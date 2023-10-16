@@ -1,5 +1,5 @@
 # Description
-# Cleaning up BA900 data and graphing
+# Cleaning up BA900 data and graphing 16 October 2023 - Xolani Sibande
 # TO DO: We need to focus the analysis and filter the data
 
 # Packages ----------------------------------------------------------------
@@ -109,7 +109,7 @@ data_list = list(
   standard_tbl = standard_tbl,
   capitec_tbl = capitec_tbl)
 
-files <- paste0(here("Outputs"), "/", names(data_list), ".csv")
+files <- paste0(here("Outputs"), "/", "BA900/", names(data_list), ".csv")
 
 walk2(data_list, files, ~ write.csv(x = .x, file = .y, row.names = F )) # exporting top five banks to CSV (as an example)
 
