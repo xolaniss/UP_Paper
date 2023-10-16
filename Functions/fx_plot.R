@@ -3,8 +3,7 @@ function (data, plotname = " ",
           variables_color = 12, 
           scale = "free", 
           ncol = NULL) {
-  ggplot(
-    pivot_longer(data,-Date, names_to = "Series", values_to = "Value"),
+  ggplot(data,
     aes(x = Date, y = Value, col = Series)
   ) +
     geom_line() +
