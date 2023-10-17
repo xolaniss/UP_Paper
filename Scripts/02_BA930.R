@@ -40,7 +40,7 @@ year <- seq(2008, 2022, by = 1)
 path_list <- 
   year %>% 
   map(~ glue(
-  here("Data","lending_v2", "4.1 BA930 Multiple Bank Export ({.}).xlsx")
+  here("Data","BA930", "4.1 BA930 Multiple Bank Export ({.}).xlsx")
 ))
 
 lending_rate <- 
@@ -53,18 +53,20 @@ lending_rate <-
     col_types = c("text", "text", "numeric", "numeric", "numeric", "numeric", "numeric") 
   )) 
 
-lending_rate
-
 # Cleaning -----------------------------------------------------------------
+names <- c("Banks", 
+           "Description", 
+           "Date",  
+           "Item", 
+           "Outstanding balance at month end R'000",
+           "Weighted average rate (%)",
+           "...6",
+           "...7")
 lending_rate_no_names <- 
   lending_rate %>%
   map(~bind_rows(., .id = "Banks")) %>% 
-  map(~rename(.,
-              "Date" = ...2,
-              "Description" = ...1,
-              "Item" = ...3,
-              "Weighted average rate (%)" = `"Weighted average rate (%)"`
-  )) %>% 
+  map(~setNames(., names)) %>% 
+  map(~ filter(., Item > 46)) %>% 
   map(~dplyr::select(., 1:6))
 
 lending_rate_tbl <- 
@@ -103,7 +105,7 @@ lending_rate_gg <- function(bank = "Total Banks"){
   lending_rate_pivot_tbl <- 
     lending_rate_tbl %>% 
     mutate(Description = str_c(Banks, " ", Description)) %>% 
-    dplyr::select(-Banks, -Item, -`Outstanding balance at month`) %>% 
+    dplyr::select(-Banks, -Item, -`Outstanding balance at month end R'000`) %>% 
     rename(
       "Series" = "Description",
       "Value" = "Weighted average rate (%)") %>% 
@@ -116,7 +118,7 @@ lending_rate_gg <- function(bank = "Total Banks"){
     mutate(Series = str_replace_all(Series, "- -", "-"))
   
   lending_rate_pivot_tbl %>% 
-    fx_nopivot_plot(variables_color = 35, ncol = 5) +
+    fx_nopivot_plot(variables_color = 35, ncol = 3) +
     theme(
       text = element_text(size = 5),
       strip.background = element_rect(colour = "white", fill = "white"),
@@ -135,7 +137,7 @@ Nedbank_gg <- lending_rate_gg("Nedbank")
 Capitec_gg <- lending_rate_gg("Capitec")
 
 # Export ---------------------------------------------------------------
-artifacts_lending_rates_v2 <- list (
+artifacts_BA930 <- list (
   data = list(
     lending_rate_tbl = lending_rate_tbl
   ),
@@ -149,7 +151,7 @@ artifacts_lending_rates_v2 <- list (
   )
 )
 
-write_rds(artifacts_lending_rates_v2, file = here("Outputs", "artifacts_lending_rates_v2.rds"))
+write_rds(artifacts_BA930, file = here("Outputs", "BA930", "artifacts_BA930.rds"))
 
 
 
