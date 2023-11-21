@@ -22,6 +22,7 @@ library(uniqtag)
 library(scales)
 library(urca)
 library(mFilter)
+library(skimr)
 
 # Functions ---------------------------------------------------------------
 source(here("Functions", "fx_plot.R"))
@@ -36,22 +37,59 @@ sheet_list = list(
   "Standard Bank" = "Standard_Bank",
   "Capitec" = "Capitec")
 
-year <- seq(2008, 2022, by = 1)
-path_list <- 
-  year %>% 
+year_2008_2015 <- c(2008:2015)
+path_list_2008_2015 <- 
+  year_2008_2015 %>% 
   map(~ glue(
   here("Data","BA930", "4.1 BA930 Multiple Bank Export ({.}).xlsx")
 ))
 
-lending_rate <- 
-  path_list %>% 
-  purrr::set_names(year) %>% 
+lending_rate_2008_2015 <- 
+  path_list_2008_2015 %>% 
+  purrr::set_names(year_2008_2015) %>% 
+  map(~excel_import_sheet(
+    path = .,
+    sheet_list = sheet_list,
+    skip = 560,
+    col_types = c("text", "text", "numeric", "numeric", "numeric", "numeric", "numeric") 
+  )) 
+
+year_2016_2018 <- c(2016:2018)
+path_list_2016_2018 <- 
+  year_2016_2018 %>% 
+  map(~ glue(
+    here("Data","BA930", "4.1 BA930 Multiple Bank Export ({.}).xlsx")
+  ))
+
+lending_rate_2016_2018 <- 
+  path_list_2016_2018 %>% 
+  purrr::set_names(year_2016_2018) %>% 
   map(~excel_import_sheet(
     path = .,
     sheet_list = sheet_list,
     skip = 5,
     col_types = c("text", "text", "numeric", "numeric", "numeric", "numeric", "numeric") 
   )) 
+
+
+year_2019_2022 <- c(2019:2022)
+path_list_2019_2022 <- 
+  year_2019_2022 %>% 
+  map(~ glue(
+    here("Data","BA930", "4.1 BA930 Multiple Bank Export ({.}).xlsx")
+  ))
+
+lending_rate_2019_2022 <- 
+  path_list_2019_2022 %>% 
+  purrr::set_names(year_2019_2022) %>% 
+  map(~excel_import_sheet(
+    path = .,
+    sheet_list = sheet_list,
+    skip = 560,
+    col_types = c("text", "text", "numeric", "numeric", "numeric", "numeric", "numeric") 
+  )) 
+
+lending_rate <- c(lending_rate_2008_2015, lending_rate_2016_2018, lending_rate_2019_2022)
 
 # Cleaning -----------------------------------------------------------------
 names <- c("Banks", 
@@ -96,9 +134,13 @@ lending_rate_tbl <-
         Item == 86 ~ "Hash total"
   )) %>%
   relocate('Item Description', .after = `Item Description`) %>% 
-  mutate(Description = str_c(Description, "-", `Item Description`))
+  mutate(Description = str_replace_all(Description, "-", "")) %>%
+  mutate(Description = str_c(Description, ": ", `Item Description`)) %>% 
+  dplyr::select(-`Item Description`) %>% 
+  drop_na()
 
 unique(lending_rate_tbl$`Item Description`) #check
+
 
 # Graphing ---------------------------------------------------------------
 lending_rate_gg <- function(bank = "Total Banks"){
@@ -153,6 +195,8 @@ artifacts_BA930 <- list (
 
 write_rds(artifacts_BA930, file = here("Outputs", "BA930", "artifacts_BA930.rds"))
 
+BA_903_Total_Banks_tbl <- lending_rate_tbl %>% filter(Banks == "Total Banks") # exporting total banks for the guys
+write_csv(BA_903_Total_Banks_tbl, here("Outputs", "BA_930_Total_Banks_tbl.csv"))
 
 
 
