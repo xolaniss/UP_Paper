@@ -147,7 +147,7 @@ financial_inclusion_dummy_tbl %>%
   geom_line()
 
 # Export ---------------------------------------------------------------
-artifacts_competion_dummies <- list (
+artifacts_competion_narratives <- list (
     data = list(
       entry_exit_tbl = entry_exit_tbl,
       finance_regulation_dummuy_tbl = finance_regulation_dummuy_tbl,
@@ -159,7 +159,7 @@ artifacts_competion_dummies <- list (
     )
 )
 
-write_rds(artifacts_competion_dummies, 
-          file = here("Outputs", "artifacts_competion_dummies.rds"))
+write_rds(artifacts_competion_narratives, 
+          file = here("Outputs", "narratives", "artifacts_competion_narratives.rds"))
 
 
