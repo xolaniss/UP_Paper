@@ -153,9 +153,6 @@ artifacts_competion_narratives <- list (
       finance_regulation_dummuy_tbl = finance_regulation_dummuy_tbl,
       competition_dummy_tbl = competition_dummy_tbl,
       financial_inclusion_dummy_tbl = financial_inclusion_dummy_tbl
-    ),
-    graphs = list(
-      financial_inclusion_dummy_tbl = financial_inclusion_dummy_tbl
     )
 )
 
