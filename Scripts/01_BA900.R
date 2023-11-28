@@ -113,6 +113,13 @@ files <- paste0(here("Outputs"), "/", "BA900/", names(data_list), ".csv")
 
 walk2(data_list, files, ~ write.csv(x = .x, file = .y, row.names = F )) # exporting top five banks to CSV (as an example)
 
+artifacts_BA900 <- list (
+  data = list(
+    Total_banks_tbl = Total_banks_tbl
+  )
+)
+
+write_rds(artifacts_BA900, file = here("Outputs", "BA900", "artifacts_BA900.rds"))
 
 
 

@@ -59,7 +59,7 @@ competition_narratives <-
   excel_import_sheet(sheet_list = sheet_list)
 
 # Entry exit dummy-----------------------------------------------------------------
-entry_exit_tbl <- 
+entry_exit <- 
   competition_narratives[[1]] %>% 
   rename(Event = `Policy / Initiative / Development`,
          Date = `Date Implemented`,
@@ -67,14 +67,26 @@ entry_exit_tbl <-
          Exit_all = Exit,
          Entry_Corporate = Enter_Corporate) %>% 
   separate(Event, into = c("Event", "Description"), sep = ": ") %>% 
-  dplyr::select(-Type, -Year, -Month) %>%
-  relocate(Date, .before = Event) %>% 
-  replace_na(list(Entry_Corporate = 0))
+  dplyr::select(-Type, -Year, -Month) %>% 
+  relocate(Date, .before = Event)
 
-
-entry_exit_tbl
-entry_exit_tbl %>% skim()
-
+entry_exit_tbl <- 
+  seq(as.Date("2008-01-01"), as.Date("2020-12-31"), by = "month") %>% 
+  as_tibble() %>%
+  rename(Date = value) %>%
+  left_join(entry_exit, by = "Date") %>% 
+  replace_na(
+    list(
+    Entry_all = 0,
+    Exit_all = 0,
+    Entry_Household = 0,
+    Exit_Household = 0,
+    Entry_Corporate = 0,
+    Exit_Corporate = 0,
+    Event = "No event",
+    Description = "No event"
+    )
+  )
 
 # Finance regulations dummy --------------------------------------------------------
 finance_regulations_tbl <- 
@@ -92,17 +104,16 @@ finance_regulation_dummuy_tbl <-
   seq(as.Date("2008-01-01"), as.Date("2020-12-31"), by = "month") %>% 
   as_tibble() %>% 
   rename(Date = value) %>% 
-  mutate(event_dummy = ifelse(Date %in% finance_regulations_tbl$Date, 1, 0)) 
+  mutate(event_dummy = ifelse(Date %in% finance_regulations_tbl$Date, 1, 0)) %>% 
+  # rename event_dummy to finance_regulation_dummy
+  rename(finance_regulation_dummy = event_dummy)
 
 finance_regulation_dummuy_tbl %>% skim()
-finance_regulation_dummuy_tbl %>% 
-  # create dummy plot
-  ggplot(aes(x = Date, y = event_dummy)) +
-  geom_line()
 
 # Competition dummy ---------------------------------------------------------------
 competition_tbl <- 
   competition_narratives[[2]] %>% 
+  as_tibble() %>%
   rename(Event = `Policy / Initiative / Development`,
          Date = `Date Implemented`,
          ) %>% 
@@ -115,18 +126,16 @@ competition_dummy_tbl <-
   seq(as.Date("2008-01-01"), as.Date("2020-12-31"), by = "month") %>% 
   as_tibble() %>% 
   rename(Date = value) %>% 
-  mutate(event_dummy = ifelse(Date %in% competition_tbl$Date, 1, 0))
+  mutate(event_dummy = ifelse(Date %in% competition_tbl$Date, 1, 0)) %>% 
+  # rename event_dummy to competition_dummy
+  rename(competition_dummy = event_dummy)
 
 competition_dummy_tbl %>% skim()
-
-# create dummy plot
-competition_dummy_tbl %>% 
-  ggplot(aes(x = Date, y = event_dummy)) +
-  geom_line()
 
 # Financial inclusion dummy ---------------------------------------------------------------
 financial_inclusion_tbl <- 
   competition_narratives[[4]] %>% 
+  as_tibble() %>%
   rename(Event = `Policy / Initiative / Development`,
          Date = `Date Implemented`,
          ) %>% 
@@ -139,20 +148,35 @@ financial_inclusion_dummy_tbl <-
   seq(as.Date("2008-01-01"), as.Date("2020-12-31"), by = "month") %>% 
   as_tibble() %>% 
   rename(Date = value) %>% 
-  mutate(event_dummy = ifelse(Date %in% financial_inclusion_tbl$Date, 1, 0))
+  mutate(event_dummy = ifelse(Date %in% financial_inclusion_tbl$Date, 1, 0)) %>% 
+  # rename event_dummy to financial_inclusion_dummy
+  rename(financial_inclusion_dummy = event_dummy)
   
-# plot dummy
-financial_inclusion_dummy_tbl %>% 
-  ggplot(aes(x = Date, y = event_dummy)) +
-  geom_line()
+# combining dummies -------------------------------------------------------
+# join finance_regulations_tbl and competition_tbl
+combined_dummies_tbl <- 
+  entry_exit_tbl %>% 
+  left_join(finance_regulation_dummuy_tbl, by = "Date") %>%
+  left_join(competition_dummy_tbl, by = "Date") %>% 
+  left_join(financial_inclusion_dummy_tbl, by = "Date")
 
+combined_dummies_gg <- 
+  combined_dummies_tbl %>%
+  pivot_longer(c(-Date, -Event, -Description), names_to = "Series", values_to = "Value") %>%
+  fx_plot()
+
+combined_dummies_gg
 # Export ---------------------------------------------------------------
 artifacts_competion_narratives <- list (
     data = list(
       entry_exit_tbl = entry_exit_tbl,
       finance_regulation_dummuy_tbl = finance_regulation_dummuy_tbl,
       competition_dummy_tbl = competition_dummy_tbl,
-      financial_inclusion_dummy_tbl = financial_inclusion_dummy_tbl
+      financial_inclusion_dummy_tbl = financial_inclusion_dummy_tbl,
+      combined_dummies_tbl = combined_dummies_tbl
+    ),
+    graphs = list(
+      combined_dummies_gg = combined_dummies_gg
     )
 )
 

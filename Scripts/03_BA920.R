@@ -62,9 +62,20 @@ pivot_eda <- function(data){
 }
 
 BA920_eda <- BA920_clean %>% map(~pivot_eda(.))
+Total_banks_tbl <- BA920_clean$Total_Banks
 
 # graphing ----------------------------------------------------------------
 gg_list <- BA920_clean %>%  map(~fx_plot(., variables_color = 15, ncol = 2))
 files <- paste0(here("Outputs"), "/", "BA920/", names(gg_list), ".png")
 walk2(gg_list, files,  ~ggsave(., device = "png", file = .y))
 write.csv(BA920_clean$Total_Banks, file = here("Outputs", "BA920", "Total_banks.csv"), row.names = F)
+
+# Exporting --------------------------------------------------------
+artifacts_BA920 <- list (
+  data = list(
+    Total_banks_tbl = Total_banks_tbl
+  )
+)
+
+write_rds(artifacts_BA920, file = here("Outputs", "BA920", "artifacts_BA920.rds"))
+
