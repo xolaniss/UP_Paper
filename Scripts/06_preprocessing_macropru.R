@@ -79,6 +79,8 @@ bank_level_narratives_tbl <-
     macropru_narratives_tbl %>%
       group_bank(Banks = "Capitec")
   )
+
+bank_level_narratives_tbl %>% glimpse()
   
 # Adjusting BA930 to wide form --------------------------------------------
 # Drop outstanding balance from BA930_tbl
