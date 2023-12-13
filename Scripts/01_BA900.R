@@ -1,6 +1,14 @@
 # Description
 # Cleaning up BA900 data and graphing 16 October 2023 - Xolani Sibande
-# TO DO: We need to focus the analysis and filter the data
+# TO DO: 
+# We need to focus the analysis and filter the data
+# (1) Credit card, Overdrafts, loans and advances to non-financial sector (168 + 169 + 183 + 185 + 190 + 192)
+# (2) Credit card, Overdrafts, loans and advances to non-financial corporate (168 + 183 + 190)
+# (3) Credit card, Overdrafts, loans and advances to households (169 + 185 + 192)
+# (4) Mortgages to non-financial corporates and households for commercial purposes (152 + 153 + 156 + 163 + 164)
+# (5) Residential mortgages to households (157)
+# (6) Leasing and installment sales to non-financial corporates (142 + 147)
+# (7) Leasing and installment sales to households (143 + 148)
 
 # Packages ----------------------------------------------------------------
 library(tidyverse)

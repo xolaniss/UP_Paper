@@ -116,8 +116,8 @@ macro_pru_combined_tbl <-
   dplyr::select(Date, Banks, everything()) 
 
 macro_pru_combined_tbl %>% 
-  filter(Banks == "Absa Bank") %>%
-  skim()
+  filter(Banks == "Absa Bank") %>% 
+  print(n = 100)
 
 
 # Export ---------------------------------------------------------------
