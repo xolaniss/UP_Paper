@@ -50,12 +50,12 @@ source(here("Functions", "excel_import_sheet.R"))
 
 # Import -------------------------------------------------------------
 read_excel(here("Data", 
-                "narratives", 
-                "Competition_and_inclusion_narrative_index_22112023.xlsx"),
+                "Narratives", 
+                "Competition_and_inclusion_narrative_index_10122023.xlsx"),
            sheet = 2)
  path <- here("Data", 
-              "narratives", 
-              "Competition_and_inclusion_narrative_index_22112023.xlsx")
+              "Narratives", 
+              "Competition_and_inclusion_narrative_index_10122023.xlsx")
 
 sheet_list <- list(
    "Entry and Exit" = "Entry and Exit",
@@ -75,7 +75,21 @@ entry_exit <-
          Date = `Date Implemented`,
          Entry_all = Entry,
          Exit_all = Exit,
-         Entry_Corporate = Enter_Corporate) %>% 
+         Entry_Corporate = Enter_Corporate,
+         Entry_credit_non_fin = `Entry - Credit card, Overdrafts, loans and advances to non-financial sector`,         
+         Exit_credit_non_fin = `Exit - Credit card, Overdrafts, loans and advances to non-financial sector`,          
+         Entry_credit_non_fin_corporate = `Entry - Credit card, Overdrafts, loans and advances to non-financial corporate`,      
+         Exit_credit_non_fin_corporate = `Exit - Credit card, Overdrafts, loans and advances to non-financial corporate`,       
+         Entry_credit_households = `Entry - Credit card, Overdrafts, loans and advances to households`,                   
+         Exit_credit_households = `Exit - Credit card, Overdrafts, loans and advances to households`,                    
+         Entry_commercial_mortgages = `Entry - Mortgages to non-financial corporates and households for commercial purposes`,
+         Exit_commercial_mortgages = `Exit - Mortgages to non-financial corporates and households for commercial purposes`, 
+         Entry_mortgages_households = `Entry - Residential mortgages to households`,                                         
+         Exit_mortgages_households = `Exit - Residential mortgages to households`,                                          
+         Entry_leasing_households = `Entry - Household leasing or installment`,                                            
+         Exit_leasing_households = `Exit - Household leasing or installment`,                                             
+         Entry_leasing_non_fin_corporate = `Entry - Non-financial corporate leasing or installment`
+         ) %>% 
   separate(Event, into = c("Event", "Description"), sep = ": ") %>% 
   dplyr::select(-Type, -Year, -Month) %>% 
   relocate(Date, .before = Event)
@@ -93,6 +107,20 @@ entry_exit_tbl <-
     Exit_Household = 0,
     Entry_Corporate = 0,
     Exit_Corporate = 0,
+    Entry_Corporate = 0,
+    Entry_credit_non_fin = 0,
+    Exit_credit_non_fin = 0,
+    Entry_credit_non_fin_corporate = 0,
+    Exit_credit_non_fin_corporate = 0,
+    Entry_credit_households = 0,
+    Exit_credit_households = 0,
+    Entry_commercial_mortgages = 0,
+    Exit_commercial_mortgages = 0,
+    Entry_mortgages_households = 0,
+    Exit_mortgages_households = 0,
+    Entry_leasing_households = 0,
+    Exit_leasing_households = 0,
+    Entry_leasing_non_fin_corporate = 0,
     Event = "No event",
     Description = "No event"
     )
@@ -125,11 +153,12 @@ competition_tbl <-
   competition_narratives[[2]] %>% 
   as_tibble() %>%
   rename(Event = `Policy / Initiative / Development`,
-         Date = `Date Implemented`,
-         ) %>% 
-  dplyr::select(-Type, -Year, -Month) %>% 
+         Date = Year
+         ) %>%
+  mutate(Date = paste0(Date, "-01-01")) %>%
+  dplyr::select(-Type, -`Date Implemented`, -Month) %>% 
   # floor the dates
-  mutate(Date = floor_date(Date, unit = "month"))
+  mutate(Date = floor_date(as.Date(Date), unit = "month"))
 
 # create competition dummy
 competition_dummy_tbl <- 
@@ -173,7 +202,7 @@ combined_dummies_tbl <-
 combined_dummies_gg <- 
   combined_dummies_tbl %>%
   pivot_longer(c(-Date, -Event, -Description), names_to = "Series", values_to = "Value") %>%
-  fx_plot()
+  fx_plot(variables_color = 22)
 
 combined_dummies_gg
 # Export ---------------------------------------------------------------
