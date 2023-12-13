@@ -1,7 +1,7 @@
 # Description
 # dummies for competition section - UP Team - 2023-11-23
 # TO DO:
-# The macropru indices will remain as is. The competition indices for entry and exit will now change quite a bit. In the Entry and Exit sheet there are 13 columns that we need to insert based on the buckets above. I've highlighted these in green in the workbook.
+# The competition indices for entry and exit will now change quite a bit. In the Entry and Exit sheet there are 13 columns that we need to insert based on the buckets above. I've highlighted these in green in the workbook.
 # Entry and exit columns for (1)
 # Entry and exit columns for (2)
 # Entry and exit columns for (3)

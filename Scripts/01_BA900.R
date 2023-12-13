@@ -81,32 +81,163 @@ nedbank_tbl %>% pivot_wider(names_from = Series, values_from = Value) %>%  skim(
 standard_tbl %>% pivot_wider(names_from = Series, values_from = Value) %>%  skim()
 capitec_tbl %>% pivot_wider(names_from = Series, values_from = Value) %>%  skim()
 
-
 #  Filtering --------------------------------------------------------------
-# TO DO: We need to decide on which variables to focus on 
 
-# Graphing ---------------------------------------------------------------
+## Filter vec -----------------------------------------------------------
+filter_vec <- 
+  c(  
+    "DEPOSITS, LOANS AND ADVANCES (total of items 111, 117, 118, 126, 135, 139, 150, 166, 171 and 180, less item 194)"
+    # , "SA banksb (total of items 112 and 116)"                                                                                                                      
+    # , "NCDs/PNsc issued by banks, with an unexpired maturity of: (total of items 113 to 115)"                                                                       
+    # , "Up to 1 month"                                                                                                                                               
+    # , "More than 1 month to 6 months"                                                                                                                               
+    # , "More than 6 months"                                                                                                                                          
+    # , "Other deposits with and loans and advances to SA banksb"                                                                                                     
+    # , "Deposits with and loans and advances to foreign banks, denominated in rand"                                                                                  
+    # , "Loans granted under resale agreements to:  (total of items 119 to 125)"                                                                                      
+    # , "SA Reserve Bank"                                                                                                                                             
+    # , "Banksd"                                                                                                                                                      
+    # , "Insurers"                                                                                                                                                    
+    # , "Pension funds"                                                                                                                                               
+    # , "Other financial corporate sectorb"                                                                                                                           
+    # , "Non-financial corporate sector"                                                                                                                              
+    # , "Other"                                                                                                                                                       
+    # , "Foreign currency loans and advances (total of items 127 to 130, 133 and 134)"                                                                                
+    # , "Foreign currency notes and coin"                                                                                                                             
+    # , "Deposits with and advances to SA Reserve Bank"                                                                                                               
+    # , "Deposits with and advances to SA banksd"                                                                                                                     
+    # , "Other advances to: (total of items 131 and 132)"                                                                                                             
+    # , "SA Financial corporate sectorc"                                                                                                                              
+    # , "SA Non-financial corporate sector and other"                                                                                                                 
+    # , "Deposits with and advances to foreign banks"                                                                                                                 
+    # , "Other advances to foreign sector"                                                                                                                            
+    # , "Redeemable preference shares issued by: (total items 136 to 138)"                                                                                            
+    # , "Banksd-1"                                                                                                                                                    
+    # , "Financial corporate sectorc"                                                                                                                                 
+    # , "Non-financial corporate sector and other"                                                                                                                    
+    # , "Instalment debtors, suspensive sales and leases (total of items 140 and 145)"                                                                                
+    # , "Instalment sales (total of items 141 to 144)"                                                                                                                
+    # , "Financial corporate sector"                                                                                                                                  
+    , "Non-financial corporate sector-1"
+    , "Household sector"
+    # , "Otherb"                                                                                                                                                      
+    # , "Leasing transactions (total of items 146 to 149)"                                                                                                            
+    # , "Financial corporate sector-1"                                                                                                                                
+    , "Non-financial corporate sector-2"
+    , "Household sector-1"
+    # , "Otherb-1"                                                                                                                                                    
+    # "Mortgage advances (total of items 151, 155 and 159)"                                                                                                         
+    # "Farm mortgages: (total of items 152 to 154)"                                                                                                                 
+    , "Corporate sector"
+    , "Household sector-2"
+    , "Otherb-2"
+    # ,"Residential mortgages: (total of items 156 to 158)"                                                                                                          
+    , "Corporate sector-1"
+    , "Household sector-3"
+    , "Otherb-3"
+    # , "Commercial and other mortgage advances: (total of items 160 to 165)"
+    # , "Public financial corporate sector"                                                                                                                           
+    # , "Public non-financial corporate sector"                                                                                                                       
+    # , "Private financial corporate sector"                                                                                                                          
+    , "Private non-financial corporate sector"
+    , "Household sector-4"
+    , "Otherb-4"
+    # , "Credit-card debtors (total of items 167 to 170)"                                                                                                             
+    # , "Financial corporate sector-2"                                                                                                                                
+    , "Non-financial corporate sector-3"
+    , "Household sector-5"
+    # , "Otherb-5"                                                                                                                                                    
+    # , "Overdrafts, loans and advances: public sector (total of items 172 to 179)"                                                                                   
+    # , "Central government of the Republic (excluding social security funds)"                                                                                        
+    # , "Social security funds"                                                                                                                                       
+    # , "Provincial governments"                                                                                                                                      
+    # , "Local government"                                                                                                                                            
+    # , "Land Bank"                                                                                                                                                   
+    # , "Other public financial corporate sector (such as IDC)c"                                                                                                      
+    # , "Public non-financial corporate sector (such as Transnet, Eskom and Telkom)"                                                                                  
+    # , "Foreign public sector"                                                                                                                                       
+    # , "Overdrafts, loans and advances: private sector (total of items 181, 187 and 188)"                                                                            
+    # , "Overdrafts, including overdrafts under cash-management schemes: (total of items 182 to 186)"                                                                 
+    # , "Financial corporate sector-3"                                                                                                                                
+    , "Non-financial corporate sector-4"
+    , "Unincorporated business enterprises of households"
+    , "Households"
+    , "Non-profit organisations serving households"
+    , "Factoring debtors"
+    # , "Other loans and advances: (total of items 189 to 193)"                                                                                                       
+    # , "Financial corporate sector-4"                                                                                                                                
+    , "Non-financial corporate sector-5"
+    , "Unincorporated business enterprises of households-1"
+    , "Households-1"
+    , "Non-profit organisations serving households-1"
+    # , "Less: credit impairments in respect of loans and advances" 
+  )
 
-## Detail graphs ----
-# totals_gg <- 
-#   total_tbl %>% 
-#   balance_sheet_rename_gg(variable_color = 175)
-# absa_gg <-
-#   absa_filtered_tbl %>% 
-#   balance_sheet_rename_gg(variable_color = 14)
-# fnb_gg <- 
-#   fnb_filtered_tbl %>% 
-#   balance_sheet_rename_gg()
-# nedbank_gg <- 
-#   nedbank_filtered_tbl %>% 
-#   balance_sheet_rename_gg()
-# standard_gg <- 
-#   standard_filtered_tbl %>% 
-#   balance_sheet_rename_gg()
-# capitec_gg <- 
-#   capitec_filtered_tbl %>% 
-#   balance_sheet_rename_gg()
+## Filtering and graphs -------------------------------------------------------------
+total_filtered_tbl <- filter_and_strings(total_tbl, filter_vec) %>%  balance_sheet_rename() 
+total_filtered_tbl 
+absa_filtered_tbl <- filter_and_strings(absa_tbl, filter_vec) %>%  balance_sheet_rename()
+absa_filtered_tbl
+fnb_filtered_tbl <- filter_and_strings(fnb_tbl, filter_vec) %>%  balance_sheet_rename()
+fnb_filtered_tbl
+nedbank_filtered_tbl <- filter_and_strings(nedbank_tbl, filter_vec) %>%  balance_sheet_rename()
+nedbank_filtered_tbl
+standard_filtered_tbl <- filter_and_strings(standard_tbl, filter_vec) %>%  balance_sheet_rename()
+standard_filtered_tbl
+capitec_filtered_tbl <- filter_and_strings(capitec_tbl, filter_vec) %>%  balance_sheet_rename()
+capitec_filtered_tbl
 
+totals_gg <-
+  total_filtered_tbl %>%
+  balance_sheet_rename_gg(variable_color = 25)
+absa_gg <-
+  absa_filtered_tbl %>%
+  balance_sheet_rename_gg(variable_color = 25)
+fnb_gg <-
+  fnb_filtered_tbl %>%
+  balance_sheet_rename_gg(variable_color = 25)
+nedbank_gg <-
+  nedbank_filtered_tbl %>%
+  balance_sheet_rename_gg(variable_color = 25)
+standard_gg <-
+  standard_filtered_tbl %>%
+  balance_sheet_rename_gg(variable_color = 25)
+capitec_gg <-
+  capitec_filtered_tbl %>%
+  balance_sheet_rename_gg(variable_color = 25)
+
+
+## Aggregation and graphs -----------------------------------------------------------
+total_aggregation_tbl <- ba900_aggregration(total_filtered_tbl)
+total_aggregation_gg <- 
+  total_aggregation_tbl %>% 
+  balance_sheet_rename_gg(variable_color = 10)
+
+absa_aggregation_tbl <- ba900_aggregration(absa_filtered_tbl)
+absa_aggregation_tbl <- ba900_aggregration(absa_filtered_tbl)
+absa_aggregation_gg <- 
+  absa_aggregation_tbl %>% 
+  balance_sheet_rename_gg(variable_color = 10)
+
+fnb_aggregation_tbl <- ba900_aggregration(fnb_filtered_tbl)
+fnb_aggregation_gg <- 
+  fnb_aggregation_tbl %>% 
+  balance_sheet_rename_gg(variable_color = 10)
+
+nedbank_aggregation_tbl <- ba900_aggregration(nedbank_filtered_tbl)
+nedbank_aggregation_gg <- 
+  nedbank_aggregation_tbl %>% 
+  balance_sheet_rename_gg(variable_color = 10)
+
+standard_aggregation_tbl <- ba900_aggregration(standard_filtered_tbl)
+standard_aggregation_gg <- 
+  standard_aggregation_tbl %>% 
+  balance_sheet_rename_gg(variable_color = 10)
+
+capitec_aggregation_tbl <- ba900_aggregration(capitec_filtered_tbl)
+capitec_aggregation_gg <- 
+  capitec_aggregation_tbl %>% 
+  balance_sheet_rename_gg(variable_color = 10)
 
 # Export ------------------------------------------------------------------
 data_list = list(
@@ -122,8 +253,37 @@ files <- paste0(here("Outputs"), "/", "BA900/", names(data_list), ".csv")
 walk2(data_list, files, ~ write.csv(x = .x, file = .y, row.names = F )) # exporting top five banks to CSV (as an example)
 
 artifacts_BA900 <- list (
-  data = list(
-    Total_banks_tbl = Total_banks_tbl
+  filtered_data = list(
+    total_filtered_tbl = total_filtered_tbl,
+    absa_filtered_tbl = absa_filtered_tbl,
+    fnb_filtered_tbl = fnb_filtered_tbl,
+    nedbank_filtered_tbl = nedbank_filtered_tbl,
+    standard_filtered_tbl = standard_filtered_tbl,
+    capitec_filtered_tbl = capitec_filtered_tbl
+  ),
+  aggregated_data = list(
+    total_aggregation_tbl = total_aggregation_tbl,
+    absa_aggregation_tbl = absa_aggregation_tbl,
+    fnb_aggregation_tbl = fnb_aggregation_tbl,
+    nedbank_aggregation_tbl = nedbank_aggregation_tbl,
+    standard_aggregation_tbl = standard_aggregation_tbl,
+    capitec_aggregation_tbl = capitec_aggregation_tbl
+  ),
+  filtered_graphs = list(
+    totals_gg = totals_gg,
+    absa_gg = absa_gg,
+    fnb_gg = fnb_gg,
+    nedbank_gg = nedbank_gg,
+    standard_gg = standard_gg,
+    capitec_gg = capitec_gg
+  ),
+  aggregated_graphs = list(
+    total_aggregation_gg = total_aggregation_gg,
+    absa_aggregation_gg = absa_aggregation_gg,
+    fnb_aggregation_gg = fnb_aggregation_gg,
+    nedbank_aggregation_gg = nedbank_aggregation_gg,
+    standard_aggregation_gg = standard_aggregation_gg,
+    capitec_aggregation_gg = capitec_aggregation_gg
   )
 )
 
