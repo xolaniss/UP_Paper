@@ -1,14 +1,5 @@
 # Description
 # dummies for competition section - UP Team - 2023-11-23
-# TO DO:
-# The competition indices for entry and exit will now change quite a bit. In the Entry and Exit sheet there are 13 columns that we need to insert based on the buckets above. I've highlighted these in green in the workbook.
-# Entry and exit columns for (1)
-# Entry and exit columns for (2)
-# Entry and exit columns for (3)
-# Entry and exit columns for (4) 
-# Entry and exit columns for (5)
-# Entry and exit columns for (6)
-# Entry column for (7)
 
 # Preliminaries -----------------------------------------------------------
 # core
@@ -26,6 +17,7 @@ library(pins)
 library(timetk)
 library(uniqtag)
 library(quantmod)
+library(janitor)
 
 # graphs
 library(PNWColors)
@@ -73,26 +65,30 @@ entry_exit <-
   competition_narratives[[1]] %>% 
   rename(Event = `Policy / Initiative / Development`,
          Date = `Date Implemented`,
-         Entry_all = Entry,
-         Exit_all = Exit,
-         Entry_Corporate = Enter_Corporate,
-         Entry_credit_non_fin = `Entry - Credit card, Overdrafts, loans and advances to non-financial sector`,         
-         Exit_credit_non_fin = `Exit - Credit card, Overdrafts, loans and advances to non-financial sector`,          
-         Entry_credit_non_fin_corporate = `Entry - Credit card, Overdrafts, loans and advances to non-financial corporate`,      
-         Exit_credit_non_fin_corporate = `Exit - Credit card, Overdrafts, loans and advances to non-financial corporate`,       
-         Entry_credit_households = `Entry - Credit card, Overdrafts, loans and advances to households`,                   
-         Exit_credit_households = `Exit - Credit card, Overdrafts, loans and advances to households`,                    
-         Entry_commercial_mortgages = `Entry - Mortgages to non-financial corporates and households for commercial purposes`,
-         Exit_commercial_mortgages = `Exit - Mortgages to non-financial corporates and households for commercial purposes`, 
-         Entry_mortgages_households = `Entry - Residential mortgages to households`,                                         
-         Exit_mortgages_households = `Exit - Residential mortgages to households`,                                          
-         Entry_leasing_households = `Entry - Household leasing or installment`,                                            
-         Exit_leasing_households = `Exit - Household leasing or installment`,                                             
-         Entry_leasing_non_fin_corporate = `Entry - Non-financial corporate leasing or installment`
+         Entry_all_dummy = Entry,
+         Exit_all_dummy = Exit,
+         Entry_Household_dummy = Entry_Household,
+         Exit_Household_dummy = Exit_Household,
+         Entry_Corporate_dummy = Enter_Corporate,
+         Exit_Corporate_dummy = Exit_Corporate,
+         Entry_credit_non_fin_dummy = `Entry - Credit card, Overdrafts, loans and advances to non-financial sector`,         
+         Exit_credit_non_fin_dummy = `Exit - Credit card, Overdrafts, loans and advances to non-financial sector`,          
+         Entry_credit_non_fin_corporate_dummy = `Entry - Credit card, Overdrafts, loans and advances to non-financial corporate`,      
+         Exit_credit_non_fin_corporate_dummy = `Exit - Credit card, Overdrafts, loans and advances to non-financial corporate`,       
+         Entry_credit_households_dummy = `Entry - Credit card, Overdrafts, loans and advances to households`,                   
+         Exit_credit_households_dummy = `Exit - Credit card, Overdrafts, loans and advances to households`,                    
+         Entry_commercial_mortgages_dummy = `Entry - Mortgages to non-financial corporates and households for commercial purposes`,
+         Exit_commercial_mortgages_dummy = `Exit - Mortgages to non-financial corporates and households for commercial purposes`, 
+         Entry_mortgages_households_dummy = `Entry - Residential mortgages to households`,                                         
+         Exit_mortgages_households_dummy = `Exit - Residential mortgages to households`,                                          
+         Entry_leasing_households_dummy = `Entry - Household leasing or installment`,                                            
+         Exit_leasing_households_dummy = `Exit - Household leasing or installment`,                                             
+         Entry_leasing_non_fin_corporate_dummy = `Entry - Non-financial corporate leasing or installment`
          ) %>% 
   separate(Event, into = c("Event", "Description"), sep = ": ") %>% 
   dplyr::select(-Type, -Year, -Month) %>% 
-  relocate(Date, .before = Event)
+  relocate(Date, .before = Event) 
+
 
 entry_exit_tbl <- 
   seq(as.Date("2008-01-01"), as.Date("2020-12-31"), by = "month") %>% 
@@ -101,26 +97,26 @@ entry_exit_tbl <-
   left_join(entry_exit, by = "Date") %>% 
   replace_na(
     list(
-    Entry_all = 0,
-    Exit_all = 0,
-    Entry_Household = 0,
-    Exit_Household = 0,
-    Entry_Corporate = 0,
-    Exit_Corporate = 0,
-    Entry_Corporate = 0,
-    Entry_credit_non_fin = 0,
-    Exit_credit_non_fin = 0,
-    Entry_credit_non_fin_corporate = 0,
-    Exit_credit_non_fin_corporate = 0,
-    Entry_credit_households = 0,
-    Exit_credit_households = 0,
-    Entry_commercial_mortgages = 0,
-    Exit_commercial_mortgages = 0,
-    Entry_mortgages_households = 0,
-    Exit_mortgages_households = 0,
-    Entry_leasing_households = 0,
-    Exit_leasing_households = 0,
-    Entry_leasing_non_fin_corporate = 0,
+    Entry_all_dummy = 0,
+    Exit_all_dummy = 0,
+    Entry_Household_dummy = 0,
+    Exit_Household_dummy = 0,
+    Entry_Corporate_dummy = 0,
+    Exit_Corporate_dummy = 0,
+    Entry_Corporate_dummy = 0,
+    Entry_credit_non_fin_dummy = 0,
+    Exit_credit_non_fin_dummy = 0,
+    Entry_credit_non_fin_corporate_dummy = 0,
+    Exit_credit_non_fin_corporate_dummy = 0,
+    Entry_credit_households_dummy = 0,
+    Exit_credit_households_dummy = 0,
+    Entry_commercial_mortgages_dummy = 0,
+    Exit_commercial_mortgages_dummy = 0,
+    Entry_mortgages_households_dummy = 0,
+    Exit_mortgages_households_dummy = 0,
+    Entry_leasing_households_dummy = 0,
+    Exit_leasing_households_dummy = 0,
+    Entry_leasing_non_fin_corporate_dummy = 0,
     Event = "No event",
     Description = "No event"
     )
@@ -155,7 +151,7 @@ competition_tbl <-
   rename(Event = `Policy / Initiative / Development`,
          Date = Year
          ) %>%
-  mutate(Date = paste0(Date, "-01-01")) %>%
+  mutate(Date = paste0(Date, "-01-01")) %>% # may need to change given two similar dates
   dplyr::select(-Type, -`Date Implemented`, -Month) %>% 
   # floor the dates
   mutate(Date = floor_date(as.Date(Date), unit = "month"))

@@ -206,6 +206,8 @@ capitec_gg <-
   capitec_filtered_tbl %>%
   balance_sheet_rename_gg(variable_color = 25)
 
+unique(total_filtered_tbl$Series)
+
 
 ## Aggregation and graphs -----------------------------------------------------------
 total_aggregation_tbl <- ba900_aggregration(total_filtered_tbl)
