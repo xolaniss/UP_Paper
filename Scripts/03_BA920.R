@@ -63,6 +63,8 @@ pivot_eda <- function(data){
 
 BA920_eda <- BA920_clean %>% map(~pivot_eda(.))
 Total_banks_tbl <- BA920_clean$Total_Banks
+Total_banks_gg <- Total_banks_tbl %>% 
+  fx_plot(variables_color = 15, ncol = 2)
 
 # graphing ----------------------------------------------------------------
 gg_list <- BA920_clean %>%  map(~fx_plot(., variables_color = 15, ncol = 2))
@@ -74,6 +76,9 @@ write.csv(BA920_clean$Total_Banks, file = here("Outputs", "BA920", "Total_banks.
 artifacts_BA920 <- list (
   data = list(
     Total_banks_tbl = Total_banks_tbl
+  ),
+  graphs = list(
+    Total_banks_gg = Total_banks_gg
   )
 )
 

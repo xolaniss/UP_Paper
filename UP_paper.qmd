@@ -109,16 +109,79 @@ source(here("Functions","borderlines.R" ))
 
 \newpage
 
-# Appendix
+# Appendix : Data
 
-## Data
+## Competition narrative indexes
+
+```{r}
+#| label: fig-comp_narrative_indexes
+#| fig-cap: "Competition narrative indexes"
+#| fig-height: 6
+#| fig-width: 6
+#| cache: FALSE
+
+comp_narratives <- read_rds(here("Outputs","narratives","artifacts_competion_narratives.rds"))
+
+comp_narratives_gg <- comp_narratives$graphs$combined_dummies_gg
+comp_narratives_gg
+
+```
+
+\newpage
+## Macroprudential narrative indexes
+
+```{r}
+#| label: fig-macro_narrative_indexes
+#| fig-cap: "Macroprudential narrative indexes"
+#| fig-height: 3
+#| fig-width: 6
+#| cache: FALSE
+
+macro_narratives <- read_rds(here("Outputs","narratives","artifacts_macropru_narratives.rds"))
+macropru_narratives_gg <- macro_narratives$macropru_narratives_gg
+macropru_narratives_gg
+
+```
+
+\newpage
+## Aggregated bank lending
+
+```{r}
+#| label: fig-bank_lending
+#| fig-cap: "Total aggregated bank lending"
+#| fig-height: 6
+#| fig-width: 6
+#| cache: FALSE
 
 
+bank_lending <- read_rds(here("Outputs","BA900","artifacts_BA900.rds"))
+bank_lending_gg <- bank_lending$aggregated_graphs$total_aggregation_gg
+bank_lending_gg
+
+```
+
+\newpage
+## Weighted bank interests rates
+
+```{r}
+# To add caculated weighted interest rates
+```
 
 
+\newpage
+## Aggregated bank controls
 
+```{r}
+#| label: fig-controls
+#| fig-cap: "Aggregated bank controls"
+#| fig-height: 7.5
+#| fig-width: 6
+#| cache: FALSE
 
-
+controls <- read_rds(here("Outputs","BA920","artifacts_BA920.rds"))
+controls_gg <- controls$graphs$Total_banks_gg
+controls_gg
+```
 
 
 

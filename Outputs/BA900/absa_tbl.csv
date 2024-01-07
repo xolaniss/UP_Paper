@@ -1307,7 +1307,7 @@
 "Other deposits",2022-10-01,4732089
 "Other deposits",2022-11-01,7108173
 "Other deposits",2022-12-01,236247
-"Other deposits",2023-01-01,1e+05
+"Other deposits",2023-01-01,100000
 "Other deposits",2023-02-01,10440236
 "Other deposits",2023-03-01,10561295
 "Other deposits",2023-04-01,17526264
@@ -6727,11 +6727,11 @@
 "Non-financial corporate sector and other",2020-02-01,11012841
 "Non-financial corporate sector and other",2020-03-01,10994059
 "Non-financial corporate sector and other",2020-04-01,10907386
-"Non-financial corporate sector and other",2020-05-01,1.1e+07
+"Non-financial corporate sector and other",2020-05-01,11000000
 "Non-financial corporate sector and other",2020-06-01,13651862
 "Non-financial corporate sector and other",2020-07-01,13000780
 "Non-financial corporate sector and other",2020-08-01,13511632
-"Non-financial corporate sector and other",2020-09-01,1.3e+07
+"Non-financial corporate sector and other",2020-09-01,13000000
 "Non-financial corporate sector and other",2020-10-01,13352221
 "Non-financial corporate sector and other",2020-11-01,13403400
 "Non-financial corporate sector and other",2020-12-01,14055572
@@ -13802,7 +13802,7 @@
 "Land Bank",2014-05-01,0
 "Land Bank",2014-06-01,0
 "Land Bank",2014-07-01,0
-"Land Bank",2014-08-01,5e+05
+"Land Bank",2014-08-01,500000
 "Land Bank",2014-09-01,0
 "Land Bank",2014-10-01,0
 "Land Bank",2014-11-01,497941
@@ -13866,12 +13866,12 @@
 "Land Bank",2019-09-01,0
 "Land Bank",2019-10-01,0
 "Land Bank",2019-11-01,1
-"Land Bank",2019-12-01,5e+05
+"Land Bank",2019-12-01,500000
 "Land Bank",2020-01-01,500001
 "Land Bank",2020-02-01,533017
-"Land Bank",2020-03-01,5e+05
-"Land Bank",2020-04-01,5e+05
-"Land Bank",2020-05-01,5e+05
+"Land Bank",2020-03-01,500000
+"Land Bank",2020-04-01,500000
+"Land Bank",2020-05-01,500000
 "Land Bank",2020-06-01,0
 "Land Bank",2020-07-01,0
 "Land Bank",2020-08-01,0
@@ -14066,7 +14066,7 @@
 "Other public financial corporate sector (such as IDC)c",2020-09-01,2162117
 "Other public financial corporate sector (such as IDC)c",2020-10-01,2001349
 "Other public financial corporate sector (such as IDC)c",2020-11-01,1825110
-"Other public financial corporate sector (such as IDC)c",2020-12-01,2e+06
+"Other public financial corporate sector (such as IDC)c",2020-12-01,2000000
 "Other public financial corporate sector (such as IDC)c",2021-01-01,1800000
 "Other public financial corporate sector (such as IDC)c",2021-02-01,1900000
 "Other public financial corporate sector (such as IDC)c",2021-03-01,1900000
@@ -18366,7 +18366,7 @@
 "Memo: Nominal value of such stock",2018-09-01,24754656
 "Memo: Nominal value of such stock",2018-10-01,3150000
 "Memo: Nominal value of such stock",2018-11-01,3500000
-"Memo: Nominal value of such stock",2018-12-01,1e+07
+"Memo: Nominal value of such stock",2018-12-01,10000000
 "Memo: Nominal value of such stock",2019-01-01,9100000
 "Memo: Nominal value of such stock",2019-02-01,5350000
 "Memo: Nominal value of such stock",2019-03-01,4900000
@@ -18374,8 +18374,8 @@
 "Memo: Nominal value of such stock",2019-05-01,7550000
 "Memo: Nominal value of such stock",2019-06-01,8068000
 "Memo: Nominal value of such stock",2019-07-01,9800000
-"Memo: Nominal value of such stock",2019-08-01,6e+06
-"Memo: Nominal value of such stock",2019-09-01,4e+06
+"Memo: Nominal value of such stock",2019-08-01,6000000
+"Memo: Nominal value of such stock",2019-09-01,4000000
 "Memo: Nominal value of such stock",2019-10-01,6500000
 "Memo: Nominal value of such stock",2019-11-01,7400000
 "Memo: Nominal value of such stock",2019-12-01,9700000
@@ -20238,7 +20238,7 @@
 "Securities issued by other public financial corporate sectorb (such as IDC, DBSA)",2018-01-01,819915
 "Securities issued by other public financial corporate sectorb (such as IDC, DBSA)",2018-02-01,805600
 "Securities issued by other public financial corporate sectorb (such as IDC, DBSA)",2018-03-01,925180
-"Securities issued by other public financial corporate sectorb (such as IDC, DBSA)",2018-04-01,1e+06
+"Securities issued by other public financial corporate sectorb (such as IDC, DBSA)",2018-04-01,1000000
 "Securities issued by other public financial corporate sectorb (such as IDC, DBSA)",2018-05-01,1607498
 "Securities issued by other public financial corporate sectorb (such as IDC, DBSA)",2018-06-01,1928619
 "Securities issued by other public financial corporate sectorb (such as IDC, DBSA)",2018-07-01,2100707
@@ -21193,25 +21193,25 @@
 "Financial corporate sectorc-1",2019-04-01,2500000
 "Financial corporate sectorc-1",2019-05-01,2300000
 "Financial corporate sectorc-1",2019-06-01,2500000
-"Financial corporate sectorc-1",2019-07-01,3e+06
+"Financial corporate sectorc-1",2019-07-01,3000000
 "Financial corporate sectorc-1",2019-08-01,3531584
-"Financial corporate sectorc-1",2019-09-01,3e+06
+"Financial corporate sectorc-1",2019-09-01,3000000
 "Financial corporate sectorc-1",2019-10-01,3200000
 "Financial corporate sectorc-1",2019-11-01,3098418
 "Financial corporate sectorc-1",2019-12-01,2522156
 "Financial corporate sectorc-1",2020-01-01,2604217
 "Financial corporate sectorc-1",2020-02-01,2539383
 "Financial corporate sectorc-1",2020-03-01,2141741
-"Financial corporate sectorc-1",2020-04-01,2e+06
+"Financial corporate sectorc-1",2020-04-01,2000000
 "Financial corporate sectorc-1",2020-05-01,1502480
 "Financial corporate sectorc-1",2020-06-01,1261633
 "Financial corporate sectorc-1",2020-07-01,1200000
 "Financial corporate sectorc-1",2020-08-01,761481
-"Financial corporate sectorc-1",2020-09-01,8e+05
+"Financial corporate sectorc-1",2020-09-01,800000
 "Financial corporate sectorc-1",2020-10-01,898058
 "Financial corporate sectorc-1",2020-11-01,1237114
-"Financial corporate sectorc-1",2020-12-01,1e+06
-"Financial corporate sectorc-1",2021-01-01,1e+06
+"Financial corporate sectorc-1",2020-12-01,1000000
+"Financial corporate sectorc-1",2021-01-01,1000000
 "Financial corporate sectorc-1",2021-02-01,693227
 "Financial corporate sectorc-1",2021-03-01,529728
 "Financial corporate sectorc-1",2021-04-01,0
@@ -28323,7 +28323,7 @@
 "Commercial paper",2018-02-01,1853429
 "Commercial paper",2018-03-01,1989141
 "Commercial paper",2018-04-01,2397603
-"Commercial paper",2018-05-01,3e+06
+"Commercial paper",2018-05-01,3000000
 "Commercial paper",2018-06-01,0
 "Commercial paper",2018-07-01,0
 "Commercial paper",2018-08-01,0

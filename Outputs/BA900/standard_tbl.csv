@@ -6391,30 +6391,30 @@
 "Banksd-1",2023-06-01,0
 "Banksd-1",2023-07-01,0
 "Banksd-1",2023-08-01,0
-"Financial corporate sectorc",2008-01-01,1e+06
-"Financial corporate sectorc",2008-02-01,1e+06
-"Financial corporate sectorc",2008-03-01,1e+06
-"Financial corporate sectorc",2008-04-01,1e+06
-"Financial corporate sectorc",2008-05-01,1e+06
-"Financial corporate sectorc",2008-06-01,1e+06
-"Financial corporate sectorc",2008-07-01,1e+06
-"Financial corporate sectorc",2008-08-01,1e+06
-"Financial corporate sectorc",2008-09-01,1e+06
-"Financial corporate sectorc",2008-10-01,1e+06
-"Financial corporate sectorc",2008-11-01,1e+06
-"Financial corporate sectorc",2008-12-01,1e+06
-"Financial corporate sectorc",2009-01-01,1e+06
-"Financial corporate sectorc",2009-02-01,1e+06
-"Financial corporate sectorc",2009-03-01,1e+06
-"Financial corporate sectorc",2009-04-01,1e+06
+"Financial corporate sectorc",2008-01-01,1000000
+"Financial corporate sectorc",2008-02-01,1000000
+"Financial corporate sectorc",2008-03-01,1000000
+"Financial corporate sectorc",2008-04-01,1000000
+"Financial corporate sectorc",2008-05-01,1000000
+"Financial corporate sectorc",2008-06-01,1000000
+"Financial corporate sectorc",2008-07-01,1000000
+"Financial corporate sectorc",2008-08-01,1000000
+"Financial corporate sectorc",2008-09-01,1000000
+"Financial corporate sectorc",2008-10-01,1000000
+"Financial corporate sectorc",2008-11-01,1000000
+"Financial corporate sectorc",2008-12-01,1000000
+"Financial corporate sectorc",2009-01-01,1000000
+"Financial corporate sectorc",2009-02-01,1000000
+"Financial corporate sectorc",2009-03-01,1000000
+"Financial corporate sectorc",2009-04-01,1000000
 "Financial corporate sectorc",2009-05-01,1577830
-"Financial corporate sectorc",2009-06-01,1e+06
+"Financial corporate sectorc",2009-06-01,1000000
 "Financial corporate sectorc",2009-07-01,1577830
 "Financial corporate sectorc",2009-08-01,1577830
 "Financial corporate sectorc",2009-09-01,1577830
 "Financial corporate sectorc",2009-10-01,1577830
 "Financial corporate sectorc",2009-11-01,1577830
-"Financial corporate sectorc",2009-12-01,1e+06
+"Financial corporate sectorc",2009-12-01,1000000
 "Financial corporate sectorc",2010-01-01,872662
 "Financial corporate sectorc",2010-02-01,872662
 "Financial corporate sectorc",2010-03-01,872662
@@ -18460,7 +18460,7 @@
 "Unexpired maturity of more than 3 years",2010-11-01,3248777
 "Unexpired maturity of more than 3 years",2010-12-01,2697183
 "Unexpired maturity of more than 3 years",2011-01-01,1491302
-"Unexpired maturity of more than 3 years",2011-02-01,6e+05
+"Unexpired maturity of more than 3 years",2011-02-01,600000
 "Unexpired maturity of more than 3 years",2011-03-01,0
 "Unexpired maturity of more than 3 years",2011-04-01,5843730
 "Unexpired maturity of more than 3 years",2011-05-01,7418561
@@ -18648,7 +18648,7 @@
 "Memo: Nominal value of such stock-1",2010-11-01,3103806
 "Memo: Nominal value of such stock-1",2010-12-01,2402817
 "Memo: Nominal value of such stock-1",2011-01-01,1400000
-"Memo: Nominal value of such stock-1",2011-02-01,6e+05
+"Memo: Nominal value of such stock-1",2011-02-01,600000
 "Memo: Nominal value of such stock-1",2011-03-01,0
 "Memo: Nominal value of such stock-1",2011-04-01,5843729
 "Memo: Nominal value of such stock-1",2011-05-01,7418561

@@ -213,28 +213,28 @@ unique(total_filtered_tbl$Series)
 total_aggregation_tbl <- ba900_aggregration(total_filtered_tbl)
 total_aggregation_gg <- 
   total_aggregation_tbl %>% 
-  balance_sheet_rename_gg(variable_color = 10)
+  balance_sheet_rename_gg(variable_color = 9)
 
 absa_aggregation_tbl <- ba900_aggregration(absa_filtered_tbl)
 absa_aggregation_tbl <- ba900_aggregration(absa_filtered_tbl)
 absa_aggregation_gg <- 
   absa_aggregation_tbl %>% 
-  balance_sheet_rename_gg(variable_color = 10)
+  balance_sheet_rename_gg(variable_color = 9)
 
 fnb_aggregation_tbl <- ba900_aggregration(fnb_filtered_tbl)
 fnb_aggregation_gg <- 
   fnb_aggregation_tbl %>% 
-  balance_sheet_rename_gg(variable_color = 10)
+  balance_sheet_rename_gg(variable_color = 9)
 
 nedbank_aggregation_tbl <- ba900_aggregration(nedbank_filtered_tbl)
 nedbank_aggregation_gg <- 
   nedbank_aggregation_tbl %>% 
-  balance_sheet_rename_gg(variable_color = 10)
+  balance_sheet_rename_gg(variable_color = 9)
 
 standard_aggregation_tbl <- ba900_aggregration(standard_filtered_tbl)
 standard_aggregation_gg <- 
   standard_aggregation_tbl %>% 
-  balance_sheet_rename_gg(variable_color = 10)
+  balance_sheet_rename_gg(variable_color = 9)
 
 capitec_aggregation_tbl <- ba900_aggregration(capitec_filtered_tbl)
 capitec_aggregation_gg <- 
