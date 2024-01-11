@@ -12,7 +12,7 @@ format:
           \newcommand{\blandscape}{\begin{landscape}}
           \newcommand{\elandscape}{\end{landscape}}
           \usepackage{rotating}
-      - file: preamble.tex
+      - file: preamble.tex 
     include-before-body: title.tex
   docx:
     reference-doc: new_template_no_numbering.docx
@@ -46,8 +46,8 @@ knitr::opts_chunk$set(echo = FALSE,
                       fig.pos = "H", 
                       fig.env= 'figure', 
                       tab.topcaption = FALSE,
-                      ft.align = "left"
-                      
+                      ft.align = "left",
+                      ft.arraystretch = 0.5                      
                       )
 library(tidyverse)
 library(readr)
@@ -70,6 +70,15 @@ library(officedown)
 library(modelsummary)
 library(sandwich)
 library(lmtest)
+
+set_flextable_defaults(
+  font.size = 8,
+  digits = 2,
+  font.family = "Arial",
+  border.color = "#5d74a5"
+)
+
+
 ```
 
 ```{r functions}
@@ -90,6 +99,9 @@ source(here("Functions","borderlines.R" ))
 
 # Results
 
+
+
+
 # Conclusion
 
 \newpage
@@ -109,8 +121,434 @@ source(here("Functions","borderlines.R" ))
 
 \newpage
 
-# Appendix : Data
+# Appendix :
 
+## Data sources
+
+```{r}
+#| label: tbl-data
+#| tbl-cap: "Data Sources"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystrech: .4
+
+tibble(
+  " " = c("BA900", 
+          "BA930", 
+          "Controls"
+          ),
+  "Description" = c("Banking sector balance sheet data at a bank level",
+                    "Banking sector lending rates at a bank level",
+                    "Banking sector performance data at a bank level"
+
+                    ),
+  
+  "Availability" = c("Public data",
+                     "Aggregated data is public. 
+Bank specific data is private",
+                     "Aggregated data is public. 
+Bank specific data is private"
+                     ),
+  "Source" = c("South African Reserve Bank",
+               "South African Reserve Bank",
+              "Prudential Authority"
+               )
+) %>% 
+  flextable_word() %>%
+  flextable::align(align = "left", part = "all")
+
+
+```
+
+
+```{r}
+#| label: tbl-data1
+#| tbl-cap: "Data Description"
+#| cache: FALSE
+#| include: FALSE
+#| ft.arraystretch: 0.5
+
+
+model_variables <- c( "L_{b,t}",
+                      "r_{b,t}",
+                      "C - C_{min}",
+                      "r_t",
+                      "\\Omega_{b,t}"
+  
+)
+
+tibble(
+  "Variable Description" = c("Loans by lending category and bank",
+                 "Lending rate by lending category and bank",
+                 "Capital buffer",
+                 "Capital requirement",
+                 "Repo rate",
+                 "GDP",
+                 "Bank level perfomance metrics"
+                 ),
+  "Data Description" = c("BA 900 data on bank level credit at a monthly frequency. 
+We have summarised to six lending categories: 
+Household secured credit, Household unsecured credit, Household residential mortgages, 
+Non financial sector secured credit, Non financial sector unsecured credit, 
+and Non financial sector mortgages as explain in Section 8.2.",
+"BA 930 data on bank level lending rates at a monthly frequency. 
+Lending rates are defined as the weighted average rate 
+by lending category. These were also summarised into the 
+same six lending categories as shown in Section 8.2.",
+"Aggregate amount of qualifying capital and 
+reserve funds less minimum required capital and reserve funds.",
+"Basel III required level of capital as a percentage of risk-weighted assets",
+"South African Reserve Bank policy rate",
+"Nominal gross domestic product.",
+"The following are bank perfomance metrics are include in the data: 
+total assets, gross loan advances, retained earnings,
+net interest income (12 months), level one high-quality liquid assets required to be held, 
+average daily amount of level one high-quality liquid assets held up to 
+fourteenth business day of the month following the month to which this return relates, 
+aggregate risk weighted exposure, return on equity, return on assets, 
+total capital adequacy ratio, and leverage ratio."
+                    
+                    ),
+  "Measure" = c("Rand","Percent", "Percent", "Percent", "Percent", "Rand", "Rand and percent"),
+  "Cross-section" = c("Nedbank, First National Bank, Standard Bank, Absa",
+                      "Nedbank, First National Bank, Standard Bank, Absa",
+                      "Nedbank, First National Bank, Standard Bank, Absa",
+                      "Nedbank, First National Bank, Standard Bank, Absa",
+                      "NA",
+                      "NA",
+                      "Nedbank, First National Bank, Standard Bank, Absa"
+                      ),
+  "Sample" = c("January 2008 to November 2022", 
+               "January 2012 to June 2022",
+               "January 2008 to September 2020",
+               "January 2008 to September 2020",
+               "January 2008 to February 2021",
+               "March 2008 to March 2022",
+               "January 2008 to September 2022"),
+  "Frequency" = c (
+  "Monthly",
+  "Monthly",
+  "Monthly",
+   "Monthly",
+  "Monthly",
+  "Quartely",
+  "Monthly"
+  ),
+  
+) %>% 
+  flextable_word(
+    caption = "Data Description") %>%
+  align(j = 1, part = "all", align = "left") %>% 
+  fit_to_width(max_width = 10) 
+
+```
+
+
+\newpage
+## Aggregation scheme
+
+```{r}
+#| label: tbl-scheme
+#| tbl-cap: Aggregation schema
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: .55
+
+
+tibble(
+  "BA 900 Categories" = 
+    c(
+      "Installment sales",
+      "",
+      "",
+      "",
+      "Leasing transactions",
+      "",
+      "",
+      "",
+      "Farm mortgages",
+      "",
+      "",
+      "Residential mortgages",
+      "",
+      "",
+      "Commercial and other mortgages",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Credit cards",
+      "",
+      "",
+      "",
+      "Overdrafts",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Factoring debtors",
+      "Other loans and advances", 
+      "",
+      "", 
+      "",
+      "",
+      ""
+    ),
+  "Item Number" = c(
+    141,
+    142,
+    143,
+    144,
+    146,
+    147,
+    148,
+    149,
+    152,
+    153,
+    154,
+    156,
+    157,
+    158,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    167,
+    168,
+    169,
+    170,
+    178,
+    181,
+    182,
+    183,
+    184,
+    185,
+    187,
+    189,
+    190, 
+    191, 
+    192,
+    193,
+    ""
+    
+  ),
+  "Sector" = c(
+    "Financial corporate sector",
+    "Non financial corporate sector",
+    "Household sector",
+    "Other",
+    "Financial corporate sector",
+    "Non financial corporate sector",
+    "Household sector",
+    "Other",
+    "Non financial corporate sector",
+    "Household sector",
+    "Other",
+    "Non financial corporate sector",
+    "Household sector",
+    "Other",
+    "Public financial corporates",
+    "Public non-financial corporates",
+    "Private financial corporate",
+    "Private non-financial corporates",
+    "Household sector",
+    "Other",
+    "Financial corporate sector",
+    "Non financial corporate sector",
+    "Household sector",
+    "Other",
+    "Public sector (includes public corporations and local government)",
+    "Financial corporate sector",
+    "Non financial corporate sector",
+    "Unincorporated business enterprises",
+    "Other Household sector",
+    "Non-profit organisations serving households",
+    "",
+    "Financial corporate sector",
+    "Non financial corporate sector",
+    "Unincorporated business enterprises",
+    "Other Household sector",
+    "Non-profit organisations serving households",
+    ""
+  ),
+  "Aggregation Key" = c(
+    "-",
+    "a",
+    "c",
+    "a",
+    "-",
+    "a",
+    "c",
+    "a",
+    "b",
+    "b",
+    "b",
+    "b",
+    "d",
+    "b",
+    "-",
+    "-",
+    "-",
+    "b",
+    "b",
+    "b",
+    "-",
+    "a",
+    "c",
+    "c",
+    "-",
+    "-",
+    "a",
+    "e",
+    "c",
+    "c",
+    "a",
+    "-",
+    "b",
+    "e",
+    "-",
+    "-",
+    ""
+  ),
+) %>% 
+  flextable_word(caption = "Aggregation schema") %>% 
+  align(align = "left", part = "all") %>%
+  colformat_num(digits = 0, j = 2) %>% 
+  autofit(add_w = -0.2)
+
+
+```
+
+The following aggregation scheme which results in six categories was followed based on @tbl-scheme, with unincorporated enterprise credit as part of household unsecured lending.
+
+a.	Non-financial corporate sector secured credit: Items 142 + 147 
+b.	Non-financial corporate sector unsecured credit: Items 168 + 182 + 187+ 190
+c.	Non-financial corporate sector mortgages (commercial and other mortgage advances): Items 152 + 153 + 154 + 156 + 158 + 163 + 164 + 165
+d.	Household sector secured credit: Items 143 + 148  
+e.	Household sector unsecured credit: Items 169 + 184 + 185 +  192 + 193 + 183 + 191 (note includes unincorporated business enterprise credit last two items)
+f.	Household sector residential mortgages: Item 157
+
+
+
+\newpage
+## Bank lending rates weighting scheme
+
+The loans quantities from the BA900s are then linked to the lending rate data from the BA930s using table to create six lending rate categories the schema on @tbl-scheme1.
+
+```{r}
+#| label: tbl-scheme1
+#| tbl-cap: Weighting schema
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: .55
+
+tibble(
+  "Sector" = c(
+   "Corporate sector",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "Household sector",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ),
+  "BA 930 Categories" = c(
+    "Overdrafts",
+    "Instalment sale agreements flexible rate",
+    "Instalment sale fixed rate",
+    "Leasing transactions flexible rate",
+    "Leasing transactions fixed rate",
+    "Mortgage advances flexible rate",
+    "Mortgage advances fixed rate",
+    "Credit cards",
+    "Other",
+    "Overdrafts",
+    "Instalment sale agreements flexible rate",
+    "Instalment sale fixed rate",
+    "Leasing transactions flexible rate",
+    "Leasing transactions fixed rate",
+    "Mortgage advances flexible rate",
+    "Mortgage advances fixed rate",
+    "Credit cards",
+    "Other"
+  ),
+  "Item Number" = c(
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66
+  ),
+  "Weighting Key" = c(
+    "b",
+    "a",
+    "-",
+    "a",
+    "-",
+    "c",
+    "-",
+    "b",
+    "b",
+    "e",
+    "d",
+    "-",
+    "d",
+    "-",
+    "f",
+    "-",
+    "e",
+    "e"
+  )
+) %>% 
+  flextable_word() %>% 
+  align(align = "left", part = "all") %>%
+  colformat_num(digits = 0, j = 2) %>% 
+  autofit(add_w = .35)
+
+
+
+
+```
+
+The six categories, therefore, are as follows:
+
+a. Non-financial corporate sector secured credit rate: Weighted average of items 49 + 51
+b. Non-financial corporate sector unsecured credit rate: Weighted average items 48 + 55 + 56
+c. Non-financial corporate sector mortgage rate: Item 53
+d. Household sector secured credit rate: Weighted average of items 59 + 61
+e. Household sector unsecured credit rate: Weighted average of items 58 + 65 + 66
+f. Household sector residential mortgages: Item 63
+
+
+\newpage
 ## Competition narrative indexes
 
 ```{r}
@@ -149,24 +587,21 @@ macropru_narratives_gg
 ```{r}
 #| label: fig-bank_lending
 #| fig-cap: "Total aggregated bank lending"
-#| fig-height: 6
+#| fig-height: 5
 #| fig-width: 6
-#| cache: FALSE
-
+#| cache: TRUE
 
 bank_lending <- read_rds(here("Outputs","BA900","artifacts_BA900.rds"))
 bank_lending_gg <- bank_lending$aggregated_graphs$total_aggregation_gg
 bank_lending_gg
-
 ```
 
 \newpage
 ## Weighted bank interests rates
 
 ```{r}
-# To add caculated weighted interest rates
-```
 
+```
 
 \newpage
 ## Aggregated bank controls
