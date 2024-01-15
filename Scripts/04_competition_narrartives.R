@@ -198,7 +198,8 @@ combined_dummies_tbl <-
 combined_dummies_gg <- 
   combined_dummies_tbl %>%
   pivot_longer(c(-Date, -Event, -Description), names_to = "Series", values_to = "Value") %>%
-  fx_plot(variables_color = 22)
+  fx_plot(variables_color = 22) +
+  facet_wrap(~Series, scales = "free_y", ncol = 3)
 
 combined_dummies_gg
 # Export ---------------------------------------------------------------

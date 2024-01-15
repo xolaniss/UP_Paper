@@ -121,9 +121,9 @@ source(here("Functions","borderlines.R" ))
 
 \newpage
 
-# Appendix :
+# Appendix
 
-## Data sources
+## Data sources (check)
 
 ```{r}
 #| label: tbl-data
@@ -133,29 +133,40 @@ source(here("Functions","borderlines.R" ))
 #| ft.arraystrech: .4
 
 tibble(
-  " " = c("BA900", 
-          "BA930", 
-          "Controls"
-          ),
-  "Description" = c("Banking sector balance sheet data at a bank level",
-                    "Banking sector lending rates at a bank level",
-                    "Banking sector performance data at a bank level"
-
-                    ),
+  " " = c(
+    "Macroprudential narrative index",
+    "Competition narrative index",
+    "BA900",
+          "BA930",
+          "Controls"),
+  "Description" = c(
+    " ",
+    " ",
+    "Banking sector balance sheet data at a bank level",
+    "Banking sector lending rates at a bank level",
+    "Banking sector performance data at a bank level"
+  ),
   
-  "Availability" = c("Public data",
-                     "Aggregated data is public. 
+  "Availability" = c(
+    "Public data",
+    "Public data",
+    "Public data",
+    "Aggregated data is public.
 Bank specific data is private",
-                     "Aggregated data is public. 
+"Aggregated data is public.
 Bank specific data is private"
-                     ),
-  "Source" = c("South African Reserve Bank",
-               "South African Reserve Bank",
-              "Prudential Authority"
-               )
-) %>% 
+  ),
+"Source" = c(
+  "Own analysis",
+  "Own analysis",
+  "South African Reserve Bank",
+  "South African Reserve Bank",
+  "Prudential Authority"
+)
+) %>%
   flextable_word() %>%
-  flextable::align(align = "left", part = "all")
+  flextable::align(align = "left", part = "all") %>% 
+  autofit(add_w = -0.18)
 
 
 ```
@@ -245,7 +256,7 @@ total capital adequacy ratio, and leverage ratio."
 
 
 \newpage
-## Aggregation scheme
+## Aggregation scheme (check)
 
 ```{r}
 #| label: tbl-scheme
@@ -377,40 +388,40 @@ tibble(
   ),
   "Aggregation Key" = c(
     "-",
-    "a",
-    "c",
-    "a",
+    "g",
+    "h",
     "-",
-    "a",
-    "c",
-    "a",
-    "b",
-    "b",
-    "b",
-    "b",
+    "-",
+    "g",
+    "h",
+    "-",
     "d",
-    "b",
+    "d",
     "-",
-    "-",
-    "-",
-    "b",
-    "b",
-    "b",
-    "-",
-    "a",
-    "c",
-    "c",
-    "-",
-    "-",
-    "a",
-    "e",
-    "c",
-    "c",
-    "a",
-    "-",
-    "b",
     "e",
     "-",
+    "-",
+    "-",
+    "-",
+    "d",
+    "d",
+    "-",
+    "-",
+    "a",
+    "b",
+    "-",
+    "-",
+    "-",
+    "-",
+    "-",
+    "a",
+    "-",
+    "b",
+    "-",
+    "-",
+    "a",
+    "-",
+    "b",
     "-",
     ""
   ),
@@ -423,21 +434,23 @@ tibble(
 
 ```
 
-The following aggregation scheme which results in six categories was followed based on @tbl-scheme, with unincorporated enterprise credit as part of household unsecured lending.
+\newpage
+The following aggregation scheme which results in nine categories was followed based on @tbl-scheme:
 
-a.	Non-financial corporate sector secured credit: Items 142 + 147 
-b.	Non-financial corporate sector unsecured credit: Items 168 + 182 + 187+ 190
-c.	Non-financial corporate sector mortgages (commercial and other mortgage advances): Items 152 + 153 + 154 + 156 + 158 + 163 + 164 + 165
-d.	Household sector secured credit: Items 143 + 148  
-e.	Household sector unsecured credit: Items 169 + 184 + 185 +  192 + 193 + 183 + 191 (note includes unincorporated business enterprise credit last two items)
-f.	Household sector residential mortgages: Item 157
-
-
+a.	Non-financial corporate unsecured lending: Items 168 + 183 + 190 
+b.	Household unsecured lending: Items 169 + 185 + 192   
+c.	Total unsecured lending: Non-financial corporate unsecured lending + Household unsecured lending
+d.	Commercial mortgages to corporates and households: Items 152 + 153 + 156 + 163 + 164   
+e.  Residential mortgages to household: Item 157
+f.	Total mortgage lending: Commercial mortgages to corporates and households + Residential mortgages to household
+g.	Leasing and instalments to corporates: Items 142 + 147
+h.  Leasing and instalments to households: Items 143 + 148
+i.  Total leasing and instalments: Leasing and instalments to corporates + Leasing and instalments to households
 
 \newpage
-## Bank lending rates weighting scheme
+## Bank lending rates weighting scheme (check)
 
-The loans quantities from the BA900s are then linked to the lending rate data from the BA930s using table to create six lending rate categories the schema on @tbl-scheme1.
+The loans quantities from the BA900s are then linked to the lending rate data from the BA930s using table to create nine lending rate categories the schema on @tbl-scheme1. The weights for each category are then calculated by dividing the total value of the loans in each category by the total value of all loans in the BA900s. The weights are then used to calculate the weighted average lending rate for each month. The weighted average lending rate is calculated by multiplying the lending rate for each category by the weight for that category and then summing the results.
 
 ```{r}
 #| label: tbl-scheme1
@@ -468,23 +481,23 @@ tibble(
    ""
   ),
   "BA 930 Categories" = c(
-    "Overdrafts",
+    "Overdraft rate",
     "Instalment sale agreements flexible rate",
     "Instalment sale fixed rate",
     "Leasing transactions flexible rate",
     "Leasing transactions fixed rate",
     "Mortgage advances flexible rate",
     "Mortgage advances fixed rate",
-    "Credit cards",
+    "Credit card rate",
     "Other",
-    "Overdrafts",
+    "Overdraft rate",
     "Instalment sale agreements flexible rate",
     "Instalment sale fixed rate",
     "Leasing transactions flexible rate",
     "Leasing transactions fixed rate",
     "Mortgage advances flexible rate",
     "Mortgage advances fixed rate",
-    "Credit cards",
+    "Credit card rate",
     "Other"
   ),
   "Item Number" = c(
@@ -508,29 +521,29 @@ tibble(
     66
   ),
   "Weighting Key" = c(
-    "b",
-    "a",
+    "a and c",
+    "g and i",
     "-",
-    "a",
+    "g and i",
     "-",
-    "c",
+    "d and f",
     "-",
-    "b",
-    "b",
-    "e",
-    "d",
+    "a and c",
+    "a and c",
+    "b and c",
+    "h and i",
     "-",
-    "d",
+    "h and i",
     "-",
-    "f",
+    "e and f",
     "-",
-    "e",
-    "e"
+    "b and c",
+    "b and c"
   )
 ) %>% 
   flextable_word() %>% 
   align(align = "left", part = "all") %>%
-  colformat_num(digits = 0, j = 2) %>% 
+  colformat_num(digits = 0, j = 3) %>% 
   autofit(add_w = .35)
 
 
@@ -538,23 +551,25 @@ tibble(
 
 ```
 
-The six categories, therefore, are as follows:
+The nine categories, therefore, are as follows:
 
-a. Non-financial corporate sector secured credit rate: Weighted average of items 49 + 51
-b. Non-financial corporate sector unsecured credit rate: Weighted average items 48 + 55 + 56
-c. Non-financial corporate sector mortgage rate: Item 53
-d. Household sector secured credit rate: Weighted average of items 59 + 61
-e. Household sector unsecured credit rate: Weighted average of items 58 + 65 + 66
-f. Household sector residential mortgages: Item 63
+a.	Non-financial corporate unsecured lending: Weighted average of items 55 + 48 + 56
+b.	Household unsecured lending: Weighted average of items 65 + 58 + 66
+c.	Total unsecured lending: Weighted average of items 55 + 48 + 56 + 65 + 58 + 66
+d.	Commercial mortgages to corporates and households: Weighted average of items 53
+e.  Residential mortgages to household:  Item 63
+f.	Total mortgage lending: Weighted average of items 53 + 63
+g.	Leasing and instalments to corporates: Weighted average of items 49 + 51
+h.  Leasing and instalments to households: Weighted average of items 59 + 61
+i.  Total leasing and instalments: Weighted average of items 49 + 51 + 59 + 61
 
 
-\newpage
-## Competition narrative indexes
+## Competition narrative indexes (check)
 
 ```{r}
 #| label: fig-comp_narrative_indexes
 #| fig-cap: "Competition narrative indexes"
-#| fig-height: 6
+#| fig-height: 7.5
 #| fig-width: 6
 #| cache: FALSE
 
@@ -562,11 +577,10 @@ comp_narratives <- read_rds(here("Outputs","narratives","artifacts_competion_nar
 
 comp_narratives_gg <- comp_narratives$graphs$combined_dummies_gg
 comp_narratives_gg
-
 ```
 
-\newpage
-## Macroprudential narrative indexes
+
+## Macroprudential narrative indexes (check)
 
 ```{r}
 #| label: fig-macro_narrative_indexes
@@ -597,14 +611,24 @@ bank_lending_gg
 ```
 
 \newpage
-## Weighted bank interests rates
+## Average lending rates (aggregated)
 
 ```{r}
+#| label: fig-bank_interest_rates
+#| fig-cap: "Average lending rates"
+#| fig-height: 5
+#| fig-width: 6
+#| cache: FALSE
 
+bank_interest_rates <- 
+  read_rds(here("Outputs","BA930","artifacts_BA930_futher_analysis.rds"))
+
+bank_interest_rates_gg <- bank_interest_rates$gg$aggregated_lending_rates_gg
+bank_interest_rates_gg
 ```
 
-\newpage
-## Aggregated bank controls
+
+## Aggregated bank controls (check)
 
 ```{r}
 #| label: fig-controls
