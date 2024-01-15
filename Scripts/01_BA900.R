@@ -1,14 +1,5 @@
 # Description
 # Cleaning up BA900 data and graphing 16 October 2023 - Xolani Sibande
-# TO DO: 
-# We need to focus the analysis and filter the data
-# (1) Credit card, Overdrafts, loans and advances to non-financial sector (168 + 169 + 183 + 185 + 190 + 192)
-# (2) Credit card, Overdrafts, loans and advances to non-financial corporate (168 + 183 + 190)
-# (3) Credit card, Overdrafts, loans and advances to households (169 + 185 + 192)
-# (4) Mortgages to non-financial corporates and households for commercial purposes (152 + 153 + 156 + 163 + 164)
-# (5) Residential mortgages to households (157)
-# (6) Leasing and installment sales to non-financial corporates (142 + 147)
-# (7) Leasing and installment sales to households (143 + 148)
 
 # Packages ----------------------------------------------------------------
 library(tidyverse)
@@ -241,6 +232,25 @@ capitec_aggregation_gg <-
   capitec_aggregation_tbl %>% 
   balance_sheet_rename_gg(variable_color = 10)
 
+## Combined aggregated data ---------------------------------------------------------
+combined_aggregated_lending_tbl <- 
+  bind_rows(
+    total_aggregation_tbl = total_aggregation_tbl,
+    absa_aggregation_tbl = absa_aggregation_tbl,
+    fnb_aggregation_tbl = fnb_aggregation_tbl,
+    nedbank_aggregation_tbl = nedbank_aggregation_tbl,
+    standard_aggregation_tbl = standard_aggregation_tbl,
+    capitec_aggregation_tbl = capitec_aggregation_tbl,
+    .id = "Banks") %>% 
+  mutate(Banks = str_replace_all(Banks, "_aggregation_tbl", "")) %>% 
+  mutate(Banks = str_to_title(Banks)) %>% 
+  mutate(Banks = str_replace_all(Banks, "Total", "Total Banks")) %>%
+  mutate(Banks = str_replace_all(Banks, "Absa", "Absa Bank")) %>%
+  mutate(Banks = str_replace_all(Banks, "Fnb", "FNB")) %>% 
+  mutate(Banks = str_replace_all(Banks, "Standard", "Standard Bank"))
+  
+combined_aggregated_lending_tbl
+
 # Export ------------------------------------------------------------------
 data_list = list(
   total_tbl = total_tbl,
@@ -269,7 +279,8 @@ artifacts_BA900 <- list (
     fnb_aggregation_tbl = fnb_aggregation_tbl,
     nedbank_aggregation_tbl = nedbank_aggregation_tbl,
     standard_aggregation_tbl = standard_aggregation_tbl,
-    capitec_aggregation_tbl = capitec_aggregation_tbl
+    capitec_aggregation_tbl = capitec_aggregation_tbl,
+    combined_aggregated_lending_tbl = combined_aggregated_lending_tbl
   ),
   filtered_graphs = list(
     totals_gg = totals_gg,

@@ -97,6 +97,49 @@ source(here("Functions","borderlines.R" ))
 
 # Data and Methodology
 
+```{r}
+#| label: tbl-descriptive
+#| tbl-cap: "Descriptive Statistics"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 0.5
+
+descriptives <- read_rds(here("Outputs", "combined_data", "artifacts_descriptives.rds"))
+descriptives_tbl <- descriptives$desc$descriptives_tbl
+descriptives_lending_tbl <- 
+  descriptives_tbl %>% 
+  ungroup() %>%
+  filter(Group == "Lending") %>% 
+  mutate(across(.cols = 2:6, .fns = ~ .x / 1000000000))
+
+descriptives_control_tbl <-
+  descriptives_tbl %>%
+  ungroup() %>%
+  filter(Group == "Controls") %>%
+  mutate(across(.cols = 2:6, .fns = ~ .x / 1))
+
+descriptives_tbl <- 
+  descriptives_lending_tbl %>% 
+  bind_rows(
+    descriptives_tbl %>% 
+      ungroup() %>%
+      filter(Group != "Lending" & Group != "Controls"),
+    descriptives_control_tbl
+  )
+
+descriptives_tbl %>%
+  as_grouped_data(groups = c("Group")) %>% 
+  as_flextable(hide_grouplabel = TRUE) %>% 
+  align(align = "center", i = c(1, 11, 18), part = "body") %>% 
+  colformat_double(digits = 1, j = 2:5, i = 2:10, prefix = "R", suffix = "bn") %>% 
+  colformat_double(digits = 1, j = 2:5, i = 11:17, suffix = "%") %>% 
+  colformat_double(digits = 0, j = 2:5, i = 19:33) %>% 
+  colformat_double(digits = 0, j =6) %>% 
+  autofit(add_w = -0.21)
+
+
+```
+
 # Results
 
 

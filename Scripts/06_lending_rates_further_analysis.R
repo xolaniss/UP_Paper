@@ -194,52 +194,6 @@ aggregated_lending_rates_gg <-
   facet_wrap(~ Series, scales = "free_y", ncol = 2)
   
 
-# Lending weighted approach ------------------------------------------------
-
-# ## Lending transformations -------------------------------------------------
-# lending_clean_up <- function(data, replace_string){
-#     bind_rows(data, .id = "Banks") %>% 
-#     mutate(Banks = str_replace_all(Banks, replace_string , "")) %>%
-#     mutate(Banks = str_to_title(Banks)) %>% 
-#     mutate(Banks = str_replace_all(Banks, "Absa", "Absa Bank")) %>%
-#     mutate(Banks = str_replace_all(Banks, "Standard", "Standard Bank")) %>%
-#     mutate(Banks = str_replace_all(Banks, "Total", "Total Banks")) %>%
-#     mutate(Banks = str_replace_all(Banks, "Fnb", "FNB")) 
-# }
-# 
-# lending_unaggregated_data_tbl <- 
-#   lending$filtered_data %>% 
-#   lending_clean_up(replace_string = "_filtered_tbl")
-#   
-# lending_aggregated_tbl <- 
-#   lending$aggregated_data %>% 
-#   lending_clean_up(replace_string = "_aggregation_tbl")
-# 
-# ## Joining lending rates and lending -----------------------------------------------------------------
-# lending_total_assets_tbl <- 
-#   lending_unaggregated_data_tbl %>% 
-#   filter(Series == "Total assets") %>%
-#   pivot_wider(names_from = Series, values_from = Value) # taking total assets to divide with aggregated lending
-# 
-# lending_aggregated_wide_tbl <- 
-#   lending_aggregated_tbl %>% 
-#   pivot_wider(names_from = Series, values_from = Value)
-# 
-# lending_rates_wide_tbl <- 
-#   lending_rates_tbl %>% 
-#   pivot_wider(names_from = Description, values_from = `Weighted average rate (%)`)
-# 
-# combined_tbl <- 
-#   lending_aggregated_wide_tbl %>% 
-#   left_join(lending_total_assets_tbl, by = c("Banks" = "Banks", "Date" = "Date")) %>% 
-#   left_join(lending_rates_wide_tbl, by = c("Banks" = "Banks", "Date" = "Date"))
-#   
-# ## lending shares ----------------------------------------------------------
-# combined_tbl %>% 
-#   mutate(across(-c(Date, Banks, `Total assets`) ,.fns = ~ .x / `Total assets`, .names = "{.col}_share")) %>% 
-#   pivot_longer(-c(Date, Banks), names_to = "Series", values_to = "Value")
-# ## Incomplete  
-
 # Export ---------------------------------------------------------------
 artifacts_lending_rates_futher_analysis <- 
   list (
