@@ -96,13 +96,14 @@ source(here("Functions","borderlines.R" ))
 @alexakis2023animal
 
 # Data and Methodology
+\newpage
 
 ```{r}
 #| label: tbl-descriptive
 #| tbl-cap: "Descriptive Statistics"
 #| cache: FALSE
 #| include: TRUE
-#| ft.arraystretch: 0.5
+#| ft.arraystretch: 0.35
 
 descriptives <- read_rds(here("Outputs", "combined_data", "artifacts_descriptives.rds"))
 descriptives_tbl <- descriptives$desc$descriptives_tbl
@@ -125,17 +126,21 @@ descriptives_tbl <-
       ungroup() %>%
       filter(Group != "Lending" & Group != "Controls"),
     descriptives_control_tbl
-  )
+  ) %>% 
+  rename(" " = Series)
 
 descriptives_tbl %>%
   as_grouped_data(groups = c("Group")) %>% 
   as_flextable(hide_grouplabel = TRUE) %>% 
-  align(align = "center", i = c(1, 11, 18), part = "body") %>% 
+  align(align = "center", i = c(1, 11, 14, 37, 44), part = "body") %>% 
   colformat_double(digits = 1, j = 2:5, i = 2:10, prefix = "R", suffix = "bn") %>% 
-  colformat_double(digits = 1, j = 2:5, i = 11:17, suffix = "%") %>% 
-  colformat_double(digits = 0, j = 2:5, i = 19:33) %>% 
+  colformat_double(digits = 0, j = 2:5, i = 12:13) %>%
+  colformat_double(digits = 0, j = 2:5, i = 15:36) %>%
+  colformat_double(digits = 1, j = 2:5, i = 38:43, suffix = "%") %>% 
+  colformat_double(digits = 0, j = 2:5, i = 45:59) %>% 
   colformat_double(digits = 0, j =6) %>% 
-  autofit(add_w = -0.21)
+  fontsize(size = 5.5, part = "all") %>%
+  autofit(add_w = -0.01)
 
 
 ```
@@ -209,7 +214,7 @@ Bank specific data is private"
 ) %>%
   flextable_word() %>%
   flextable::align(align = "left", part = "all") %>% 
-  autofit(add_w = -0.18)
+  autofit(add_w = -0.25)
 
 
 ```
