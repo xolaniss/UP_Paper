@@ -2152,7 +2152,7 @@
 "More than 1 month to 6 months",2014-11-01,0
 "More than 1 month to 6 months",2014-12-01,100392
 "More than 1 month to 6 months",2015-01-01,100948
-"More than 1 month to 6 months",2015-02-01,1e+05
+"More than 1 month to 6 months",2015-02-01,100000
 "More than 1 month to 6 months",2015-03-01,100398
 "More than 1 month to 6 months",2015-04-01,101024
 "More than 1 month to 6 months",2015-05-01,218
@@ -2333,11 +2333,11 @@
 "More than 6 months",2014-04-01,0
 "More than 6 months",2014-05-01,0
 "More than 6 months",2014-06-01,100373
-"More than 6 months",2014-07-01,1e+05
-"More than 6 months",2014-08-01,1e+05
-"More than 6 months",2014-09-01,1e+05
-"More than 6 months",2014-10-01,1e+05
-"More than 6 months",2014-11-01,1e+05
+"More than 6 months",2014-07-01,100000
+"More than 6 months",2014-08-01,100000
+"More than 6 months",2014-09-01,100000
+"More than 6 months",2014-10-01,100000
+"More than 6 months",2014-11-01,100000
 "More than 6 months",2014-12-01,0
 "More than 6 months",2015-01-01,0
 "More than 6 months",2015-02-01,0
@@ -23785,9 +23785,9 @@
 "Unlisted equities (total of items 230 to 232)",2015-12-01,0
 "Unlisted equities (total of items 230 to 232)",2016-01-01,0
 "Unlisted equities (total of items 230 to 232)",2016-02-01,0
-"Unlisted equities (total of items 230 to 232)",2016-03-01,1e+05
-"Unlisted equities (total of items 230 to 232)",2016-04-01,1e+05
-"Unlisted equities (total of items 230 to 232)",2016-05-01,1e+05
+"Unlisted equities (total of items 230 to 232)",2016-03-01,100000
+"Unlisted equities (total of items 230 to 232)",2016-04-01,100000
+"Unlisted equities (total of items 230 to 232)",2016-05-01,100000
 "Unlisted equities (total of items 230 to 232)",2016-06-01,136189
 "Unlisted equities (total of items 230 to 232)",2016-07-01,150633
 "Unlisted equities (total of items 230 to 232)",2016-08-01,169072
@@ -23973,9 +23973,9 @@
 "Banksc-3",2015-12-01,0
 "Banksc-3",2016-01-01,0
 "Banksc-3",2016-02-01,0
-"Banksc-3",2016-03-01,1e+05
-"Banksc-3",2016-04-01,1e+05
-"Banksc-3",2016-05-01,1e+05
+"Banksc-3",2016-03-01,100000
+"Banksc-3",2016-04-01,100000
+"Banksc-3",2016-05-01,100000
 "Banksc-3",2016-06-01,136189
 "Banksc-3",2016-07-01,150633
 "Banksc-3",2016-08-01,169072
@@ -24010,20 +24010,20 @@
 "Banksc-3",2019-01-01,561817
 "Banksc-3",2019-02-01,420654
 "Banksc-3",2019-03-01,474911
-"Banksc-3",2019-04-01,1e+05
-"Banksc-3",2019-05-01,1e+05
-"Banksc-3",2019-06-01,1e+05
-"Banksc-3",2019-07-01,1e+05
-"Banksc-3",2019-08-01,1e+05
-"Banksc-3",2019-09-01,1e+05
-"Banksc-3",2019-10-01,1e+05
-"Banksc-3",2019-11-01,1e+05
-"Banksc-3",2019-12-01,1e+05
-"Banksc-3",2020-01-01,1e+05
-"Banksc-3",2020-02-01,1e+05
-"Banksc-3",2020-03-01,1e+05
-"Banksc-3",2020-04-01,1e+05
-"Banksc-3",2020-05-01,1e+05
+"Banksc-3",2019-04-01,100000
+"Banksc-3",2019-05-01,100000
+"Banksc-3",2019-06-01,100000
+"Banksc-3",2019-07-01,100000
+"Banksc-3",2019-08-01,100000
+"Banksc-3",2019-09-01,100000
+"Banksc-3",2019-10-01,100000
+"Banksc-3",2019-11-01,100000
+"Banksc-3",2019-12-01,100000
+"Banksc-3",2020-01-01,100000
+"Banksc-3",2020-02-01,100000
+"Banksc-3",2020-03-01,100000
+"Banksc-3",2020-04-01,100000
+"Banksc-3",2020-05-01,100000
 "Banksc-3",2020-06-01,69340
 "Banksc-3",2020-07-01,69340
 "Banksc-3",2020-08-01,69340

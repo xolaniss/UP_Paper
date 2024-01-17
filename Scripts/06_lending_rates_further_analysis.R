@@ -39,7 +39,9 @@ source(here("Functions", "fx_plot.R"))
 
 # Import -------------------------------------------------------------
 lending_rates <- read_rds(here("Outputs", "BA930", "artifacts_BA930.rds"))  
-lending <- read_rds(here("Outputs", "BA900", "artifacts_BA900.rds"))
+lending <- read_rds(here("Outputs", "BA900", "artifacts_BA900.rds")) 
+lending_shares_tbl <- lending$shares_data$combined_shares_tbl %>% 
+  pivot_wider(id_cols = c(Date, Banks), names_from = Series, values_from = Value)
 
 # Equal weights approach --------------------------------------------------
 
@@ -120,6 +122,7 @@ lending_rates_tbl <-
                 -contains("foreign sector"),
                 -contains("Micro loans"),
                 -contains("Interbank"))
+names(lending_rates_tbl) 
 
 ## Graphing lending rates ------------------------------------------------
 lending_rate_gg <-
@@ -134,29 +137,24 @@ lending_rate_gg
 
 ## Aggregated rates -----------------------------------------------------------
 aggregated_lending_rates_tbl <-
-  lending_rates_tbl %>%
+  lending_rates_tbl %>% 
+  left_join(lending_shares_tbl, by = c("Date", "Banks")) %>%
   mutate(
     `Non financial corporate unsecured lending rate` =
-      (
-        `Credit cards: corporate sector` +
-          `Overdrafts: corporate sector` +
-          `Other: corporate sector`
-      ) / 3
+        `Credit cards: corporate sector` * `Non-financial corporate sector credit cards share` +
+          `Overdrafts: corporate sector` * `Non-financial corporate sector overdrafts share`  +
+          `Other: corporate sector` * `Non-financial corporate sector other loans and advances share`
   ) %>%
   mutate(
     `Household unsecured lending rate` =
-      (
-      `Credit cards: household sector` +
-          `Overdrafts: household sector` +
-          `Other: household sector`
-      ) / 3
+        `Credit cards: household sector` * `Households credit cards share` +
+          `Overdrafts: household sector` * `Households overdrafts share`  +
+          `Other: household sector` * `Households other loans and advances share`
   )  %>%
   mutate(
     `Total unsecured lending rate` =
-      (
-        `Non financial corporate unsecured lending rate` +
-          `Household unsecured lending rate` 
-      ) / 2
+        `Non financial corporate unsecured lending rate` * `Non-financial corporate unsecured lending share` +
+          `Household unsecured lending rate` * `Household unsecured lending share`
   ) %>% 
   mutate(
     `Commercial mortgages to corporates and households rate` =
@@ -168,10 +166,32 @@ aggregated_lending_rates_tbl <-
       ) %>% 
   mutate(
     `Total mortgages lending rate` =
-      (`Commercial mortgages to corporates and households rate` +
-          `Residential mortgages to household rate` 
-      ) / 2
+      `Commercial mortgages to corporates and households rate` *
+      `Commercial mortgages to corporates and households share`  +
+        `Residential mortgages to household rate` *
+        `Residential mortgages to households share`
   ) %>% 
+  mutate(
+    `Leasing and installements to corporate rate` =
+        `Leasing transactions: corporate sector: flexible rate` *
+          `Non-financial corporate sector leasing transactions share` +
+          `Instalment sale agreements: corporate sector: flexible rate` *
+          `Non-financial corporate sector instalment sales share` 
+  ) %>%
+  mutate(
+      `Leasing and installments to households rate` =
+          `Leasing transactions: household sector: flexible rate` *
+            `Households leasing transactions share`+
+            `Instalment sale agreements: household sector: flexible rate` *
+            `Household sector instalment sales share`
+    ) %>% 
+  mutate(
+    `Total leasing and installments rate` =
+        `Leasing and installements to corporate rate` *
+          `Leasing and installments to corporates share`+
+          `Leasing and installments to households rate` *
+          `Leasing and installments to households share`
+  ) %>%
   dplyr::select(
     Date,
     Banks,
@@ -180,10 +200,14 @@ aggregated_lending_rates_tbl <-
     `Total unsecured lending rate`,
     `Commercial mortgages to corporates and households rate`,
     `Residential mortgages to household rate`,
-    `Total mortgages lending rate`
+    `Total mortgages lending rate`,
+    `Leasing and installements to corporate rate`,
+    `Leasing and installments to households rate`,
+    `Total leasing and installments rate`
   ) 
   
-aggregated_lending_rates_tbl
+aggregated_lending_rates_tbl %>% 
+  
 
 aggregated_lending_rates_gg <- 
   aggregated_lending_rates_tbl %>% 

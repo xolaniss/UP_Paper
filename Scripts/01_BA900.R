@@ -32,6 +32,8 @@ source(here("Functions", "cleanup.R"))
 source(here("Functions", "filter_and_stings.R"))
 source(here("Functions", "balance_sheet_rename_gg.R"))
 source(here("Functions", "ba900_aggregation.R"))
+source(here("Functions", "ba900_aggregation_shares.R")) 
+
 
 # Import ------------------------------------------------------------------
 path = here("Data", "BA900", "BA900_line_item_103_to_277_updated_to_Aug_2023.xlsx")
@@ -251,6 +253,61 @@ combined_aggregated_lending_tbl <-
   
 combined_aggregated_lending_tbl
 
+# Aggregated data shares ------------------------------------------------------------
+total_banks_shares_tbl <-   
+  ba900_aggregration_shares(
+    filtered_data= total_filtered_tbl,
+    aggregated_data = total_aggregation_tbl
+  ) %>% 
+  mutate(Banks = "Total Banks")
+
+absa_banks_shares_tbl <-
+  ba900_aggregration_shares(
+    filtered_data= absa_filtered_tbl,
+    aggregated_data = absa_aggregation_tbl
+  ) %>% 
+  mutate(Banks = "Absa Bank")
+
+fnb_banks_shares_tbl <-
+  ba900_aggregration_shares(
+    filtered_data= fnb_filtered_tbl,
+    aggregated_data = fnb_aggregation_tbl
+  ) %>% 
+  mutate(Banks = "FNB")
+
+nedbank_banks_shares_tbl <-
+  ba900_aggregration_shares(
+    filtered_data= nedbank_filtered_tbl,
+    aggregated_data = nedbank_aggregation_tbl
+  ) %>% 
+  mutate(Banks = "Nedbank")
+
+standard_banks_shares_tbl <-
+  ba900_aggregration_shares(
+    filtered_data= standard_filtered_tbl,
+    aggregated_data = standard_aggregation_tbl
+  ) %>% 
+  mutate(Banks = "Standard Bank")
+
+capitec_banks_shares_tbl <-
+  ba900_aggregration_shares(
+    filtered_data= capitec_filtered_tbl,
+    aggregated_data = capitec_aggregation_tbl
+  ) %>% 
+  mutate(Banks = "Capitec")
+
+# combine shares tbl
+combined_shares_tbl <- 
+  bind_rows(
+  total_banks_shares_tbl,
+  absa_banks_shares_tbl,
+  fnb_banks_shares_tbl,
+  nedbank_banks_shares_tbl,
+  standard_banks_shares_tbl,
+  capitec_banks_shares_tbl
+) %>% 
+  relocate(Banks, .after = 1)
+
 # Export ------------------------------------------------------------------
 data_list = list(
   total_tbl = total_tbl,
@@ -281,6 +338,15 @@ artifacts_BA900 <- list (
     standard_aggregation_tbl = standard_aggregation_tbl,
     capitec_aggregation_tbl = capitec_aggregation_tbl,
     combined_aggregated_lending_tbl = combined_aggregated_lending_tbl
+  ),
+  shares_data = list(
+    total_banks_shares_tbl = total_banks_shares_tbl,
+    absa_banks_shares_tbl = absa_banks_shares_tbl,
+    fnb_banks_shares_tbl = fnb_banks_shares_tbl,
+    nedbank_banks_shares_tbl = nedbank_banks_shares_tbl,
+    standard_banks_shares_tbl = standard_banks_shares_tbl,
+    capitec_banks_shares_tbl = capitec_banks_shares_tbl,
+    combined_shares_tbl = combined_shares_tbl
   ),
   filtered_graphs = list(
     totals_gg = totals_gg,
