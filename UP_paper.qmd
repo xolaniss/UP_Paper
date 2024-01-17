@@ -14,6 +14,7 @@ format:
           \usepackage{rotating}
       - file: preamble.tex 
     include-before-body: title.tex
+    keep-tex: TRUE
   docx:
     reference-doc: new_template_no_numbering.docx
 pdf-engine: xelatex
