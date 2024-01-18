@@ -216,7 +216,7 @@ Bank specific data is private"
 ) %>%
   flextable_word() %>%
   flextable::align(align = "left", part = "all") %>% 
-  autofit(add_w = -0.25)
+  autofit(add_w = -0.30)
 
 
 ```
@@ -303,7 +303,6 @@ total capital adequacy ratio, and leverage ratio."
   fit_to_width(max_width = 10) 
 
 ```
-
 
 \newpage
 ## Aggregation scheme (check)
@@ -484,7 +483,7 @@ tibble(
 
 ```
 
-\newpage
+
 The following aggregation scheme which results in nine categories was followed based on @tbl-scheme:
 
 a.	Non-financial corporate unsecured lending: Items 168 + 183 + 190 
@@ -616,7 +615,7 @@ i.  Total leasing and instalments: Weighted average of items 49 + 51 + 59 + 61
 ```{r}
 #| label: fig-comp_narrative_indexes
 #| fig-cap: "Competition narrative indexes"
-#| fig-height: 7.5
+#| fig-height: 7
 #| fig-width: 6
 #| cache: FALSE
 
@@ -642,13 +641,13 @@ macropru_narratives_gg
 
 ```
 
-\newpage
+
 ## Aggregated bank lending
 
 ```{r}
 #| label: fig-bank_lending
 #| fig-cap: "Total aggregated bank lending"
-#| fig-height: 5
+#| fig-height: 6
 #| fig-width: 6
 #| cache: TRUE
 
@@ -657,12 +656,12 @@ bank_lending_gg <- bank_lending$aggregated_graphs$total_aggregation_gg
 bank_lending_gg
 ```
 
-\newpage
-## Average lending rates (aggregated)
+
+## Weighted lending rates (aggregated)
 
 ```{r}
 #| label: fig-bank_interest_rates
-#| fig-cap: "Average lending rates"
+#| fig-cap: "Weighted lending rates"
 #| fig-height: 5
 #| fig-width: 6
 #| cache: FALSE
