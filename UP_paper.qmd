@@ -103,8 +103,9 @@ source(here("Functions","borderlines.R" ))
 #| label: tbl-descriptive
 #| tbl-cap: "Descriptive Statistics"
 #| cache: FALSE
-#| include: TRUE
+#| include: FALSE
 #| ft.arraystretch: 0.35
+#| eval: FALSE
 
 descriptives <- read_rds(here("Outputs", "combined_data", "artifacts_descriptives.rds"))
 descriptives_tbl <- descriptives$desc$descriptives_tbl
@@ -595,9 +596,6 @@ tibble(
   colformat_num(digits = 0, j = 3) %>% 
   autofit(add_w = .35)
 
-
-
-
 ```
 
 The nine categories, therefore, are as follows:
@@ -677,7 +675,7 @@ bank_interest_rates_gg
 ```
 
 
-## Aggregated bank controls (check)
+<!-- ## Aggregated bank controls (check) -->
 
 ```{r}
 #| label: fig-controls
@@ -685,6 +683,8 @@ bank_interest_rates_gg
 #| fig-height: 7.5
 #| fig-width: 6
 #| cache: FALSE
+#| include: FALSE
+#| eval: FALSE
 
 controls <- read_rds(here("Outputs","BA920","artifacts_BA920.rds"))
 controls_gg <- controls$graphs$Total_banks_gg

@@ -91,7 +91,7 @@ entry_exit <-
 
 
 entry_exit_tbl <- 
-  seq(as.Date("2008-01-01"), as.Date("2020-12-31"), by = "month") %>% 
+  seq(as.Date("2008-01-01"), as.Date("2023-12-31"), by = "month") %>% 
   as_tibble() %>%
   rename(Date = value) %>%
   left_join(entry_exit, by = "Date") %>% 
@@ -135,7 +135,7 @@ finance_regulations_tbl <-
   distinct(Date, Event, .keep_all = TRUE)
 
 finance_regulation_dummuy_tbl <- 
-  seq(as.Date("2008-01-01"), as.Date("2020-12-31"), by = "month") %>% 
+  seq(as.Date("2008-01-01"), as.Date("2023-12-31"), by = "month") %>% 
   as_tibble() %>% 
   rename(Date = value) %>% 
   mutate(event_dummy = ifelse(Date %in% finance_regulations_tbl$Date, 1, 0)) %>% 
@@ -158,7 +158,7 @@ competition_tbl <-
 
 # create competition dummy
 competition_dummy_tbl <- 
-  seq(as.Date("2008-01-01"), as.Date("2020-12-31"), by = "month") %>% 
+  seq(as.Date("2008-01-01"), as.Date("2023-12-31"), by = "month") %>% 
   as_tibble() %>% 
   rename(Date = value) %>% 
   mutate(event_dummy = ifelse(Date %in% competition_tbl$Date, 1, 0)) %>% 
@@ -180,7 +180,7 @@ financial_inclusion_tbl <-
 
 # create financial inclusion dummy
 financial_inclusion_dummy_tbl <- 
-  seq(as.Date("2008-01-01"), as.Date("2020-12-31"), by = "month") %>% 
+  seq(as.Date("2008-01-01"), as.Date("2023-12-31"), by = "month") %>% 
   as_tibble() %>% 
   rename(Date = value) %>% 
   mutate(event_dummy = ifelse(Date %in% financial_inclusion_tbl$Date, 1, 0)) %>% 

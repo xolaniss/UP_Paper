@@ -111,7 +111,7 @@ descriptives_macropru_tbl <-
   macropru_index_tbl %>% 
   banks_descriptives(group_var = "Macroprudential Narrative Indices")
 
-competition_index_tbl <-
+descriptives_competition_index_tbl <-
   competition_index_tbl %>% 
   banks_descriptives(group_var = "Competition Narrative Indices")
 

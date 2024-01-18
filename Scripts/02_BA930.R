@@ -140,7 +140,11 @@ lending_rate_tbl <-
   drop_na()
 
 unique(lending_rate_tbl$`Item Description`) #check
-
+lending_rate_tbl %>% 
+  #pivot wider
+  pivot_wider(id_cols = c(Date, Banks), names_from = Description, values_from = `Weighted average rate (%)`) %>% 
+  # filter(Date > "2012-01-01") %>% 
+  skim()
 
 # Graphing ---------------------------------------------------------------
 lending_rate_gg <- function(bank = "Total Banks"){
@@ -177,6 +181,7 @@ Standard_gg <- lending_rate_gg("Standard")
 FNB_gg <- lending_rate_gg("FNB")
 Nedbank_gg <- lending_rate_gg("Nedbank")
 Capitec_gg <- lending_rate_gg("Capitec")
+
 
 # Export ---------------------------------------------------------------
 artifacts_BA930 <- list (

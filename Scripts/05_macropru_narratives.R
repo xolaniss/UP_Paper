@@ -43,13 +43,21 @@ macropru_narratives <- read_excel(here("Data", "narratives", "plot_narratives_po
 macropru_narratives %>% 
   tail(12)
 # Cleaning -----------------------------------------------------------------
+
+
 macropru_narratives_tbl <- 
   macropru_narratives %>% 
-  mutate(
-    Date = seq(as.Date("2008-01-01"), as.Date("2019-12-01"), by = "month")
-  ) %>% 
-  # drop Period
   dplyr::select(-Period) %>%
+  mutate(
+    Date = seq(as.Date("2008-01-01"), as.Date("2019-12-31"), by = "month")
+  ) %>% 
+  bind_rows(
+    tibble(
+      "Date" = seq(as.Date("2020-01-01"), as.Date("2023-12-31"), by = "month"),
+      "Draft" = rep(0, 48),
+      "Implementation" = rep(0, 48)
+    )
+  ) %>% 
   # move date to before Draft
   relocate(Date, .before = Draft)
 

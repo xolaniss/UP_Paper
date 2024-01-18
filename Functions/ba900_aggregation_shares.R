@@ -29,8 +29,7 @@ ba900_aggregration_shares <-
         across(
           .cols  = c(
             `Non-financial corporate unsecured lending`, 
-            `Household unsecured lending`,
-            `Households other loans and advances`), 
+            `Household unsecured lending`), 
           .fns = ~ .x / `Total unsecured lending`,
           .names = "{col} share"
         )

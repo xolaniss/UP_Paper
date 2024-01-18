@@ -43,6 +43,8 @@ lending <- read_rds(here("Outputs", "BA900", "artifacts_BA900.rds"))
 lending_shares_tbl <- lending$shares_data$combined_shares_tbl %>% 
   pivot_wider(id_cols = c(Date, Banks), names_from = Series, values_from = Value)
 
+lending_rates$data$lending_rate_tbl %>% skim()
+
 # Equal weights approach --------------------------------------------------
 
 ## Cleaning lending rates --------------------------------------------------------
@@ -122,7 +124,39 @@ lending_rates_tbl <-
                 -contains("foreign sector"),
                 -contains("Micro loans"),
                 -contains("Interbank"))
-names(lending_rates_tbl) 
+lending_rates_tbl %>% skim()
+
+
+## Replacing extreme values with na.locf ---------------------------------
+extreme_replace <- function(data, replace_var){
+  replace_var <- enquo(replace_var)
+  data %>% 
+    mutate(
+      !!replace_var :=
+        ifelse(
+          !!replace_var > 15,
+          NA,
+          !!replace_var
+        )
+    ) %>%
+    mutate(
+      !!replace_var :=
+        zoo::na.locf(!!replace_var, na.rm = FALSE)
+    )
+}
+
+lending_rates_tbl <- extreme_replace(data = lending_rates_tbl, 
+                replace_var = `Mortgage advances: corporate sector: flexible rate`)
+lending_rates_tbl <- extreme_replace(data = lending_rates_tbl, 
+                replace_var = `Mortgage advances: household sector: flexible rate`)
+lending_rates_tbl <- extreme_replace(data = lending_rates_tbl, 
+                replace_var = `Other: corporate sector`)
+lending_rates_tbl <- extreme_replace(data = lending_rates_tbl, 
+                replace_var = `Other: household sector`)
+lending_rates_tbl <- extreme_replace(data = lending_rates_tbl, 
+                replace_var = `Overdrafts: corporate sector`)
+lending_rates_tbl <- extreme_replace(data = lending_rates_tbl,
+                replace_var = `Overdrafts: household sector`)
 
 ## Graphing lending rates ------------------------------------------------
 lending_rate_gg <-
@@ -138,7 +172,7 @@ lending_rate_gg
 ## Aggregated rates -----------------------------------------------------------
 aggregated_lending_rates_tbl <-
   lending_rates_tbl %>% 
-  left_join(lending_shares_tbl, by = c("Date", "Banks")) %>%
+  left_join(lending_shares_tbl , by = c("Date", "Banks")) %>% 
   mutate(
     `Non financial corporate unsecured lending rate` =
         `Credit cards: corporate sector` * `Non-financial corporate sector credit cards share` +
@@ -162,7 +196,7 @@ aggregated_lending_rates_tbl <-
       ) %>% 
   mutate(
     `Residential mortgages to household rate` =
-        `Mortgage advances: household sector: flexible rate` 
+      `Mortgage advances: household sector: flexible rate`
       ) %>% 
   mutate(
     `Total mortgages lending rate` =
@@ -206,7 +240,7 @@ aggregated_lending_rates_tbl <-
     `Total leasing and installments rate`
   ) 
   
-aggregated_lending_rates_tbl %>% 
+aggregated_lending_rates_tbl %>% skim()
   
 
 aggregated_lending_rates_gg <- 
@@ -217,7 +251,7 @@ aggregated_lending_rates_gg <-
   fx_plot(plotname = "Rate (%)", variables_color = 10) +
   facet_wrap(~ Series, scales = "free_y", ncol = 2)
   
-
+aggregated_lending_rates_gg
 # Export ---------------------------------------------------------------
 artifacts_lending_rates_futher_analysis <- 
   list (

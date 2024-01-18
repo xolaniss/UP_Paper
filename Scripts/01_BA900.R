@@ -180,6 +180,7 @@ standard_filtered_tbl
 capitec_filtered_tbl <- filter_and_strings(capitec_tbl, filter_vec) %>%  balance_sheet_rename()
 capitec_filtered_tbl
 
+capitec_filtered_tbl %>% pivot_wider(names_from = Series, values_from = Value) %>% skim()
 totals_gg <-
   total_filtered_tbl %>%
   balance_sheet_rename_gg(variable_color = 25)
@@ -198,6 +199,7 @@ standard_gg <-
 capitec_gg <-
   capitec_filtered_tbl %>%
   balance_sheet_rename_gg(variable_color = 25)
+capitec_filtered_tbl %>% pivot_wider(names_from = Series, values_from = Value) %>% skim()
 
 unique(total_filtered_tbl$Series)
 
@@ -251,7 +253,9 @@ combined_aggregated_lending_tbl <-
   mutate(Banks = str_replace_all(Banks, "Fnb", "FNB")) %>% 
   mutate(Banks = str_replace_all(Banks, "Standard", "Standard Bank"))
   
-combined_aggregated_lending_tbl
+combined_aggregated_lending_tbl %>% 
+  pivot_wider(id_cols = c(Date, Banks),names_from = Series, values_from = Value) %>%
+  skim()
 
 # Aggregated data shares ------------------------------------------------------------
 total_banks_shares_tbl <-   
@@ -295,7 +299,9 @@ capitec_banks_shares_tbl <-
     aggregated_data = capitec_aggregation_tbl
   ) %>% 
   mutate(Banks = "Capitec")
-
+capitec_banks_shares_tbl %>% pivot_wider(names_from = Series,
+                                         values_from = Value) %>% 
+  skim()
 # combine shares tbl
 combined_shares_tbl <- 
   bind_rows(
@@ -306,7 +312,8 @@ combined_shares_tbl <-
   standard_banks_shares_tbl,
   capitec_banks_shares_tbl
 ) %>% 
-  relocate(Banks, .after = 1)
+  relocate(Banks, .after = 1) 
+
 
 # Export ------------------------------------------------------------------
 data_list = list(
