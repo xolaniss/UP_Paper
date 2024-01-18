@@ -57,8 +57,13 @@ competition_tbl <- competition_index$data$combined_dummies_tbl %>%
 competition_tbl %>% skim()
 
 controls <- read_rds(here("Outputs", "controls", "artifacts_controls.rds"))
-controls_tbl <- controls$controls_tbl
+controls_tbl <- controls$controls_tbl %>% 
+  mutate(Banks = str_to_title(Bank)) %>% 
+  dplyr::select(-Bank) %>%
+  relocate(Banks, .after = Date) %>% 
+  pivot_wider(id_cols = c(Date, Banks), names_from = "Series", values_from = "Value")
 controls_tbl
+  
 # Combined data -------------------------------------------------------------
 ## Combining narratives  -------------------------------------------------------------
 dummies_prelim_tbl <- 
@@ -92,14 +97,12 @@ lending_tbl <-
 lending_tbl %>% group_by(Banks) %>% skim() 
 dummies_tbl %>% group_by(Banks) %>% skim() 
 
-## Combining lending and lending rates and dummies -------------------------------------------------------------
+## Combining lending and lending rates and dummies and controls -------------------------------------------------------------
 combined_tbl <- 
   lending_tbl %>% 
-  left_join(dummies_tbl, by = c("Date", "Banks")) # combined lending and dummies
+  left_join(dummies_tbl, by = c("Date", "Banks")) %>% # combined lending and dummies
+  left_join(controls_tbl, by = c("Date", "Banks")) # combined lending and dummies and controls
 combined_tbl %>% group_by(Banks) %>% skim()
-
-## Combining lending and lending rates and dummies and controls -------------------------------------------------------------
-# Still to do
 
 # Transformations --------------------------------------------------------
 
