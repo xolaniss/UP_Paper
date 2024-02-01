@@ -101,16 +101,26 @@ dummies_tbl %>% group_by(Banks) %>% skim()
 combined_tbl <- 
   lending_tbl %>% 
   left_join(dummies_tbl, by = c("Date", "Banks")) %>% # combined lending and dummies
-  left_join(controls_tbl, by = c("Date", "Banks")) # combined lending and dummies and controls
-combined_tbl %>% group_by(Banks) %>% skim()
+  left_join(controls_tbl, by = c("Date", "Banks")) %>%  # combined lending and dummies and controls
 
-# Transformations --------------------------------------------------------
-
+glimpse(combined_tbl)
 
 # EDA ---------------------------------------------------------------
+combined_tbl %>% group_by(Banks) %>% skim()
+plot_str(combined_tbl) # structure of data
+plot_intro(combined_tbl) # breakdown on data
+plot_missing(combined_tbl) # breakdown on missing
+plot_bar(combined_tbl) # freq of discrete
+plot_histogram(combined_tbl) # distribution of continuous
+plot_boxplot(combined_tbl, by = "Banks") # distribution of continuous
+plot_qq(combined_tbl) # qq of continuous
+plot_correlation(na.omit(combined_tbl)) # correlation of continuous
 
 
-# Graphing ---------------------------------------------------------------
+# Feature engineering --------------------------------------------------------
+
+
+
 
 
 # Export ---------------------------------------------------------------

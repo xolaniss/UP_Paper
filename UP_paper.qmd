@@ -314,7 +314,6 @@ total capital adequacy ratio, and leverage ratio."
 #| include: TRUE
 #| ft.arraystretch: .55
 
-
 tibble(
   "BA 900 Categories" = 
     c(
@@ -610,6 +609,34 @@ h.  Leasing and instalments to households: Weighted average of items 59 + 61
 i.  Total leasing and instalments: Weighted average of items 49 + 51 + 59 + 61
 
 
+
+
+\newpage
+## Description of narrative events (check)
+
+```{r}
+#| label: table-description_narratives
+#| tbl-cap: "Description of the narrative indexes"
+#| cache: FALSE
+#| include: TRUE
+
+tibble(
+  "Index" = c(
+    "Macroprudential",
+    "Competition"
+  ),
+  "Description" = c(
+    "The macroprudential narrative index",
+    "The competition narrative index"
+  )
+) %>% 
+  flextable_word() %>% 
+  align(align = "left", part = "all") %>%
+  autofit(add_w = 1.5)
+```
+
+
+\newpage
 ## Competition narrative indexes (check)
 
 ```{r}
@@ -626,6 +653,7 @@ comp_narratives_gg
 ```
 
 
+\newpage
 ## Macroprudential narrative indexes (check)
 
 ```{r}
@@ -641,6 +669,7 @@ macropru_narratives_gg
 
 ```
 
+\newpage
 
 ## Aggregated bank lending
 
