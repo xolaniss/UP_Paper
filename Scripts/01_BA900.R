@@ -201,8 +201,7 @@ capitec_gg <-
   balance_sheet_rename_gg(variable_color = 25)
 capitec_filtered_tbl %>% pivot_wider(names_from = Series, values_from = Value) %>% skim()
 
-unique(total_filtered_tbl$Series)
-
+unique(total_filtered_tbl$Series) 
 
 ## Aggregation and graphs -----------------------------------------------------------
 total_aggregation_tbl <- ba900_aggregration(total_filtered_tbl)

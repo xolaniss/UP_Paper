@@ -309,7 +309,7 @@ total capital adequacy ratio, and leverage ratio."
 
 ```{r}
 #| label: tbl-scheme
-#| tbl-cap: Aggregation schema
+#| tbl-cap: "Aggregation schema"
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: .55
@@ -498,11 +498,11 @@ i.  Total leasing and instalments: Leasing and instalments to corporates + Leasi
 \newpage
 ## Bank lending rates weighting scheme (check)
 
-The loans quantities from the BA900s are then linked to the lending rate data from the BA930s using table to create nine lending rate categories the schema on @tbl-scheme1. The weights for each category are then calculated by dividing the total value of the loans in each category by the total value of all loans in the BA900s. The weights are then used to calculate the weighted average lending rate for each month. The weighted average lending rate is calculated by multiplying the lending rate for each category by the weight for that category and then summing the results.
+The loans quantities from the BA900s are then linked to the lending rate data from the BA930s using table to create nine lending rate categories the schema on @tbl-scheme_1. The weights for each category are then calculated by dividing the total value of the loans in each category by the total value of all loans in the BA900s. The weights are then used to calculate the weighted average lending rate for each month. The weighted average lending rate is calculated by multiplying the lending rate for each category by the weight for that category and then summing the results.
 
 ```{r}
-#| label: tbl-scheme1
-#| tbl-cap: Weighting schema
+#| label: tbl-scheme_1
+#| tbl-cap: "Weighting schema"
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: .55
@@ -615,7 +615,7 @@ i.  Total leasing and instalments: Weighted average of items 49 + 51 + 59 + 61
 ## Description of narrative events (check)
 
 ```{r}
-#| label: table-description_narratives
+#| label: tbl-description_narratives
 #| tbl-cap: "Description of the narrative indexes"
 #| cache: FALSE
 #| include: TRUE

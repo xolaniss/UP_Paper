@@ -36,7 +36,7 @@ library(car)
 
 # Functions ---------------------------------------------------------------
 source(here("Functions", "fx_plot.R"))
-
+# 
 # Import -------------------------------------------------------------
 macropru_index <- read_rds(here("Outputs", 
                                 "narratives", 

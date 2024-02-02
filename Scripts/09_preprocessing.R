@@ -101,7 +101,7 @@ dummies_tbl %>% group_by(Banks) %>% skim()
 combined_tbl <- 
   lending_tbl %>% 
   left_join(dummies_tbl, by = c("Date", "Banks")) %>% # combined lending and dummies
-  left_join(controls_tbl, by = c("Date", "Banks")) %>%  # combined lending and dummies and controls
+  left_join(controls_tbl, by = c("Date", "Banks"))   # combined lending and dummies and controls
 
 glimpse(combined_tbl)
 
@@ -114,8 +114,7 @@ plot_bar(combined_tbl) # freq of discrete
 plot_histogram(combined_tbl) # distribution of continuous
 plot_boxplot(combined_tbl, by = "Banks") # distribution of continuous
 plot_qq(combined_tbl) # qq of continuous
-plot_correlation(na.omit(combined_tbl)) # correlation of continuous
-
+#
 
 # Feature engineering --------------------------------------------------------
 
