@@ -149,6 +149,92 @@ descriptives_tbl %>%
 
 # Results
 
+## Macroprudential regulation and lending
+
+\blandscape
+
+```{r}
+#| label: tbl-macropru_draft
+#| tbl-cap: "Macroprudential Draft Regulation Results"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 0.5
+
+
+
+
+macropru_results <- read_rds(here("Outputs", "models", "artifacts_macropru_models.rds"))
+
+modelsummary_word(
+    macropru_results$draft_models
+  ) %>% 
+  width(j = 1, width = 1.5)
+
+```
+
+
+\elandscape
+
+
+\newpage
+
+\blandscape
+
+
+```{r}
+#| label: tbl-macropru_implementation
+#| tbl-cap: "Macroprudential Regulation Implementation Results"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 0.40
+
+
+modelsummary_word(
+    macropru_results$implementation_models
+  ) %>% 
+    width(j = 1, width = 1.5)
+
+
+```
+
+\elandscape
+
+\newpage
+## Competition regulation and lending
+
+```{r}
+#| label: tbl-competition_corporate_unsecured
+#| tbl-cap: "Entry and exit effect on corporate unsecured lending"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 0.35
+
+competition_results <- read_rds(here("Outputs", "models", "artifacts_competition_models.rds"))
+
+modelsummary_word(
+  competition_results$entry_exit_corp_model
+) %>% 
+  autofit(add_w = 1)
+
+```
+
+\newpage
+
+```{r}
+#| label: tbl-competition_household_unsecured
+#| tbl-cap: "Entry and exit effect on household unsecured lending"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 0.35
+
+modelsummary_word(
+  competition_results$entry_exit_household_model
+) %>% 
+  autofit(add_w = 1)
+
+```
+
+
 
 
 

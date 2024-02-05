@@ -100,6 +100,6 @@ artifacts_competition_models <- list (
 )
 
 write_rds(artifacts_competition_models, 
-          file = here("Outputs", "artifacts_competition_models.rds"))
+          file = here("Outputs", "models", "artifacts_competition_models.rds"))
 
 
