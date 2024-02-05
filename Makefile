@@ -9,7 +9,11 @@ artifacts_BA930.rds artifacts_BA930_futher_analysis.rds \
 artifacts_competion_narratives.rds artifacts_macropru_narratives.rds \
 artifacts_BA920.rds \
 artifacts_controls.rds \
-artifacts_descriptives.rds
+artifacts_data_check.rds \
+artifacts_modelling_data.rds \
+artifacts_descriptives.rds \
+artifacts_macropru_models.rds \
+artifacts_competition_models.rds
 
 ## Generating the manuscript 
 UP_paper.pdf: UP_paper.qmd $(INPUT_TARGETS)
@@ -38,8 +42,27 @@ artifacts_BA930.rds artifacts_BA900.rds
 artifacts_controls.rds: 07_bank_controls.R ERD_data_request.xlsx
 	Rscript $<
 	
-artifacts_descriptives.rds:	08_descriptives.R \
+artifacts_data_check.rds:	08_data_check.R \
 artifacts_macropru_narratives.rds artifacts_competion_narratives.rds \
 artifacts_BA900.rds artifacts_BA930_futher_analysis.rds artifacts_BA920.rds
 	Rscript $<
+
+artifacts_modelling_data.rds: 09_preprocessing.R \
+artifacts_data_check.rds \
+artifacts_competion_narratives.rds \
+artifacts_controls.rds
+	Rscript $<
+
+artifacts_descriptives.rds: 10_descriptives.R \
+artifacts_modelling_data.rds
+	Rscript $<
+
+artifacts_macropru_models.rds: 11_prelim_macropru_models.R \
+artifacts_modelling_data.rds
+	Rscript $<
+
+artifacts_competition_models.rds: 12_prelim_competition_models.R \
+artifacts_modelling_data.rds
+	Rscript $<
+	
 

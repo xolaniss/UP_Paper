@@ -53,10 +53,10 @@ read_rds(here("Outputs", "combined_data", "artifacts_modelling_data.rds"))
 
 
 # Export ---------------------------------------------------------------
-artifacts_ <- list (
+artifacts_descriptives <- list (
 
 )
 
-write_rds(artifacts_, file = here("Outputs", "artifacts_.rds"))
+write_rds(artifacts_descriptives, file = here("Outputs","combined_data", "artifacts_descriptives.rds"))
 
 
