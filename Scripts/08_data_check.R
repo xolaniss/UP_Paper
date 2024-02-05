@@ -69,8 +69,8 @@ controls_tbl <-
   relocate(Date, .before = Series)
 controls_tbl
 
-# Descriptives --------------------------------------------------------
-banks_descriptives <- function (data, group_var){
+# data_check --------------------------------------------------------
+banks_data_check <- function (data, group_var){
   data %>% 
     drop_na() %>%
     group_by(Series) %>%
@@ -89,43 +89,43 @@ banks_descriptives <- function (data, group_var){
     mutate(Group = group_var)
   }
 
-descriptives_lending_tbl <- 
+data_check_lending_tbl <- 
   aggregated_lending_tbl %>% 
   filter(Banks == "Total Banks") %>% 
   dplyr::select(-Banks) %>%
-  banks_descriptives(group_var = "Lending")
+  banks_data_check(group_var = "Lending")
   
-descriptives_lending_rates_tbl <- 
+data_check_lending_rates_tbl <- 
   aggregated_lending_rates_tbl %>% 
   filter(Banks == "Total Banks") %>% 
   dplyr::select(-Banks) %>%
-  banks_descriptives(group_var = "Lending Rates")
+  banks_data_check(group_var = "Lending Rates")
   
-descriptives_control_tbl <- 
+data_check_control_tbl <- 
   controls_tbl %>%
   filter(Banks == "Total Banks") %>% 
   dplyr::select(-Banks) %>%
-  banks_descriptives(group_var = "Controls")
+  banks_data_check(group_var = "Controls")
 
-descriptives_macropru_tbl <-
+data_check_macropru_tbl <-
   macropru_index_tbl %>% 
-  banks_descriptives(group_var = "Macroprudential Narrative Indices")
+  banks_data_check(group_var = "Macroprudential Narrative Indices")
 
-descriptives_competition_index_tbl <-
+data_check_competition_index_tbl <-
   competition_index_tbl %>% 
-  banks_descriptives(group_var = "Competition Narrative Indices")
+  banks_data_check(group_var = "Competition Narrative Indices")
 
-descriptives_tbl <- 
+data_check_tbl <- 
   bind_rows(
-    descriptives_macropru_tbl,
+    data_check_macropru_tbl,
     competition_index_tbl,
-    descriptives_lending_tbl,
-    descriptives_lending_rates_tbl,
-    descriptives_control_tbl
+    data_check_lending_tbl,
+    data_check_lending_rates_tbl,
+    data_check_control_tbl
   )
 
 # Export ---------------------------------------------------------------
-artifacts_descriptives <- list (
+artifacts_data_check <- list (
   data = list(
     aggregated_lending_tbl = aggregated_lending_tbl,
     aggregated_lending_rates_tbl = aggregated_lending_rates_tbl,
@@ -134,10 +134,10 @@ artifacts_descriptives <- list (
     competition_index_tbl = competition_index_tbl
   ),
   desc = list(
-    descriptives_tbl = descriptives_tbl
+    data_check_tbl = data_check_tbl
   )
 )
 
-write_rds(artifacts_descriptives, file = here("Outputs", "combined_data", "artifacts_descriptives.rds"))
+write_rds(artifacts_data_check, file = here("Outputs", "combined_data", "artifacts_data_check.rds"))
 
 

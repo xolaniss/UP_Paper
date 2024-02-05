@@ -1,6 +1,5 @@
 # Description
-# Preliminary models for paper - Xolani Sibande 18 January 2023
-
+# descriptives table for the paper
 # Preliminaries -----------------------------------------------------------
 # core
 library(tidyverse)
@@ -39,7 +38,7 @@ library(car)
 source(here("Functions", "fx_plot.R"))
 
 # Import -------------------------------------------------------------
-
+read_rds(here("Outputs", "combined_data", "artifacts_modelling_data.rds"))
 
 # Cleaning -----------------------------------------------------------------
 

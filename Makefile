@@ -1,9 +1,9 @@
 # Makefile to run the analysis for the paper and compile the manuscript
 
-# Recursively look for all files in the current directory and its subdirectories
+## Recursively look for all files in the current directory and its subdirectories
 VPATH = $(shell find . -type d)
 
-# List of inputs
+## List of inputs
 INPUT_TARGETS = artifacts_BA900.rds \
 artifacts_BA930.rds artifacts_BA930_futher_analysis.rds \
 artifacts_competion_narratives.rds artifacts_macropru_narratives.rds \
@@ -11,11 +11,11 @@ artifacts_BA920.rds \
 artifacts_controls.rds \
 artifacts_descriptives.rds
 
-# Generating the manuscript 
+## Generating the manuscript 
 UP_paper.pdf: UP_paper.qmd $(INPUT_TARGETS)
 	quarto render $<
 	
-# Generating rds inputs to manuscript
+## Generating rds inputs to manuscript
 artifacts_BA900.rds: 01_BA900.R BA900_line_item_103_to_277_updated_to_Aug_2023.xlsx
 	Rscript $<
 
