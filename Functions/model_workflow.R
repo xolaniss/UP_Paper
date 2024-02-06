@@ -17,6 +17,7 @@ function(data,
    ols_model <- 
     map(formula_list, 
         ~ lm(.x, data = data)) 
+   
     # set_names(response_clean_vec) 
  
    not_robust_models <- 
