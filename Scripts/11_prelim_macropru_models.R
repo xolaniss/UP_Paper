@@ -50,8 +50,10 @@ combined_tbl <-
   dplyr::filter(Banks != "Total Banks") %>% 
   clean_names()
 
-# Modelling function -------------------------------------------------------------
-response_vec <- c(
+# Rates models ---------------------------------------------------------------
+
+## draft  -------------------------------------------------------------
+response_rates_draft_vec <- c(
   "Total unsecured lending rate",
   "Total leasing and installments rate",
   "Total mortgages lending rate",
@@ -63,52 +65,115 @@ response_vec <- c(
   "Residential mortgages to household rate"
 )
 
-predictor_draft_vec <- c(
+predictor_rates_draft_vec <- c(
   "draft",
   "-1",
   "factor(banks)",
   "factor(month)"
 )
 
-# draft models -------------------------------------------------------------
-draft_models <- 
+draft_rates_models <- 
   model_workflow(
   data = combined_tbl,
-  response_vec = response_vec,
-  predictor_vec = predictor_draft_vec
+  response_vec = response_rates_draft_vec,
+  predictor_vec = predictor_rates_draft_vec
 ) 
 
 modelsummary(
-    draft_models,
+    draft_rates_models,
     stars = c('*' = 0.1, '**' = 0.05, '***' = 0.01),
     coef_omit = NULL
   )
 
-# implementation models -------------------------------------------------------------
-predictor_implementation_vec <- c(
+## implementation  -------------------------------------------------------------
+predictor_implementation_rates_vec <- c(
   "implementation",
   "-1",
   "factor(banks)",
   "factor(month)"
 )
 
-implementation_models <- 
+implementation_rates_models <- 
   model_workflow(
   data = combined_tbl,
-  response_vec = response_vec,
-  predictor_vec = predictor_implementation_vec
+  response_vec = response_rates_draft_vec,
+  predictor_vec = predictor_implementation_rates_vec
 ) 
 
 modelsummary(
-  implementation_models, 
+  implementation_rates_models, 
   stars = c('*' = 0.1, '**' = 0.05, '***' = 0.01),
   coef_omit = NULL
   )
 
+
+# Lending models -------------------------------------------------------------
+
+## draft  -------------------------------------------------------------
+response_lending_draft_vec <- c(
+  "change_in_log_total_unsecured_lending",
+  "change_in_log_total_leasing_and_installments",
+  "change_in_log_total_mortgage_lending",
+  "change_in_log_non_financial_corporate_unsecured_lending",
+  "change_in_log_leasing_and_installments_to_corporates",
+  "change_in_log_commercial_mortgages_to_corporates_and_households",
+  "change_in_log_household_unsecured_lending",
+  "change_in_log_leasing_and_installments_to_households",
+  "change_in_log_residential_mortgages_to_households"
+)
+
+predictor_lending_draft_vec <- c(
+  "draft",
+  "-1",
+  "factor(banks)",
+  "factor(month)"
+)
+
+draft_lending_models <- 
+  model_workflow(
+  data = combined_tbl,
+  response_vec = response_lending_draft_vec,
+  predictor_vec = predictor_lending_draft_vec
+)
+
+modelsummary(
+  draft_lending_models,
+  stars = c('*' = 0.1, '**' = 0.05, '***' = 0.01),
+  coef_omit = NULL
+)
+
+## implementation  -------------------------------------------------------------
+predictor_implementation_lending_vec <- c(
+  "implementation",
+  "-1",
+  "factor(banks)",
+  "factor(month)"
+)
+
+implementation_lending_models <- 
+  model_workflow(
+  data = combined_tbl,
+  response_vec = response_lending_draft_vec,
+  predictor_vec = predictor_implementation_lending_vec
+)
+
+modelsummary(
+  implementation_lending_models,
+  stars = c('*' = 0.1, '**' = 0.05, '***' = 0.01),
+  coef_omit = NULL
+)
+
+
 # Export ---------------------------------------------------------------
 artifacts_macropru_models <- list (
-  draft_models = draft_models,
-  implementation_models = implementation_models
+  rates_models = list(
+    draft = draft_rates_models,
+    implementation = implementation_rates_models
+  ),
+  lending_models = list(
+    draft = draft_lending_models,
+    implementation = implementation_lending_models
+  )
 )
 
 write_rds(artifacts_macropru_models, file = here("Outputs", "models", "artifacts_macropru_models.rds"))

@@ -149,29 +149,67 @@ descriptives_tbl %>%
 
 # Results
 
-## Macroprudential regulation and lending
-
+## Macroprudential regulation and lending volumes
 \blandscape
 
 ```{r}
-#| label: tbl-macropru_draft
-#| tbl-cap: "Macroprudential Draft Regulation Results"
+#| label: tbl-macropru_draft_lending
+#| tbl-cap: "Macroprudential Draft Regulation Results (Lending Volumes)"
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: 0.5
 
-
-
-
 macropru_results <- read_rds(here("Outputs", "models", "artifacts_macropru_models.rds"))
 
 modelsummary_word(
-    macropru_results$draft_models
+    macropru_results$lending_models$draft
   ) %>% 
   width(j = 1, width = 1.5)
 
 ```
 
+\elandscape
+
+
+\blandscape
+
+```{r}
+#| label: tbl-macropru_implementation_lending
+#| tbl-cap: "Macroprudential Draft Regulation Results (Lending Volumes)"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 0.5
+
+
+modelsummary_word(
+    macropru_results$lending_models$implementation
+  ) %>% 
+  width(j = 1, width = 1.5)
+
+```
+
+
+\elandscape
+
+
+
+## Macroprudential regulation and lending rates
+
+\blandscape
+
+```{r}
+#| label: tbl-macropru_draft_rates
+#| tbl-cap: "Macroprudential Draft Regulation Results (Rates)"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 0.5
+
+modelsummary_word(
+    macropru_results$rates_models$draft
+  ) %>% 
+  width(j = 1, width = 1.5)
+
+```
 
 \elandscape
 
@@ -182,15 +220,15 @@ modelsummary_word(
 
 
 ```{r}
-#| label: tbl-macropru_implementation
-#| tbl-cap: "Macroprudential Regulation Implementation Results"
+#| label: tbl-macropru_implementation_rates
+#| tbl-cap: "Macroprudential Regulation Implementation Results (Rates)"
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: 0.40
 
 
 modelsummary_word(
-    macropru_results$implementation_models
+    macropru_results$rates_models$implementation
   ) %>% 
     width(j = 1, width = 1.5)
 
@@ -198,6 +236,8 @@ modelsummary_word(
 ```
 
 \elandscape
+
+
 
 \newpage
 ## Competition regulation and lending
