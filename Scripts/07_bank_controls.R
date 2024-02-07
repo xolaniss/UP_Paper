@@ -40,7 +40,7 @@ source(here("Functions", "excel_import_sheet_controls.R"))
 # Import -------------------------------------------------------------
 sheet_list <-  list(
   "ABSA BANK"  = "Absa",
-  "FIRSTRAND BANK" = "FRB",
+  "FNB" = "FRB",
   "NEDBANK" = "Nedbank",
   "STANDARD BANK" = "Std bank",
   "CAPITEC" = "Capitec")

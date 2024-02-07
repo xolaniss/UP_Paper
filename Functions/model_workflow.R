@@ -27,8 +27,8 @@ function(data,
     map(ols_model,
         .f = ~ coeftest(
           .x, 
-          vcov = vcovHAC,
-          # cluster = ~ banks
+          vcov = vcovBS,
+          cluster = ~ banks
           ))
   robust_model
 

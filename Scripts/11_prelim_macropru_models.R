@@ -47,8 +47,10 @@ combined <- read_rds(here("Outputs", "combined_data", "artifacts_modelling_data.
 combined_tbl <- 
   combined$combined_features_tbl %>% 
   mutate(month = lubridate::month(Date)) %>%
-  dplyr::filter(Banks != "Total Banks") %>% 
-  clean_names()
+  dplyr::filter(Banks != "Total Banks") %>%
+  mutate(covid_dummy = if_else(Date >= "2020-03-01", 1, 0)) %>% 
+  clean_names() 
+  # filter(date >= "2009-01-01" & date < "2020-03-01") # Covid adjustment
 
 # Rates models ---------------------------------------------------------------
 
@@ -68,6 +70,7 @@ response_rates_draft_vec <- c(
 predictor_rates_draft_vec <- c(
   "draft",
   "-1",
+  "covid_dummy",
   "factor(banks)",
   "factor(month)"
 )
@@ -89,6 +92,7 @@ modelsummary(
 predictor_implementation_rates_vec <- c(
   "implementation",
   "-1",
+  "covid_dummy",
   "factor(banks)",
   "factor(month)"
 )
@@ -125,6 +129,7 @@ response_lending_draft_vec <- c(
 predictor_lending_draft_vec <- c(
   "draft",
   "-1",
+  "covid_dummy",
   "factor(banks)",
   "factor(month)"
 )
@@ -146,6 +151,7 @@ modelsummary(
 predictor_implementation_lending_vec <- c(
   "implementation",
   "-1",
+  "covid_dummy",
   "factor(banks)",
   "factor(month)"
 )

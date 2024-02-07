@@ -135,7 +135,8 @@ descriptives_tbl %>%
 macropru_results <- read_rds(here("Outputs", "models", "artifacts_macropru_models.rds"))
 
 modelsummary_word(
-    macropru_results$lending_models$draft
+    macropru_results$lending_models$draft,
+    coef_omit = 3:17
   ) %>% 
   width(j = 1, width = 1.5)
 
@@ -148,14 +149,15 @@ modelsummary_word(
 
 ```{r}
 #| label: tbl-macropru_implementation_lending
-#| tbl-cap: "Macroprudential Draft Regulation Results (Lending Volumes)"
+#| tbl-cap: "Macroprudential Implementation Regulation Results (Lending Volumes)"
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: 0.5
 
 
 modelsummary_word(
-    macropru_results$lending_models$implementation
+    macropru_results$lending_models$implementation,
+    coef_omit = 3:17
   ) %>% 
   width(j = 1, width = 1.5)
 
@@ -178,7 +180,8 @@ modelsummary_word(
 #| ft.arraystretch: 0.5
 
 modelsummary_word(
-    macropru_results$rates_models$draft
+    macropru_results$rates_models$draft,
+    coef_omit = 3:17
   ) %>% 
   width(j = 1, width = 1.5)
 
@@ -201,7 +204,8 @@ modelsummary_word(
 
 
 modelsummary_word(
-    macropru_results$rates_models$implementation
+    macropru_results$rates_models$implementation,
+    coef_omit = 3:17
   ) %>% 
     width(j = 1, width = 1.5)
 
@@ -211,8 +215,6 @@ modelsummary_word(
 \elandscape
 
 
-
-\newpage
 ## Competition regulation and lending
 
 ```{r}
@@ -220,34 +222,146 @@ modelsummary_word(
 #| tbl-cap: "Entry and exit effect on corporate unsecured lending"
 #| cache: FALSE
 #| include: TRUE
-#| ft.arraystretch: 0.35
+#| ft.arraystretch: 0.5
 
 competition_results <- read_rds(here("Outputs", "models", "artifacts_competition_models.rds"))
 
 modelsummary_word(
-  competition_results$entry_exit_corp_model
+  competition_results$corporate_unsecured_model,
+  coef_omit = 3:18
 ) %>% 
-  autofit(add_w = 1)
+  autofit(add_w = 1.2)
 
 ```
 
-\newpage
 
 ```{r}
 #| label: tbl-competition_household_unsecured
 #| tbl-cap: "Entry and exit effect on household unsecured lending"
 #| cache: FALSE
 #| include: TRUE
-#| ft.arraystretch: 0.35
+#| ft.arraystretch: 0.5
 
 modelsummary_word(
-  competition_results$entry_exit_household_model
+  competition_results$household_unsecured_model,
+  coef_omit = 3:18
 ) %>% 
-  autofit(add_w = 1)
+  autofit(add_w = 1.2)
+
+```
+
+```{r}
+#| label: tbl-competition_corporate_mortgages
+#| tbl-cap: "Entry and exit effect on corporate mortgages"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 0.5
+
+modelsummary_word(
+  competition_results$commercial_mortgages_model,
+  coef_omit = 3:18
+) %>% 
+  autofit(add_w = 1.2)
 
 ```
 
 
+
+```{r}
+#| label: tbl-competition_household_mortgages
+#| tbl-cap: "Entry and exit effect on household mortgages"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 0.5
+
+modelsummary_word(
+  competition_results$households_mortgages_model,
+  coef_omit = 3:18
+) %>% 
+  autofit(add_w = 1.2)
+
+```
+
+\newpage
+
+```{r}
+#| label: tbl-competition_corporate_leasing
+#| tbl-cap: "Entry and exit effect on corporate leasing and installments"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 0.5
+
+modelsummary_word(
+  competition_results$coorporate_leasing_installments_model,
+  coef_omit = 3:17
+) %>% 
+  autofit(add_w = 1.1)
+
+```
+
+
+```{r}
+#| label: tbl-competition_household_leasing_installment
+#| tbl-cap: "Entry and exit effect on household leasing and installments"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 0.5
+
+modelsummary_word(
+  competition_results$household_leasing_installments_model,
+  coef_omit = 3:18
+) %>% 
+  autofit(add_w = 1.1)
+
+```
+
+
+```{r}
+#| label: tbl-competition_other
+#| tbl-cap: "Other competition developments"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 0.5
+
+modelsummary_word(
+  competition_results$other_competition_model,
+  coef_omit = 3:17
+) %>% 
+  autofit(add_w = 0)
+
+```
+
+
+
+```{r}
+#| label: tbl-competition_financial_regulation
+#| tbl-cap: "Micro-regulations"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 0.5
+
+modelsummary_word(
+  competition_results$finance_regulations_model,
+  coef_omit = 3:17
+) %>% 
+  autofit(add_w = 0)
+
+```
+
+
+```{r}
+#| label: tbl-competition_financial_inclusion
+#| tbl-cap: "Financial inclusion"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 0.5
+
+modelsummary_word(
+  competition_results$finance_regulations_model,
+  coef_omit = 3:17
+) %>% 
+  autofit(add_w = 0)
+```
 
 
 
