@@ -825,65 +825,6 @@ i.  Total leasing and instalments: Weighted average of items 49 + 51 + 59 + 61
 
 
 \newpage
-## Description of narrative events (check)
-
-```{r}
-#| label: tbl-description_narratives
-#| tbl-cap: "Description of the narrative indexes"
-#| cache: FALSE
-#| include: TRUE
-
-tibble(
-  "Index" = c(
-    "Macroprudential",
-    "Competition"
-  ),
-  "Description" = c(
-    "The macroprudential narrative index",
-    "The competition narrative index"
-  )
-) %>% 
-  flextable_word() %>% 
-  align(align = "left", part = "all") %>%
-  autofit(add_w = 1.5)
-```
-
-
-\newpage
-## Competition narrative indexes (check)
-
-```{r}
-#| label: fig-comp_narrative_indexes
-#| fig-cap: "Competition narrative indexes"
-#| fig-height: 7
-#| fig-width: 6
-#| cache: FALSE
-
-comp_narratives <- read_rds(here("Outputs","narratives","artifacts_competion_narratives.rds"))
-
-comp_narratives_gg <- comp_narratives$graphs$combined_dummies_gg
-comp_narratives_gg
-```
-
-
-\newpage
-## Macroprudential narrative indexes (check)
-
-```{r}
-#| label: fig-macro_narrative_indexes
-#| fig-cap: "Macroprudential narrative indexes"
-#| fig-height: 3
-#| fig-width: 6
-#| cache: FALSE
-
-macro_narratives <- read_rds(here("Outputs","narratives","artifacts_macropru_narratives.rds"))
-macropru_narratives_gg <- macro_narratives$macropru_narratives_gg
-macropru_narratives_gg
-
-```
-
-\newpage
-
 ## Aggregated bank lending
 
 ```{r}
@@ -934,3 +875,64 @@ controls_gg
 
 
 
+
+\newpage
+## Description of narrative events (check)
+
+```{r}
+#| label: tbl-description_narratives
+#| tbl-cap: "Description of the narrative indexes"
+#| cache: FALSE
+#| include: TRUE
+
+tibble(
+  "Index" = c(
+    "Macroprudential",
+    "Competition"
+  ),
+  "Description" = c(
+    "The macroprudential narrative index",
+    "The competition narrative index"
+  )
+) %>% 
+  flextable_word() %>% 
+  align(align = "left", part = "all") %>%
+  autofit(add_w = 1.5)
+```
+
+
+\newpage
+## Macroprudential narrative indexes (check)
+
+```{r}
+#| label: fig-macro_narrative_indexes
+#| fig-cap: "Macroprudential narrative indexes"
+#| fig-height: 3
+#| fig-width: 6
+#| cache: FALSE
+
+macro_narratives <- read_rds(here("Outputs","narratives","artifacts_macropru_narratives.rds"))
+macropru_narratives_gg <- macro_narratives$macropru_narratives_gg
+macropru_narratives_gg
+
+```
+
+\newpage
+
+## Competition narrative indexes (check)
+
+```{r}
+#| label: fig-comp_narrative_indexes
+#| fig-cap: "Competition narrative indexes"
+#| fig-height: 7
+#| fig-width: 6
+#| cache: FALSE
+
+comp_narratives <- read_rds(here("Outputs","narratives","artifacts_competion_narratives.rds"))
+
+comp_narratives_gg <- comp_narratives$graphs$combined_dummies_gg
+comp_narratives_gg
+```
+
+
+\newpage
