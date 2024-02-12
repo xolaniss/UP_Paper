@@ -122,68 +122,161 @@ descriptives_tbl %>%
 
 # Results
 
-## Macroprudential regulation and lending volumes
+## Macroprudential regulation
 \blandscape
 
 ```{r}
 #| label: tbl-macropru_draft_lending
-#| tbl-cap: "Macroprudential Draft Regulation Results (Lending Volumes)"
+#| tbl-cap: "Macroprudential regulations and lending volumes results)"
 #| cache: FALSE
 #| include: TRUE
-#| ft.arraystretch: 0.5
+#| ft.arraystretch: 1
 
 macropru_results <- read_rds(here("Outputs", "models", "artifacts_macropru_models.rds"))
 
-modelsummary_word(
-    macropru_results$lending_models$draft,
-    coef_omit = 3:17
-  ) %>% 
-  width(j = 1, width = 1.5)
-
-```
-
-\elandscape
-
-
-\blandscape
-
-```{r}
-#| label: tbl-macropru_implementation_lending
-#| tbl-cap: "Macroprudential Implementation Regulation Results (Lending Volumes)"
-#| cache: FALSE
-#| include: TRUE
-#| ft.arraystretch: 0.5
-
-
-modelsummary_word(
+rows <- modelsummary_word(
     macropru_results$lending_models$implementation,
-    coef_omit = 3:17
+    coef_omit = 3:17,
+    gof_omit = "AIC|BIC|Std|Log",
+    output = "dataframe"
+  ) [, c(2, 4:12)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
   ) %>% 
-  width(j = 1, width = 1.5)
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) 
+  
+rows_tbl <-  tibble(
+  "term" = "Implementation estimates",  
+  "(1)" = " ", 
+  "(2)" = " ", 
+  "(3)" = " ", 
+  "(4)" = " ", 
+  "(5)" = " ", 
+  "(6)" = " ", 
+  "(7)" = " ", 
+  "(8)" = " ", 
+  "(9)" = " ") %>% 
+  add_row(rows)
 
+modelsummary_word(
+  macropru_results$lending_models$draft,
+  coef_omit = 3:17,
+  gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+  add_rows = rows_tbl
+) %>%
+  width(j = 1, width = 1.5) %>%
+  add_body_row(values =
+                 c("Draft regulations estimates"),
+               colwidths = 10) %>%
+  merge_at(i = 4, j = 1:10) %>%
+  theme_booktabs() %>% 
+  border_inner(border = fp_border(color = "white"), part = "all") %>% 
+  add_header_row(
+    values = c("", "Total", "Corporations", "Households"),
+    colwidths = c(1, 3, 3, 3)) %>% 
+  align(align = "center", part = "header", i = 1) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 4) %>% 
+  hline(i = 6, j = 1:10, part = "body") 
 ```
-
 
 \elandscape
 
-
-
-## Macroprudential regulation and lending rates
 
 \blandscape
 
 ```{r}
 #| label: tbl-macropru_draft_rates
-#| tbl-cap: "Macroprudential Draft Regulation Results (Rates)"
+#| tbl-cap: "Macroprudential regulation and lending rates"
 #| cache: FALSE
 #| include: TRUE
-#| ft.arraystretch: 0.5
+#| ft.arraystretch: 1
+
+rows <- modelsummary_word(
+    macropru_results$rates_models$implementation,
+    coef_omit = 3:17,
+    gof_omit = "AIC|BIC|Std|Log",
+    output = "dataframe"
+  ) [, c(2, 4:12)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) 
+  
+rows_tbl <-  tibble(
+  "term" = "Implementation estimates",  
+  "(1)" = " ", 
+  "(2)" = " ", 
+  "(3)" = " ", 
+  "(4)" = " ", 
+  "(5)" = " ", 
+  "(6)" = " ", 
+  "(7)" = " ", 
+  "(8)" = " ", 
+  "(9)" = " ") %>% 
+  add_row(rows)
+
 
 modelsummary_word(
     macropru_results$rates_models$draft,
-    coef_omit = 3:17
+    coef_omit = 3:17,
+    gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+    add_rows = rows_tbl
   ) %>% 
-  width(j = 1, width = 1.5)
+  width(j = 1, width = 1.5) %>% 
+   add_body_row(values =
+                 c("Draft regulations estimates"),
+               colwidths = 10) %>%
+  merge_at(i = 4, j = 1:10) %>%
+  theme_booktabs() %>% 
+  border_inner(border = fp_border(color = "white"), part = "all") %>% 
+  add_header_row(
+    values = c("", "Total", "Corporations", "Households"),
+    colwidths = c(1, 3, 3, 3)) %>% 
+  align(align = "center", part = "header", i = 1) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 4) %>% 
+  hline(i = 6, j = 1:10, part = "body") 
 
 ```
 
@@ -191,29 +284,6 @@ modelsummary_word(
 
 
 \newpage
-
-\blandscape
-
-
-```{r}
-#| label: tbl-macropru_implementation_rates
-#| tbl-cap: "Macroprudential Regulation Implementation Results (Rates)"
-#| cache: FALSE
-#| include: TRUE
-#| ft.arraystretch: 0.40
-
-
-modelsummary_word(
-    macropru_results$rates_models$implementation,
-    coef_omit = 3:17
-  ) %>% 
-    width(j = 1, width = 1.5)
-
-
-```
-
-\elandscape
-
 
 ## Competition regulation and lending
 
