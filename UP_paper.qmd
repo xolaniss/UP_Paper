@@ -127,16 +127,16 @@ descriptives_tbl %>%
 
 ```{r}
 #| label: tbl-macropru_draft_lending
-#| tbl-cap: "Macroprudential regulations and lending volumes results)"
+#| tbl-cap: "Macroprudential regulations and lending volumes results"
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: 1
 
 macropru_results <- read_rds(here("Outputs", "models", "artifacts_macropru_models.rds"))
 
-rows <- modelsummary_word(
+rows <- modelsummary_basic(
     macropru_results$lending_models$implementation,
-    coef_omit = 3:17,
+    coef_omit = 2:16,
     gof_omit = "AIC|BIC|Std|Log",
     output = "dataframe"
   ) [, c(2, 4:12)] %>% 
@@ -180,7 +180,7 @@ rows_tbl <-  tibble(
 
 modelsummary_word(
   macropru_results$lending_models$draft,
-  coef_omit = 3:17,
+  coef_omit = 2:16,
   gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
   add_rows = rows_tbl
 ) %>%
@@ -188,16 +188,14 @@ modelsummary_word(
   add_body_row(values =
                  c("Draft regulations estimates"),
                colwidths = 10) %>%
-  merge_at(i = 4, j = 1:10) %>%
-  theme_booktabs() %>% 
-  border_inner(border = fp_border(color = "white"), part = "all") %>% 
+  merge_at(i = 3, j = 1:10) %>%
   add_header_row(
     values = c("", "Total", "Corporations", "Households"),
     colwidths = c(1, 3, 3, 3)) %>% 
   align(align = "center", part = "header", i = 1) %>%
   align(align = "center", part = "body", i = 1) %>%
-  align(align = "center", part = "body", i = 4) %>% 
-  hline(i = 6, j = 1:10, part = "body") 
+  align(align = "center", part = "body", i = 3) %>% 
+  hline(i = 4, j = 1:10, part = "body") 
 ```
 
 \elandscape
@@ -212,9 +210,9 @@ modelsummary_word(
 #| include: TRUE
 #| ft.arraystretch: 1
 
-rows <- modelsummary_word(
+rows <- modelsummary_basic(
     macropru_results$rates_models$implementation,
-    coef_omit = 3:17,
+    coef_omit = 2:16,
     gof_omit = "AIC|BIC|Std|Log",
     output = "dataframe"
   ) [, c(2, 4:12)] %>% 
@@ -259,7 +257,7 @@ rows_tbl <-  tibble(
 
 modelsummary_word(
     macropru_results$rates_models$draft,
-    coef_omit = 3:17,
+    coef_omit = 2:16,
     gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
     add_rows = rows_tbl
   ) %>% 
@@ -267,16 +265,14 @@ modelsummary_word(
    add_body_row(values =
                  c("Draft regulations estimates"),
                colwidths = 10) %>%
-  merge_at(i = 4, j = 1:10) %>%
-  theme_booktabs() %>% 
-  border_inner(border = fp_border(color = "white"), part = "all") %>% 
+  merge_at(i = 3, j = 1:10) %>%
   add_header_row(
     values = c("", "Total", "Corporations", "Households"),
     colwidths = c(1, 3, 3, 3)) %>% 
   align(align = "center", part = "header", i = 1) %>%
   align(align = "center", part = "body", i = 1) %>%
-  align(align = "center", part = "body", i = 4) %>% 
-  hline(i = 6, j = 1:10, part = "body") 
+  align(align = "center", part = "body", i = 3) %>% 
+  hline(i = 4, j = 1:10, part = "body") 
 
 ```
 
@@ -285,153 +281,244 @@ modelsummary_word(
 
 \newpage
 
-## Competition regulation and lending
+## Competition regulation
 
 ```{r}
-#| label: tbl-competition_corporate_unsecured
-#| tbl-cap: "Entry and exit effect on corporate unsecured lending"
+#| label: tbl-competition_unsecured
+#| tbl-cap: "Entry and exit effect on unsecured lending"
 #| cache: FALSE
 #| include: TRUE
-#| ft.arraystretch: 0.5
+#| ft.arraystretch: 1
 
 competition_results <- read_rds(here("Outputs", "models", "artifacts_competition_models.rds"))
 
+
+household_rows <- modelsummary_basic(
+  competition_results$household_unsecured_model,
+  coef_omit = 4:18
+) [, c(2, 4:5)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes"
+  ) 
+
+household_rows_tbl <- 
+  tibble(
+  "term" = "Households estimates",  
+  "(1)" = " ", 
+  "(2)" = " "
+  ) %>% 
+  add_row(household_rows)
+
+
+
 modelsummary_word(
   competition_results$corporate_unsecured_model,
-  coef_omit = 3:18
-) %>% 
-  autofit(add_w = 1.2)
-
-```
-
-
-```{r}
-#| label: tbl-competition_household_unsecured
-#| tbl-cap: "Entry and exit effect on household unsecured lending"
-#| cache: FALSE
-#| include: TRUE
-#| ft.arraystretch: 0.5
-
-modelsummary_word(
-  competition_results$household_unsecured_model,
-  coef_omit = 3:18
-) %>% 
-  autofit(add_w = 1.2)
-
-```
-
-```{r}
-#| label: tbl-competition_corporate_mortgages
-#| tbl-cap: "Entry and exit effect on corporate mortgages"
-#| cache: FALSE
-#| include: TRUE
-#| ft.arraystretch: 0.5
-
-modelsummary_word(
-  competition_results$commercial_mortgages_model,
-  coef_omit = 3:18
-) %>% 
-  autofit(add_w = 1.2)
-
-```
-
-
-
-```{r}
-#| label: tbl-competition_household_mortgages
-#| tbl-cap: "Entry and exit effect on household mortgages"
-#| cache: FALSE
-#| include: TRUE
-#| ft.arraystretch: 0.5
-
-modelsummary_word(
-  competition_results$households_mortgages_model,
-  coef_omit = 3:18
-) %>% 
-  autofit(add_w = 1.2)
+  coef_omit = 4:18,
+  gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+  add_rows = household_rows_tbl
+) %>%
+  add_body_row(values =
+                 c("Corporation estimates"),
+               colwidths = 3) %>%
+  merge_at(i = 5, j = 1:3) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 5) %>%
+  hline(i = 8, j = 1:3, part = "body") %>%
+  autofit(add_w = 1)
 
 ```
 
 \newpage
 
 ```{r}
-#| label: tbl-competition_corporate_leasing
-#| tbl-cap: "Entry and exit effect on corporate leasing and installments"
+#| label: tbl-competition_corporate_mortgages
+#| tbl-cap: "Entry and exit effect on mortgages"
 #| cache: FALSE
 #| include: TRUE
-#| ft.arraystretch: 0.5
+#| ft.arraystretch: 1
+
+mortgages_rows <- modelsummary_basic(
+  competition_results$households_mortgages_model,
+  coef_omit = 4:18
+) [, c(2, 4:5)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes"
+  )
+
+
+mortgages_rows_tbl <- 
+  tibble(
+  "term" = "Households estimates",  
+  "(1)" = " ", 
+  "(2)" = " "
+  ) %>% 
+  add_row(mortgages_rows)
+
+
+modelsummary_word(
+  competition_results$commercial_mortgages_model,
+  coef_omit = 4:18,
+  gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+  add_rows = mortgages_rows_tbl
+) %>% 
+  add_body_row(values =
+                 c("Corporation estimates"),
+               colwidths = 3) %>%
+  merge_at(i = 5, j = 1:3) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 5) %>%
+  hline(i = 8, j = 1:3, part = "body") %>%
+  autofit(add_w = 1)
+
+
+```
+
+
+
+\newpage
+
+```{r}
+#| label: tbl-competition_corporate_leasing
+#| tbl-cap: "Entry and exit effect on leasing and installments"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 1
+
+leasing_rows <- 
+  modelsummary_basic(
+  competition_results$household_leasing_installments_model,
+  coef_omit = 4:18
+) [, c(2, 4:5)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes"
+  )
+
+leasing_rows_tbl <- 
+  tibble(
+  "term" = "Households estimates",  
+  "(1)" = " ", 
+  "(2)" = " "
+  ) %>% 
+  add_row(leasing_rows)
 
 modelsummary_word(
   competition_results$coorporate_leasing_installments_model,
-  coef_omit = 3:17
-) %>% 
-  autofit(add_w = 1.1)
+  coef_omit = 3:17,
+  gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+  add_rows = mortgages_rows_tbl
+) %>%
+  add_body_row(values =
+                 c("Corporation estimates"),
+               colwidths = 3) %>%
+  merge_at(i = 4, j = 1:3) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 4) %>%
+  hline(i = 7, j = 1:3, part = "body") %>%
+  autofit(add_w = 1)
 
 ```
 
 
-```{r}
-#| label: tbl-competition_household_leasing_installment
-#| tbl-cap: "Entry and exit effect on household leasing and installments"
-#| cache: FALSE
-#| include: TRUE
-#| ft.arraystretch: 0.5
-
-modelsummary_word(
-  competition_results$household_leasing_installments_model,
-  coef_omit = 3:18
-) %>% 
-  autofit(add_w = 1.1)
-
-```
-
-
-```{r}
-#| label: tbl-competition_other
-#| tbl-cap: "Other competition developments"
-#| cache: FALSE
-#| include: TRUE
-#| ft.arraystretch: 0.5
-
-modelsummary_word(
-  competition_results$other_competition_model,
-  coef_omit = 3:17
-) %>% 
-  autofit(add_w = 0)
-
-```
-
-
-
-```{r}
-#| label: tbl-competition_financial_regulation
-#| tbl-cap: "Micro-regulations"
-#| cache: FALSE
-#| include: TRUE
-#| ft.arraystretch: 0.5
-
-modelsummary_word(
-  competition_results$finance_regulations_model,
-  coef_omit = 3:17
-) %>% 
-  autofit(add_w = 0)
-
-```
-
+\newpage
 
 ```{r}
 #| label: tbl-competition_financial_inclusion
-#| tbl-cap: "Financial inclusion"
+#| tbl-cap: "Miscellaneous competition results"
 #| cache: FALSE
 #| include: TRUE
-#| ft.arraystretch: 0.5
+#| ft.arraystretch: 1
+
+other_rows <-
+  modelsummary_basic(
+    competition_results$other_competition_model,
+    coef_omit = 3:17,
+    gof_omit = "AIC|BIC|Std|Log|Num.Obs.") %>% 
+  add_row(
+    term = "Micro-regulations estimates",
+    `(1)` = " ",
+    `(2)` = " ",
+    `(3)` = " ",
+    `(4)` = " ",
+    `(5)` = " ",
+    `(6)` = " "
+  ) %>% 
+  add_row(
+    modelsummary_basic(
+      competition_results$finance_regulations_model,
+      coef_omit = 3:17
+    )
+  ) %>%
+  dplyr::select(2, 4:9) %>%
+  add_row(
+    term = "Bank Fixed Effects",
+    `(1)` = "Yes",
+    `(2)` = "Yes",
+    `(3)` = "Yes",
+    `(4)` = "Yes",
+    `(5)` = "Yes",
+    `(6)` = "Yes"
+  ) %>%
+  add_row(
+    term = "Monthly Fixed Effects",
+    `(1)` = "Yes",
+    `(2)` = "Yes",
+    `(3)` = "Yes",
+    `(4)` = "Yes",
+    `(5)` = "Yes",
+    `(6)` = "Yes"
+  )
+
+
+other_rows_tbl <- 
+  tibble(
+    "term" = "Other competition developments estimates",
+    `(1)` = " ",
+    `(2)` = " ",
+    `(3)` = " ",
+    `(4)` = " ",
+    `(5)` = " ",
+    `(6)` = " "
+  ) %>% 
+  add_row(other_rows)
 
 modelsummary_word(
-  competition_results$finance_regulations_model,
-  coef_omit = 3:17
-) %>% 
+  competition_results$financial_inclusion_model,
+  coef_omit = 3:17,
+   gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+  add_rows = other_rows_tbl
+) %>%
+  add_body_row(values =
+                 c("Financial inclusion estimates"),
+               colwidths = 7) %>%
+  merge_at(i = 4, j = 1:7) %>%
+  merge_at(i = 7, j = 1:7) %>% 
+  align(align = "center", part = "body", i = c(1, 4, 7)) %>%
+  hline(i = 9, j = 1:7, part = "body") %>%
   autofit(add_w = 0)
+
 ```
+
 
 
 
@@ -456,7 +543,7 @@ modelsummary_word(
 
 # Appendix
 
-## Data sources (check)
+## Data sources
 
 ```{r}
 #| label: tbl-data
@@ -588,7 +675,7 @@ total capital adequacy ratio, and leverage ratio."
 ```
 
 \newpage
-## Aggregation scheme (check)
+## Aggregation scheme
 
 ```{r}
 #| label: tbl-scheme
@@ -779,7 +866,7 @@ h.  Leasing and instalments to households: Items 143 + 148
 i.  Total leasing and instalments: Leasing and instalments to corporates + Leasing and instalments to households
 
 \newpage
-## Bank lending rates weighting scheme (check)
+## Bank lending rates weighting scheme
 
 The loans quantities from the BA900s are then linked to the lending rate data from the BA930s using table to create nine lending rate categories the schema on @tbl-scheme_1. The weights for each category are then calculated by dividing the total value of the loans in each category by the total value of all loans in the BA900s. The weights are then used to calculate the weighted average lending rate for each month. The weighted average lending rate is calculated by multiplying the lending rate for each category by the weight for that category and then summing the results.
 
@@ -947,7 +1034,7 @@ controls_gg
 
 
 \newpage
-## Description of narrative events (check)
+## Description of narrative events
 
 ```{r}
 #| label: tbl-description_narratives
@@ -972,7 +1059,7 @@ tibble(
 
 
 \newpage
-## Macroprudential narrative indexes (check)
+## Macroprudential narrative indexes
 
 ```{r}
 #| label: fig-macro_narrative_indexes
@@ -989,7 +1076,7 @@ macropru_narratives_gg
 
 \newpage
 
-## Competition narrative indexes (check)
+## Competition narrative indexes
 
 ```{r}
 #| label: fig-comp_narrative_indexes
@@ -1005,4 +1092,11 @@ comp_narratives_gg
 ```
 
 
-\newpage
+
+
+
+
+
+
+
+
