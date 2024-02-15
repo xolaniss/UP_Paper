@@ -14,7 +14,9 @@ artifacts_modelling_data.rds \
 artifacts_descriptives.rds \
 artifacts_macropru_models.rds \
 artifacts_competition_models.rds \
-artifacts_three_month_macropru_models.rds 
+artifacts_three_month_macropru_models.rds \
+artifacts_competition_control_models.rds \
+artifacts_macropru_controls_models.rds
 
 ## Generating the manuscript 
 UP_paper.pdf: UP_paper.qmd $(INPUT_TARGETS)
@@ -70,4 +72,11 @@ artifacts_three_month_macropru_models.rds: 14_three_months_macropru_models.R \
 artifacts_modelling_data.rds
 	Rscript $<
 	
+artifacts_competition_control_models.rds: 15_competition_models_controsl.R \
+artifacts_modelling_data.rds
+	Rscript $<
+
+artifacts_macropru_controls_models.rds: 13_macropru_models_with_controls.R \
+artifacts_modelling_data.rds
+	Rscript $<
 

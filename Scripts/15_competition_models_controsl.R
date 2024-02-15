@@ -73,14 +73,14 @@ predictor_unsecured_corp_vec <- c(
   "factor(month)"
 )
 
-corporate_unsecured_model <- 
+corporate_unsecured_control_model <- 
   model_workflow(
     data = combined_tbl,
     response_vec = response_unsecured_corp_vec,
     predictor_vec = predictor_unsecured_corp_vec
   )
 
-corporate_unsecured_model
+corporate_unsecured_control_model
 
 ## Unsecured households models -------------------------------------------------------------
 response_unsecured_household_vec <- c(
@@ -101,14 +101,14 @@ predictor_unsecured_household_vec <- c(
   "factor(month)"
 )
 
-household_unsecured_model <- 
+household_unsecured_control_model <- 
   model_workflow(
     data = combined_tbl,
     response_vec = response_unsecured_household_vec,
     predictor_vec = predictor_unsecured_household_vec
   )
 
-household_unsecured_model
+household_unsecured_control_model
 
 ## Commercial mortgages models -------------------------------------------------------------
 response_commercial_mortgages_vec <- c(
@@ -129,14 +129,14 @@ predictor_commercial_mortgages_vec <- c(
   "factor(month)"
 )
 
-commercial_mortgages_model <- 
+commercial_mortgages_control_model <- 
   model_workflow(
     data = combined_tbl,
     response_vec = response_commercial_mortgages_vec,
     predictor_vec = predictor_commercial_mortgages_vec
   )
 
-commercial_mortgages_model
+commercial_mortgages_control_model
 
 ## Households mortgages models -------------------------------------------------------------
 response_households_mortgages_vec <- c(
@@ -157,14 +157,14 @@ predictor_households_mortgages_vec <- c(
   "factor(month)"
 )
 
-households_mortgages_model <- 
+households_mortgages_control_model <- 
   model_workflow(
     data = combined_tbl,
     response_vec = response_households_mortgages_vec,
     predictor_vec = predictor_households_mortgages_vec
   )
 
-households_mortgages_model
+households_mortgages_control_model
 
 ## Household leasing and installments models -------------------------------------------------------------
 response_household_leasing_installments_vec <- c(
@@ -177,18 +177,22 @@ predictor_household_leasing_installments_vec <- c(
   "entry_leasing_households_dummy",
   "exit_leasing_households_dummy",
   "covid_dummy",
+  "repo",
+  "consumer_confidence_index",
+  "return_on_assets",
+  "savit40",
   "factor(banks)",
   "factor(month)"
 )
 
-household_leasing_installments_model <- 
+household_leasing_installments_control_model <- 
   model_workflow(
     data = combined_tbl,
     response_vec = response_household_leasing_installments_vec,
     predictor_vec = predictor_household_leasing_installments_vec
   )
 
-household_leasing_installments_model
+household_leasing_installments_control_model
 
 ## Corporate leasing and installments models -------------------------------------------------------------
 response_corporate_leasing_installments_vec <- c(
@@ -200,18 +204,22 @@ predictor_corporate_leasing_installments_vec <- c(
   "-1",
   "entry_leasing_non_fin_corporate_dummy",
   "covid_dummy",
+  "repo",
+  "consumer_confidence_index",
+  "return_on_assets",
+  "savit40",
   "factor(banks)",
   "factor(month)"
 )
 
-coorporate_leasing_installments_model <- 
+coorporate_leasing_installments_control_model <- 
   model_workflow(
     data = combined_tbl,
     response_vec = response_corporate_leasing_installments_vec,
     predictor_vec = predictor_corporate_leasing_installments_vec
   )
 
-coorporate_leasing_installments_model
+coorporate_leasing_installments_control_model
 
 # Other competition models -------------------------------------------------------------
 response_other_competition_vec <- c(
@@ -227,18 +235,22 @@ predictor_other_competition_vec <- c(
   "-1",
   "competition_dummy",
   "covid_dummy",
+  "repo",
+  "consumer_confidence_index",
+  "return_on_assets",
+  "savit40",
   "factor(banks)",
   "factor(month)"
 )
 
-other_competition_model <- 
+other_competition_control_model <- 
   model_workflow(
     data = combined_tbl,
     response_vec = response_other_competition_vec,
     predictor_vec = predictor_other_competition_vec
   )
 
-other_competition_model
+other_competition_control_model
 
 # Finance regulations models -------------------------------------------------------------
 response_finance_regulations_vec <- c(
@@ -254,18 +266,22 @@ predictor_finance_regulations_vec <- c(
   "-1",
   "finance_regulation_dummy",
   "covid_dummy",
+  "repo",
+  "consumer_confidence_index",
+  "return_on_assets",
+  "savit40",
   "factor(banks)",
   "factor(month)"
 )
 
-finance_regulations_model <- 
+finance_regulations_control_model <- 
   model_workflow(
     data = combined_tbl,
     response_vec = response_finance_regulations_vec,
     predictor_vec = predictor_finance_regulations_vec
   )
 
-finance_regulations_model
+finance_regulations_control_model
 
 # Financial inclusion models -------------------------------------------------------------
 response_financial_inclusion_vec <- c(
@@ -281,33 +297,37 @@ predictor_financial_inclusion_vec <- c(
   "-1",
   "financial_inclusion_dummy",
   "covid_dummy",
+  "repo",
+  "consumer_confidence_index",
+  "return_on_assets",
+  "savit40",
   "factor(banks)",
   "factor(month)"
 )
 
-financial_inclusion_model <- 
+financial_inclusion_control_model <- 
   model_workflow(
     data = combined_tbl,
     response_vec = response_financial_inclusion_vec,
     predictor_vec = predictor_financial_inclusion_vec
   )
 
-financial_inclusion_model
+financial_inclusion_control_model
 
 # Export ---------------------------------------------------------------
-artifacts_competition_models <- list (
-  household_unsecured_model = household_unsecured_model,
-  corporate_unsecured_model = corporate_unsecured_model,
-  commercial_mortgages_model = commercial_mortgages_model,
-  households_mortgages_model = households_mortgages_model,
-  household_leasing_installments_model = household_leasing_installments_model,
-  coorporate_leasing_installments_model = coorporate_leasing_installments_model,
-  other_competition_model = other_competition_model,
-  finance_regulations_model = finance_regulations_model,
-  financial_inclusion_model = financial_inclusion_model
+artifacts_competition_control_models <- list (
+  household_unsecured_control_model = household_unsecured_control_model,
+  corporate_unsecured_control_model = corporate_unsecured_control_model,
+  commercial_mortgages_control_model = commercial_mortgages_control_model,
+  households_mortgages_control_model = households_mortgages_control_model,
+  household_leasing_installments_control_model = household_leasing_installments_control_model,
+  coorporate_leasing_installments_control_model = coorporate_leasing_installments_control_model,
+  other_competition_control_model = other_competition_control_model,
+  finance_regulations_control_model = finance_regulations_control_model,
+  financial_inclusion_control_model = financial_inclusion_control_model
 )
 
-write_rds(artifacts_competition_models, 
-          file = here("Outputs", "models", "artifacts_competition_models.rds"))
+write_rds(artifacts_competition_control_models, 
+          file = here("Outputs", "models", "artifacts_competition_control_models.rds"))
 
 
