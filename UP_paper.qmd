@@ -428,7 +428,7 @@ modelsummary_word(
   competition_results$coorporate_leasing_installments_model,
   coef_omit = 3:17,
   gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
-  add_rows = mortgages_rows_tbl
+  add_rows = leasing_rows_tbl
 ) %>%
   add_body_row(values =
                  c("Corporation estimates"),
