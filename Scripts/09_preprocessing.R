@@ -99,14 +99,75 @@ lending_tbl <-
 lending_tbl %>% group_by(Banks) %>% skim() 
 dummies_tbl %>% group_by(Banks) %>% skim() 
 
+# Additional controls -----------------------------------------------------
+path <- here("Data", 
+             "Other possible data", 
+             "Controls - competition models_15022024.xlsx")
+
+sheet_list <- list(
+  "Policy rate" = "Policy rate",
+  "Consumer confidence" = "Consumer confidence",
+  "Equity volatility" = "Equity volatility"
+)
+
+additional_controls_list <- 
+  path %>% 
+  excel_import_sheet(sheet_list = sheet_list)
+
+Policy_rate_tbl <- list(
+  "Total Banks" = additional_controls_list$`Policy rate`,
+  "Absa Bank" = additional_controls_list$`Policy rate`,
+  "FNB" = additional_controls_list$`Policy rate`,
+  "Nedbank" = additional_controls_list$`Policy rate`,
+  "Standard Bank" = additional_controls_list$`Policy rate`,
+  "Capitec" = additional_controls_list$`Policy rate`
+) %>% 
+  bind_rows(.id = "Banks") %>%
+  rename(Date = `SARPRT Index`) %>% 
+  relocate(Banks, .after = Date)
+
+Consumer_confidence_tbl <- list(
+  "Total Banks" = additional_controls_list$`Consumer confidence`,
+  "Absa Bank" = additional_controls_list$`Consumer confidence`,
+  "FNB" = additional_controls_list$`Consumer confidence`,
+  "Nedbank" = additional_controls_list$`Consumer confidence`,
+  "Standard Bank" = additional_controls_list$`Consumer confidence`,
+  "Capitec" = additional_controls_list$`Consumer confidence`
+) %>% 
+  bind_rows(.id = "Banks") %>%
+  rename(Date = `SACWC Index`) %>% 
+  relocate(Banks, .after = Date)
+
+Equity_volatility_tbl <- list(
+  "Total Banks" = additional_controls_list$`Equity volatility`,
+  "Absa Bank" = additional_controls_list$`Equity volatility`,
+  "FNB" = additional_controls_list$`Equity volatility`,
+  "Nedbank" = additional_controls_list$`Equity volatility`,
+  "Standard Bank" = additional_controls_list$`Equity volatility`,
+  "Capitec" = additional_controls_list$`Equity volatility`
+) %>% 
+  bind_rows(.id = "Banks") %>%
+  rename(Date = `SAVIT40 Index`) %>% 
+  relocate(Banks, .after = Date)
+
+additional_controls_tbl <- 
+  Policy_rate_tbl %>% 
+  left_join(Consumer_confidence_tbl, by = c("Date", "Banks")) %>%
+  left_join(Equity_volatility_tbl, by = c("Date", "Banks")) %>% 
+  mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>% 
+  # floor the date to the beggining of the month
+  mutate(Date = floor_date(Date, unit = "month")) %>% 
+  group_by(Banks) %>% 
+  fill(`Consumer confidence index`, .direction = "down") %>% 
+  drop_na() %>% 
+  ungroup()
+
 ## Combining lending and lending rates and dummies and controls -------------------------------------------------------------
 combined_tbl <- 
   lending_tbl %>% 
   left_join(dummies_tbl, by = c("Date", "Banks")) %>% # combined lending and dummies
-  left_join(controls_tbl, by = c("Date", "Banks"))   # combined lending and dummies and controls
-
-glimpse(combined_tbl)
-
+  left_join(controls_tbl, by = c("Date", "Banks")) %>%    # combined lending and dummies and controls
+  left_join(additional_controls_tbl, by = c("Date", "Banks")) # combined lending and dummies and controls and additional controls
 
 # EDA ---------------------------------------------------------------
 combined_tbl %>% group_by(Banks) %>% skim()
@@ -151,6 +212,31 @@ combined_features_tbl <-
          ~ (.x - lag(.x)),
          .names = "Change_in_{.col}"
           )) %>%  # log transformation
+  mutate(across(c(`log_Total unsecured lending`,
+                  `log_Non-financial corporate unsecured lending`,
+                  `log_Household unsecured lending`,
+                  `log_Total mortgage lending`,
+                  `log_Commercial mortgages to corporates and households`,
+                  `log_Residential mortgages to households`,
+                  `log_Total leasing and installments`,
+                  `log_Leasing and installments to corporates`,
+                  `log_Leasing and installments to households`
+  ), 
+  ~ (.x - lag(.x, n = 3)),
+  .names = "three_month_change_in_{.col}"
+  )) %>% 
+  mutate(across(c(
+    `three_month_change_in_log_Total unsecured lending`,
+    `three_month_change_in_log_Non-financial corporate unsecured lending`,
+    `three_month_change_in_log_Household unsecured lending`,
+    `three_month_change_in_log_Total mortgage lending`,
+    `three_month_change_in_log_Commercial mortgages to corporates and households`,
+    `three_month_change_in_log_Residential mortgages to households`,
+    `three_month_change_in_log_Total leasing and installments`,
+    `three_month_change_in_log_Leasing and installments to corporates`,
+    `three_month_change_in_log_Leasing and installments to households`
+  ),
+  ~ .x * 100)) %>% 
   mutate(across(c(
     `Change_in_log_Total unsecured lending`,
     `Change_in_log_Non-financial corporate unsecured lending`,

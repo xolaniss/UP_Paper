@@ -127,15 +127,17 @@ descriptives_tbl %>%
 
 ```{r}
 #| label: tbl-macropru_draft_lending
-#| tbl-cap: "Macroprudential regulations and lending volumes results"
+#| tbl-cap: "Macroprudential regulations and lending volumes (3-months) results"
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: 1
 
 macropru_results <- read_rds(here("Outputs", "models", "artifacts_macropru_models.rds"))
 
+macropru_three_month_results <- read_rds(here("Outputs", "models", "artifacts_three_month_macropru_models.rds"))
+
 rows <- modelsummary_basic(
-    macropru_results$lending_models$implementation,
+    macropru_three_month_results$three_lending_models$three_month_implementation,
     coef_omit = 2:16,
     gof_omit = "AIC|BIC|Std|Log",
     output = "dataframe"
@@ -179,7 +181,7 @@ rows_tbl <-  tibble(
   add_row(rows)
 
 modelsummary_word(
-  macropru_results$lending_models$draft,
+  macropru_three_month_results$three_lending_models$three_month_draft,
   coef_omit = 2:16,
   gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
   add_rows = rows_tbl

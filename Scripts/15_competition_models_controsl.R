@@ -1,5 +1,5 @@
 # Description
-# preliminary models for competiton - Xolani Sibande 5 February 2024
+# controls for competitition models - Xolani Sibande 15 February 2024
 
 # Preliminaries -----------------------------------------------------------
 # core
@@ -40,6 +40,7 @@ options(scipen = 999)
 source(here("Functions", "fx_plot.R"))
 source(here("Functions", "formular_function.R"))
 source(here("Functions", "model_workflow.R"))
+source(here("Functions", "excel_import_sheet.R"))
 
 # Import -------------------------------------------------------------
 combined <- read_rds(here("Outputs", "combined_data", "artifacts_modelling_data.rds"))
@@ -49,9 +50,8 @@ combined_tbl <-
   mutate(covid_dummy = if_else(Date >= "2020-03-01", 1, 0)) %>%  # Covid dummy
   dplyr::filter(Banks != "Total Banks") %>%
   clean_names() %>% 
-  filter(date >= "2009-01-01") # Initial data adjustment
+  filter(date >= "2009-01-01") # Initial adjustment
 combined_tbl %>% glimpse()
-
 
 # Entry Exit models -------------------------------------------------------------
 ## Unsecured corporations models -------------------------------------------------------------
@@ -65,16 +65,20 @@ predictor_unsecured_corp_vec <- c(
   "entry_credit_non_fin_dummy",
   "exit_credit_non_fin_dummy",
   "covid_dummy",
+  "repo",
+  "consumer_confidence_index",
+  "return_on_assets",
+  "savit40",
   "factor(banks)",
   "factor(month)"
 )
 
 corporate_unsecured_model <- 
   model_workflow(
-  data = combined_tbl,
-  response_vec = response_unsecured_corp_vec,
-  predictor_vec = predictor_unsecured_corp_vec
-)
+    data = combined_tbl,
+    response_vec = response_unsecured_corp_vec,
+    predictor_vec = predictor_unsecured_corp_vec
+  )
 
 corporate_unsecured_model
 
@@ -89,16 +93,20 @@ predictor_unsecured_household_vec <- c(
   "entry_credit_households_dummy",
   "exit_credit_households_dummy",
   "covid_dummy",
+  "repo",
+  "consumer_confidence_index",
+  "return_on_assets",
+  "savit40",
   "factor(banks)",
   "factor(month)"
 )
 
 household_unsecured_model <- 
   model_workflow(
-  data = combined_tbl,
-  response_vec = response_unsecured_household_vec,
-  predictor_vec = predictor_unsecured_household_vec
-)
+    data = combined_tbl,
+    response_vec = response_unsecured_household_vec,
+    predictor_vec = predictor_unsecured_household_vec
+  )
 
 household_unsecured_model
 
@@ -112,6 +120,10 @@ predictor_commercial_mortgages_vec <- c(
   "-1",
   "entry_commercial_mortgages_dummy",
   "exit_commercial_mortgages_dummy",
+  "repo",
+  "consumer_confidence_index",
+  "return_on_assets",
+  "savit40",
   "covid_dummy",
   "factor(banks)",
   "factor(month)"
@@ -119,10 +131,10 @@ predictor_commercial_mortgages_vec <- c(
 
 commercial_mortgages_model <- 
   model_workflow(
-  data = combined_tbl,
-  response_vec = response_commercial_mortgages_vec,
-  predictor_vec = predictor_commercial_mortgages_vec
-)
+    data = combined_tbl,
+    response_vec = response_commercial_mortgages_vec,
+    predictor_vec = predictor_commercial_mortgages_vec
+  )
 
 commercial_mortgages_model
 
@@ -136,6 +148,10 @@ predictor_households_mortgages_vec <- c(
   "-1",
   "entry_mortgages_households_dummy",
   "exit_mortgages_households_dummy",
+  "repo",
+  "consumer_confidence_index",
+  "return_on_assets",
+  "savit40",
   "covid_dummy",
   "factor(banks)",
   "factor(month)"
@@ -143,10 +159,10 @@ predictor_households_mortgages_vec <- c(
 
 households_mortgages_model <- 
   model_workflow(
-  data = combined_tbl,
-  response_vec = response_households_mortgages_vec,
-  predictor_vec = predictor_households_mortgages_vec
-)
+    data = combined_tbl,
+    response_vec = response_households_mortgages_vec,
+    predictor_vec = predictor_households_mortgages_vec
+  )
 
 households_mortgages_model
 
@@ -167,10 +183,10 @@ predictor_household_leasing_installments_vec <- c(
 
 household_leasing_installments_model <- 
   model_workflow(
-  data = combined_tbl,
-  response_vec = response_household_leasing_installments_vec,
-  predictor_vec = predictor_household_leasing_installments_vec
-)
+    data = combined_tbl,
+    response_vec = response_household_leasing_installments_vec,
+    predictor_vec = predictor_household_leasing_installments_vec
+  )
 
 household_leasing_installments_model
 
@@ -190,10 +206,10 @@ predictor_corporate_leasing_installments_vec <- c(
 
 coorporate_leasing_installments_model <- 
   model_workflow(
-  data = combined_tbl,
-  response_vec = response_corporate_leasing_installments_vec,
-  predictor_vec = predictor_corporate_leasing_installments_vec
-)
+    data = combined_tbl,
+    response_vec = response_corporate_leasing_installments_vec,
+    predictor_vec = predictor_corporate_leasing_installments_vec
+  )
 
 coorporate_leasing_installments_model
 
@@ -217,10 +233,10 @@ predictor_other_competition_vec <- c(
 
 other_competition_model <- 
   model_workflow(
-  data = combined_tbl,
-  response_vec = response_other_competition_vec,
-  predictor_vec = predictor_other_competition_vec
-)
+    data = combined_tbl,
+    response_vec = response_other_competition_vec,
+    predictor_vec = predictor_other_competition_vec
+  )
 
 other_competition_model
 
@@ -244,10 +260,10 @@ predictor_finance_regulations_vec <- c(
 
 finance_regulations_model <- 
   model_workflow(
-  data = combined_tbl,
-  response_vec = response_finance_regulations_vec,
-  predictor_vec = predictor_finance_regulations_vec
-)
+    data = combined_tbl,
+    response_vec = response_finance_regulations_vec,
+    predictor_vec = predictor_finance_regulations_vec
+  )
 
 finance_regulations_model
 
@@ -271,10 +287,10 @@ predictor_financial_inclusion_vec <- c(
 
 financial_inclusion_model <- 
   model_workflow(
-  data = combined_tbl,
-  response_vec = response_financial_inclusion_vec,
-  predictor_vec = predictor_financial_inclusion_vec
-)
+    data = combined_tbl,
+    response_vec = response_financial_inclusion_vec,
+    predictor_vec = predictor_financial_inclusion_vec
+  )
 
 financial_inclusion_model
 
