@@ -169,7 +169,7 @@ rows <- modelsummary_basic(
   ) 
   
 rows_tbl <-  tibble(
-  "term" = "Implementation estimates",  
+  "term" = "Implementation model",  
   "(1)" = " ", 
   "(2)" = " ", 
   "(3)" = " ", 
@@ -181,6 +181,20 @@ rows_tbl <-  tibble(
   "(9)" = " ") %>% 
   add_row(rows)
 
+predictor <- c("Draft index", "Implementation index")
+
+dependant_lending <- c(
+  " ",
+  "Unsecured",
+  "Secured",
+  "Mortgages",
+  "Unsecured",
+  "Secured",
+  "Mortgages",
+  "Unsecured",
+  "Secured",
+  "Mortgages"
+)
 modelsummary_word(
   macropru_three_month_results$three_lending_models$three_month_draft,
   coef_omit = 2:16,
@@ -189,16 +203,27 @@ modelsummary_word(
 ) %>%
   width(j = 1, width = 1.5) %>%
   add_body_row(values =
-                 c("Draft regulations estimates"),
+                 c("Draft model"),
                colwidths = 10) %>%
   merge_at(i = 3, j = 1:10) %>%
   add_header_row(
-    values = c("", "Total", "Corporations", "Households"),
+    values = c("", "Total", "Corporates", "Households"),
     colwidths = c(1, 3, 3, 3)) %>% 
   align(align = "center", part = "header", i = 1) %>%
   align(align = "center", part = "body", i = 1) %>%
-  align(align = "center", part = "body", i = 3) %>% 
-  hline(i = 4, j = 1:10, part = "body") 
+  align(align = "center", part = "body", i = 3) %>%
+  hline(i = 4, j = 1:10, part = "body") %>%
+  mk_par(
+    i = 2,
+    part = "header",
+    value = as_paragraph(dependant_lending)
+  ) %>% 
+  mk_par(
+    j = 1,
+    i = c(2, 4),
+    part = "body",
+    value = as_paragraph(predictor)
+  ) 
 ```
 
 \elandscape
@@ -245,7 +270,7 @@ rows <- modelsummary_basic(
   ) 
   
 rows_tbl <-  tibble(
-  "term" = "Implementation estimates",  
+  "term" = "Implementation model",  
   "(1)" = " ", 
   "(2)" = " ", 
   "(3)" = " ", 
@@ -257,6 +282,18 @@ rows_tbl <-  tibble(
   "(9)" = " ") %>% 
   add_row(rows)
 
+dependant_rate <- c(
+  " ",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage"
+)
 
 modelsummary_word(
     macropru_results$rates_models$draft,
@@ -266,16 +303,27 @@ modelsummary_word(
   ) %>% 
   width(j = 1, width = 1.5) %>% 
    add_body_row(values =
-                 c("Draft regulations estimates"),
+                 c("Draft model"),
                colwidths = 10) %>%
   merge_at(i = 3, j = 1:10) %>%
   add_header_row(
-    values = c("", "Total", "Corporations", "Households"),
+    values = c("", "Total", "Corporates", "Households"),
     colwidths = c(1, 3, 3, 3)) %>% 
   align(align = "center", part = "header", i = 1) %>%
   align(align = "center", part = "body", i = 1) %>%
   align(align = "center", part = "body", i = 3) %>% 
-  hline(i = 4, j = 1:10, part = "body") 
+  hline(i = 4, j = 1:10, part = "body") %>% 
+   mk_par(
+    i = 2,
+    part = "header",
+    value = as_paragraph(dependant_rate)
+  ) %>% 
+  mk_par(
+    j = 1,
+    i = c(2, 4),
+    part = "body",
+    value = as_paragraph(predictor)
+  ) 
 
 ```
 
@@ -313,13 +361,27 @@ household_rows <- modelsummary_basic(
 
 household_rows_tbl <- 
   tibble(
-  "term" = "Households estimates",  
+  "term" = "Households model",  
   "(1)" = " ", 
   "(2)" = " "
   ) %>% 
   add_row(household_rows)
 
 
+dependant_comp <- c(
+  " ",
+  "Rate",
+  "Volume"
+)
+
+predictor_credit <- c(
+  "All credit entry index",
+  "All credit exit index",
+  "Covid-19 dummy",
+  "All credit entry index",
+  "All credit exit index",
+  "Covid-19 dummy"
+)
 
 modelsummary_word(
   competition_results$corporate_unsecured_model,
@@ -328,13 +390,25 @@ modelsummary_word(
   add_rows = household_rows_tbl
 ) %>%
   add_body_row(values =
-                 c("Corporation estimates"),
+                 c("Corporates model"),
                colwidths = 3) %>%
   merge_at(i = 5, j = 1:3) %>%
   align(align = "center", part = "body", i = 1) %>%
   align(align = "center", part = "body", i = 5) %>%
+  align(align = "center", part = "body", j = c(2,3)) %>%
   hline(i = 8, j = 1:3, part = "body") %>%
-  autofit(add_w = 1)
+   mk_par(
+    i = 1,
+    part = "header",
+    value = as_paragraph(dependant_comp),
+  ) %>% 
+  mk_par(i = c(2, 3, 4, 6, 7, 8),
+         j = 1,
+         part = "body",
+         value = as_paragraph(predictor_credit)) %>% 
+  align(align = "center", part = "header", i = 1) %>% 
+  autofit(add_w = 1) 
+ 
 
 ```
 
@@ -362,15 +436,25 @@ mortgages_rows <- modelsummary_basic(
   `(2)` = "Yes"
   )
 
-
 mortgages_rows_tbl <- 
   tibble(
-  "term" = "Households estimates",  
+  "term" = "Households model",  
   "(1)" = " ", 
   "(2)" = " "
   ) %>% 
   add_row(mortgages_rows)
 
+predictor_commercial_mortgages <- c(
+  "Commercial mortgages entry index",
+  "Commercial mortgages exit index",
+  "Covid-19 dummy"
+)
+
+predictor_household_mortgages <- c(
+  "Household mortgages entry index",
+  "Household mortgages exit index",
+  "Covid-19 dummy"
+)
 
 modelsummary_word(
   competition_results$commercial_mortgages_model,
@@ -379,12 +463,29 @@ modelsummary_word(
   add_rows = mortgages_rows_tbl
 ) %>% 
   add_body_row(values =
-                 c("Corporation estimates"),
+                 c("Corporates model"),
                colwidths = 3) %>%
   merge_at(i = 5, j = 1:3) %>%
   align(align = "center", part = "body", i = 1) %>%
   align(align = "center", part = "body", i = 5) %>%
+  align(align = "center", part = "body", j = c(2,3)) %>%
   hline(i = 8, j = 1:3, part = "body") %>%
+  mk_par(i = 1,
+         part = "header",
+         value = as_paragraph(dependant_comp),) %>%
+  mk_par(
+    i = c(2, 3, 4),
+    j = 1,
+    part = "body",
+    value = as_paragraph(predictor_commercial_mortgages)
+  ) %>% 
+    mk_par(
+    i = c(6, 7, 8),
+    j = 1,
+    part = "body",
+    value = as_paragraph(predictor_household_mortgages)
+  ) %>% 
+  align(align = "center", part = "header", i = 1) %>% 
   autofit(add_w = 1)
 
 
@@ -419,11 +520,22 @@ leasing_rows <-
 
 leasing_rows_tbl <- 
   tibble(
-  "term" = "Households estimates",  
+  "term" = "Households model",  
   "(1)" = " ", 
   "(2)" = " "
   ) %>% 
   add_row(leasing_rows)
+
+predictor_commercial_leasing <- c(
+  "Corporate leasing entry index",
+  "Covid-19 dummy"
+)
+
+predictor_household_leasing <- c(
+  "Household leasing entry index" ,
+  "Household leasing exit index",
+  "Covid-19 dummy"
+)
 
 modelsummary_word(
   competition_results$coorporate_leasing_installments_model,
@@ -432,18 +544,39 @@ modelsummary_word(
   add_rows = leasing_rows_tbl
 ) %>%
   add_body_row(values =
-                 c("Corporation estimates"),
+                 c("Corporates model"),
                colwidths = 3) %>%
   merge_at(i = 4, j = 1:3) %>%
   align(align = "center", part = "body", i = 1) %>%
   align(align = "center", part = "body", i = 4) %>%
+    align(align = "center", part = "body", j = c(2,3)) %>%
   hline(i = 7, j = 1:3, part = "body") %>%
+   mk_par(
+    i = 1,
+    part = "header",
+    value = as_paragraph(dependant_comp),
+  ) %>% 
+  align(align = "center", part = "header", i = 1) %>% 
+  mk_par(
+    i = c(2, 3),
+    j = 1,
+    part = "body",
+    value = as_paragraph(predictor_commercial_leasing)
+  ) %>% 
+    mk_par(
+    i = c(5, 6, 7),
+    j = 1,
+    part = "body",
+    value = as_paragraph(predictor_household_leasing)
+  ) %>% 
   autofit(add_w = 1)
 
 ```
 
 
 \newpage
+\blandscape
+
 
 ```{r}
 #| label: tbl-competition_financial_inclusion
@@ -458,7 +591,7 @@ other_rows <-
     coef_omit = 3:17,
     gof_omit = "AIC|BIC|Std|Log|Num.Obs.") %>% 
   add_row(
-    term = "Micro-regulations estimates",
+    term = "Micro-regulations model",
     `(1)` = " ",
     `(2)` = " ",
     `(3)` = " ",
@@ -492,10 +625,35 @@ other_rows <-
     `(6)` = "Yes"
   )
 
+dependant_other <- c(
+  " ",
+  "Unsecured Rate",
+  "Secured Rate",
+  "Mortgage Rate",
+  "Unsecured Lending",
+  "Secured Lending",
+  "Mortgage Lending"
+)
+
+predictor_financial_inclusion <- c(
+  "Financial inclusion index",
+  "Covid-19 dummy"
+)
+
+predictor_other_competition <- c(
+  "Other competition index",
+  "Covid-19 dummy"
+)
+
+prediction_micro_regulations <- c(
+  "Finance regulation index",
+  "Covid-19 dummy"
+)
+
 
 other_rows_tbl <- 
   tibble(
-    "term" = "Other competition developments estimates",
+    "term" = "Other competition developments model",
     `(1)` = " ",
     `(2)` = " ",
     `(3)` = " ",
@@ -512,17 +670,45 @@ modelsummary_word(
   add_rows = other_rows_tbl
 ) %>%
   add_body_row(values =
-                 c("Financial inclusion estimates"),
+                 c("Financial inclusion model"),
                colwidths = 7) %>%
+  add_header_row(
+    values = c("Total"),
+    colwidths = 7
+  ) %>% 
+  align(align = "center", part = "header", i = 1) %>%
   merge_at(i = 4, j = 1:7) %>%
   merge_at(i = 7, j = 1:7) %>% 
   align(align = "center", part = "body", i = c(1, 4, 7)) %>%
   hline(i = 9, j = 1:7, part = "body") %>%
+  mk_par(
+    i = 2,
+    part = "header",
+    value = as_paragraph(dependant_other),
+  ) %>% 
+  align(align = "center", part = "header", i = 1) %>%
+  mk_par(
+    i = c(2, 3),
+    j = 1,
+    part = "body",
+    value = as_paragraph(predictor_financial_inclusion)
+  ) %>%
+  mk_par(
+    i = c(5, 6),
+    j = 1,
+    part = "body",
+    value = as_paragraph(predictor_other_competition)
+  ) %>%
+  mk_par(i = c(8, 9),
+         j = 1,
+         part = "body",
+         value = as_paragraph(prediction_micro_regulations)
+  ) %>% 
   autofit(add_w = 0)
 
 ```
 
-
+\elandscape
 
 
 # Conclusion
@@ -1183,7 +1369,7 @@ rows <- modelsummary_basic(
   ) 
   
 rows_tbl <-  tibble(
-  "term" = "Implementation estimates",  
+  "term" = "Implementation model",  
   "(1)" = " ", 
   "(2)" = " ", 
   "(3)" = " ", 
@@ -1195,6 +1381,25 @@ rows_tbl <-  tibble(
   "(9)" = " ") %>% 
   add_row(rows)
 
+predictor_control <-
+  c(
+    "Draft index",
+    "Return on assets",
+    "Total capital adequacy ratio",
+    "Implementation index",
+    "Return on assets",
+    "Total capital adequacy ratio"
+  )
+
+predictor_control <- c(
+  "Draft index",
+  "Return on assets",
+  "Total capital adequacy ratio",
+  "Implementation index",
+  "Return on assets",
+  "Total capital adequacy ratio"
+)
+
 modelsummary_word(
   macropru_control_results$lending_models$draft,
   coef_omit = 4:18,
@@ -1203,16 +1408,25 @@ modelsummary_word(
 ) %>%
   width(j = 1, width = 1.8) %>%
   add_body_row(values =
-                 c("Draft regulations estimates"),
+                 c("Draft model"),
                colwidths = 10) %>%
   merge_at(i = 5, j = 1:10) %>%
   add_header_row(
-    values = c("", "Total", "Corporations", "Households"),
+    values = c("", "Total", "Corporates", "Households"),
     colwidths = c(1, 3, 3, 3)) %>% 
   align(align = "center", part = "header", i = 1) %>%
   align(align = "center", part = "body", i = 1) %>%
   align(align = "center", part = "body", i = 5) %>% 
-  hline(i = 8, j = 1:10, part = "body") 
+  hline(i = 8, j = 1:10, part = "body") %>% 
+  mk_par(i = 2,
+         part = "header",
+         value = as_paragraph(dependant_lending)) %>%
+  mk_par(
+    j = 1,
+    i = c(2, 3, 4, 6, 7, 8),
+    part = "body",
+    value = as_paragraph(predictor_control)
+  ) 
 ```
 
 \elandscape
@@ -1259,7 +1473,7 @@ rows <- modelsummary_basic(
   ) 
   
 rows_tbl <-  tibble(
-  "term" = "Implementation estimates",  
+  "term" = "Implementation model",  
   "(1)" = " ", 
   "(2)" = " ", 
   "(3)" = " ", 
@@ -1280,16 +1494,25 @@ modelsummary_word(
   ) %>% 
   width(j = 1, width = 1.8) %>% 
    add_body_row(values =
-                 c("Draft regulations estimates"),
+                 c("Draft model"),
                colwidths = 10) %>%
   merge_at(i = 5, j = 1:10) %>%
   add_header_row(
     values = c("", "Total", "Corporations", "Households"),
-    colwidths = c(1, 3, 3, 3)) %>% 
+    colwidths = c(1, 3, 3, 3)) %>%
   align(align = "center", part = "header", i = 1) %>%
   align(align = "center", part = "body", i = 1) %>%
-  align(align = "center", part = "body", i = 5) %>% 
-  hline(i = 8, j = 1:10, part = "body") 
+  align(align = "center", part = "body", i = 5) %>%
+  hline(i = 8, j = 1:10, part = "body") %>%
+  mk_par(i = 2,
+         part = "header",
+         value = as_paragraph(dependant_rate)) %>%
+  mk_par(
+    j = 1,
+    i = c(2, 3, 4, 6, 7, 8),
+    part = "body",
+    value = as_paragraph(predictor_control)
+  ) 
 
 ```
 
@@ -1330,6 +1553,23 @@ household_rows_tbl <-
   ) %>% 
   add_row(household_rows)
 
+predictor_credit_control <- c(
+  "All credit entry index",
+  "All credit exit index",
+  "Covid-19 dummy",
+  "Repo rate",
+  "Consumer confidence index",
+  "Return on assets",
+  "SAVIT40 index", 
+  "All credit entry index",
+  "All credit exit index",
+  "Covid-19 dummy",
+  "Repo rate",
+  "Consumer confidence index",
+  "Return on assets",
+  "SAVIT40 index"
+)
+
 modelsummary_word(
   competition_control_results$corporate_unsecured_control_model,
   coef_omit = 8:22,
@@ -1343,6 +1583,16 @@ modelsummary_word(
   align(align = "center", part = "body", i = 1) %>%
   align(align = "center", part = "body", i = 9) %>%
   hline(i = 16, j = 1:3, part = "body") %>%
+  mk_par(i = 1,
+         part = "header",
+         value = as_paragraph(dependant_comp)) %>%
+  align(align = "center", part = "header", i = 1) %>%
+  mk_par(
+    j = 1,
+    i = c(2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16),
+    part = "body",
+    value = as_paragraph(predictor_credit_control)
+  ) %>% 
   autofit(add_w = 1)
 
 ```
@@ -1380,6 +1630,23 @@ mortgages_rows_tbl <-
   ) %>% 
   add_row(mortgages_rows)
 
+predictor_mortgages_control <- c(
+  "Commercial mortgages entry index",
+  "Commercial mortgages exit index",
+  "Covid-19 dummy",
+  "Repo rate",
+  "Consumer confidence index",
+  "Return on assets",
+  "SAVIT40 index", 
+  "Household mortgages entry index",
+  "Houehold mortgages entry index",
+  "Covid-19 dummy",
+  "Repo rate",
+  "Consumer confidence index",
+  "Return on assets",
+  "SAVIT40 index"
+)
+
 
 modelsummary_word(
   competition_control_results$commercial_mortgages_control_model,
@@ -1394,6 +1661,16 @@ modelsummary_word(
   align(align = "center", part = "body", i = 1) %>%
   align(align = "center", part = "body", i = 9) %>%
   hline(i = 16, j = 1:3, part = "body") %>%
+  mk_par(i = 1,
+         part = "header",
+         value = as_paragraph(dependant_comp)) %>%
+  align(align = "center", part = "header", i = 1) %>%
+  mk_par(
+    j = 1,
+    i = c(2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16),
+    part = "body",
+    value = as_paragraph(predictor_mortgages_control)
+  ) %>% 
   autofit(add_w = 1)
 
 
@@ -1433,6 +1710,22 @@ leasing_rows_tbl <-
   ) %>% 
   add_row(leasing_rows)
 
+predictor_leasing_control <- c(
+  "Corporate leasing entry index",
+  "Covid-19 dummy",
+  "Repo rate",
+  "Consumer confidence index",
+  "Return on assets",
+  "SAVIT40 index", 
+  "Household leasing entry index",
+  "Household leasing exit index",
+  "Covid-19 dummy",
+  "Repo rate",
+  "Consumer confidence index",
+  "Return on assets",
+  "SAVIT40 index"
+)
+
 modelsummary_word(
   competition_control_results$coorporate_leasing_installments_control_model,
   coef_omit = 7:21,
@@ -1446,6 +1739,16 @@ modelsummary_word(
   align(align = "center", part = "body", i = 1) %>%
   align(align = "center", part = "body", i = 8) %>%
   hline(i = 15, j = 1:3, part = "body") %>%
+  mk_par(i = 1,
+         part = "header",
+         value = as_paragraph(dependant_comp)) %>%
+  align(align = "center", part = "header", i = 1) %>%
+  mk_par(
+    j = 1,
+    i = c(2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15),
+    part = "body",
+    value = as_paragraph(predictor_leasing_control)
+  ) %>% 
   autofit(add_w = 1)
 
 ```
@@ -1453,12 +1756,14 @@ modelsummary_word(
 
 \newpage
 
+\blandscape
+
 ```{r}
 #| label: tbl-competition_financial_inclusion_controls
 #| tbl-cap: "Miscellaneous competition results with controls"
 #| cache: FALSE
 #| include: TRUE
-#| ft.arraystretch: 0.8
+#| ft.arraystretch: 0.6
 
 other_rows <-
   modelsummary_basic(
@@ -1513,6 +1818,33 @@ other_rows_tbl <-
   ) %>% 
   add_row(other_rows)
 
+predictor_financial_inclusion_control <- c(
+  "Financial inclusion index",
+  "Covid-19 dummy",
+  "Repo rate",
+  "Consumer confidence index",
+  "Return on assets",
+  "SAVIT40 index"
+)
+
+predictor_other_competition_control <- c(
+  "Other competition index",
+  "Covid-19 dummy",
+  "Repo rate",
+  "Consumer confidence index",
+  "Return on assets",
+  "SAVIT40 index"
+)
+
+prediction_micro_regulations_control <- c(
+  "Finance regulation index",
+  "Covid-19 dummy",
+  "Repo rate",
+  "Consumer confidence index",
+  "Return on assets",
+  "SAVIT40 index"
+)
+
 modelsummary_word(
   competition_control_results$financial_inclusion_control_model,
   coef_omit = 7:21,
@@ -1522,14 +1854,41 @@ modelsummary_word(
   add_body_row(values =
                  c("Financial inclusion estimates"),
                colwidths = 7) %>%
+    add_header_row(
+    values = c("Total"),
+    colwidths = 7
+  ) %>% 
   merge_at(i = 8, j = 1:7) %>%
   merge_at(i = 15, j = 1:7) %>% 
   align(align = "center", part = "body", i = c(1, 8, 15)) %>%
   hline(i = 21, j = 1:7, part = "body") %>%
+  mk_par(
+    i = 2,
+    part = "header",
+    value = as_paragraph(dependant_other),
+  ) %>% 
+  mk_par(
+    i = c(2, 3, 4, 5, 6, 7),
+    j = 1,
+    part = "body",
+    value = as_paragraph(predictor_financial_inclusion_control)
+  ) %>%
+  mk_par(
+    i = c(9, 10, 11, 12, 13, 14),
+    j = 1,
+    part = "body",
+    value = as_paragraph(predictor_other_competition_control)
+  ) %>%
+  mk_par(i = c(16, 17, 18, 19, 20, 21),
+         j = 1,
+         part = "body",
+         value = as_paragraph(prediction_micro_regulations_control)
+  ) %>% 
+  align(align = "center", part = "header", i = 1) %>%
   autofit(add_w = 0)
 
 ```
 
 
-
+\elandscape
 
