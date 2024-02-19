@@ -1120,7 +1120,7 @@ macropru_control_results <- read_rds(here("Outputs", "models", "artifacts_macrop
 
 rows <- modelsummary_basic(
     macropru_control_results$lending_models$implementation,
-    coef_omit = 4:17,
+    coef_omit = 4:18,
     gof_omit = "AIC|BIC|Std|Log",
     output = "dataframe"
   ) [, c(2, 4:12)] %>% 
@@ -1164,7 +1164,7 @@ rows_tbl <-  tibble(
 
 modelsummary_word(
   macropru_control_results$lending_models$draft,
-  coef_omit = 4:17,
+  coef_omit = 4:18,
   gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
   add_rows = rows_tbl
 ) %>%
@@ -1196,7 +1196,7 @@ modelsummary_word(
 
 rows <- modelsummary_basic(
     macropru_control_results$rates_models$implementation,
-    coef_omit = 4:17,
+    coef_omit = 4:18,
     gof_omit = "AIC|BIC|Std|Log",
     output = "dataframe"
   ) [, c(2, 4:12)] %>% 
@@ -1241,7 +1241,7 @@ rows_tbl <-  tibble(
 
 modelsummary_word(
     macropru_control_results$rates_models$draft,
-    coef_omit = 4:17,
+    coef_omit = 4:18,
     gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
     add_rows = rows_tbl
   ) %>% 
@@ -1276,7 +1276,7 @@ competition_control_results <- read_rds(here("Outputs", "models", "artifacts_com
 
 household_rows <- modelsummary_basic(
   competition_control_results$household_unsecured_control_model,
-  coef_omit = 8:21
+  coef_omit = 8:22
 ) [, c(2, 4:5)] %>% 
   add_row(
    term = "Bank Fixed Effects",  
@@ -1299,7 +1299,7 @@ household_rows_tbl <-
 
 modelsummary_word(
   competition_control_results$corporate_unsecured_control_model,
-  coef_omit = 8:21,
+  coef_omit = 8:22,
   gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
   add_rows = household_rows_tbl
 ) %>%
@@ -1325,7 +1325,7 @@ modelsummary_word(
 
 mortgages_rows <- modelsummary_basic(
   competition_control_results$households_mortgages_control_model,
-  coef_omit = 8:21,
+  coef_omit = 8:22,
 ) [, c(2, 4:5)] %>% 
   add_row(
    term = "Bank Fixed Effects",  
@@ -1350,7 +1350,7 @@ mortgages_rows_tbl <-
 
 modelsummary_word(
   competition_control_results$commercial_mortgages_control_model,
-  coef_omit = 8:21,
+  coef_omit = 8:22,
   gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
   add_rows = mortgages_rows_tbl
 ) %>% 
@@ -1379,7 +1379,7 @@ modelsummary_word(
 leasing_rows <- 
   modelsummary_basic(
   competition_control_results$household_leasing_installments_control_model,
-  coef_omit = 8:21,
+  coef_omit = 8:22,
 ) [, c(2, 4:5)] %>% 
   add_row(
    term = "Bank Fixed Effects",  
@@ -1402,7 +1402,7 @@ leasing_rows_tbl <-
 
 modelsummary_word(
   competition_control_results$coorporate_leasing_installments_control_model,
-  coef_omit = 7:20,
+  coef_omit = 7:21,
   gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
   add_rows = leasing_rows_tbl
 ) %>%
@@ -1425,12 +1425,12 @@ modelsummary_word(
 #| tbl-cap: "Miscellaneous competition results with controls"
 #| cache: FALSE
 #| include: TRUE
-#| ft.arraystretch: 1
+#| ft.arraystretch: 0.8
 
 other_rows <-
   modelsummary_basic(
     competition_control_results$other_competition_control_model,
-    coef_omit = 7:20,
+    coef_omit = 7:21,
     gof_omit = "AIC|BIC|Std|Log|Num.Obs.") %>% 
   add_row(
     term = "Micro-regulations estimates",
@@ -1444,7 +1444,7 @@ other_rows <-
   add_row(
     modelsummary_basic(
       competition_control_results$finance_regulations_control_model,
-      coef_omit = 7:20
+      coef_omit = 7:21
     )
   ) %>%
   dplyr::select(2, 4:9) %>%
@@ -1482,7 +1482,7 @@ other_rows_tbl <-
 
 modelsummary_word(
   competition_control_results$financial_inclusion_control_model,
-  coef_omit = 7:20,
+  coef_omit = 7:21,
    gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
   add_rows = other_rows_tbl
 ) %>%
