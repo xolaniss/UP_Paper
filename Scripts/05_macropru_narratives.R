@@ -67,6 +67,10 @@ macropru_narratives_tbl %>% skim()
 # Graphing ---------------------------------------------------------------
 macropru_narratives_gg <- 
   macropru_narratives_tbl %>% 
+  rename(
+    "Draft Index" = "Draft",
+    "Implementation Index" = "Implementation"
+  ) %>%
   pivot_longer(
     cols = -Date,
     names_to = "Series",

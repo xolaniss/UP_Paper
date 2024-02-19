@@ -118,7 +118,7 @@ descriptives_tbl %>%
   colformat_double(digits = 0, i = 47:50, j = 2:6) %>%
   width(j = 1, width = 1.5) %>%
   align(align = "center", i = c(1, 11, 21, 24, 47), part = "body") %>% 
-  autofit(add_w = 0)
+  autofit(add_w = -0.05)
 ```
 
 # Results
@@ -1098,11 +1098,44 @@ comp_narratives_gg
 
 
 
+## Modelling variables description
+
+```{r}
+#| label: tbl-variable_description
+#| tbl-cap: "Variables description"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 1
+
+tibble(
+  "Name" = c(
+    "Macroprudential",
+    "Competition"
+  ),
+  Type = c(
+    "Index",
+    "Index"
+  ),
+  "Description" = c(
+    "The macroprudential narrative index",
+    "The competition narrative index"
+  ),
+  "Sample" = c(
+    "All banks",
+    "All banks"
+  ),
+  "Frequency" = c(
+    "Quarterly",
+    "Quarterly"
+  )
+) %>% 
+  flextable_word() %>% 
+  align(align = "left", part = "all") %>%
+  autofit(add_w = 0.1)
+```
 
 
-
-
-
+\newpage
 
 
 ## Macropudential results with controls

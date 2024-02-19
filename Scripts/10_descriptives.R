@@ -57,12 +57,14 @@ descriptives_change_in_tbl <-
   combined_filtered_tbl %>% 
   dplyr::select(
     Date,
-    starts_with("Change_in")) %>% 
+    starts_with("three_month_change")) %>% 
   pivot_longer(
     cols = -Date,
     names_to = "Series",
     values_to = "Value"
   ) %>% 
+  mutate(Series = str_replace_all(Series, "_", " ")) %>%
+  mutate(Series = str_to_sentence(Series)) %>% 
   descriptives(group_var = "Lending growth")
 descriptives_lending_rates_tbl <- 
 combined_filtered_tbl %>% 
@@ -81,6 +83,10 @@ descriptives_macropru_tbl <-
     Date,
     Draft, 
     Implementation) %>% 
+  rename(
+    "Draft Index" = "Draft",
+    "Implementation Index" = "Implementation"
+  ) %>% 
   pivot_longer(
     cols = -Date,
     names_to = "Series",
@@ -93,6 +99,30 @@ descriptives_competition_tbl <-
   dplyr::select(
     Date,
     ends_with("dummy")) %>% 
+  rename(
+    "All entry index" = Entry_all_dummy,
+    "All exit index" = Exit_all_dummy,
+    "Household entry index" = Entry_Household_dummy,
+    "Household exit index" = Exit_Household_dummy,
+    "Corporate entry index" = Entry_Corporate_dummy,
+    "Corporate exit index" = Exit_Corporate_dummy,
+    "All credit entry entry index" = Entry_credit_non_fin_dummy,
+    "All credit entry exit index" = Exit_credit_non_fin_dummy,
+    "Corporate credit entry index" = Entry_credit_non_fin_corporate_dummy,
+    "Corporate credit exit index" = Exit_credit_non_fin_corporate_dummy,
+    "Household credit entry index" = Entry_credit_households_dummy,
+    "Household credit exit index" = Exit_credit_households_dummy,
+    "Commercial mortgages entry" = Entry_commercial_mortgages_dummy,
+    "Commercial mortgages exit" = Exit_commercial_mortgages_dummy,
+    "Entry mortgages households index" = Entry_mortgages_households_dummy,
+    "Exit mortgages households index" = Exit_mortgages_households_dummy,
+    "Household leasing entry index" = Entry_leasing_households_dummy,
+    "Household leasing exit index" = Exit_leasing_households_dummy,
+    "Corporate leasing entry index" = Entry_leasing_non_fin_corporate_dummy,
+    "Finance regulation index" = finance_regulation_dummy,
+    "Other competition index" = competition_dummy,
+    "Financial inclusion index" = financial_inclusion_dummy
+  ) %>% 
   pivot_longer(
     cols = -Date,
     names_to = "Series",
@@ -110,6 +140,11 @@ descriptives_controls_tbl <-
     `Return on assets`,
     `Total capital adequacy ratio`
   ) %>%
+  rename(
+    "Repo rate" = repo,
+    "Consumer confidence index" = `Consumer confidence index`,
+    "SAVIT40 index" = SAVIT40,
+  ) %>% 
   pivot_longer(
     cols = -Date,
     names_to = "Series",
@@ -124,7 +159,8 @@ descriptives_tbl <-
     descriptives_macropru_tbl,
     descriptives_competition_tbl,
     descriptives_controls_tbl
-  )
+  ) 
+
 
 
 # Export ---------------------------------------------------------------

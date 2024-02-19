@@ -197,10 +197,35 @@ combined_dummies_tbl <-
 
 combined_dummies_gg <- 
   combined_dummies_tbl %>%
+  rename(
+    "All entry index" = Entry_all_dummy,
+    "All exit index" = Exit_all_dummy,
+    "Household entry index" = Entry_Household_dummy,
+    "Household exit index" = Exit_Household_dummy,
+    "Corporate entry index" = Entry_Corporate_dummy,
+    "Corporate exit index" = Exit_Corporate_dummy,
+    "All credit entry entry index" = Entry_credit_non_fin_dummy,
+    "All credit entry exit index" = Exit_credit_non_fin_dummy,
+    "Corporate credit entry index" = Entry_credit_non_fin_corporate_dummy,
+    "Corporate credit exit index" = Exit_credit_non_fin_corporate_dummy,
+    "Household credit entry index" = Entry_credit_households_dummy,
+    "Household credit exit index" = Exit_credit_households_dummy,
+    "Commercial mortgages entry" = Entry_commercial_mortgages_dummy,
+    "Commercial mortgages exit" = Exit_commercial_mortgages_dummy,
+    "Entry mortgages households index" = Entry_mortgages_households_dummy,
+    "Exit mortgages households index" = Exit_mortgages_households_dummy,
+    "Household leasing entry index" = Entry_leasing_households_dummy,
+    "Household leasing exit index" = Exit_leasing_households_dummy,
+    "Corporate leasing entry index" = Entry_leasing_non_fin_corporate_dummy,
+    "Finance regulation index" = finance_regulation_dummy,
+    "Other competition index" = competition_dummy,
+    "Financial inclusion index" = financial_inclusion_dummy
+  ) %>%
   pivot_longer(c(-Date, -Event, -Description), names_to = "Series", values_to = "Value") %>%
   fx_plot(variables_color = 22) +
-  facet_wrap(~Series, scales = "free_y", ncol = 3)
+  facet_wrap(~Series, scales = "free_y", ncol = 3) 
 
+combined_dummies_tbl %>% glimpse()
 combined_dummies_gg
 # Export ---------------------------------------------------------------
 artifacts_competion_narratives <- list (
