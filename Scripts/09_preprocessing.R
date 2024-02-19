@@ -38,6 +38,7 @@ library(lpirfs)
 options(scipen = 999)
 # Functions ---------------------------------------------------------------
 source(here("Functions", "fx_plot.R"))
+source(here("Functions", "excel_import_sheet.R"))
 
 # Import -------------------------------------------------------------
 combined <- read_rds(here("Outputs", "combined_data", "artifacts_data_check.rds"))
@@ -59,12 +60,13 @@ competition_tbl <- competition_index$data$combined_dummies_tbl %>%
 competition_tbl %>% skim()
 
 controls <- read_rds(here("Outputs", "controls", "artifacts_controls.rds"))
-controls_tbl <- controls$controls_tbl %>% 
-  mutate(Banks = str_to_title(Bank)) %>% 
+controls_tbl <- controls$controls_tbl %>%
+  mutate(Banks = str_to_title(Bank)) %>%
+  mutate(Banks = str_replace_all(Banks, "Fnb", "FNB")) %>%
   dplyr::select(-Bank) %>%
   relocate(Banks, .after = Date) %>% 
   pivot_wider(id_cols = c(Date, Banks), names_from = "Series", values_from = "Value")
-controls_tbl
+
   
 # Combined data -------------------------------------------------------------
 ## Combining narratives  -------------------------------------------------------------
@@ -274,7 +276,7 @@ combined_features_tbl <-
     .names = "log_{.col}"
     )) # log transformation of controls
 
-combined_features_tbl %>% glimpse()
+combined_features_tbl %>% group_by(Banks) %>% skim()
 
 plot_histogram(combined_features_tbl, ncol = 2)
 plot_boxplot(combined_features_tbl %>%  dplyr::select(Banks, contains("Change_in")),

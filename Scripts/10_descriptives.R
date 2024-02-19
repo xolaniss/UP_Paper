@@ -36,38 +36,22 @@ library(car)
 
 # Functions ---------------------------------------------------------------
 source(here("Functions", "fx_plot.R"))
+source(here("Functions", "descriptives.R"))
 
 # Import -------------------------------------------------------------
 combined <- read_rds(here("Outputs", "combined_data", "artifacts_modelling_data.rds"))
 combined_tbl <- 
   combined$combined_features_tbl
 
-combined_tbl %>% glimpse()
+combined_tbl
 
 # Filtering ---------------------------------------------------------------
 combined_filtered_tbl <- 
   combined_tbl %>% 
   filter(Banks == "Total Banks") 
-
+combined_filtered_tbl %>% glimpse()
+combined_filtered_tbl %>% skim()
 # Summarising -------------------------------------------------------------
-descriptives <- function (data, group_var){
-  data %>% 
-    drop_na() %>%
-    group_by(Series) %>%
-    summarise(across(
-      .cols = -c(Date),
-      .fns = list(
-        Median = median,
-        SD = sd,
-        Min = min,
-        Max = max,
-        IQR = IQR,
-        Obs = ~ n()
-      ),
-      .names = "{.fn}"
-    )) %>%
-    mutate(Group = group_var)
-}
 
 descriptives_change_in_tbl <- 
   combined_filtered_tbl %>% 
@@ -116,13 +100,32 @@ descriptives_competition_tbl <-
   ) %>% 
   descriptives(group_var = "Competition regulation narrative indices")
 
+descriptives_controls_tbl <- 
+  combined_filtered_tbl %>%
+  dplyr::select(
+    Date,
+    repo,
+    `Consumer confidence index`,
+    SAVIT40,
+    `Return on assets`,
+    `Total capital adequacy ratio`
+  ) %>%
+  pivot_longer(
+    cols = -Date,
+    names_to = "Series",
+    values_to = "Value"
+  ) %>%
+  descriptives(group_var = "Controls")
+
 descriptives_tbl <- 
   bind_rows(
     descriptives_change_in_tbl,
     descriptives_lending_rates_tbl,
     descriptives_macropru_tbl,
-    descriptives_competition_tbl
+    descriptives_competition_tbl,
+    descriptives_controls_tbl
   )
+
 
 # Export ---------------------------------------------------------------
 artifacts_descriptives <- list (
