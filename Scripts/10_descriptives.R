@@ -112,16 +112,21 @@ descriptives_competition_tbl <-
     "Corporate credit exit index" = Exit_credit_non_fin_corporate_dummy,
     "Household credit entry index" = Entry_credit_households_dummy,
     "Household credit exit index" = Exit_credit_households_dummy,
-    "Commercial mortgages entry" = Entry_commercial_mortgages_dummy,
-    "Commercial mortgages exit" = Exit_commercial_mortgages_dummy,
-    "Entry mortgages households index" = Entry_mortgages_households_dummy,
-    "Exit mortgages households index" = Exit_mortgages_households_dummy,
+    "Commercial mortgages entry index" = Entry_commercial_mortgages_dummy,
+    "Commercial mortgages exit index" = Exit_commercial_mortgages_dummy,
+    "Households mortgages entry  index" = Entry_mortgages_households_dummy,
+    "Household mortgages entry index" = Exit_mortgages_households_dummy,
     "Household leasing entry index" = Entry_leasing_households_dummy,
     "Household leasing exit index" = Exit_leasing_households_dummy,
     "Corporate leasing entry index" = Entry_leasing_non_fin_corporate_dummy,
     "Finance regulation index" = finance_regulation_dummy,
     "Other competition index" = competition_dummy,
     "Financial inclusion index" = financial_inclusion_dummy
+  ) %>% 
+  dplyr::select(
+    Date,
+    `Finance regulation index`,
+    `Financial inclusion index`
   ) %>% 
   pivot_longer(
     cols = -Date,

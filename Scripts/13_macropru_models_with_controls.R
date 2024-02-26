@@ -47,6 +47,7 @@ combined <- read_rds(here("Outputs", "combined_data", "artifacts_modelling_data.
 combined_tbl <- 
   combined$combined_features_tbl %>% 
   mutate(month = lubridate::month(Date)) %>%
+  mutate(year = lubridate::year(Date)) %>%
   dplyr::filter(Banks != "Total Banks") %>%
   mutate(covid_dummy = if_else(Date >= "2020-03-01", 1, 0)) %>% 
   clean_names() %>% 
@@ -74,8 +75,10 @@ predictor_rates_draft_vec <- c(
   # "covid_dummy",
   "return_on_assets",
   "total_capital_adequacy_ratio",
+  # "impairments",
   "factor(banks)",
   "factor(month)"
+  # "factor(year)"
 )
 
 draft_rates_controls_models <- 
@@ -98,8 +101,10 @@ predictor_implementation_rates_vec <- c(
   # "covid_dummy",
   "return_on_assets",
   "total_capital_adequacy_ratio",
+  # "impairments",
   "factor(banks)",
   "factor(month)"
+  # "factor(year)"
 )
 
 implementation_rates_controls_models <- 
@@ -137,8 +142,10 @@ predictor_lending_draft_vec <- c(
   # "covid_dummy",
   "return_on_assets",
   "total_capital_adequacy_ratio",
+  # "impairments",
   "factor(banks)",
   "factor(month)"
+  # "factor(year)"
 )
 
 draft_lending_controls_models <- 
@@ -161,8 +168,10 @@ predictor_implementation_lending_vec <- c(
   # "covid_dummy",
   "return_on_assets",
   "total_capital_adequacy_ratio",
+  # "impairments",
   "factor(banks)",
   "factor(month)"
+  # "factor(year)"
 )
 
 implementation_lending_controls_models <- 

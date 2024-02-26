@@ -67,7 +67,6 @@ controls_tbl <- controls$controls_tbl %>%
   relocate(Banks, .after = Date) %>% 
   pivot_wider(id_cols = c(Date, Banks), names_from = "Series", values_from = "Value")
 
-  
 # Combined data -------------------------------------------------------------
 ## Combining narratives  -------------------------------------------------------------
 dummies_prelim_tbl <- 
@@ -152,6 +151,23 @@ Equity_volatility_tbl <- list(
   rename(Date = `SAVIT40 Index`) %>% 
   relocate(Banks, .after = Date)
 
+impairments_tbl <- read_excel(
+  here("Data", 
+       "Other possible data", 
+       "Loan loss provisions_22.02.2024.xlsx")) %>% 
+  rename(Banks = "Bank",
+         Impairments = `Loan loss provision`) %>% 
+  mutate(Banks = str_replace_all(Banks, "Absa", "Absa Bank"))
+  
+impairments_tbl %>% 
+  # line graphs by bank
+  ggplot(aes(x = Date, y = Impairments, color = Banks)) +
+  geom_line() +
+  labs(title = "Loan loss provisions",
+       x = "Date",
+       y = "Loan loss provisions") +
+  theme_minimal()
+
 additional_controls_tbl <- 
   Policy_rate_tbl %>% 
   left_join(Consumer_confidence_tbl, by = c("Date", "Banks")) %>%
@@ -161,8 +177,19 @@ additional_controls_tbl <-
   mutate(Date = floor_date(Date, unit = "month")) %>% 
   group_by(Banks) %>% 
   fill(`Consumer confidence index`, .direction = "down") %>% 
-  drop_na() %>% 
-  ungroup()
+  ungroup() %>% 
+  left_join(impairments_tbl, by = c("Date", "Banks")) %>% 
+  drop_na()
+
+additional_controls_gg <- 
+  additional_controls_tbl %>% 
+  pivot_longer(cols = -c(Date, Banks), names_to = "Series", values_to = "Value") %>%
+  # line graphs
+  filter(Banks == "Total Banks") %>% 
+  ggplot(aes(x = Date, y = Value, color = Series)) +
+  geom_line() +
+  facet_wrap(~Series, scales = "free_y")
+
 
 ## Combining lending and lending rates and dummies and controls -------------------------------------------------------------
 combined_tbl <- 
@@ -274,7 +301,14 @@ combined_features_tbl <-
       ),
     ~ log(.x + 1),
     .names = "log_{.col}"
-    )) # log transformation of controls
+    )) %>% 
+  mutate(across(
+    c(
+      `Return on assets`,
+      `Total capital adequacy ratio`
+      ),
+    ~ .x * 100
+  ))# log transformation of controls
 
 combined_features_tbl %>% group_by(Banks) %>% skim()
 
@@ -285,8 +319,9 @@ plot_boxplot(combined_features_tbl %>%  dplyr::select(Banks, contains("rate")),
              by = "Banks")
 # Export ---------------------------------------------------------------
 artifacts_modelling_data <- list (
-  combined_tbl = combined_tbl,
-  combined_features_tbl = combined_features_tbl
+    combined_tbl = combined_tbl,
+    combined_features_tbl = combined_features_tbl,
+    additional_controls_gg = additional_controls_gg
 )
 
 write_rds(artifacts_modelling_data, file = here("Outputs", "combined_data", "artifacts_modelling_data.rds"))

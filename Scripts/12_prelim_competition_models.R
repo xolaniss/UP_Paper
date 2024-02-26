@@ -46,6 +46,7 @@ combined <- read_rds(here("Outputs", "combined_data", "artifacts_modelling_data.
 combined_tbl <- 
   combined$combined_features_tbl %>% 
   mutate(month = lubridate::month(Date)) %>%
+  mutate(year = lubridate::year(Date)) %>%
   mutate(covid_dummy = if_else(Date >= "2020-03-01", 1, 0)) %>%  # Covid dummy
   dplyr::filter(Banks != "Total Banks") %>%
   clean_names() %>% 

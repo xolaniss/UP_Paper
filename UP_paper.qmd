@@ -37,6 +37,8 @@ title-block-banner: false
 title-block-style: none
 ---
 
+# TO DO: Take out "other competition" from results
+
 ```{r setup}
 #| include=FALSE
 options(scipen=999)
@@ -89,7 +91,6 @@ source(here("Functions","modelplot_word.R" ))
 source(here("Functions","borderlines.R" ))
 ```
 
-
 # Introduction
 
 
@@ -112,17 +113,16 @@ descriptives_tbl <- descriptives$descriptives_tbl
 descriptives_tbl %>%
   as_grouped_data(groups = c("Group")) %>% 
   as_flextable(hide_grouplabel = TRUE) %>% 
-  colformat_double(digits = 2, i = 2:21, j = 2:6) %>% 
-  colformat_double(digits = 0, i = 22:46, j = 2:6) %>% 
-  colformat_double(digits = 2, i = 22:46, j = 3) %>% 
-  colformat_double(digits = 0, i = 47:50, j = 2:6) %>%
+  colformat_double(digits = 2, i = 2:10, j = 2:6) %>%
+  colformat_double(digits = 2, i = 11:20, j = 2:6) %>%
+  colformat_double(digits = , i = 22:26, j = 2:6) %>%
+  colformat_double(digits = 2, i = 27:30, j = 2:6) %>%
   width(j = 1, width = 1.5) %>%
-  align(align = "center", i = c(1, 11, 21, 24, 47), part = "body") %>% 
+  align(align = "center", i = c(1, 11, 21, 24, 27), part = "body") %>%
   autofit(add_w = -0.05)
 ```
 
 # Results
-
 ## Macroprudential regulation
 \blandscape
 
@@ -332,13 +332,14 @@ modelsummary_word(
 
 \newpage
 
-## Competition regulation
+## Financial regulation
 
 ```{r}
 #| label: tbl-competition_unsecured
 #| tbl-cap: "Entry and exit effect on unsecured lending"
 #| cache: FALSE
-#| include: TRUE
+#| include: FALSE
+#| eval: TRUE
 #| ft.arraystretch: 1
 
 competition_results <- read_rds(here("Outputs", "models", "artifacts_competition_models.rds"))
@@ -412,13 +413,12 @@ modelsummary_word(
 
 ```
 
-\newpage
-
 ```{r}
 #| label: tbl-competition_corporate_mortgages
 #| tbl-cap: "Entry and exit effect on mortgages"
 #| cache: FALSE
-#| include: TRUE
+#| include: FALSE
+#| eval: FALSE
 #| ft.arraystretch: 1
 
 mortgages_rows <- modelsummary_basic(
@@ -491,15 +491,12 @@ modelsummary_word(
 
 ```
 
-
-
-\newpage
-
 ```{r}
 #| label: tbl-competition_corporate_leasing
 #| tbl-cap: "Entry and exit effect on leasing and installments"
 #| cache: FALSE
-#| include: TRUE
+#| include: FALSE
+#| eval: FALSE
 #| ft.arraystretch: 1
 
 leasing_rows <- 
@@ -573,14 +570,10 @@ modelsummary_word(
 
 ```
 
-
-\newpage
 \blandscape
-
-
 ```{r}
 #| label: tbl-competition_financial_inclusion
-#| tbl-cap: "Miscellaneous competition results"
+#| tbl-cap: "Financial regulation results"
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: 1
@@ -589,7 +582,7 @@ other_rows <-
   modelsummary_basic(
     competition_results$other_competition_model,
     coef_omit = 3:17,
-    gof_omit = "AIC|BIC|Std|Log|Num.Obs.") %>% 
+    gof_omit = "AIC|BIC|Std|Log|Num.Obs.") %>%
   add_row(
     term = "Micro-regulations model",
     `(1)` = " ",
@@ -668,24 +661,24 @@ modelsummary_word(
   coef_omit = 3:17,
    gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
   add_rows = other_rows_tbl
-) %>%
+) %>% 
   add_body_row(values =
                  c("Financial inclusion model"),
                colwidths = 7) %>%
   add_header_row(
     values = c("Total"),
     colwidths = 7
-  ) %>% 
+  ) %>%
   align(align = "center", part = "header", i = 1) %>%
   merge_at(i = 4, j = 1:7) %>%
-  merge_at(i = 7, j = 1:7) %>% 
+  merge_at(i = 7, j = 1:7) %>%
   align(align = "center", part = "body", i = c(1, 4, 7)) %>%
   hline(i = 9, j = 1:7, part = "body") %>%
   mk_par(
     i = 2,
     part = "header",
     value = as_paragraph(dependant_other),
-  ) %>% 
+  ) %>%
   align(align = "center", part = "header", i = 1) %>%
   mk_par(
     i = c(2, 3),
@@ -703,7 +696,7 @@ modelsummary_word(
          j = 1,
          part = "body",
          value = as_paragraph(prediction_micro_regulations)
-  ) %>% 
+  ) %>%
   autofit(add_w = 0)
 
 ```
@@ -711,6 +704,8 @@ modelsummary_word(
 \elandscape
 
 
+## Robustness
+## Discussion
 # Conclusion
 
 \newpage
@@ -1191,7 +1186,7 @@ bank_lending_gg
 ```{r}
 #| label: fig-bank_interest_rates
 #| fig-cap: "Weighted lending rates"
-#| fig-height: 5
+#| fig-height: 6
 #| fig-width: 6
 #| cache: FALSE
 
@@ -1265,12 +1260,12 @@ macropru_narratives_gg
 
 \newpage
 
-## Competition narrative indexes
+## Financial regulation narrative indexes
 
 ```{r}
 #| label: fig-comp_narrative_indexes
 #| fig-cap: "Competition narrative indexes"
-#| fig-height: 7
+#| fig-height: 3
 #| fig-width: 6
 #| cache: FALSE
 
@@ -1281,9 +1276,7 @@ comp_narratives_gg
 ```
 
 
-
-
-
+\newpage
 ## Modelling variables description
 
 ```{r}
@@ -1324,9 +1317,9 @@ tibble(
 \newpage
 
 
-## Macropudential results with controls
 
 \blandscape
+## Macropudential results with controls
 
 ```{r}
 #| label: tbl-macropru_draft_lending_control
@@ -1406,18 +1399,18 @@ modelsummary_word(
   gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
   add_rows = rows_tbl
 ) %>%
-  width(j = 1, width = 1.8) %>%
+  width(j = 1, width = 1.8) %>% 
   add_body_row(values =
                  c("Draft model"),
                colwidths = 10) %>%
   merge_at(i = 5, j = 1:10) %>%
   add_header_row(
     values = c("", "Total", "Corporates", "Households"),
-    colwidths = c(1, 3, 3, 3)) %>% 
+    colwidths = c(1, 3, 3, 3)) %>%
   align(align = "center", part = "header", i = 1) %>%
   align(align = "center", part = "body", i = 1) %>%
-  align(align = "center", part = "body", i = 5) %>% 
-  hline(i = 8, j = 1:10, part = "body") %>% 
+  align(align = "center", part = "body", i = 5) %>%
+  hline(i = 8, j = 1:10, part = "body") %>%
   mk_par(i = 2,
          part = "header",
          value = as_paragraph(dependant_lending)) %>%
@@ -1426,7 +1419,7 @@ modelsummary_word(
     i = c(2, 3, 4, 6, 7, 8),
     part = "body",
     value = as_paragraph(predictor_control)
-  ) 
+  )
 ```
 
 \elandscape
@@ -1512,19 +1505,20 @@ modelsummary_word(
     i = c(2, 3, 4, 6, 7, 8),
     part = "body",
     value = as_paragraph(predictor_control)
-  ) 
+  )
 
 ```
 
 \elandscape
 
-## Competition results with controls
+
 
 ```{r}
 #| label: tbl-competition_unsecured_controls
 #| tbl-cap: "Entry and exit effect on unsecured lending with controls"
 #| cache: FALSE
-#| include: TRUE
+#| include: FALSE
+#| eval: TRUE
 #| ft.arraystretch: 1
 
 competition_control_results <- read_rds(here("Outputs", "models", "artifacts_competition_control_models.rds"))
@@ -1597,13 +1591,12 @@ modelsummary_word(
 
 ```
 
-\newpage
-
 ```{r}
 #| label: tbl-competition_corporate_mortgages_controls
 #| tbl-cap: "Entry and exit effect on mortgages with controls"
 #| cache: FALSE
-#| include: TRUE
+#| include: FALSE
+#| eval: FALSE
 #| ft.arraystretch: 1
 
 mortgages_rows <- modelsummary_basic(
@@ -1676,14 +1669,12 @@ modelsummary_word(
 
 ```
 
-
-\newpage
-
 ```{r}
 #| label: tbl-competition_corporate_leasing_controls
 #| tbl-cap: "Entry and exit effect on leasing and installments with controls"
 #| cache: FALSE
-#| include: TRUE
+#| include: FALSE
+#| eval: FALSE
 #| ft.arraystretch: 1
 
 leasing_rows <- 
@@ -1753,17 +1744,21 @@ modelsummary_word(
 
 ```
 
-
-\newpage
-
 \blandscape
+## Financial regulation results with controls
 
 ```{r}
 #| label: tbl-competition_financial_inclusion_controls
-#| tbl-cap: "Miscellaneous competition results with controls"
+#| tbl-cap: "Financial regulation with controls results"
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: 0.6
+
+competition_control_results <- read_rds(here(
+  "Outputs",
+  "models",
+  "artifacts_competition_control_models.rds"
+))
 
 other_rows <-
   modelsummary_basic(
@@ -1857,16 +1852,16 @@ modelsummary_word(
     add_header_row(
     values = c("Total"),
     colwidths = 7
-  ) %>% 
+  ) %>%
   merge_at(i = 8, j = 1:7) %>%
-  merge_at(i = 15, j = 1:7) %>% 
+  merge_at(i = 15, j = 1:7) %>%
   align(align = "center", part = "body", i = c(1, 8, 15)) %>%
   hline(i = 21, j = 1:7, part = "body") %>%
   mk_par(
     i = 2,
     part = "header",
     value = as_paragraph(dependant_other),
-  ) %>% 
+  ) %>%
   mk_par(
     i = c(2, 3, 4, 5, 6, 7),
     j = 1,
@@ -1883,12 +1878,11 @@ modelsummary_word(
          j = 1,
          part = "body",
          value = as_paragraph(prediction_micro_regulations_control)
-  ) %>% 
+  ) %>%
   align(align = "center", part = "header", i = 1) %>%
   autofit(add_w = 0)
 
 ```
-
 
 \elandscape
 

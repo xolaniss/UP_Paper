@@ -221,6 +221,12 @@ combined_dummies_gg <-
     "Other competition index" = competition_dummy,
     "Financial inclusion index" = financial_inclusion_dummy
   ) %>%
+  dplyr::select(
+    Date,
+    Event,
+    Description,
+    `Finance regulation index`, 
+    `Financial inclusion index`) %>% 
   pivot_longer(c(-Date, -Event, -Description), names_to = "Series", values_to = "Value") %>%
   fx_plot(variables_color = 22) +
   facet_wrap(~Series, scales = "free_y", ncol = 3) 

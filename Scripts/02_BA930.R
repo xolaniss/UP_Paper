@@ -203,6 +203,7 @@ write_rds(artifacts_BA930, file = here("Outputs", "BA930", "artifacts_BA930.rds"
 BA_903_Total_Banks_tbl <- lending_rate_tbl %>% filter(Banks == "Total Banks") # exporting total banks for the guys
 write_csv(BA_903_Total_Banks_tbl, here("Outputs", "BA_930_Total_Banks_tbl.csv"))
 
+lending_rate_tbl %>% skim()
 
 
 
