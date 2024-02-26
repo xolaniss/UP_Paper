@@ -37,7 +37,6 @@ title-block-banner: false
 title-block-style: none
 ---
 
-# TO DO: Take out "other competition" from results
 
 ```{r setup}
 #| include=FALSE
@@ -48,9 +47,9 @@ knitr::opts_chunk$set(echo = FALSE,
                       dpi = 500, 
                       fig.pos = "H", 
                       fig.env= 'figure', 
-                      tab.topcaption = FALSE,
+                      tab.topcaption = TRUE,
                       ft.align = "left",
-                      ft.arraystretch = 0.5                      
+                      ft.arraystretch = 0.5
                       )
 library(tidyverse)
 library(readr)
@@ -332,7 +331,7 @@ modelsummary_word(
 
 \newpage
 
-## Financial regulation
+## Financial regulation and inclusion
 
 ```{r}
 #| label: tbl-competition_unsecured
@@ -573,30 +572,15 @@ modelsummary_word(
 \blandscape
 ```{r}
 #| label: tbl-competition_financial_inclusion
-#| tbl-cap: "Financial regulation results"
+#| tbl-cap: "Financial regulation and inclusion results"
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: 1
 
 other_rows <-
-  modelsummary_basic(
-    competition_results$other_competition_model,
-    coef_omit = 3:17,
-    gof_omit = "AIC|BIC|Std|Log|Num.Obs.") %>%
-  add_row(
-    term = "Micro-regulations model",
-    `(1)` = " ",
-    `(2)` = " ",
-    `(3)` = " ",
-    `(4)` = " ",
-    `(5)` = " ",
-    `(6)` = " "
-  ) %>% 
-  add_row(
     modelsummary_basic(
       competition_results$finance_regulations_model,
       coef_omit = 3:17
-    )
   ) %>%
   dplyr::select(2, 4:9) %>%
   add_row(
@@ -633,11 +617,6 @@ predictor_financial_inclusion <- c(
   "Covid-19 dummy"
 )
 
-predictor_other_competition <- c(
-  "Other competition index",
-  "Covid-19 dummy"
-)
-
 prediction_micro_regulations <- c(
   "Finance regulation index",
   "Covid-19 dummy"
@@ -646,7 +625,7 @@ prediction_micro_regulations <- c(
 
 other_rows_tbl <- 
   tibble(
-    "term" = "Other competition developments model",
+    "term" = "Financial regulations model (3-month lending)",
     `(1)` = " ",
     `(2)` = " ",
     `(3)` = " ",
@@ -663,7 +642,7 @@ modelsummary_word(
   add_rows = other_rows_tbl
 ) %>% 
   add_body_row(values =
-                 c("Financial inclusion model"),
+                 c("Financial inclusion model (3-month lending)"),
                colwidths = 7) %>%
   add_header_row(
     values = c("Total"),
@@ -671,9 +650,8 @@ modelsummary_word(
   ) %>%
   align(align = "center", part = "header", i = 1) %>%
   merge_at(i = 4, j = 1:7) %>%
-  merge_at(i = 7, j = 1:7) %>%
-  align(align = "center", part = "body", i = c(1, 4, 7)) %>%
-  hline(i = 9, j = 1:7, part = "body") %>%
+  align(align = "center", part = "body", i = c(1, 4)) %>%
+  hline(i = 6, j = 1:7, part = "body") %>%
   mk_par(
     i = 2,
     part = "header",
@@ -686,13 +664,7 @@ modelsummary_word(
     part = "body",
     value = as_paragraph(predictor_financial_inclusion)
   ) %>%
-  mk_par(
-    i = c(5, 6),
-    j = 1,
-    part = "body",
-    value = as_paragraph(predictor_other_competition)
-  ) %>%
-  mk_par(i = c(8, 9),
+  mk_par(i = c(5, 6),
          j = 1,
          part = "body",
          value = as_paragraph(prediction_micro_regulations)
@@ -1242,81 +1214,65 @@ tibble(
 ```
 
 
-\newpage
 ## Macroprudential narrative indexes
 
 ```{r}
-#| label: fig-macro_narrative_indexes
-#| fig-cap: "Macroprudential narrative indexes"
-#| fig-height: 3
-#| fig-width: 6
+#| label: fig-macro_narrative_indexes_one_month
+#| fig-cap: "One month lending growth and macroprudential narrative index comparison. Note: The black line represents the Draft index, and the red line represents the Implementation index."
+#| fig-height: 8
+#| fig-width: 8
 #| cache: FALSE
 
-macro_narratives <- read_rds(here("Outputs","narratives","artifacts_macropru_narratives.rds"))
-macropru_narratives_gg <- macro_narratives$macropru_narratives_gg
-macropru_narratives_gg
+narratives <- read_rds(here("Outputs","combined_data", "artifacts_visual_lag_test.rds"))
+macropru_narratives_one_month_gg <- narratives$macropru$one_month_test_gg
+macropru_narratives_one_month_gg
 
 ```
+
+\newpage
+
+```{r}
+#| label: fig-macro_narrative_indexes_three_month
+#| fig-cap: "Three month lending growth and macroprudential narrative indexes comparison. Note: The black line represents the Draft index, and the red line represents the Implementation index."
+#| fig-height: 9
+#| fig-width: 8
+#| cache: FALSE
+
+macropru_narratives_one_month_gg <- narratives$macropru$three_month_test_gg
+macropru_narratives_one_month_gg
+
+```
+
 
 \newpage
 
 ## Financial regulation narrative indexes
 
 ```{r}
-#| label: fig-comp_narrative_indexes
-#| fig-cap: "Competition narrative indexes"
-#| fig-height: 3
-#| fig-width: 6
+#| label: fig-comp_narrative_indexes_one_month
+#| fig-cap: "One month lending growth and financial narrative index comparison. Note: The black line represents the Financial regulation index, and the red line represents the Financial inclusion index."
+#| fig-height: 8
+#| fig-width: 8
 #| cache: FALSE
 
-comp_narratives <- read_rds(here("Outputs","narratives","artifacts_competion_narratives.rds"))
-
-comp_narratives_gg <- comp_narratives$graphs$combined_dummies_gg
-comp_narratives_gg
+finance_narratives_one_month_gg <- narratives$finance$one_month_test_finance_gg
+finance_narratives_one_month_gg
 ```
 
-
 \newpage
-## Modelling variables description
 
 ```{r}
-#| label: tbl-variable_description
-#| tbl-cap: "Variables description"
+#| label: fig-comp_narrative_indexes_three_month
+#| fig-cap: "Three month lending growth and financial narrative indexes comparison. Note: The black line represents the Financial regulation index, and the red line represents the Financial inclusion index."
+#| fig-height: 8
+#| fig-width: 8
 #| cache: FALSE
-#| include: TRUE
-#| ft.arraystretch: 1
 
-tibble(
-  "Name" = c(
-    "Macroprudential",
-    "Competition"
-  ),
-  Type = c(
-    "Index",
-    "Index"
-  ),
-  "Description" = c(
-    "The macroprudential narrative index",
-    "The competition narrative index"
-  ),
-  "Sample" = c(
-    "All banks",
-    "All banks"
-  ),
-  "Frequency" = c(
-    "Quarterly",
-    "Quarterly"
-  )
-) %>% 
-  flextable_word() %>% 
-  align(align = "left", part = "all") %>%
-  autofit(add_w = 0.1)
+finance_narratives_three_months_gg <- narratives$finance$three_month_test_finance_gg
+finance_narratives_three_months_gg
 ```
 
-
 \newpage
-
-
 
 \blandscape
 ## Macropudential results with controls
@@ -1429,7 +1385,7 @@ modelsummary_word(
 
 ```{r}
 #| label: tbl-macropru_draft_rates_control
-#| tbl-cap: "Macroprudential regulation and lending rates with controls"
+#| tbl-cap: "Macroprudential regulation and lending rates with controls results"
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: 1
@@ -1749,10 +1705,10 @@ modelsummary_word(
 
 ```{r}
 #| label: tbl-competition_financial_inclusion_controls
-#| tbl-cap: "Financial regulation with controls results"
+#| tbl-cap: "Financial regulation and inclusion with controls results"
 #| cache: FALSE
 #| include: TRUE
-#| ft.arraystretch: 0.6
+#| ft.arraystretch: 0.8
 
 competition_control_results <- read_rds(here(
   "Outputs",
@@ -1761,25 +1717,10 @@ competition_control_results <- read_rds(here(
 ))
 
 other_rows <-
-  modelsummary_basic(
-    competition_control_results$other_competition_control_model,
-    coef_omit = 7:21,
-    gof_omit = "AIC|BIC|Std|Log|Num.Obs.") %>% 
-  add_row(
-    term = "Micro-regulations estimates",
-    `(1)` = " ",
-    `(2)` = " ",
-    `(3)` = " ",
-    `(4)` = " ",
-    `(5)` = " ",
-    `(6)` = " "
-  ) %>% 
-  add_row(
     modelsummary_basic(
       competition_control_results$finance_regulations_control_model,
       coef_omit = 7:21
-    )
-  ) %>%
+    ) %>% 
   dplyr::select(2, 4:9) %>%
   add_row(
     term = "Bank Fixed Effects",
@@ -1803,7 +1744,7 @@ other_rows <-
 
 other_rows_tbl <- 
   tibble(
-    "term" = "Other competition developments estimates",
+    "term" = "Financial regulation model (3-month lending)",
     `(1)` = " ",
     `(2)` = " ",
     `(3)` = " ",
@@ -1822,14 +1763,6 @@ predictor_financial_inclusion_control <- c(
   "SAVIT40 index"
 )
 
-predictor_other_competition_control <- c(
-  "Other competition index",
-  "Covid-19 dummy",
-  "Repo rate",
-  "Consumer confidence index",
-  "Return on assets",
-  "SAVIT40 index"
-)
 
 prediction_micro_regulations_control <- c(
   "Finance regulation index",
@@ -1847,16 +1780,15 @@ modelsummary_word(
   add_rows = other_rows_tbl
 ) %>%
   add_body_row(values =
-                 c("Financial inclusion estimates"),
+                 c("Financial inclusion model (3-month lending)"),
                colwidths = 7) %>%
     add_header_row(
-    values = c("Total"),
+    values = c("Totals"),
     colwidths = 7
   ) %>%
   merge_at(i = 8, j = 1:7) %>%
-  merge_at(i = 15, j = 1:7) %>%
-  align(align = "center", part = "body", i = c(1, 8, 15)) %>%
-  hline(i = 21, j = 1:7, part = "body") %>%
+  align(align = "center", part = "body", i = c(1, 8)) %>%
+  hline(i = 14, j = 1:7, part = "body") %>%
   mk_par(
     i = 2,
     part = "header",
@@ -1868,13 +1800,7 @@ modelsummary_word(
     part = "body",
     value = as_paragraph(predictor_financial_inclusion_control)
   ) %>%
-  mk_par(
-    i = c(9, 10, 11, 12, 13, 14),
-    j = 1,
-    part = "body",
-    value = as_paragraph(predictor_other_competition_control)
-  ) %>%
-  mk_par(i = c(16, 17, 18, 19, 20, 21),
+  mk_par(i = c(9, 10, 11, 12, 13, 14),
          j = 1,
          part = "body",
          value = as_paragraph(prediction_micro_regulations_control)

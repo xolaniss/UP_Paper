@@ -25,6 +25,7 @@ library(patchwork)
 library(psych)
 library(DataExplorer)
 library(skimr)
+library(janitor)
 
 # econometrics
 library(tseries)
@@ -40,11 +41,8 @@ source(here("Functions", "fx_plot.R"))
 # Import -------------------------------------------------------------
 macropru_narratives <- read_excel(here("Data", "narratives", "plot_narratives_post_2008.xlsx"))
 
-macropru_narratives %>% 
-  tail(12)
+
 # Cleaning -----------------------------------------------------------------
-
-
 macropru_narratives_tbl <- 
   macropru_narratives %>% 
   dplyr::select(-Period) %>%
@@ -80,9 +78,8 @@ macropru_narratives_gg <-
 
 # Export ---------------------------------------------------------------
 artifacts_macropru_narratives <- list (
-  macropru_narratives_tbl = macropru_narratives_tbl,
-  macropru_narratives_gg = macropru_narratives_gg
-  
+    macropru_narratives_tbl = macropru_narratives_tbl,
+    macropru_narratives_gg = macropru_narratives_gg
 )
 
 write_rds(artifacts_macropru_narratives, 

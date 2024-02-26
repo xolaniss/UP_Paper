@@ -203,9 +203,9 @@ response_other_competition_vec <- c(
   "total_unsecured_lending_rate",
   "total_leasing_and_installments_rate",
   "total_mortgages_lending_rate",
-  "change_in_log_total_unsecured_lending",
-  "change_in_log_total_leasing_and_installments",
-  "change_in_log_total_mortgage_lending"
+  "three_month_change_in_log_total_unsecured_lending",
+  "three_month_change_in_log_total_leasing_and_installments",
+  "three_month_change_in_log_total_mortgage_lending"
 )
 
 predictor_other_competition_vec <- c(
@@ -230,9 +230,9 @@ response_finance_regulations_vec <- c(
   "total_unsecured_lending_rate",
   "total_leasing_and_installments_rate",
   "total_mortgages_lending_rate",
-  "change_in_log_total_unsecured_lending",
-  "change_in_log_total_leasing_and_installments",
-  "change_in_log_total_mortgage_lending"
+  "three_month_change_in_log_total_unsecured_lending",
+  "three_month_change_in_log_total_leasing_and_installments",
+  "three_month_change_in_log_total_mortgage_lending"
 )
 
 predictor_finance_regulations_vec <- c(
@@ -257,9 +257,9 @@ response_financial_inclusion_vec <- c(
   "total_unsecured_lending_rate",
   "total_leasing_and_installments_rate",
   "total_mortgages_lending_rate",
-  "change_in_log_total_unsecured_lending",
-  "change_in_log_total_leasing_and_installments",
-  "change_in_log_total_mortgage_lending"
+  "three_month_change_in_log_total_unsecured_lending",
+  "three_month_change_in_log_total_leasing_and_installments",
+  "three_month_change_in_log_total_mortgage_lending"
 )
 
 predictor_financial_inclusion_vec <- c(

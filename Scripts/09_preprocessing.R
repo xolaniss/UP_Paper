@@ -105,6 +105,7 @@ path <- here("Data",
              "Other possible data", 
              "Controls - competition models_15022024.xlsx")
 
+
 sheet_list <- list(
   "Policy rate" = "Policy rate",
   "Consumer confidence" = "Consumer confidence",
@@ -180,6 +181,8 @@ additional_controls_tbl <-
   ungroup() %>% 
   left_join(impairments_tbl, by = c("Date", "Banks")) %>% 
   drop_na()
+
+additional_controls_tbl %>% skim()
 
 additional_controls_gg <- 
   additional_controls_tbl %>% 
