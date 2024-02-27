@@ -77,7 +77,9 @@ set_flextable_defaults(
   font.size = 8,
   digits = 2,
   font.family = "Arial",
-  border.color = "#5d74a5"
+  border.color = "black",
+  border.width = 0.5,
+  fp_border = fp_border(color = "black", width = 0.5, style = "solid")
 )
 
 
@@ -222,7 +224,14 @@ modelsummary_word(
     i = c(2, 4),
     part = "body",
     value = as_paragraph(predictor)
-  ) 
+  ) %>% 
+  # add_footer_row(
+  #   values = as_paragraph(
+  #     "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."
+  #   ),
+  #   colwidths = 10) %>% 
+  # hline(i = 1, part = "footer", border = fp_border(color = "white")) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
 ```
 
 \elandscape
@@ -322,7 +331,8 @@ modelsummary_word(
     i = c(2, 4),
     part = "body",
     value = as_paragraph(predictor)
-  ) 
+  ) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
 
 ```
 
@@ -669,6 +679,7 @@ modelsummary_word(
          part = "body",
          value = as_paragraph(prediction_micro_regulations)
   ) %>%
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) %>% 
   autofit(add_w = 0)
 
 ```
@@ -697,6 +708,8 @@ modelsummary_word(
 
 \newpage
 
+
+\blandscape
 # Appendix
 
 ## Data sources
@@ -706,7 +719,7 @@ modelsummary_word(
 #| tbl-cap: "Data Sources"
 #| cache: FALSE
 #| include: TRUE
-#| ft.arraystrech: .4
+#| ft.arraystrech: 0.5
 
 tibble(
   " " = c(
@@ -716,11 +729,12 @@ tibble(
           "BA930",
           "Controls"),
   "Description" = c(
-    " ",
-    " ",
+    "Narrative index of macroprudential regulations in South Africa. ",
+    "Narrative index of financial regulations in South Africa",
     "Banking sector balance sheet data at a bank level",
     "Banking sector lending rates at a bank level",
-    "Banking sector performance data at a bank level"
+    "Banking sector performance data at a bank level and 
+    general macroeconomic data."
   ),
   
   "Availability" = c(
@@ -737,16 +751,19 @@ Bank specific data is private"
   "Own analysis",
   "South African Reserve Bank",
   "South African Reserve Bank",
-  "Prudential Authority"
+  "Prudential Authority, 
+  South African Reserve Bank, 
+  Statistics South Africa, 
+  Johanesburg Stock Exchange"
 )
 ) %>%
   flextable_word() %>%
   flextable::align(align = "left", part = "all") %>% 
-  autofit(add_w = -0.30)
-
+  autofit(add_w = -0.2)
 
 ```
 
+\elandscape
 
 ```{r}
 #| label: tbl-data1
@@ -1375,7 +1392,8 @@ modelsummary_word(
     i = c(2, 3, 4, 6, 7, 8),
     part = "body",
     value = as_paragraph(predictor_control)
-  )
+  ) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
 ```
 
 \elandscape
@@ -1461,7 +1479,8 @@ modelsummary_word(
     i = c(2, 3, 4, 6, 7, 8),
     part = "body",
     value = as_paragraph(predictor_control)
-  )
+  ) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
 
 ```
 
@@ -1806,7 +1825,8 @@ modelsummary_word(
          value = as_paragraph(prediction_micro_regulations_control)
   ) %>%
   align(align = "center", part = "header", i = 1) %>%
-  autofit(add_w = 0)
+  autofit(add_w = 0) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
 
 ```
 
