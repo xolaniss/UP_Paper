@@ -218,19 +218,250 @@
 \textbf{JEL Codes}: 
 \newpage
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, boxrule=0pt, sharp corners, interior hidden, enhanced, frame hidden, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, borderline west={3pt}{0pt}{shadecolor}, sharp corners, frame hidden, interior hidden, boxrule=0pt, enhanced]}{\end{tcolorbox}}\fi
 
 \setstretch{1.5}
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
+\textit{The pursuit for financial stability through macro-prudential policies could potentially imply financial exclusion, particularly in emerging countries such as South Africa. For instance, economic growth and development could be promoted through increased lending to small and medium businesses, who are riskier to lend to. However, macro-prudential policies are by nature aimed at reducing risks associated with lending. Therefore, a natural question that arises is whether macro-prudential policy is a constraint to or consistent with financial inclusion or greater banking competition?}
+
 \hypertarget{literature-review}{%
 \section{Literature Review}\label{literature-review}}
 
-\citet{alexakis2023animal}
+Our paper encompasses and contributes to various strands of literature.
+It firstly encompasses literature on the response of banks to
+macroprudential reforms and secondly, the response of banks to external
+efforts aimed at enabling financial inclusion. The construction of
+narrative macroprudential reforms and narrative accounts of financial
+inclusion encompass literature on narrative methods of identification.
+
+The objective(s) of macroprudential reforms are well documented and
+continue to expand with further reforms being introduced to create
+resilient banking
+systems\footnote{See \cite{kashyap2004cyclical}, \cite{basel06}, \cite{cohen2016banks} and \cite{cerutti2018changes} among others.}.
+The ongoing debate regarding the implications of the reforms,
+particularly on lending behaviour of banks provide further insight on
+the costs and benefits of making banking systems resilient through the
+reforms.
+
+Evidently, work on the cost or unintended consequences of
+macroprudential reforms have dominated the debate.
+\cite{noss2016estimating} highlight that tightened macroprudential
+capital requirements can cause banks' cost of funding to rise and in
+turn, prompt banks to pass the increase in their cost of funding to
+borrowers in the form of high interest on loans and/or reduction in
+credit extended. \cite{deli2017real} show that higher capital
+requirements would lead banks to reduce their risk-weighted assets,
+implying a downward shift in lending in order to meet the capital
+requirements. As evidence, the former authors use a Vector
+Autoregressive (VAR) model to estimate the effect of changes in banks'
+capital requirements on lending in the United Kingdom (UK) and find that
+tighter capital requirements are associated with a reduction in lending,
+with the effect on corporate lending more pronounced relative to
+household lending.
+
+Earlier work by \cite{aiyar2016does} study the interaction of capital
+requirements and monetary policy and response of UK banks to the two
+policies. Their findings show that banks reduce lending in response to
+tighter capital reforms and monetary policy. They also exploit the
+heterogeneity of banks and find that large banks react to tighter
+capital requirements only, while small banks react to both policies.
+\cite{deli2017real} and \cite{mirzaei2022effectiveness} provide
+cross-country evidence on the effect of macroprudential reforms. The
+former authors conduct the analysis for banks in 125 countries and find
+weak negative effects of capital stringency on loan growth, especially
+for well-capitalized banks. \cite{mirzaei2022effectiveness} find similar
+results for banks in 91 countries, where small, less-capitalized and
+less-liquid banks reduce lending more in response to stringent capital
+requirements relative to banks that are well-capitalized and
+highly-liquid.
+
+With the use of various Dynamic Stochastic General Equilibrium (DSGE)
+models, \cite{angelini2015b} find that a one percentage point increase
+in the capital ratio translates into a 0.09 percent loss in output
+relative to the level that would have prevailed in the absence of
+capital tightening. \cite{berka2018basel} study the interaction between
+credit activity, Basel Accords banking regulations, household saving
+decisions and project returns with the use of a DSGE model, calibrated
+for the Canadian economy. They find that Basel Accords in the form of
+capital requirements have an impact on loans, when project returns
+decline throughout the cycle as the requirements prompt banks to ration
+credit during downturns where project returns are low, implying
+increased default risk by borrowers (entrepreneurs).
+
+Interestingly, work on the potential effect of macroprudential reforms
+in emerging markets is limited. The exception is recent work by
+\cite{fang2022bank} who study the impact of rising capital requirements
+on lending in Peru. They exploit bank-level lending data and
+bank-specific capital buffers. Their findings show that higher capital
+requirements are associated with lower credit extension. The effects
+however vary according to economic conditions and bank characteristics,
+where less capitalized, less liquid and less profitable banks react more
+to tighter capital requirements. The effects are also more pronounced
+during economic downturns. In the case of South Africa, earlier work by
+\cite{maredza2016capital} investigates the impact of increased bank
+requirements and in particular those introduced under Basel II on the
+cost of intermediation. Results from a panel of ten banks show that
+tighter capital requirements increase the cost of intermediation, with
+the net interest margin serving as a proxy for the cost of
+intermediation. \cite{gumata2017bank} assess the impact of Basel III in
+the form of liquidity coverage ratio and net stable funding ratios on
+credit growth. Their decomposition exercise shows that Basel III
+contributed to the contraction in credit post the GFC.
+
+Lastly, the construction of our narrative macroprudential reforms is
+based on the literature documenting narrative methods of identification.
+As outlined earlier, evidence on the response of bank lending to
+macroprudential reforms is based on the assumption that an increase in
+aggregate regulatory capital represents a negative credit supply shock
+and in turn have a negative effect on credit extension
+\citep{noss2016estimating}. As such, our narrative accounts of
+macroprudential reforms implicitly proxy for credit supply shocks.
+\cite{ramey2016macroeconomic} describes the narrative method of
+identification as constructing a series from historical documents to
+identify the reason and/or the quantities associated with a particular
+change in a variable. Furthermore, the construction of narrative
+accounts is particularly aimed at exclusively isolating shocks or
+effects of policy intervention\citep{angelopoulou2007narrative}.
+Therefore, by constructing a narrative series of macroprudential
+reforms, we aim to address challenges relating to the identification of
+macroprudential reforms and their impact thereof. The application of the
+identification strategy has largely focused on identifying monetary and
+fiscal
+shocks\footnote{See \cite{romer1989does}, \cite{romer1997identification} \cite{romer2004new} \cite{romer2010macroeconomic} \cite{ramey2011identifying} ]\cite{ramey2016macroeconomic} \cite{ramey2018government}.}.
+However, the approach is increasingly being applied to analyse and
+identify capital reforms. For instance, \cite{budnik2020identifying}
+analyse the dynamic effects of U.S macroprudential policies by
+constructing a set of policy measures related to capital requirements
+following the Basel III Accords. The narrative instruments take a value
+of -1 and 1 in the case of tightening and easing of capital
+requirements, respectively and 0 otherwise. Importantly, results from
+their analysis show that tightening of capital requirements induces a
+persistent decline in corporate credit. Further, the impact of a change
+in capital requirements is concentrated more on corporate credit
+relative to household credit. \cite{eickmeier2018macroeconomic} also
+assess the dynamic effects of bank capital regulation in the U.S, where
+they use the narrative approach to construct an exogenous capital
+regulation index that captures exogenous changes in bank capital
+regulation. Their results also show persistent declines in corporate and
+investment loans and real estate loans, following changes in the capital
+regulation index.
+
+We therefore add to the growing empirical literature examining; (1) the
+response of banks to changes in macroprudential reforms; (2)
+particularly in emerging markets and (3); applying narrative methods of
+identification.
+
+\hypertarget{macroprudential-reforms-narrative-indicators}{%
+\section{Macroprudential reforms: Narrative
+Indicators}\label{macroprudential-reforms-narrative-indicators}}
+
+This section presents actions and events we use to construct a set of
+macroprudential measures or indicators introduced following Basel II
+Agreements and Accords. The indicators represent credit supply shocks,
+following \cite{noss2016estimating} and \cite{deli2017real} among
+others. The construction is based on historical documents containing
+actions and events that lead to the implementation of macroprudential
+regulations, from 2008 to 2019. We consult circulars issued by the SARB
+to commercial banks in South Africa, annual reports of commercial banks
+and SARB and risk and capital management reports of commercial banks. We
+consider reports of only the big 4 commercial banks in South Africa as
+they account for over 90 percent of banking industry
+assets.\footnote{The big 4 banks include Standard Bank, ABSA, NEDBANK and First Rand.}
+We also consider documents published and issued by the Basel Committee
+on Bank Supervision (BCBS), containing communication between BCBS and
+SARB relating to the implementation of Basel regulations.
+
+Due to the wide variety of information contained in the documents, we
+impose a criteria with which we use to identify actions and events that
+are most important in the construction of our narrative indicators.
+Since the set of macorprudential indicators proxy for credit shocks, the
+criteria imposed is such that: (1) actions and events are specific in
+their intentions and (2), actions and events might imply a change in
+bank behaviour with respect to the adjustment of capital buffers and/or
+the attachment of greater risk weights to certain lending products or
+lending markets. From this, we are able to build a series of two
+narrative indicators \(z_{t}\) defined such that \(z_{t}=1\) for dates
+of events containing announcements and communication of regulation
+intended to be passed and the drafting of such regulation which we call
+\(Draft\). The second indicator is such that \(z_{t}=1\) for dates of
+events recording the eventual implementation of the regulation, which we
+call \(Implementation\). For dates where \(Draft\) and
+\(Implementation\) of regulation is not recorded \(z_{t}=0\). Therefore
+where possible, we also track the actions and events from the date they
+are communicated and or announced, issued or published (\(Draft\)),
+until the date they are introduced or implemented (\(Implementation\)).
+
+The decomposition of the actions and events is done with the aim of
+possibly identifying anticipation effects following the drafting of
+regulation not yet implemented. For instance,
+\cite{eickmeier2018macroeconomic} analyse the macroeconomic effects of
+bank capital requirement tightenings using a narrative index of bank
+regulatory capital in the U.S. They find that bank assets (loans) and
+industrial production fall 6 months before new rules become effective.
+The anticipation effects are captured by the banks' actions between
+dates when regulation is first mentioned in proposed rules and dates
+when the final rule is communicated. In effect, anticipation effects are
+therefore based on the notion that banks have information on the
+proposed regulation and dates which they will be implemented and as
+such, they can act (expand credit for instance) before implementation
+date and thereby take advantage of less stringent requirements on credit
+extension due to regulation before tighter requirements are introduced.
+
+Information contained in the documents we use to construct our narrative
+indicators also contain details enabling us to exploit such anticipation
+effects.
+
+Importantly, we do not identify the impact of individual regulations and
+requirements under Basel Accords and Agreements but rather, we consider
+Basel regulations in their entirety. Although different Basel
+regulations such as the capital and liquidity requirements target
+different instruments, the entirety of Basel regulations, which both
+capital and liquidity requirements fall under, is aimed at creating
+resilient and robust banking systems, through higher bank capital
+requirements and subsequently, increased bank capital holdings
+\citep{cohen2016banks} \citep{cerutti2018changes}.
+
+As an example to some of the actions we use to construct the two sets of
+indicators, the implementation of Basel II on January 1, 2008 is
+categorized as an implementation indicator. Further example occurs on
+February 4, 2009, which we categorize as a \(Draft\) indicator, where
+the SARB issues directive 1/2009 (1 of 2009) announcing the approach
+banks should follow in the application of capital floors. ``Modelled
+capital should not be below 80\% of the capital requirements under Basel
+I to ensure capital levels do not fall below prudent level''.
+
+Following Basel II, banks are allowed to use internal models to
+determine risk weights and in turn, determine capital levels. However,
+capital floors ensure capital requirements did not fall below a certain
+percentage of banks' capital requirements under the previous Basel I
+framework\citep{basel06}. This in essence, imply greater risk weight
+arched to riskier credit products. For instance,
+\cite{imbierowicz2018time} show that Danish banks reducing their lending
+on loans with higher risk weights, in response to higher capital
+requirements, including approaches to capital floors. A further example
+which is categorized as a \(Draft\) indicator and tracked until
+implementation, occurs on July 31, 2009, where the BCBS announces
+``measures to strengthen the 1996 rules governing trading book capital
+and to enhance the three pillars of the Basel II framework (Basel
+2.5)''. This in essence, aims to introduce higher capital requirements
+to capture the credit risk of complex trading activities, promote the
+build-up of capital buffers that can be drawn down in periods of stress
+and strengthen the quality of bank capital\citep{basel09}. The SARB
+endorsed and gave notices to banks to prepare for the implementation
+therefore, on October 8, 2010, following the communication by the BCBS
+on July 31, 2009. Following both communications and announcements, Basel
+2.5 is eventually implemented January 1, 2012.
 
 \hypertarget{data-and-methodology}{%
 \section{Data and Methodology}\label{data-and-methodology}}
+
+\hypertarget{data}{%
+\subsection{Data}\label{data}}
+
+Still to come\ldots{}
+\textit{It is important to note that policy indicators capturing macroprudential reforms are not-bank specific . For instance, banks in our panel may at their discretion, increase their capital buffers in addition to minimum requirements. However, the minimum macroprudential (predominantly capital requirements) reforms are applied uniformly across banks}.
 
 \newpage
 
@@ -459,12 +690,146 @@
 
 \renewcommand*{\arraystretch}{1}
 
+\hypertarget{methodology}{%
+\subsection{Methodology}\label{methodology}}
+
+The objective of the paper is to evaluate the response by banks to
+macroprudential reforms and whether the reforms are consistent with
+policies aimed at enabling competition and inclusion in the banking
+industry. Therefore, we evaluate specifications relating to
+macroprudential reforms and specifications relating to competition and
+inclusion separately,
+
+\hypertarget{response-to-macroprudential-reforms}{%
+\subsubsection{Response to Macroprudential
+reforms}\label{response-to-macroprudential-reforms}}
+
+Our aim in this section is to evaluate the response of credit supply to
+macroprudeetial reforms. Banks might pass the increase in cost of
+funding, following tighter macroprudential capital requirements, on to
+their borrowers in the form of higher interest rate on loans or by
+reducing the quantity of credit they can extend
+\citep{noss2016estimating}. As such, we consider both the response of
+stock of outstanding loans and the price of the loans (rates).
+
+Following \cite{aiyar2016does}, \cite{deli2017real}, \cite{fang2022bank}
+and \cite{mirzaei2022effectiveness} the first baseline panel regression
+model considers the effect of macroprudnetial reforms on the stock of
+lending as follow: \begin{equation}
+    \Delta Loan_{b,i,t+r,t-p}=\beta_{0}+ \beta_{1}MacroPru_{t}++\beta_{3}X_{b,t-p}+ \omega_{b}+ \lambda_{t}+\epsilon_{i,t}
+\end{equation}
+
+where the dependent variables is loan growth, defined as as the
+log-difference in the stock of loans of bank \(b\), between the end of
+month \(t=r+r\) and and end of month \(t-p\), for lending product \(i\).
+The main explanatory variable is the macroprudential reform
+(\(MacroPru\)) indicator, such that \$MacroPru=1 \$ for dates of events
+containing announcements and communication of regulation intended to be
+passed and the drafting of such regulation, \(Draft\) and zero
+otherwise. Similarly, we also estimate equation (1) for \$MacroPru=1 \$
+for dates of events recording the eventual implementation of the
+regulation, \(Implementation\) and zero otherwise.
+
+We decompose the stock of loans to nine categories, that is \(i=1...9\),
+which consist of three totals, defined as total unsecured lending, total
+mortgage lending, total secured lending. Unsecured lending is defined as
+loans, overdrafts and credit cards to households and non-financial
+sector corporates, while secured lending consist of leasing and
+instalment sales to households and non-financial sector corporates.
+Total unsecured lending therefore consist of household unsecured lending
+and non-financial corporate sector lending. Total mortgage lending
+consist of residential mortgages to households and commercial mortgages
+to corporates and households.
+
+We include a set of time-varying bank-specific controls, captured by
+\(X_{b,t-p}\), consisting of banks' return on assets and total capital
+adequacy ratio. Furthermore, we use bank-fixed effects \(\omega_{b}\) to
+absorb differences in unobserved and time-invariant bank
+characteristics. Macroeconomic and policy shocks affecting banks equally
+such as economic growth and monetary policy are absorbed by time fixed
+effects \(\lambda_{t}\).
+
+Similarly, the specification for the price of lending follows:
+
+\begin{equation}
+    P_{b,i}= \beta_{0}+\beta_{1}MacroPru +\beta_{3}X_{b,t-p}+ \omega_{b}+ \lambda_{t}+\epsilon_{i,t}
+\end{equation}
+
+where the dependent variable is bank \(b's\) lending rate for product
+\(i\). The main explanatory variable \(MacroPru\), is defined as in
+equation (1). The controls are also as in equation(1).
+
+\subsubsection{Response to financial inclusion events}
+
+The second baseline panel regression considers the response of banks to
+events aimed at enabling financial inclusion in the banking industry. We
+firstly consider the effect of the events on the stock of lending as
+follow:
+
+\begin{equation}
+     \Delta Loan_{b,i,t+r,t-p}= \beta_{0}+\beta_{1}Inclusion+ \beta_{2}D_{t}+\beta_{3}X_{b,t-p}+ \omega_{b}+ \lambda_{t}+\epsilon_{i,t}
+\end{equation}
+
+where the dependent variables is loan growth, defined as as the
+log-difference in the stock of loans of bank \(b\), between the end of
+month \(t=r+r\) and and end of month \(t-p\), for lending product \(i\).
+We consider only three loan categories: Total unsecured lending, secured
+lending and total mortgage lending. The definitions are as in the
+previous section. \(Inclusion\) is a dummy variable, such that
+\(Inclusion=1\) for dates of events where measures aimed at enabling
+financial inclusion are announced, drafted and implemented.
+
+We also include a set of macro controls which include the repo rate,
+consumer confidence index and SAVIT40 index and bank-specific control,
+return on assets. These are captured by \(X_{b,t-p}\). We also control
+for the COVID-19 period, captured by the dummy \(D_{t}\) such
+\(D_{t}=1\) from the beginning of the lockdown period until the end of
+the sample and \(0\) otherwise. As with macroprudential specifications,
+we include bank-fixed effects \(\omega_{b}\) time fixed effects
+\(\lambda_{t}\).
+
+We also evaluate the effect of the reforms on lending rates. The
+specification is as follow:
+
+\begin{equation}
+    P_{b,i}= \beta_{0}+\beta_{1}Inclusion+ \\beta_{2}D_{t}+\beta_{3}X_{b,t-p}+ \omega_{b}+ \lambda_{t}+\epsilon_{i,t}
+\end{equation}
+
+where the dependent variable is bank \(b's\) lending rate for product
+\(i\). We consider lending rates on total unsecured lending, secured
+lending and total mortgage lending. \(Inclusion\), \(D_{t}\) and
+\(X_{b,t-p}\) are defined as in equation (3). Bank-fixed effects are
+captured by \(\omega_{b}\), while \(\lambda_{t}\) represent time fixed
+effects.
+
+\textit{Still need to define equation 5 below}
+
+\begin{equation}
+    P_{b,i}= \beta_{0}+\beta_{1}MicroReg+ \beta_{2}D_{t}+\beta_{3}X_{b,t-p}+ \omega_{b}+ \lambda_{t}+\epsilon_{i,t}
+\end{equation}
+
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
-\hypertarget{macroprudential-regulation}{%
-\subsection{Macroprudential
-regulation}\label{macroprudential-regulation}}
+\hypertarget{response-to-macroprudential-regulation}{%
+\subsection{Response to macroprudential
+regulation}\label{response-to-macroprudential-regulation}}
+
+Banks might pass the increase in cost of funding, following tighter
+macroprudential capital requirements, on to their borrowers in the form
+of higher interest rate on loans or by reducing the quantity of credit
+they can extend \citep{noss2016estimating}
+
+Two possibilities for positive coefficients on lending volumes. One is
+the the anticipation effects where banks have information on the
+proposed regulation and dates which they will be implemented and as
+such, they can act (expand credit for instance) before implementation
+date and thereby take advantage of less stringent requirements on credit
+extension due to regulation before tighter requirements are introduced.
+
+\textit{Secondly, and with positive coefficients with implementation is the idea of portfolio rebalancing. The notion is that banks will reduce their relatively riskier loan portfolio (e.g reduction in unsecured lending) and rebalance their portfolios towards more prudent ones (secured loan portfolio) \citep{deli2017real}. This is due to fact that macroprudential reforms enforce banks to attach greater risk weights to certain loan portfolios such as unsecured credit. For instance, banks in Denmark retrenched more on their lending portfolio with higher risk weights, in response to higher capital requirements \citep{imbierowicz2018time}}.
+
+\textbf{Similarly, \cite{cappelletti2019impact} find that banks classified as Other Systematically-Important (O-SII), who face added capital requirements, reduce their credit supply to households and financial sectors and shifted their lending to less risky counterparts within the non-financial corporations sector. Similarly, the banks in our sample (FNB, Standard Bank, Nedbank and ABSA) are classified as Domestic-Systematically Important Banks (D-SIB) and are charged additional capital requirements}\}.
 
 \blandscape
 
@@ -1461,62 +1826,197 @@ The nine categories, therefore, are as follows:
 \subsection{Description of narrative
 events}\label{description-of-narrative-events}}
 
-\hypertarget{tbl-description_narratives}{}
-\global\setlength{\Oldarrayrulewidth}{\arrayrulewidth}
+\hypertarget{macroprudential-indicators}{%
+\subsubsection{Macroprudential
+Indicators}\label{macroprudential-indicators}}
 
-\global\setlength{\Oldtabcolsep}{\tabcolsep}
+This section provides a detailed account of the narrative
+macroprudential indicators.
 
-\setlength{\tabcolsep}{0pt}
+2008/01/01: \textcolor{ForestGreen}{Implementation}
 
-\renewcommand*{\arraystretch}{0.5}
+\begin{quote}
+            BASEL II is  Implemented until Dec 2011
 
+\end{quote}
 
+2009/02/04:
+\textcolor{blue}{Announcement, draft and passing of regulation}
 
-\providecommand{\ascline}[3]{\noalign{\global\arrayrulewidth #1}\arrayrulecolor[HTML]{#2}\cline{#3}}
+\begin{quote}
+SARB issues  \textbf{directive 1/2009 (1 of 2009)} announcing the approach banks should follow in the application of capital floors. "Modelled capital should not be below 80\% of the capital requirements under Basel I to ensure capital levels do not fall below prudent level". Following Basel II, banks are allowed to use internal models to determine risk weights and in turn, determine capital levels. However, capital floors ensure capital requirements did not fall below a certain percentage of banks’ capital requirements under the previous Basel I framework\citep{basel06}. This in essence, imply greater risk weight arched to riskier credit products. For instance,  \cite{imbierowicz2018time} show that Danish banks reducing their lending on loans with higher risk weights, in response to higher capital requirements, including approaches to capital floors.
+\end{quote}
 
-\begin{longtable}[l]{|p{2.48in}|p{3.46in}}
-\caption{\label{tbl-description_narratives}Description of the narrative indexes }\tabularnewline
+2009/07/31*:
+\textcolor{blue}{Announcement, draft and passing of regulation}
 
+\begin{quote}BCBS announces "measures to strengthen the 1996 rules governing trading book capital and to enhance the three pillars of the Basel II framework (Basel 2.5)". This in essence, aims  to introduce higher capital requirements to capture the credit risk of complex trading activities, promote the build-up of capital buffers that can be drawn down in periods of stress and strengthen the quality of bank capital\citep{basel09}
+\end{quote}
 
+2010/10/08*:
+\textcolor{blue}{Announcement, draft and passing of regulation}
 
+\begin{quote}SARB issues \textbf{circular 3/2010} endorsing and giving notices to banks to prepare for the implementation of Basel 2.5, following the communication by the BCBS on July 31, 2009
+\end{quote}
 
-\ascline{1pt}{000000}{1-2}
+2011/06/30*:
+\textcolor{blue}{Announcement, draft and passing of regulation}
 
-\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 2.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Index}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 3.46in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Description}}} \\
+\begin{quote}BCBS issues and publishes Basel III: A Global Regulatory Framework for More Resilient Banks and Banking Systems. ???
+\end{quote}
 
-\ascline{1pt}{000000}{1-2}\endfirsthead 
+2011/07/31:
+\textcolor{blue}{Announcement, draft and passing of regulation}
 
-\ascline{1pt}{000000}{1-2}
+\begin{quote} 
+Cabinet adopts proposal to shift to Twin Peaks Model of Financial Regulation in South Africa, following he GFC, with the aim of improving  institutional structure to support financial regulation. Stricter oversight on finacial system, implications for financial inculsion??
+\end{quote}
 
-\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 2.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Index}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 3.46in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Description}}} \\
+2011/10/31:
+\textcolor{blue}{Announcement, draft and passing of regulation}
 
-\ascline{1pt}{000000}{1-2}\endhead
+\begin{quote}
+Basel 2.5 is transposed into domestic law (next step is implementation)
+\end{quote}
 
+2012/01/01: \textcolor{ForestGreen}{Implementation}
 
+\begin{quote}
+    Basel 2.5 takes effect: SARB minimum capital requirements
+    \begin{itemize}
+        \item Total CET1, 5.25\%, Total Tier1, 7\%, Minimum regulatory capital, 8\%, Total regulatory capital for D-SIB, 9.5\%
+    \end{itemize}
+\end{quote}
 
-\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 2.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Macroprudential}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 3.46in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{The\ macroprudential\ narrative\ index}}} \\
+2012/02/16*:
+\textcolor{blue}{Announcement, draft and passing of regulation}
 
-\ascline{1pt}{FFFFFF}{1-2}
+\begin{quote}
+SARB issues \textbf{guidance note 2/2012} announcing on new definition of total regulatory capital for Basel III such as:
+\begin{itemize}
+    \item Phasing out arrangements for non-common equity Tier 1 capital instruments that no longer qualify as regulatory capital under Basel III
+ \item Transitional arrangements for Basel III implementation
+\item Treatment of disclosed reserves undrer Basel III
+\end{itemize}
+\end{quote}
 
+2012/05/31*:
+\textcolor{blue}{Announcement, draft and passing of regulation}
 
+\begin{quote}
+SARB issues \textbf{guidance Note G5/2012} announcing that it will provide  liquidity facility to assist banks in meeting the liquidity Coverage Ratio (LCR) and cash reserves can be included as banks' high quality liquid assets for calculating LCR. This follows results from the QIS exercises by banks,  which revealed some banks would have shortfalls of around R140 billion in meeting the 100\ LCR  by 1 Jan 2019 due do to reliance eon short-term funding limited availability of HQLA
 
-\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 2.48in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Competition}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 3.46in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{The\ competition\ narrative\ index}}} \\
+\begin{itemize}
+    \item LCR requirements will be introduced on \textbf{1 Jan 2015} at 60\%, increasing by 10\% to reach 100\% on 1 Jan 2019
+\item Level 1 assets (stocks, funds or bonds) shall comprise 60\% of total HQLA  while level 2 assets (less liquid) shall constitute no more than the remaining 40\%
+\item SARB proposes that Leverage ratio be set at 4\% (LR of 4\% implies that banks' leverage does not exceed its capital by 40\%)
+\end{itemize}
+\end{quote}
 
-\ascline{1pt}{000000}{1-2}
+2012/08/15*:
+\textcolor{blue}{Announcement, draft and passing of regulation}
 
+\begin{quote}
+SARB transposes Basel III into law and publishes Counter-cyclical Capital Buffer (CCyB) rules, set to be implemented on 1 January 2016
+\end{quote}
 
+2013/01/31/*: \textcolor{ForestGreen}{Implementation}
 
-\end{longtable}
+\begin{quote}
+    Basel III takes effect
+\end{quote}
 
+2013/08/20:
+\textcolor{blue}{Announcement, draft and passing of regulation}
 
+\begin{quote}
+ SARB issues \textbf{Guidance Note 6/2013} announcing that banks' cash reserves may be included as part of their level 1 HQLA. Only equities listed on JSE's main exchange and included on Top 40 Index shall be considered as level2 HQLA (\textit{Potentially limit banks' ability to raise capital}).
+\end{quote}
 
-\arrayrulecolor[HTML]{000000}
+2014/01/31: \textcolor{ForestGreen}{Implementation}
 
-\global\setlength{\arrayrulewidth}{\Oldarrayrulewidth}
+\begin{quote}
+SARB mimimum Capital Requirements increase to:\\
+Total CET1, 5,5\%, Total Tier1, 7\%, Total regulatory capital, 8\%, Total regulatory capital for D-SIB, 10\%
+\end{quote}
 
-\global\setlength{\tabcolsep}{\Oldtabcolsep}
+2014/12/31:
+\textcolor{blue}{Announcement, draft and passing of regulation}
 
-\renewcommand*{\arraystretch}{1}
+\begin{quote}
+SARB issues \textbf{guidance note 8/2014} announcing  the provision of a committed liquidity facility  (CLF). This is to assist banks to meet the LCR.
+Banks, however need to have collateral to access the CLF, consisting of:
+\begin{itemize}
+    \item  High-quality residential mortgage loans
+\item Other loans and advances such as VAF, excluding unsecured loans
+\item Domestically listed securities
+\end{itemize}
+\textit{Banks with less diversified asset portfolio, i.e small banks will probably not qualify? Further restrictions/ stricter measures to loan extension?}
+\end{quote}
+
+2015/01/31*: \textcolor{ForestGreen}{Implementation}
+
+\begin{quote}
+LCR ratio is introduced/impelemnted at 60\% compliance
+\end{quote}
+
+2015/12/31*:
+\textcolor{blue}{Announcement, draft and passing of regulation}
+
+\begin{quote}
+
+SARB issues \textbf{circular 8/2015} announcing timelines and targets in respect of  the implementation of the countercyclical capital buffer (CCyB). SARB requirements shall apply to bank-wide total RWA:
+\begin{itemize}
+    \item 0.625\% on 1 Jan 2016
+\item 1.25\% 1 Jan 2017
+\item 1.875\% on 1 Jan 2018
+\item 2.5\% on 1 Jan 2019
+\end{itemize}
+\end{quote}
+
+2016/01/31*: \textcolor{ForestGreen}{Implementation}
+
+\begin{quote}
+LCR ratio is introduced/implemented at 60\% compliance. CCyB also implemented at 0.625\% 
+\end{quote}
+
+2016/04/13*:
+\textcolor{blue}{Announcement, draft and passing of regulation}
+
+\begin{quote}
+SARB issues \textbf{directive 1/2016} to inform all banks of matters related to the exposure limits imposed in the classification of deposits and credit exposures to small and medium enterprises  (SMEs), to be implemented on 1 July 2016. For instance, total exposure of a bank to an SME borrower, which shall be determined or calculated on a consolidated basis, at no time exceeds R12,5 million (\textit{Greater limits on value of a loan that can be extended to an SME and in turn, financial exclusion?})
+\end{quote}
+
+2016/07/01*: \textcolor{ForestGreen}{Implementation}
+
+\begin{quote}
+Exposure limits imposed in the classification of deposits and credit exposures to small and medium enterprises  (SMEs), announced on 2016/04/13, implemented
+\end{quote}
+
+2017/01/31*: \textcolor{ForestGreen}{Implementation}
+
+\begin{quote}
+LCR ratio is introduced/implemented at 80\% compliance, while CCyB increases to 1.25\%
+\end{quote}
+
+2017/12/13*:
+\textcolor{blue}{Announcement, draft and passing of regulation}
+
+\begin{quote}
+SARB issues \textbf{directive 8/2017} informing banks to comply with NSFR framework and on matters retaled to calibration of NSFR, including  template to monitor NSFR compliance. Agrees to start implementation on 1 January 2018. Objective is to reduce funding risk over a longer time horizon by requiring banks to fund their activities with sufficiently stable sources of funding in order to mitigate the risk of future funding stress. \textit{anks will be required to match their funding with their outflows, which may lead to a greater demand for longer term funding. Longer term funding will result in an increased cost of funding for banks (possibly passed on to borrowers and lower profitability and returns for banks}
+\end{quote}
+
+2018/01/31*: \textcolor{ForestGreen}{Implementation}
+
+\begin{quote}
+NSFR Implemented following  Directive 8/2017, CCyB increases to 1,875\% and LCR is implemented at 90\% compliance.
+\end{quote}
+
+2019/01/31*: \textcolor{ForestGreen}{Implementation}
+
+\begin{quote}
+CCyB increases to 2,5\% (maximum) and LCR is implemented at 100\% compliance.
+\end{quote}
 
 \hypertarget{macroprudential-narrative-indexes}{%
 \subsection{Macroprudential narrative
