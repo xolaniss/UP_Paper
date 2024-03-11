@@ -143,8 +143,8 @@ three_month_test_finance_gg
 # Export ---------------------------------------------------------------
 artifacts_visual_lag_test <- list(
   macropru = list(
-  one_month_test_gg = one_month_test_gg,
-  three_month_test_gg = three_month_test_gg
+  one_month_test_macropru_gg = one_month_test_macropru_gg,
+  three_month_test_macropru_gg = three_month_test_macropru_gg
   ),
   finance = list(
   one_month_test_finance_gg = one_month_test_finance_gg,

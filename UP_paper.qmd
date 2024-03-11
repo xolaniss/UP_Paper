@@ -1511,7 +1511,7 @@ CCyB increases to 2,5\% (maximum) and LCR is implemented at 100\% compliance.
 #| cache: FALSE
 
 narratives <- read_rds(here("Outputs","combined_data", "artifacts_visual_lag_test.rds"))
-macropru_narratives_one_month_gg <- narratives$macropru$one_month_test_gg
+macropru_narratives_one_month_gg <- narratives$macropru$one_month_test_macropru_gg
 macropru_narratives_one_month_gg
 
 ```
@@ -1525,7 +1525,7 @@ macropru_narratives_one_month_gg
 #| fig-width: 8
 #| cache: FALSE
 
-macropru_narratives_one_month_gg <- narratives$macropru$three_month_test_gg
+macropru_narratives_one_month_gg <- narratives$macropru$three_month_test_macropru_gg
 macropru_narratives_one_month_gg
 
 ```
