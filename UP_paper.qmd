@@ -12,6 +12,8 @@ format:
           \newcommand{\blandscape}{\begin{landscape}}
           \newcommand{\elandscape}{\end{landscape}}
           \usepackage{rotating}
+          \newcommand{\bsideways}{\begin{sidewaystable}}
+          \newcommand{\esideways}{\end{sidewaystable}}
       - file: preamble.tex 
     include-before-body: title.tex
     keep-tex: TRUE
@@ -74,7 +76,7 @@ library(sandwich)
 library(lmtest)
 
 set_flextable_defaults(
-  font.size = 8,
+  font.size = 7,
   digits = 2,
   font.family = "Arial",
   border.color = "black",
@@ -162,7 +164,7 @@ descriptives_tbl %>%
   colformat_double(digits = 2, i = 27:30, j = 2:6) %>%
   width(j = 1, width = 1.5) %>%
   align(align = "center", i = c(1, 11, 21, 24, 27), part = "body") %>%
-  autofit(add_w = -0.05)
+  autofit(add_w = -0.1)
 ```
 
 
@@ -247,9 +249,7 @@ tighter requirements are introduced.
 
 \textbf{Similarly, \cite{cappelletti2019impact} find that banks classified as Other Systematically-Important (O-SII), who face added capital requirements, reduce their credit supply to households and financial sectors and shifted their lending to less risky counterparts within the non-financial corporations sector. Similarly, the banks in our sample (FNB, Standard Bank, Nedbank and ABSA) are classified as Domestic-Systematically Important Banks (D-SIB) and are charged additional capital requirements}}. 
 
-
-\blandscape
-
+\bsideways
 ```{r}
 #| label: tbl-macropru_draft_lending
 #| tbl-cap: "Macroprudential regulations and lending volumes (3-months) results"
@@ -325,7 +325,7 @@ modelsummary_word(
   gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
   add_rows = rows_tbl
 ) %>%
-  width(j = 1, width = 1.5) %>%
+  width(j = 1, width = 1.2) %>%
   add_body_row(values =
                  c("Draft model"),
                colwidths = 10) %>%
@@ -356,12 +356,10 @@ modelsummary_word(
   # hline(i = 1, part = "footer", border = fp_border(color = "white")) %>% 
   hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
 ```
+\esideways
 
-\elandscape
 
-
-\blandscape
-
+\bsideways
 ```{r}
 #| label: tbl-macropru_draft_rates
 #| tbl-cap: "Macroprudential regulation and lending rates"
@@ -432,7 +430,7 @@ modelsummary_word(
     gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
     add_rows = rows_tbl
   ) %>% 
-  width(j = 1, width = 1.5) %>% 
+  width(j = 1, width = 1.2) %>% 
    add_body_row(values =
                  c("Draft model"),
                colwidths = 10) %>%
@@ -455,11 +453,11 @@ modelsummary_word(
     part = "body",
     value = as_paragraph(predictor)
   ) %>% 
-  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) %>% 
+  autofit(add_w = -10)
 
 ```
-
-\elandscape
+\esideways
 
 
 \newpage
@@ -702,7 +700,8 @@ modelsummary_word(
 
 ```
 
-\blandscape
+
+\bsideways
 ```{r}
 #| label: tbl-competition_financial_inclusion
 #| tbl-cap: "Financial regulation and inclusion results"
@@ -797,18 +796,16 @@ modelsummary_word(
     part = "body",
     value = as_paragraph(predictor_financial_inclusion)
   ) %>%
+  width(j = 1, width = 1.8) %>%
   mk_par(i = c(5, 6),
          j = 1,
          part = "body",
          value = as_paragraph(prediction_micro_regulations)
   ) %>%
-  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) %>% 
-  autofit(add_w = 0)
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) 
 
 ```
-
-\elandscape
-
+\esideways
 
 ## Robustness
 ## Discussion
@@ -832,7 +829,7 @@ modelsummary_word(
 \newpage
 
 
-\blandscape
+
 # Appendix
 
 ## Data sources
@@ -885,8 +882,6 @@ Bank specific data is private"
   autofit(add_w = -0.2)
 
 ```
-
-\elandscape
 
 ```{r}
 #| label: tbl-data1
@@ -1561,9 +1556,10 @@ finance_narratives_three_months_gg
 
 \newpage
 
-\blandscape
+
 ## Macropudential results with controls
 
+\bsideways
 ```{r}
 #| label: tbl-macropru_draft_lending_control
 #| tbl-cap: "Macroprudential regulations and lending volumes (3-months) with controls results"
@@ -1642,7 +1638,7 @@ modelsummary_word(
   gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
   add_rows = rows_tbl
 ) %>%
-  width(j = 1, width = 1.8) %>% 
+  width(j = 1, width = 1.4) %>%
   add_body_row(values =
                  c("Draft model"),
                colwidths = 10) %>%
@@ -1663,14 +1659,12 @@ modelsummary_word(
     part = "body",
     value = as_paragraph(predictor_control)
   ) %>% 
-  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) 
 ```
+\esideways
 
-\elandscape
 
-
-\blandscape
-
+\bsideways
 ```{r}
 #| label: tbl-macropru_draft_rates_control
 #| tbl-cap: "Macroprudential regulation and lending rates with controls results"
@@ -1729,7 +1723,7 @@ modelsummary_word(
     gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
     add_rows = rows_tbl
   ) %>% 
-  width(j = 1, width = 1.8) %>% 
+  width(j = 1, width = 1.4) %>% 
    add_body_row(values =
                  c("Draft model"),
                colwidths = 10) %>%
@@ -1753,10 +1747,7 @@ modelsummary_word(
   hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
 
 ```
-
-\elandscape
-
-
+\esideways
 
 ```{r}
 #| label: tbl-competition_unsecured_controls
@@ -1989,9 +1980,10 @@ modelsummary_word(
 
 ```
 
-\blandscape
+
 ## Financial regulation results with controls
 
+\bsideways
 ```{r}
 #| label: tbl-competition_financial_inclusion_controls
 #| tbl-cap: "Financial regulation and inclusion with controls results"
@@ -2096,9 +2088,8 @@ modelsummary_word(
   ) %>%
   align(align = "center", part = "header", i = 1) %>%
   autofit(add_w = 0) %>% 
-  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) 
 
 ```
-
-\elandscape
+\esideways
 
