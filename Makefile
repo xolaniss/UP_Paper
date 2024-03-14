@@ -17,7 +17,10 @@ artifacts_competition_models.rds \
 artifacts_three_month_macropru_models.rds \
 artifacts_competition_control_models.rds \
 artifacts_macropru_controls_models.rds \
-artifacts_visual_lag_test.rds
+artifacts_visual_lag_test.rds \
+artificats_additional_competition_control_models.rds \
+artifacts_additional_competition_models.rds
+
 
 ## Generating the manuscript 
 UP_paper.pdf: UP_paper.qmd $(INPUT_TARGETS)
@@ -85,4 +88,11 @@ artifacts_visual_lag_test.rds:	16_visual_lag_test.R \
 artifacts_modelling_data.rds
 	Rscript $<
 
+artificats_additional_competition_control_models.rds: 15a_competition_models_controsl.R \
+artifacts_modelling_data.rds
+	Rscript $<
+
+artifacts_additional_competition_models.rds: 12a_prelim_competition_models.R \
+artifacts_modelling_data.rds
+	Rscript $<
 

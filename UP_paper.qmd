@@ -94,12 +94,12 @@ source(here("Functions","modelplot_word.R" ))
 source(here("Functions","borderlines.R" ))
 ```
 
-# Introduction
+# Introduction (Duma and Kea)
 
 \textit{The pursuit for financial stability through macro-prudential policies could potentially imply financial exclusion, particularly in emerging countries such as South Africa. For instance, economic growth and development could be promoted through increased lending to small and medium businesses, who are riskier to lend to. However, macro-prudential policies are by nature aimed at reducing risks associated with lending. Therefore, a natural question that arises is whether macro-prudential policy is a constraint to or consistent with financial inclusion or greater banking competition?}
 
 
-# Literature Review
+# Literature Review (Duma and Kea)
 Our paper encompasses and contributes to various strands of literature. It firstly encompasses literature on the response of banks to  macroprudential reforms and secondly, the response of banks to external efforts aimed at enabling financial inclusion. The construction of narrative macroprudential reforms and narrative accounts of financial inclusion encompass  literature on narrative methods of identification. 
 
 The objective(s) of macroprudential reforms are well documented and continue to expand with further reforms being introduced to create resilient banking systems\footnote{See \cite{kashyap2004cyclical}, \cite{basel06}, \cite{cohen2016banks} and \cite{cerutti2018changes} among others.}. The ongoing debate regarding the implications of the reforms, particularly on lending behaviour of banks provide further insight on the costs and benefits of making banking systems resilient through the reforms.  
@@ -116,7 +116,9 @@ Lastly, the construction of our narrative macroprudential reforms is based on th
 
 We therefore add to the growing empirical literature examining; (1) the response of banks to changes in macroprudential reforms; (2)   particularly in emerging markets and (3); applying narrative methods of identification.
 
-# Macroprudential reforms: Narrative Indicators
+#  Narrative Indicators 
+
+## Macroprudential reforms (kea)
 
 This section presents actions and events we use to construct a set of macroprudential measures or indicators introduced following Basel II Agreements and Accords. The indicators represent credit supply shocks, following \cite{noss2016estimating} and \cite{deli2017real} among others. The construction is based on historical documents containing actions and events that  lead to the implementation of macroprudential regulations, from 2008 to 2019. We consult circulars issued by the SARB to commercial banks in South Africa, annual reports of commercial banks and SARB and risk and capital management reports of commercial banks. We consider reports of only the big 4 commercial banks in South Africa as they account for over 90 percent of  banking industry assets.\footnote{The big 4 banks include Standard Bank, ABSA, NEDBANK and First Rand.} We also consider documents published and issued by the Basel Committee on Bank Supervision (BCBS), containing communication between BCBS and SARB relating to the implementation of Basel regulations. 
 
@@ -133,12 +135,12 @@ As an example to some of the actions we use to construct the two sets of indicat
 
 Following Basel II, banks are allowed to use internal models to determine risk weights and in turn, determine capital levels. However, capital floors ensure capital requirements did not fall below a certain percentage of banks’ capital requirements under the previous Basel I framework\citep{basel06}. This in essence, imply greater risk weight arched to riskier credit products. For instance,  \cite{imbierowicz2018time} show that Danish banks reducing their lending on loans with higher risk weights, in response to higher capital requirements, including approaches to capital floors.  A further example which is categorized as a $Draft$ indicator and tracked until implementation, occurs on July 31, 2009, where the BCBS announces "measures to strengthen the 1996 rules governing trading book capital and to enhance the three pillars of the Basel II framework (Basel 2.5)". This in essence, aims  to introduce higher capital requirements to capture the credit risk of complex trading activities, promote the build-up of capital buffers that can be drawn down in periods of stress and strengthen the quality of bank capital\citep{basel09}. The SARB endorsed and gave notices to banks to prepare for the implementation therefore, on October 8, 2010, following the communication by the BCBS on July 31, 2009. Following both communications and announcements,  Basel 2.5 is eventually implemented January 1, 2012. 
 
-
+# Finance regulation reforms (Duma)
 
 
 # Data and Methodology
 
-## Data
+## Data (Duma and Xolani)
 
 Still to come...
 \textit{It is important to note that policy indicators capturing macroprudential reforms are not-bank specific . For instance, banks in our panel may at their discretion, increase their capital buffers in addition to minimum requirements. However, the minimum macroprudential (predominantly capital requirements) reforms are applied uniformly across banks}.
@@ -168,13 +170,12 @@ descriptives_tbl %>%
 ```
 
 
-## Methodology
+## Methodology (Kea, Duma, Xolani)
 The objective of the paper is to evaluate the response by banks to macroprudential reforms and whether the reforms are consistent with policies aimed at enabling competition and inclusion in the banking industry. Therefore, we evaluate specifications relating to macroprudential reforms and specifications relating to competition and inclusion separately,
 
 
-### Response to Macroprudential reforms
-
- Our aim in this section is to evaluate the response of  credit supply to macroprudeetial reforms. Banks might pass the increase in cost of funding, following tighter macroprudential capital requirements, on to their borrowers in the form of higher interest rate on loans or by reducing the quantity of credit they can extend \citep{noss2016estimating}. As such,  we consider both the response of  stock of outstanding loans and the price of the loans (rates). 
+### Response to Macroprudential reforms (Kea)
+Our aim in this section is to evaluate the response of  credit supply to macroprudeetial reforms. Banks might pass the increase in cost of funding, following tighter macroprudential capital requirements, on to their borrowers in the form of higher interest rate on loans or by reducing the quantity of credit they can extend \citep{noss2016estimating}. As such,  we consider both the response of  stock of outstanding loans and the price of the loans (rates). 
  
  Following \cite{aiyar2016does}, \cite{deli2017real}, \cite{fang2022bank} and \cite{mirzaei2022effectiveness}
  the first baseline panel regression model considers the effect of macroprudnetial reforms on the stock of lending as follow: 
@@ -200,7 +201,7 @@ Similarly, the specification for the price of lending follows:
 where the dependent variable is bank $b's$ lending rate for product $i$. The main explanatory variable $MacroPru$, is defined as in equation (1). The controls are also as in equation(1). 
 
 
-\subsubsection{Response to financial inclusion events}
+### Response to financial inclusion events (Duma)
 
 The second baseline panel regression considers the response of banks  to events aimed at enabling  financial  inclusion in the banking industry. We firstly consider the effect of the events
 on the stock of lending as follow:
@@ -219,11 +220,9 @@ We also include a set of macro controls which include the repo rate, consumer co
 
 We also evaluate the effect of the reforms on lending rates. The specification is as follow:
 
-
 \begin{equation}
     P_{b,i}= \beta_{0}+\beta_{1}Inclusion+ \\beta_{2}D_{t}+\beta_{3}X_{b,t-p}+ \omega_{b}+ \lambda_{t}+\epsilon_{i,t}
 \end{equation}
-
 
 
 where the dependent variable is bank $b's$ lending rate for product $i$.  We consider lending rates on total unsecured lending, secured lending and total mortgage lending.  $Inclusion$, $D_{t}$ and $X_{b,t-p}$ are defined as in equation (3). Bank-fixed effects are captured by $\omega_{b}$, while   $\lambda_{t}$ represent time fixed effects.
@@ -237,7 +236,7 @@ where the dependent variable is bank $b's$ lending rate for product $i$.  We con
 \end{equation}
 
 # Results
-## Response to macroprudential regulation
+## Response to macroprudential regulation (Kea)
 
 Banks might pass the increase in cost of funding, following tighter macroprudential capital requirements, on to their borrowers in the form of higher interest rate on loans or by reducing the quantity of credit they can extend \citep{noss2016estimating}
 
@@ -462,7 +461,7 @@ modelsummary_word(
 
 \newpage
 
-## Financial regulation and inclusion
+## Financial regulation and inclusion (Duma)
 
 ```{r}
 #| label: tbl-competition_unsecured
@@ -806,12 +805,12 @@ modelsummary_word(
 
 ```
 \esideways
+ 
+## Robustness (Kea and Duma)
+## Discussion (???)
+# Conclusion (Kea and Duma)
 
-## Robustness
-## Discussion
-# Conclusion
-
-\newpage
+\newpage 
 # References 
 ::: {#refs}
 :::

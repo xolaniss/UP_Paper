@@ -140,6 +140,8 @@ Consumer_confidence_tbl <- list(
   rename(Date = `SACWC Index`) %>% 
   relocate(Banks, .after = Date)
 
+Consumer_confidence_tbl %>% group_by(Banks) %>% skim()
+
 Equity_volatility_tbl <- list(
   "Total Banks" = additional_controls_list$`Equity volatility`,
   "Absa Bank" = additional_controls_list$`Equity volatility`,
@@ -177,7 +179,7 @@ additional_controls_tbl <-
   # floor the date to the beggining of the month
   mutate(Date = floor_date(Date, unit = "month")) %>% 
   group_by(Banks) %>% 
-  fill(`Consumer confidence index`, .direction = "down") %>% 
+  fill(`Consumer confidence index`, .direction = "up") %>% 
   ungroup() %>% 
   left_join(impairments_tbl, by = c("Date", "Banks")) %>% 
   drop_na()
