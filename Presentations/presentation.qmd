@@ -1,0 +1,966 @@
+---
+title: "Regulation and bank lending in South Africa: A narrative approach"
+author: "Dumakude Nxumalo and Keaoleboga Mncube"
+institute: "University of Pretoria"
+date: "28 March 2024"
+format: 
+    revealjs:
+      theme: simple
+      show-slide-number: all
+      controls: true
+      progress: true
+      center: false
+      # width: 1
+      # height: 1080
+      # aspectratio: 1
+      number-sections: false
+      center-title-slide: true
+      title-slide-style: default
+      auto-strech: true
+      margin: 0.15
+  
+  
+---
+```{r setup}
+#| include=FALSE
+options(scipen=999)
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning = FALSE, 
+                      message = FALSE, 
+                      dpi = 500, 
+                      fig.pos = "H", 
+                      fig.env= 'figure', 
+                      tab.topcaption = TRUE,
+                      ft.align = "center",
+                      ft.arraystretch = 1
+                      )
+library(tidyverse)
+library(readr)
+library(readxl)
+library(zoo)
+library(magick)
+library(stringi)
+library(patchwork)
+library(xtable)
+library(scales)
+library(rvest)
+library(rebus)
+library(PNWColors)
+library(lubridate)
+library(here)
+library(flextable)
+library(gt)
+library(officer)
+library(officedown)
+library(modelsummary)
+library(sandwich)
+library(lmtest)
+
+set_flextable_defaults(
+  font.size = 10,
+  digits = 3,
+  font.family = "Arial",
+  border.color = "#5d74a5",
+  border.width = 1,
+  fp_border = fp_border(color = "#5d74a5", width = 1, style = "solid")
+)
+
+
+```
+
+```{r functions}
+source(here("Functions","flextable_word.R" ))
+source(here("Functions","modelsummary_word.R" ))
+source(here("Functions","modelplot_word.R" ))
+source(here("Functions","borderlines.R" ))
+```
+
+
+## Introduction
+
+Content
+
+## Literature review
+
+Content
+
+## Methodology
+
+Content
+
+# Data
+## Bank lending
+```{r}
+#| label: fig-bank_lending
+#| fig-cap: "Total aggregated bank lending"
+#| fig-height: 6
+#| fig-width: 12
+#| cache: TRUE
+
+bank_lending <- read_rds(here("Outputs","BA900","artifacts_BA900.rds"))
+bank_lending_gg <- bank_lending$aggregated_graphs$total_aggregation_gg
+bank_lending_gg +
+  facet_wrap (. ~ Series, scale = "free", ncol = 3) +
+  theme(text = element_text(size = 9, face = "bold"))
+```
+
+## Bank lending rats
+```{r}
+#| label: fig-bank_interest_rates
+#| fig-cap: "Weighted lending rates"
+#| fig-height: 6
+#| fig-width: 10
+#| cache: FALSE
+
+bank_interest_rates <- 
+  read_rds(here("Outputs","BA930","artifacts_BA930_futher_analysis.rds"))
+
+bank_interest_rates_gg <- bank_interest_rates$gg$aggregated_lending_rates_gg
+bank_interest_rates_gg +
+  facet_wrap (. ~ Series, scale = "free", ncol = 3) +
+   theme(text = element_text(size = 9, face = "bold")) 
+  
+```
+
+## Macroprudential regulation narrative indices
+```{r}
+#| label: fig-macro_narrative_indexes_three_month
+#| fig-cap: "Three month lending growth and macroprudential narrative indexes comparison. Note: The black line represents the Draft index, and the red line represents the Implementation index."
+#| fig-height: 8
+#| fig-width: 20
+#| cache: FALSE
+
+narratives <- read_rds(here("Outputs","combined_data", "artifacts_visual_lag_test.rds"))
+macropru_narratives_one_month_gg <- narratives$macropru$three_month_test_macropru_gg
+macropru_narratives_one_month_gg +
+  facet_wrap(~series, scales = "free_y", ncol = 3) +
+  theme(text = element_text(size = 14, face = "bold")
+        )
+
+```
+
+## Finance regulation narrative indices
+```{r}
+#| label: fig-comp_narrative_indexes_three_month
+#| fig-cap: "Three month lending growth and financial narrative indexes comparison. Note: The black line represents the Financial regulation index, and the red line represents the Financial inclusion index."
+#| fig-height: 8
+#| fig-width: 20
+#| cache: FALSE
+
+finance_narratives_three_months_gg <- narratives$finance$three_month_test_finance_gg
+finance_narratives_three_months_gg +
+   facet_wrap(~series, scales = "free_y", ncol = 3) +
+  theme(text = element_text(size = 14, face = "bold")
+        )
+```
+
+# Results
+
+## Macropru regulation and lending volume
+```{r}
+#| label: tbl-macropru_draft_lending
+#| tbl-cap: "Macroprudential regulations and lending volumes (3-months) results"
+#| cache: FALSE
+#| include: TRUE
+#| eval: TRUE
+#| ft.arraystretch: 1
+
+
+macropru_results <- read_rds(here("Outputs", "models", "artifacts_macropru_models.rds"))
+
+macropru_three_month_results <- read_rds(here("Outputs", "models", "artifacts_three_month_macropru_models.rds"))
+
+rows <- modelsummary_basic(
+    macropru_three_month_results$three_lending_models$three_month_implementation,
+    coef_omit = 2:16,
+    gof_omit = "AIC|BIC|Std|Log",
+    output = "dataframe"
+  ) [, c(2, 4:12)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) 
+  
+rows_tbl <-  tibble(
+  "term" = "Implementation model",  
+  "(1)" = " ", 
+  "(2)" = " ", 
+  "(3)" = " ", 
+  "(4)" = " ", 
+  "(5)" = " ", 
+  "(6)" = " ", 
+  "(7)" = " ", 
+  "(8)" = " ", 
+  "(9)" = " ") %>% 
+  add_row(rows)
+
+predictor_macro <- c("Draft index", "Implementation index")
+
+dependant_lending <- c(
+  " ",
+  "Unsecured",
+  "Secured",
+  "Mortgages",
+  "Unsecured",
+  "Secured",
+  "Mortgages",
+  "Unsecured",
+  "Secured",
+  "Mortgages"
+)
+modelsummary_word(
+  macropru_three_month_results$three_lending_models$three_month_draft,
+  coef_omit = 2:16,
+  gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+  add_rows = rows_tbl
+) %>%
+  width(j = 1, width = 3) %>%
+  add_body_row(values =
+                 c("Draft model"),
+               colwidths = 10) %>%
+  merge_at(i = 3, j = 1:10) %>%
+  add_header_row(
+    values = c("", "Total", "Corporates", "Households"),
+    colwidths = c(1, 3, 3, 3)) %>% 
+  align(align = "center", part = "header", i = 1) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 3) %>%
+  hline(i = 4, j = 1:10, part = "body") %>%
+  mk_par(
+    i = 2,
+    part = "header",
+    value = as_paragraph(dependant_lending)
+  ) %>% 
+  mk_par(
+    j = 1,
+    i = c(2, 4),
+    part = "body",
+    value = as_paragraph(predictor_macro)
+  ) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
+```
+
+## Macropru regulation and lending rates 
+```{r}
+#| label: tbl-macropru_draft_rates
+#| tbl-cap: "Macroprudential regulation and lending rates"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 1
+
+rows <- modelsummary_basic(
+    macropru_results$rates_models$implementation,
+    coef_omit = 2:16,
+    gof_omit = "AIC|BIC|Std|Log",
+    output = "dataframe"
+  ) [, c(2, 4:12)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) 
+  
+rows_tbl <-  tibble(
+  "term" = "Implementation model",  
+  "(1)" = " ", 
+  "(2)" = " ", 
+  "(3)" = " ", 
+  "(4)" = " ", 
+  "(5)" = " ", 
+  "(6)" = " ", 
+  "(7)" = " ", 
+  "(8)" = " ", 
+  "(9)" = " ") %>% 
+  add_row(rows)
+
+dependant_rate <- c(
+  " ",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage"
+)
+
+
+
+modelsummary_word(
+    macropru_results$rates_models$draft,
+    coef_omit = 2:16,
+    gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+    add_rows = rows_tbl
+  ) %>% 
+  width(j = 1, width = 3) %>% 
+   add_body_row(values =
+                 c("Draft model"),
+               colwidths = 10) %>%
+  merge_at(i = 3, j = 1:10) %>%
+  add_header_row(
+    values = c("", "Total", "Corporates", "Households"),
+    colwidths = c(1, 3, 3, 3)) %>% 
+  align(align = "center", part = "header", i = 1) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 3) %>% 
+  hline(i = 4, j = 1:10, part = "body") %>% 
+   mk_par(
+    i = 2,
+    part = "header",
+    value = as_paragraph(dependant_rate)
+  ) %>% 
+  mk_par(
+    j = 1,
+    i = c(2, 4),
+    part = "body",
+    value = as_paragraph(predictor_macro)
+  ) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) 
+
+```
+
+## Finance regulation and lending volume
+```{r}
+#| label: tbl-finance_lending
+#| tbl-cap: "Finance regulation and lending volumes (3-months) results"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 1
+
+additional_competition_results <- read_rds(here("Outputs", "models", "artifacts_additional_competition_models.rds"))
+
+rows <- modelsummary_basic(
+    additional_competition_results$financial_inclusion_lending_models,
+    coef_omit = 3:17,
+    gof_omit = "AIC|BIC|Std|Log",
+    output = "dataframe"
+  ) [, c(2, 4:12)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) 
+  
+rows_tbl <-  tibble(
+  "term" = "Financial inclusion model",  
+  "(1)" = " ", 
+  "(2)" = " ", 
+  "(3)" = " ", 
+  "(4)" = " ", 
+  "(5)" = " ", 
+  "(6)" = " ", 
+  "(7)" = " ", 
+  "(8)" = " ", 
+  "(9)" = " ") %>% 
+  add_row(rows)
+
+dependant_rate <- c(
+  " ",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage"
+)
+
+predictor_finance <- c("Finance regulation index", "Covid-dummy", "Financial inclusion index", "Covid-dummy")
+
+modelsummary_word(
+    additional_competition_results$finance_lending_models,
+    coef_omit = 3:17,
+    gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+    add_rows = rows_tbl
+  ) %>% 
+  width(j = 1, width = 3) %>% 
+   add_body_row(values =
+                 c("Finance regulation model"),
+               colwidths = 10) %>%
+  merge_at(i = 4, j = 1:10) %>%
+  add_header_row(
+    values = c("", "Total", "Corporates", "Households"),
+    colwidths = c(1, 3, 3, 3)) %>% 
+  align(align = "center", part = "header", i = 1) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 4) %>% 
+  hline(i = 6, j = 1:10, part = "body") %>% 
+   mk_par(
+    i = 2,
+    part = "header",
+    value = as_paragraph(dependant_rate)
+  ) %>% 
+  mk_par(
+    j = 1,
+    i = c(2, 3, 5, 6),
+    part = "body",
+    value = as_paragraph(predictor_finance)
+  ) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) 
+
+```
+
+## Finance regulation and lending rates
+```{r}
+#| label: tbl-finance_rates
+#| tbl-cap: "Financial regulation and lending rates results"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 1
+
+rows <- modelsummary_basic(
+    additional_competition_results$financial_inclusion_rates_models,
+    coef_omit = 3:17,
+    gof_omit = "AIC|BIC|Std|Log",
+    output = "dataframe"
+  ) [, c(2, 4:12)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) 
+  
+rows_tbl <-  tibble(
+  "term" = "Financial inclusion model",  
+  "(1)" = " ", 
+  "(2)" = " ", 
+  "(3)" = " ", 
+  "(4)" = " ", 
+  "(5)" = " ", 
+  "(6)" = " ", 
+  "(7)" = " ", 
+  "(8)" = " ", 
+  "(9)" = " ") %>% 
+  add_row(rows)
+
+dependant_rate <- c(
+  " ",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage"
+)
+
+modelsummary_word(
+    additional_competition_results$finance_rates_models,
+    coef_omit = 3:17,
+    gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+    add_rows = rows_tbl
+  ) %>% 
+  width(j = 1, width = 3) %>% 
+   add_body_row(values =
+                 c("Finance regulation model"),
+               colwidths = 10) %>%
+  merge_at(i = 4, j = 1:10) %>%
+  add_header_row(
+    values = c("", "Total", "Corporates", "Households"),
+    colwidths = c(1, 3, 3, 3)) %>% 
+  align(align = "center", part = "header", i = 1) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 4) %>% 
+  hline(i = 6, j = 1:10, part = "body") %>% 
+   mk_par(
+    i = 2,
+    part = "header",
+    value = as_paragraph(dependant_rate)
+  ) %>% 
+  mk_par(
+    j = 1,
+    i = c(2, 3, 5, 6),
+    part = "body",
+    value = as_paragraph(predictor_finance)
+  ) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
+
+```
+
+
+# Conclusions
+Content
+
+# Appendix: Results with controls
+
+## Macropru regulation and lending volume
+```{r}
+#| label: tbl-macropru_draft_lending_control
+#| tbl-cap: "Macroprudential regulations and lending volumes (3-months) with controls results"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 1
+
+macropru_control_results <- read_rds(here("Outputs", "models", "artifacts_macropru_controls_models.rds"))
+
+rows <- modelsummary_basic(
+    macropru_control_results$lending_models$implementation,
+    coef_omit = 4:18,
+    gof_omit = "AIC|BIC|Std|Log",
+    output = "dataframe"
+  ) [, c(2, 4:12)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) 
+  
+rows_tbl <-  tibble(
+  "term" = "Implementation model",  
+  "(1)" = " ", 
+  "(2)" = " ", 
+  "(3)" = " ", 
+  "(4)" = " ", 
+  "(5)" = " ", 
+  "(6)" = " ", 
+  "(7)" = " ", 
+  "(8)" = " ", 
+  "(9)" = " ") %>% 
+  add_row(rows)
+
+predictor_control <-
+  c(
+    "Draft index",
+    "Return on assets",
+    "Total capital adequacy ratio",
+    "Implementation index",
+    "Return on assets",
+    "Total capital adequacy ratio"
+  )
+
+predictor_control <- c(
+  "Draft index",
+  "Return on assets",
+  "Total capital adequacy ratio",
+  "Implementation index",
+  "Return on assets",
+  "Total capital adequacy ratio"
+)
+
+modelsummary_word(
+  macropru_control_results$lending_models$draft,
+  coef_omit = 4:18,
+  gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+  add_rows = rows_tbl
+) %>%
+  width(j = 1, width = 3) %>%
+  add_body_row(values =
+                 c("Draft model"),
+               colwidths = 10) %>%
+  merge_at(i = 5, j = 1:10) %>%
+  add_header_row(
+    values = c("", "Total", "Corporates", "Households"),
+    colwidths = c(1, 3, 3, 3)) %>%
+  align(align = "center", part = "header", i = 1) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 5) %>%
+  hline(i = 8, j = 1:10, part = "body") %>%
+  mk_par(i = 2,
+         part = "header",
+         value = as_paragraph(dependant_lending)) %>%
+  mk_par(
+    j = 1,
+    i = c(2, 3, 4, 6, 7, 8),
+    part = "body",
+    value = as_paragraph(predictor_control)
+  ) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) 
+```
+## Macropru regulation and lending rates 
+```{r}
+#| label: tbl-macropru_draft_rates_control
+#| tbl-cap: "Macroprudential regulation and lending rates with controls results"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 1
+
+rows <- modelsummary_basic(
+    macropru_control_results$rates_models$implementation,
+    coef_omit = 4:18,
+    gof_omit = "AIC|BIC|Std|Log",
+    output = "dataframe"
+  ) [, c(2, 4:12)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) 
+  
+rows_tbl <-  tibble(
+  "term" = "Implementation model",  
+  "(1)" = " ", 
+  "(2)" = " ", 
+  "(3)" = " ", 
+  "(4)" = " ", 
+  "(5)" = " ", 
+  "(6)" = " ", 
+  "(7)" = " ", 
+  "(8)" = " ", 
+  "(9)" = " ") %>% 
+  add_row(rows)
+
+
+modelsummary_word(
+    macropru_control_results$rates_models$draft,
+    coef_omit = 4:18,
+    gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+    add_rows = rows_tbl
+  ) %>% 
+  width(j = 1, width = 3) %>% 
+   add_body_row(values =
+                 c("Draft model"),
+               colwidths = 10) %>%
+  merge_at(i = 5, j = 1:10) %>%
+  add_header_row(
+    values = c("", "Total", "Corporations", "Households"),
+    colwidths = c(1, 3, 3, 3)) %>%
+  align(align = "center", part = "header", i = 1) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 5) %>%
+  hline(i = 8, j = 1:10, part = "body") %>%
+  mk_par(i = 2,
+         part = "header",
+         value = as_paragraph(dependant_rate)) %>%
+  mk_par(
+    j = 1,
+    i = c(2, 3, 4, 6, 7, 8),
+    part = "body",
+    value = as_paragraph(predictor_control)
+  ) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
+
+```
+
+## Finance regulation and lending volume
+```{r}
+#| label: tbl-finance_control_lending
+#| tbl-cap: "Finance regulation and lending volumes (3-months) with controls results"
+#| cache: FALSE
+#| include: TRUE
+
+additional_competition_controls_results <- read_rds(here("Outputs", "models", "artifacts_additional_competition_control_models.rds"))
+
+rows <- modelsummary_basic(
+    additional_competition_controls_results$financial_inclusion_lending_models,
+    coef_omit = 5:19,
+    gof_omit = "AIC|BIC|Std|Log",
+    output = "dataframe"
+  ) [, c(2, 4:12)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) 
+  
+rows_tbl <-  tibble(
+  "term" = "Financial inclusion model",  
+  "(1)" = " ", 
+  "(2)" = " ", 
+  "(3)" = " ", 
+  "(4)" = " ", 
+  "(5)" = " ", 
+  "(6)" = " ", 
+  "(7)" = " ", 
+  "(8)" = " ", 
+  "(9)" = " ") %>% 
+  add_row(rows)
+
+dependant_rate <- c(
+  " ",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage"
+)
+
+predictor_finance_controls <-
+  c("Finance regulation index",
+    "Covid-dummy",
+    "Repo rate",
+    "Consumer confidence",
+    "Return on assets",
+    "SAVIT40 index",
+    "Financial inclusion index",
+    "Covid-dummy",
+    "Repo rate",
+    "Consumer confidence",
+    "Return on assets",
+    "SAVIT40 index")
+
+
+modelsummary_word(
+    additional_competition_controls_results$finance_lending_models,
+    coef_omit = 5:19,
+    gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+    add_rows = rows_tbl
+  ) %>% 
+  width(j = 1, width = 5) %>% 
+   add_body_row(values =
+                 c("Finance regulation model"),
+               colwidths = 10) %>%
+  merge_at(i = 8, j = 1:10) %>%
+  add_header_row(
+    values = c("", "Total", "Corporates", "Households"),
+    colwidths = c(1, 3, 3, 3)) %>% 
+  align(align = "center", part = "header", i = 1) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 8) %>% 
+  hline(i = 14, j = 1:10, part = "body") %>% 
+   mk_par(
+    i = 2,
+    part = "header",
+    value = as_paragraph(dependant_rate)
+  ) %>% 
+  mk_par(
+    j = 1,
+    i = c(2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14),
+    part = "body",
+    value = as_paragraph(predictor_finance_controls)
+  ) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) %>% 
+  height_all(height = 0.01, part = "all") %>% 
+  hrule(rule = "exact")
+
+```
+## Finance regulation and lending rates
+```{r}
+#| label: tbl-finance_control_rates
+#| tbl-cap: "Finance regulation and lending rates with controls results"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 1
+
+rows <- modelsummary_basic(
+    additional_competition_controls_results$financial_inclusion_rates_models,
+    coef_omit = 5:19,
+    gof_omit = "AIC|BIC|Std|Log",
+    output = "dataframe"
+  ) [, c(2, 4:12)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) 
+  
+rows_tbl <-  tibble(
+  "term" = "Financial inclusion model",  
+  "(1)" = " ", 
+  "(2)" = " ", 
+  "(3)" = " ", 
+  "(4)" = " ", 
+  "(5)" = " ", 
+  "(6)" = " ", 
+  "(7)" = " ", 
+  "(8)" = " ", 
+  "(9)" = " ") %>% 
+  add_row(rows)
+
+dependant_rate <- c(
+  " ",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage"
+)
+
+modelsummary_word(
+    additional_competition_controls_results$finance_rates_models,
+    coef_omit = 5:19,
+    gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+    add_rows = rows_tbl
+  ) %>% 
+  width(j = 1, width = 3) %>% 
+   add_body_row(values =
+                 c("Finance regulation model"),
+               colwidths = 10) %>%
+  merge_at(i = 8, j = 1:10) %>%
+  add_header_row(
+    values = c("", "Total", "Corporates", "Households"),
+    colwidths = c(1, 3, 3, 3)) %>% 
+  align(align = "center", part = "header", i = 1) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 8) %>% 
+  hline(i = 14, j = 1:10, part = "body") %>% 
+   mk_par(
+    i = 2,
+    part = "header",
+    value = as_paragraph(dependant_rate)
+  ) %>% 
+  mk_par(
+    j = 1,
+    i = c(2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14),
+    part = "body",
+    value = as_paragraph(predictor_finance_controls)
+  ) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
+
+```

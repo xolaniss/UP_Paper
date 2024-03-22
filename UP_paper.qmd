@@ -19,7 +19,7 @@ format:
     keep-tex: TRUE
   docx:
     reference-doc: new_template_no_numbering.docx
-pdf-engine: xelatex
+pdf-engine: lualatex
 # monofont: "DejaVu Sans Mono"
 # mainfont: "Times New Roman"
 execute: 
@@ -1419,9 +1419,10 @@ finance_narratives_three_months_gg
 \newpage
 
 
-## Results with controls
 
 \bsideways
+## Results with controls
+
 ```{r}
 #| label: tbl-macropru_draft_lending_control
 #| tbl-cap: "Macroprudential regulations and lending volumes (3-months) with controls results"

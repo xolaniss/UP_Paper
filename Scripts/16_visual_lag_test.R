@@ -76,7 +76,7 @@ test_plot <- function(data,
          x = " ",
          y = axis_title) +
     facet_wrap(~series, scales = "free_y", ncol = 2) +
-    scale_color_manual(values = pnw_palette("Shuksan2", 9))
+    scale_color_manual(values = pnw_palette("Sunset2", 9))
 }
 
 # Import -------------------------------------------------------------

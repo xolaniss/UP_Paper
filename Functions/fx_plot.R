@@ -22,7 +22,7 @@ function (data, plotname = " ",
       plot.tag = element_text(size = 8)
     ) +
     labs(x = "", y = plotname) +
-    scale_color_manual(values = pnw_palette("Shuksan2", variables_color))
+    scale_color_manual(values = pnw_palette("Sunset2", variables_color))
 }
 
 
@@ -54,7 +54,7 @@ fx_recode_plot <-
         plot.tag = element_text(size = 8)
       ) +
       labs(x = "", y = plotname) +
-      scale_color_manual(values = pnw_palette("Shuksan2", variables_color))
+      scale_color_manual(values = pnw_palette("Sunset2", variables_color))
   }
 
 fx_nopivot_plot <-
@@ -82,5 +82,5 @@ fx_nopivot_plot <-
         plot.tag = element_text(size = 8)
       ) +
       labs(x = "", y = plotname) +
-      scale_color_manual(name = "", values = pnw_palette("Shuksan2", variables_color))
+      scale_color_manual(name = "", values = pnw_palette("Sunset2", variables_color))
   }
