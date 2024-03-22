@@ -17,7 +17,7 @@ format:
       center-title-slide: true
       title-slide-style: default
       auto-strech: true
-      margin: 0.15
+      margin: 0.2
   
   
 ---
