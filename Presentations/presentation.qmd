@@ -18,8 +18,7 @@ format:
       title-slide-style: default
       auto-strech: true
       margin: 0.2
-  
-  
+      reference-location: document
 ---
 ```{r setup}
 #| include=FALSE
@@ -75,18 +74,61 @@ source(here("Functions","modelplot_word.R" ))
 source(here("Functions","borderlines.R" ))
 ```
 
-
 ## Introduction
+- Since the global financial crisis, regulatory changes have been a key focus for policymakers^[National Treasury. 2018. Explanatory Policy Paper for COFI Bill.].
+- However, there are concerns as to the impact of these changes on bank lending. This has been a focus of various studies.^[Aiyar et al. 2016. How does credit supply respond to monetary and bank minimum capital requirements? European Economic Review. Other studies as well.]
+- Given the importance of bank lending to economic growth, understanding the factors that influence bank lending is crucial.^[Loayza et al. 2017. Financial development, growth, and crisis: Is there a trade off? World Bank.]
 
-Content
+## The aim of the study
+- Therefore, this study aims to investigate the impact of regulatory changes on bank lending in South Africa using a narrative approach.
+- We focus on two types of regulatory changes:
+  - Macroprudential regulation
+  - Finance and inclusion regulation
+- Estimate panel regression for six credit categories and four banks
 
-## Literature review
+## Brief comments on literature
+- The literature on the impact of regulatory changes on bank lending is diverse.
+- Some studies find that regulatory changes have a negative impact on bank lending. Whilst other suggest that regulation does not impact bank lending.
+- In South Africa studies are limited, and therefore this question remains open.
 
-Content
+# Methodology
 
-## Methodology
+## Narrative approach  {.smaller}
 
-Content
+- The narrative approach requires construction of 'exogenous' narrative indices. Exogeneity is a key challenge in the literature.
+- The indices reflect regulatory events which the literature identifies as having a potential impact on bank lending.
+- However, the narrative approach is not without its limitations.
+- For example, the indices do not conform to any a priori expectations which can make interpretation challenging.
+- However, the narrative approach is useful in that it allows for the identification of regulatory events that may have been overlooked in the literature.
+
+## Construction of macroprudential indices
+- We delineate between anticipation and actual effect of the regulation
+- The anticipation effects is captured by the communication of macroprudential regulation,
+- Therefore, $Draft_t$ take a value of 1 when there is communication and 0 otherwise.
+- Similarly, the actual impact if captured using the $Implementation_t$ variable which take a value of 1 when macroprudential regulation is implemented, and 0 otherwise
+
+## Construction of finance indices
+- Following the same logic as the macroprudential indices, we construct two finance indices. 
+- The first index captures proposed and final changes in finance regulation ($FinReg_t$), which take a value of 1 when such an event occurs, and 0 otherwise.
+- The second index captures the proposed national financial inclusion framework ($FinInclusion_t$), which takes a value of 1 when this event occurs, and 0 otherwise.
+
+## Construction of credit categories (segments)
+- Using the BA900, 930, and other data sources we constructed six credit categories.
+- Households: mortgages, unsecured credit, and secured credit
+- Corporate: mortgages, unsecured credit, and secured credit
+- Aggregates: total mortgages, total unsecured credit, total secured credit.
+
+## Econometric approach
+- We use a panel data approach to estimate the impact of regulatory changes on bank lending.
+- For each index the fixed effect model specified as follows:
+$$ Lending_{b,t}^{c} = \beta_1Index_t^i + \beta_2\tau_b^c + \beta_3\lambda_t^c + \beta_4\Omega^c + \epsilon_{b,t}^c, and  $$
+$$ Rate_{b,t}^{c} = \alpha_1Index_t^i + \alpha_2\tau_b^c + \alpha_3\lambda_t^c + \alpha_4\Omega^c + \epsilon_{b,t}^c .$$
+- Where $b$ is FNB, Absa, Nedbank, or Standard Bank. $t$ is the time period, $c$ is the credit category, and $i$ is the $Draft_t$, $Implementation_t$, $FinReg_t$, or $FinInclusion_t$. 
+
+## Econometric approach (continued)
+- Therefore $Lending_{b,t}^c$ is bank level three month growth of lending, and $Rate_{b,t}^c$ is the bank level lending rates.
+- $\Omega^c$ is a matrix of controls which includes a covid dummy, bank level variables, and other macroeconomic variables.
+- $\tau_b^c$ is a bank fixed effect, $\lambda_t^c$ is a time fixed effect, and $\epsilon_{b,t}^c$ is the error term.
 
 # Data
 ## Bank lending
@@ -104,7 +146,7 @@ bank_lending_gg +
   theme(text = element_text(size = 9, face = "bold"))
 ```
 
-## Bank lending rats
+## Bank lending rates
 ```{r}
 #| label: fig-bank_interest_rates
 #| fig-cap: "Weighted lending rates"
@@ -139,6 +181,12 @@ macropru_narratives_one_month_gg +
 
 ```
 
+## Macroprudential regulation narrative indices (examples)
+- For example:
+  - 2013 implementation of BASEL III
+  - Guidance note II of 2012 - new definition of regulatory capital
+  - Guidance note 6 of 2013 - only equities listed on JSE can be included in level 1 capital
+
 ## Finance regulation narrative indices
 ```{r}
 #| label: fig-comp_narrative_indexes_three_month
@@ -153,10 +201,15 @@ finance_narratives_three_months_gg +
   theme(text = element_text(size = 14, face = "bold")
         )
 ```
+## Finance regulation narrative indices (examples)
+- For example:
+  - Removal of adverse customer credit information (2013/14)
+  - Reduction in the max interest on credit that could offered by lenders (2015)
+  - National credit regulations amendments (2014-15)
 
-# Results
+# Macroprudential results
 
-## Macropru regulation and lending volume
+## Macropru regulation and lending volumes
 ```{r}
 #| label: tbl-macropru_draft_lending
 #| tbl-cap: "Macroprudential regulations and lending volumes (3-months) results"
@@ -360,7 +413,20 @@ modelsummary_word(
 
 ```
 
-## Finance regulation and lending volume
+## Discussion - Macroprudential regulation
+- The macroprudential regulation results suggests lending portfolio rebalancing phenomena. This result was also robust with controls.
+- In terms of the lending volumes results:
+  - There is a rebalancing from long to short term lending. 
+  - Suggesting that banks are more risk averse toward term lending due to regulatory requirements
+  
+## Discussion - Macroprudential regulation (continued)
+- In terms of the lending rates results:
+  - Rebalancing means banks shift from unsecured credit to secured credit. This effect was not prevalent in mortgages.
+  - The rebalancing effect was more pronounced in the household sector than in the corporate sector.
+  - This is a similar risk averse behavior as in the lending volumes results.
+
+# Finance and inclusion regulation results
+## Finance regulation and lending volumes
 ```{r}
 #| label: tbl-finance_lending
 #| tbl-cap: "Finance regulation and lending volumes (3-months) results"
@@ -561,8 +627,24 @@ modelsummary_word(
 ```
 
 
-# Conclusions
-Content
+
+## Discussion - Finance and inclusion regulation  {.smaller}
+- The finance and inclusion regulation results indicate a decrease in lending volumes and an increase in lending rates. However, the lending rates results are sensitive to controls.
+- Finance regulation:
+  - The lending volumes specifically decrease in the unsecured lending for both corporates and households. 
+  - Mortgage lending volumes increase for households
+  - For households and corporates lending rates increased for the secured credit, and an increase in lending rates for households mortgages.
+
+
+## Discussion - Finance and inclusion regulation (continued)  
+
+- Finance inclusion:
+  - Similar to finance regulation results but with stronger effects on lending volumes.
+- Overall and contrary to the intentions of the changes of these regulations, the results indicate a decrease in lending volumes and an increase in lending rates.
+
+
+## Conclusions
+
 
 # Appendix: Results with controls
 

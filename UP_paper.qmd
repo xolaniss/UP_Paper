@@ -1142,7 +1142,7 @@ i.  Total leasing and instalments: Weighted average of items 49 + 51 + 59 + 61
 #| fig-cap: "Total aggregated bank lending"
 #| fig-height: 6
 #| fig-width: 6
-#| cache: TRUE
+#| cache: FALSE
 
 bank_lending <- read_rds(here("Outputs","BA900","artifacts_BA900.rds"))
 bank_lending_gg <- bank_lending$aggregated_graphs$total_aggregation_gg
