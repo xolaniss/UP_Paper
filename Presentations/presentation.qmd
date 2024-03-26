@@ -123,12 +123,12 @@ source(here("Functions","borderlines.R" ))
 - For each index the fixed effect model specified as follows:
 $$ Lending_{b,t}^{c} = \beta_1Index_t^i + \beta_2\tau_b^c + \beta_3\lambda_t^c + \beta_4\Omega^c + \epsilon_{b,t}^c, and  $$
 $$ Rate_{b,t}^{c} = \alpha_1Index_t^i + \alpha_2\tau_b^c + \alpha_3\lambda_t^c + \alpha_4\Omega^c + \epsilon_{b,t}^c .$$
-- Where $b$ is FNB, Absa, Nedbank, or Standard Bank. $t$ is the time period, $c$ is the credit category, and $i$ is the $Draft_t$, $Implementation_t$, $FinReg_t$, or $FinInclusion_t$. 
+- Where $b$ is FNB, Absa, Nedbank, or Standard Bank. $t$ is the time period, $c$ is the credit category, and $i$ constitutes the $Draft_t$, $Implementation_t$, $FinReg_t$, or $FinInclusion_t$ indices. 
 
 ## Econometric approach (continued)
-- Therefore $Lending_{b,t}^c$ is bank level three month growth of lending, and $Rate_{b,t}^c$ is the bank level lending rates.
+- Therefore $Lending_{b,t}^c$ are the bank level three month growth of lending, and $Rate_{b,t}^c$ are the bank level lending rates.
 - $\Omega^c$ is a matrix of controls which includes a covid dummy, bank level variables, and other macroeconomic variables.
-- $\tau_b^c$ is a bank fixed effect, $\lambda_t^c$ is a time fixed effect, and $\epsilon_{b,t}^c$ is the error term.
+- $\tau_b^c$ captures the bank fixed effect, $\lambda_t^c$ are the time fixed effects, and $\epsilon_{b,t}^c$ are the error terms.
 
 # Data
 ## Bank lending
@@ -267,7 +267,7 @@ rows_tbl <-  tibble(
   "(9)" = " ") %>% 
   add_row(rows)
 
-predictor_macro <- c("Draft index", "Implementation index")
+predictor_macro <- c("Draft", "Implementation")
 
 dependant_lending <- c(
   " ",
@@ -493,7 +493,7 @@ dependant_rate <- c(
   "Mortgage"
 )
 
-predictor_finance <- c("Finance regulation index", "Covid-dummy", "Financial inclusion index", "Covid-dummy")
+predictor_finance <- c("FinReg", "Covid-dummy", "FinInclusion", "Covid-dummy")
 
 modelsummary_word(
     additional_competition_results$finance_lending_models,
@@ -704,19 +704,19 @@ rows_tbl <-  tibble(
 
 predictor_control <-
   c(
-    "Draft index",
+    "Draft",
     "Return on assets",
     "Total capital adequacy ratio",
-    "Implementation index",
+    "Implementation",
     "Return on assets",
     "Total capital adequacy ratio"
   )
 
 predictor_control <- c(
-  "Draft index",
+  "Draft",
   "Return on assets",
   "Total capital adequacy ratio",
-  "Implementation index",
+  "Implementation",
   "Return on assets",
   "Total capital adequacy ratio"
 )
@@ -901,13 +901,13 @@ dependant_rate <- c(
 )
 
 predictor_finance_controls <-
-  c("Finance regulation index",
+  c("FinReg",
     "Covid-dummy",
     "Repo rate",
     "Consumer confidence",
     "Return on assets",
     "SAVIT40 index",
-    "Financial inclusion index",
+    "FinInclusion",
     "Covid-dummy",
     "Repo rate",
     "Consumer confidence",
