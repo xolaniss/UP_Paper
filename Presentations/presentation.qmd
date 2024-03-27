@@ -1,7 +1,7 @@
 ---
 title: "Regulation and bank lending in South Africa: A narrative approach"
-author: "Dumakude Nxumalo and Keaoleboga Mncube"
-institute: "University of Pretoria"
+author: "Dumakude Nxumalo, Keaoleboga Mncube, Xolani Sibande"
+institute: "University of Pretoria and South African Reserve Bank"
 date: "28 March 2024"
 format: 
     revealjs:
@@ -121,8 +121,8 @@ source(here("Functions","borderlines.R" ))
 ## Econometric approach
 - We use a panel data approach to estimate the impact of regulatory changes on bank lending.
 - For each index the fixed effect model specified as follows:
-$$ Lending_{b,t}^{c} = \beta_1Index_t^i + \beta_2\tau_b^c + \beta_3\lambda_t^c + \beta_4\Omega^c + \epsilon_{b,t}^c, and  $$
-$$ Rate_{b,t}^{c} = \alpha_1Index_t^i + \alpha_2\tau_b^c + \alpha_3\lambda_t^c + \alpha_4\Omega^c + \epsilon_{b,t}^c .$$
+$$ Lending_{b,t}^{c} = \beta_1Index_t^i + \tau_b^c + \lambda_t^c + \beta'\Omega^c + \epsilon_{b,t}^c, and  $$
+$$ Rate_{b,t}^{c} = \alpha_1Index_t^i + \tau_b^c + \lambda_t^c + \alpha'\Omega^c + \epsilon_{b,t}^c .$$
 - Where $b$ is FNB, Absa, Nedbank, or Standard Bank. $t$ is the time period, $c$ is the credit category, and $i$ constitutes the $Draft_t$, $Implementation_t$, $FinReg_t$, or $FinInclusion_t$ indices. 
 
 ## Econometric approach (continued)
@@ -164,6 +164,12 @@ bank_interest_rates_gg +
   
 ```
 
+## Macroprudential regulation narrative indices (examples)
+- For example:
+  - 2013 implementation of BASEL III
+  - Guidance note II of 2012 - new definition of regulatory capital
+  - Guidance note 6 of 2013 - only equities listed on JSE can be included in level 1 capital
+
 ## Macroprudential regulation narrative indices
 ```{r}
 #| label: fig-macro_narrative_indexes_three_month
@@ -173,7 +179,7 @@ bank_interest_rates_gg +
 #| cache: FALSE
 
 narratives <- read_rds(here("Outputs","combined_data", "artifacts_visual_lag_test.rds"))
-macropru_narratives_one_month_gg <- narratives$macropru$three_month_test_macropru_gg
+macropru_narratives_one_month_gg <- narratives$macropru$three_month_test_macropru_totals_gg
 macropru_narratives_one_month_gg +
   facet_wrap(~series, scales = "free_y", ncol = 3) +
   theme(text = element_text(size = 14, face = "bold")
@@ -181,11 +187,11 @@ macropru_narratives_one_month_gg +
 
 ```
 
-## Macroprudential regulation narrative indices (examples)
+## Finance regulation narrative indices (examples)
 - For example:
-  - 2013 implementation of BASEL III
-  - Guidance note II of 2012 - new definition of regulatory capital
-  - Guidance note 6 of 2013 - only equities listed on JSE can be included in level 1 capital
+  - Removal of adverse customer credit information (2013/14)
+  - Reduction in the max interest on credit that could offered by lenders (2015)
+  - National credit regulations amendments (2014-15)
 
 ## Finance regulation narrative indices
 ```{r}
@@ -195,124 +201,14 @@ macropru_narratives_one_month_gg +
 #| fig-width: 20
 #| cache: FALSE
 
-finance_narratives_three_months_gg <- narratives$finance$three_month_test_finance_gg
+finance_narratives_three_months_gg <- narratives$finance$three_month_test_finance_total_gg
 finance_narratives_three_months_gg +
    facet_wrap(~series, scales = "free_y", ncol = 3) +
   theme(text = element_text(size = 14, face = "bold")
         )
 ```
-## Finance regulation narrative indices (examples)
-- For example:
-  - Removal of adverse customer credit information (2013/14)
-  - Reduction in the max interest on credit that could offered by lenders (2015)
-  - National credit regulations amendments (2014-15)
 
 # Macroprudential results
-
-## Macropru regulation and lending volumes
-```{r}
-#| label: tbl-macropru_draft_lending
-#| tbl-cap: "Macroprudential regulations and lending volumes (3-months) results"
-#| cache: FALSE
-#| include: TRUE
-#| eval: TRUE
-#| ft.arraystretch: 1
-
-
-macropru_results <- read_rds(here("Outputs", "models", "artifacts_macropru_models.rds"))
-
-macropru_three_month_results <- read_rds(here("Outputs", "models", "artifacts_three_month_macropru_models.rds"))
-
-rows <- modelsummary_basic(
-    macropru_three_month_results$three_lending_models$three_month_implementation,
-    coef_omit = 2:16,
-    gof_omit = "AIC|BIC|Std|Log",
-    output = "dataframe"
-  ) [, c(2, 4:12)] %>% 
-  add_row(
-   term = "Bank Fixed Effects",  
-  `(1)` = "Yes", 
-  `(2)` = "Yes", 
-  `(3)` = "Yes", 
-  `(4)` = "Yes", 
-  `(5)` = "Yes", 
-  `(6)` = "Yes", 
-  `(7)` = "Yes", 
-  `(8)` = "Yes", 
-  `(9)` = "Yes"
-  ) %>% 
-  add_row(
-   term = "Monthly Fixed Effects",  
-  `(1)` = "Yes", 
-  `(2)` = "Yes", 
-  `(3)` = "Yes", 
-  `(4)` = "Yes", 
-  `(5)` = "Yes", 
-  `(6)` = "Yes", 
-  `(7)` = "Yes", 
-  `(8)` = "Yes", 
-  `(9)` = "Yes"
-  ) 
-  
-rows_tbl <-  tibble(
-  "term" = "Implementation model",  
-  "(1)" = " ", 
-  "(2)" = " ", 
-  "(3)" = " ", 
-  "(4)" = " ", 
-  "(5)" = " ", 
-  "(6)" = " ", 
-  "(7)" = " ", 
-  "(8)" = " ", 
-  "(9)" = " ") %>% 
-  add_row(rows)
-
-predictor_macro <- c("Draft", "Implementation")
-
-dependant_lending <- c(
-  " ",
-  "Unsecured",
-  "Secured",
-  "Mortgages",
-  "Unsecured",
-  "Secured",
-  "Mortgages",
-  "Unsecured",
-  "Secured",
-  "Mortgages"
-)
-modelsummary_word(
-  macropru_three_month_results$three_lending_models$three_month_draft,
-  coef_omit = 2:16,
-  gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
-  add_rows = rows_tbl
-) %>%
-  width(j = 1, width = 3) %>%
-  add_body_row(values =
-                 c("Draft model"),
-               colwidths = 10) %>%
-  merge_at(i = 3, j = 1:10) %>%
-  add_header_row(
-    values = c("", "Total", "Corporates", "Households"),
-    colwidths = c(1, 3, 3, 3)) %>% 
-  align(align = "center", part = "header", i = 1) %>%
-  align(align = "center", part = "body", i = 1) %>%
-  align(align = "center", part = "body", i = 3) %>%
-  hline(i = 4, j = 1:10, part = "body") %>%
-  mk_par(
-    i = 2,
-    part = "header",
-    value = as_paragraph(dependant_lending)
-  ) %>% 
-  mk_par(
-    j = 1,
-    i = c(2, 4),
-    part = "body",
-    value = as_paragraph(predictor_macro)
-  ) %>% 
-  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
-```
-
 ## Macropru regulation and lending rates 
 ```{r}
 #| label: tbl-macropru_draft_rates
@@ -320,6 +216,8 @@ modelsummary_word(
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: 1
+
+macropru_results <- read_rds(here("Outputs", "models", "artifacts_macropru_models.rds"))
 
 rows <- modelsummary_basic(
     macropru_results$rates_models$implementation,
@@ -378,7 +276,7 @@ dependant_rate <- c(
   "Mortgage"
 )
 
-
+predictor_macro <- c("Draft", "Implementation")
 
 modelsummary_word(
     macropru_results$rates_models$draft,
@@ -412,6 +310,110 @@ modelsummary_word(
   hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) 
 
 ```
+
+
+## Macropru regulation and lending volumes
+```{r}
+#| label: tbl-macropru_draft_lending
+#| tbl-cap: "Macroprudential regulations and lending volumes (3-months) results"
+#| cache: FALSE
+#| include: TRUE
+#| eval: TRUE
+#| ft.arraystretch: 1
+
+macropru_three_month_results <- read_rds(here("Outputs", "models", "artifacts_three_month_macropru_models.rds"))
+
+rows <- modelsummary_basic(
+    macropru_three_month_results$three_lending_models$three_month_implementation,
+    coef_omit = 2:16,
+    gof_omit = "AIC|BIC|Std|Log",
+    output = "dataframe"
+  ) [, c(2, 4:12)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) 
+  
+rows_tbl <-  tibble(
+  "term" = "Implementation model",  
+  "(1)" = " ", 
+  "(2)" = " ", 
+  "(3)" = " ", 
+  "(4)" = " ", 
+  "(5)" = " ", 
+  "(6)" = " ", 
+  "(7)" = " ", 
+  "(8)" = " ", 
+  "(9)" = " ") %>% 
+  add_row(rows)
+
+
+
+dependant_lending <- c(
+  " ",
+  "Unsecured",
+  "Secured",
+  "Mortgages",
+  "Unsecured",
+  "Secured",
+  "Mortgages",
+  "Unsecured",
+  "Secured",
+  "Mortgages"
+)
+modelsummary_word(
+  macropru_three_month_results$three_lending_models$three_month_draft,
+  coef_omit = 2:16,
+  gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+  add_rows = rows_tbl
+) %>%
+  width(j = 1, width = 3) %>%
+  add_body_row(values =
+                 c("Draft model"),
+               colwidths = 10) %>%
+  merge_at(i = 3, j = 1:10) %>%
+  add_header_row(
+    values = c("", "Total", "Corporates", "Households"),
+    colwidths = c(1, 3, 3, 3)) %>% 
+  align(align = "center", part = "header", i = 1) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 3) %>%
+  hline(i = 4, j = 1:10, part = "body") %>%
+  mk_par(
+    i = 2,
+    part = "header",
+    value = as_paragraph(dependant_lending)
+  ) %>% 
+  mk_par(
+    j = 1,
+    i = c(2, 4),
+    part = "body",
+    value = as_paragraph(predictor_macro)
+  ) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
+```
+
+
 
 ## Discussion - Macroprudential regulation
 - The macroprudential regulation results suggests lending portfolio rebalancing phenomena. This result was also robust with controls.
@@ -644,7 +646,8 @@ modelsummary_word(
 
 
 ## Conclusions
-
+- Macro prudential developments are working as intended. There is a portfolio rebalancing where banks move from riskier unsecured lending to the more prudent credit types
+- Finance regulations have the effect of restricting credit supply. In so far as financial inclusion is concerned, the actual effects are contrary to aims of fostering greater inclusion
 
 # Appendix: Results with controls
 

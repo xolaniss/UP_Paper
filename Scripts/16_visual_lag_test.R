@@ -111,6 +111,16 @@ three_month_test_macropru_gg <- test_plot(macropru_test_tbl,
 one_month_test_macropru_gg
 three_month_test_macropru_gg
 
+
+# Total macropru tests ----------------------------------------------------
+
+three_month_test_macropru_totals_gg <- test_plot(macropru_test_tbl %>% dplyr::select(date, 
+                                                                                     `draft index`,
+                                                                                     `implementation index`,
+                                                                                     contains("total_")),
+                                          lag_string = "three",
+                                          axis_title = "Three month growth (%) / Index")
+
 # Competition test -----------------------------------------------------------
 competition_test_tbl <- 
   combined_tbl %>% 
@@ -140,15 +150,29 @@ three_month_test_finance_gg <- test_plot(competition_test_tbl,
 one_month_test_finance_gg
 three_month_test_finance_gg
 
+
+# Summarised competition test ---------------------------------------------
+three_month_test_finance_total_gg <- test_plot(competition_test_tbl %>% dplyr::select(date,
+                                                                                `Finance regulation index`,
+                                                                                `Financial inclusion index`,
+                                                                                contains("total_")),
+                                         index_1 = `Finance regulation index`,
+                                         index_2 = `Financial inclusion index`,
+                                         lag_string = "three",
+                                         axis_title = "Three month growth (%) / Index")
+
+
 # Export ---------------------------------------------------------------
 artifacts_visual_lag_test <- list(
   macropru = list(
   one_month_test_macropru_gg = one_month_test_macropru_gg,
-  three_month_test_macropru_gg = three_month_test_macropru_gg
+  three_month_test_macropru_gg = three_month_test_macropru_gg,
+  three_month_test_macropru_totals_gg = three_month_test_macropru_totals_gg
   ),
   finance = list(
   one_month_test_finance_gg = one_month_test_finance_gg,
-  three_month_test_finance_gg = three_month_test_finance_gg
+  three_month_test_finance_gg = three_month_test_finance_gg,
+  three_month_test_finance_total_gg = three_month_test_finance_total_gg
   )
 )
 
