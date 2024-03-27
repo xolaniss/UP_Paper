@@ -1,6 +1,6 @@
 ---
 title: "Regulation and bank lending in South Africa: A narrative approach"
-author: "Dumakude Nxumalo, Keaoleboga Mncube, Xolani Sibande"
+author: "Dumakude Nxumalo, Keaoleboga Mncube, and Xolani Sibande"
 institute: "University of Pretoria and South African Reserve Bank"
 date: "28 March 2024"
 format: 
@@ -631,19 +631,10 @@ modelsummary_word(
 
 
 ## Discussion - Finance and inclusion regulation  {.smaller}
-- The finance and inclusion regulation results indicate a decrease in lending volumes and an increase in lending rates. However, the lending rates results are sensitive to controls.
+- The finance and inclusion regulation results indicate a decrease in lending volumes and an increase in lending rates.
 - Finance regulation:
-  - The lending volumes specifically decrease in the unsecured lending for both corporates and households. 
-  - Mortgage lending volumes increase for households
-  - For households and corporates lending rates increased for the secured credit, and an increase in lending rates for households mortgages.
-
-
-## Discussion - Finance and inclusion regulation (continued)  
-
-- Finance inclusion:
-  - Similar to finance regulation results but with stronger effects on lending volumes.
-- Overall and contrary to the intentions of the changes of these regulations, the results indicate a decrease in lending volumes and an increase in lending rates.
-
+  - The lending volumes specifically decrease in the unsecured lending for corporates. 
+  - For households and corporates lending rates increased for the unsecured credit, and an decrease in lending rates for households mortgages.
 
 ## Conclusions
 - Macro prudential developments are working as intended. There is a portfolio rebalancing where banks move from riskier unsecured lending to the more prudent credit types
