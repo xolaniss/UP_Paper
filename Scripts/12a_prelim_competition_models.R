@@ -50,7 +50,7 @@ combined_tbl <-
   mutate(covid_dummy = if_else(Date >= "2020-03-01", 1, 0)) %>%  # Covid dummy
   dplyr::filter(Banks != "Total Banks") %>%
   clean_names() %>% 
-  filter(date >= "2012-01-01" & date < "2020-03-01") # Covid adjustment
+  filter(date >= "2009-01-01" & date < "2020-03-01") # Covid adjustment
 combined_tbl %>% glimpse()
 
 
