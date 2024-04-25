@@ -2,7 +2,7 @@
 format:
   pdf:
     tbl-cap-location: top
-    dpi: 500
+    dpi: 350
     fig-pos: "H"
     number-sections: true
     cite-method: natbib
@@ -15,7 +15,7 @@ format:
           \newcommand{\bsideways}{\begin{sidewaystable}[htbp]}
           \newcommand{\esideways}{\end{sidewaystable}}
       - file: preamble.tex 
-    include-before-body: title.tex
+    include-before-body: title_v2.tex
     keep-tex: TRUE
   docx:
     reference-doc: new_template_no_numbering.docx
@@ -26,7 +26,7 @@ execute:
   echo: false
   warning: false
 editor: source
-bibliography: references.bib
+bibliography: references_v2.bib
 biblio-style: apalike
 natbiboptions: round
 link-citations: true
@@ -222,17 +222,17 @@ descriptives_tbl %>%
   as_flextable(hide_grouplabel = TRUE) %>% 
   colformat_double(digits = 2, i = 2:10, j = 2:6) %>%
   colformat_double(digits = 2, i = 11:20, j = 2:6) %>%
-  colformat_double(digits = , i = 22:26, j = 2:6) %>%
-  colformat_double(digits = 2, i = 27:30, j = 2:6) %>%
+  colformat_double(digits = 2 , i = 22:26, j = 2:6) %>%
+  colformat_double(digits = 2, i = 27:29, j = 2:6) %>%
   width(j = 1, width = 1.5) %>%
-  align(align = "center", i = c(1, 11, 21, 24, 27), part = "body") %>%
+  align(align = "center", i = c(1, 11, 21, 24, 26), part = "body") %>%
   autofit(add_w = -0.1)
 ```
 
 
 ## Methodology
 
-We use a panel data approach to estimate the impact of the different regulatory developments on bank rates and three month changes in bank lending volumes. The three month change in lending is calculated as the log difference of lending at $t$ and $t-3$.^[We perform a visual test of the correlations between the response variables and our narrative indices. These are provided in Figures [[xx]] and [[xx]] in Appendices A.7 and A.9. We find a stronger co-movement between the narrative indicators and three month change in lending. This is because the three month growth rates are less volatile than than the one month changes.] This approach is consistent with \cite{aiyar2016does}, \cite{deli2017real}, \cite{fang2022bank} and \cite{mirzaei2022effectiveness} who also consider the effect of macroprudential reforms on the stock of lending. [[check that the consistency in the growth rate period. If not, then rephrase the para.]]
+We use a panel data approach to estimate the impact of the different regulatory developments on bank rates and three month changes in bank lending volumes. The three month change in lending is calculated as the log difference of lending at $t$ and $t-3$.^[We perform a visual test of the correlations between the response variables and our narrative indices. These are provided in @fig-macro_narrative_indexes_three_month and @fig-comp_narrative_indexes_three_month in Appendices A.7 and A.9. We find a stronger co-movement between the narrative indicators and three month change in lending. This is because the three month growth rates are less volatile than than the one month changes.] This approach is consistent with \cite{aiyar2016does}, \cite{deli2017real}, \cite{fang2022bank} and \cite{mirzaei2022effectiveness} who also consider the effect of macroprudential reforms on the stock of lending.
 
 Our approach differs from existing literature in the following respects. First, our analysis considers the impact of regulatory developments on both lending volumes and bank pricing. Second, we measure bank responses in disaggregated customer segments, as opposed to assess changes in aggregate lending. This approach allows us to measure whether bank responses differ in different customers segments. Third, our analysis considers separate estimations for each of the narrative indices. This allows us to estimate how differently banks respond in the face of different regulation. Our approach provides us with the ability to infer whether these two regulatory approaches are consistent with their own objectives, but also with each other.
 
@@ -247,6 +247,19 @@ Lending_{b,t}^{c} = \beta_1Index_t^i + \tau_b^c + \lambda_t^c + \beta'\Omega^c +
 Where $b$ $\in [FNB, Absa, Nedbank, Standard Bank]$; $t$ is the time period; $c$ is the credit category; and $i$ $\in$ $[Draft_t, Implementation_t, FinReg_t]$. Therefore $Lending_{b,t}^c$ are the bank level three month growth of lending, and $Rate_{b,t}^c$ are the bank level lending rates. $\Omega^c$ is a matrix of controls which includes a covid dummy, bank level variables, and other macroeconomic variables. $\tau_b^c$ captures the bank fixed effect, $\lambda_t^c$ are the time fixed effects, and $\epsilon_{b,t}^c$ are the error terms.
 
 # Results
+
+## Responses to regulation
+
+Tables 2 and 4  report the results from the estimation of equation (1), with standard errors clustered at bank level. Tables 3 and 5 relate to equation (2), where the dependent variable is the log difference in lending volumes between $t$ and $t-3$, also clustered at bank level.\footnote{Results of one month loan volume changes are available upon request}.  
+
+With regard the impact of macroprudential regulation and bank lending rates, we find that interest rates on unsecured lending rise while those on secured lending and mortgage fall, by under 1\%. The results are consistent and significant when we consider the effect on households and corporates. Household unsecured and mortgage rates, have  a stronger reaction relative to corporate rates. Total unsecured lending rate increases by approximately 2.5\% while lending rates on secured loans and mortgages fall half a percentage point. Lending rates on household unsecured  loans rise more relative to corporate unsecured lending rates (over 3\% relative to 2\%  increase in corporate unsecured lending rates). On the other hand, secured and mortgage lending rates for corporates decline more relative to secured and mortgage lending rates on households. 
+
+With regard the impact of macroprudential regulation and bank lending growth, we find that the draft indicator is associated with a 2\% increase in secured lending and an under 1\% decline in mortgage lending. The signs of the coefficients are consistent and significant for both unsecured lending to corporates and households as well as mortgage lending to corporates and households. However, lending to households has a stronger reaction relative to lending to corporates. On the contrary, we find that following regulatory implementation, total unsecured lending falls by approximately 2\%, while the effect on total secured lending is insignificant. The results are consistent for unsecured lending to corporates and households (although the coefficient on unsecured household lending is insignificant). 
+
+For both lending rates and volumes, we find that banks respond stronger and significantly following macruprudential regulatory implementation, relative to responses to the draft indicator. The results hold when we include controls, as shown in Table A.5 in Appendix A.10. 
+
+Tables 4 provides the results of how lending rates have responded to the finance regulations that have sought to enhance inclusion. Unsecured lending rates for households increase by 1.2% and increase by 0.8% for corporates. We also find statistically significant decreases in mortgage rates of 0.3% for households and 0.4% for corporates. [[results are not robust. requires different specification and re-estimation]].
+
 
 \bsideways
 ```{r}
@@ -669,23 +682,12 @@ modelsummary_word(
 ```
 \esideways
  
-## Responses to regulation
-
-Tables 2 and 4  report the results from the estimation of equation (1), with standard errors clustered at bank level. Tables 3 and 5 relate to equation (2), where the dependent variable is the log difference in lending volumes between $t$ and $t-3$, also clustered at bank level.\footnote{Results of one month loan volume changes are available upon request}.  
-
-With regard the impact of macroprudential regulation and bank lending rates, we find that interest rates on unsecured lending rise while those on secured lending and mortgage fall, by under 1\%. The results are consistent and significant when we consider the effect on households and corporates. Household unsecured and mortgage rates, have  a stronger reaction relative to corporate rates. Total unsecured lending rate increases by approximately 2.5\% while lending rates on secured loans and mortgages fall half a percentage point. Lending rates on household unsecured  loans rise more relative to corporate unsecured lending rates (over 3\% relative to 2\%  increase in corporate unsecured lending rates). On the other hand, secured and mortgage lending rates for corporates decline more relative to secured and mortgage lending rates on households. 
-
-With regard the impact of macroprudential regulation and bank lending growth, we find that the draft indicator is associated with a 2\% increase in secured lending and an under 1\% decline in mortgage lending. The signs of the coefficients are consistent and significant for both unsecured lending to corporates and households as well as mortgage lending to corporates and households. However, lending to households has a stronger reaction relative to lending to corporates. On the contrary, we find that following regulatory implementation, total unsecured lending falls by approximately 2\%, while the effect on total secured lending is insignificant. The results are consistent for unsecured lending to corporates and households (although the coefficient on unsecured household lending is insignificant). 
-
-For both lending rates and volumes, we find that banks respond stronger and significantly following macruprudential regulatory implementation, relative to responses to the draft indicator. The results hold when we include controls, as shown in Table A.5 in Appendix A.10. 
-
-Tables 4 provides the results of how lending rates have responded to the finance regulations that have sought to enhance inclusion. Unsecured lending rates for households increase by 1.2% and increase by 0.8% for corporates. We also find statistically significant decreases in mortgage rates of 0.3% for households and 0.4% for corporates. [[results are not robust. requires different specification and re-estimation]].
-
 Table 5 provides responses in the three month growth of bank lending volumes in response to finance regulations. We only find that lending to corporates respond to regulatory developments. Results suggest that there was a 1.7% decrease in growth rates of unsecured lending to corporates following finance regulatory changes. Conversely, banks had a statistically significant increase of 0.7% in the growth rate of secured lending to corporates. We do not find any evidence of changes in bank lending to households, as well as in mortgage lending to corporates.
-
+ 
+ 
 ## Discussion
 
-**Macroprudential regulatory changes**
+### Macroprudential regulatory changes
 
 The analysis in the paper adds to the existing work on consequences of macroprudential regulation in emerging markets, similar to \cite{sibande2024} and \cite{makrelov2024lending}. Our results however,  are directly not comparable to other studies since firstly,  we consider  entirely, the effects of anticipated regulatory changes captured by the pre-announcement of the regulation and the eventual implementation of the regulation.  Secondly, we consider the effect of these pre-announced regulation on  loan growth and interest rates on lending, for secured, unsecured and mortgage loans. 
  
@@ -706,11 +708,9 @@ Second is that mortgage lending declines following stringent macroprudential ref
 
 A report by the Actuarial Society of South Africa highlights that banks have reduced their relative exposures to mortgages and have in turn, increased their exposures to loan classes that are for consumption purposes. It also highlights that the introduction of the Net Stable Funding Ratio (NSFR) which form part of Basel III, potentially implies higher funding costs on retail mortgages relative to unsecured retail loans. In turn, these costs can be shifted to consumers through higher mortgages lending rates (which does not show up in our results) and/or rationing of mortgage lending for a given level of lending rate.
 
-The report also highlights impact of Basel III on securitization, where stricter risk weights are attached to it, particularity securitization balances on mortgages. Securitization is also a means to raise funding for long-term assets such as mortgages. Therefore stricter weights attached could affect bank appetite to mortgage lending. For instance, a report by the Banking Association of South Africa (BASA) indicates that securitization balances on mortgages have declined from R30 billion in 2008 to around R4 billion in 2022 \footnote{Report available at: https://securitisation.banking.org.za/index.php.}.  This points to   evidence  relating to the reduction in the  use of securitization by banks to fund mortgage lending, following tightened regulation. 
-
 The results also point to the unique nature of the banking system in South Africa and consequently, the response of banks to macroprudential regulation. The heterogeneous response of secured, unsecured and mortgage lending (both outstanding amounts and interest rates) also provide insights on and the mechanisms with which they are affected, following  stringent capital requirements.
 
-**Finance regulatory changes**
+### Finance regulatory changes
 
 The results contained in Tables 4 and 5 show the changes in bank responses following inclusion focused finance regulations. We find that these regulatory developments are associated with increased bank lending rates to corporates and households in unsecured lending, and decreased mortgage lending to both these customer groups. Growth in bank lending volumes decrease in unsecured lending to corporates.
 
@@ -746,8 +746,7 @@ Overall, our results indicate that macroprudential policy is working as intended
 \newpage
 
 
-
-# Appendix
+# Appendix 
 
 ## Data sources
 
@@ -1249,40 +1248,36 @@ This section provides a detailed account of the narrative macroprudential indica
 2008/01/01:  \textcolor{ForestGreen}{Implementation}
 \begin{quote}
             BASEL II is  Implemented until Dec 2011
-
-
-\end{quote}%
+\end{quote}
 
 2009/02/04: \textcolor{blue}{Announcement, draft and passing of regulation}
 
-           \begin{quote}SARB issues  \textbf{directive 1/2009 (1 of 2009)} announcing the approach banks should follow in the application of capital floors. "Modelled capital should not be below 80\% of the capital requirements under Basel I to ensure capital levels do not fall below prudent level". Following Basel II, banks are allowed to use internal models to determine risk weights and in turn, determine capital levels. However, capital floors ensure capital requirements did not fall below a certain percentage of banks’ capital requirements under the previous Basel I framework\citep{basel06}. This in essence, imply greater risk weight attached to riskier credit products. For instance,  \cite{imbierowicz2018time} show that Danish banks reducing their lending on loans with higher risk weights, in response to higher capital requirements, including approaches to capital floors.
-           \end{quote}%
+\begin{quote}SARB issues  \textbf{directive 1/2009 (1 of 2009)} announcing the approach banks should follow in the application of capital floors. "Modelled capital should not be below 80\% of the capital requirements under Basel I to ensure capital levels do not fall below prudent level". Following Basel II, banks are allowed to use internal models to determine risk weights and in turn, determine capital levels. However, capital floors ensure capital requirements did not fall below a certain percentage of banks’ capital requirements under the previous Basel I framework\citep{basel06}. This in essence, imply greater risk weight attached to riskier credit products. For instance,  \cite{imbierowicz2018time} show that Danish banks reducing their lending on loans with higher risk weights, in response to higher capital requirements, including approaches to capital floors.
+ \end{quote}
 
 
 2009/07/31*: \textcolor{blue}{Announcement, draft and passing of regulation}
              \begin{quote}BCBS announces "measures to strengthen the 1996 rules governing trading book capital and to enhance the three pillars of the Basel II framework (Basel 2.5)". This in essence, aims  to introduce higher capital requirements to capture the credit risk of complex trading activities, promote the build-up of capital buffers that can be drawn down in periods of stress and strengthen the quality of bank capital\citep{basel09}
-                \end{quote}%
+                \end{quote}
  
 
 
 2010/10/08*: \textcolor{blue}{Announcement, draft and passing of regulation}
             \begin{quote}SARB issues \textbf{circular 3/2010} endorsing and giving notices to banks to prepare for the implementation of Basel 2.5, following the communication by the BCBS on July 31, 2009
 
-\end{quote}%
+\end{quote}
 
 
  2011/06/30*:   \textcolor{blue}{Announcement, draft and passing of regulation}
 
-        \begin{quote}BCBS issues and publishes Basel III: A Global Regulatory Framework for More Resilient Banks and Banking Systems. 
-\end{quote}%
+\begin{quote}BCBS issues and publishes Basel III: A Global Regulatory Framework for More Resilient Banks and Banking Systems. 
+\end{quote}
 
 
 2011/07/31: \textcolor{blue}{Announcement, draft and passing of regulation}
- \begin{quote} 
+\begin{quote} 
 Cabinet adopts proposal to shift to Twin Peaks Model of Financial Regulation in South Africa, following he GFC, with the aim of improving  institutional structure to support financial regulation. This is a signal to stricter oversight on the overall financial system
-\end{quote}%
-
-
+\end{quote}
 
 
 2011/10/31: \textcolor{blue}{Announcement, draft and passing of regulation}
@@ -1306,7 +1301,6 @@ Cabinet adopts proposal to shift to Twin Peaks Model of Financial Regulation in 
 
 \begin{quote}
     
-
 SARB issues \textbf{guidance note 2/2012} announcing on new definition of total regulatory capital for Basel III such as:
 \begin{itemize}
     \item Phasing out arrangements for non-common equity Tier 1 capital instruments that no longer qualify as regulatory capital under Basel III
@@ -1317,11 +1311,9 @@ SARB issues \textbf{guidance note 2/2012} announcing on new definition of total 
 \end{quote}
 
 
-
 2012/05/31*: \textcolor{blue}{Announcement, draft and passing of regulation}
 
 \begin{quote}
-
 SARB issues \textbf{guidance Note G5/2012} announcing that it will provide  liquidity facility to assist banks in meeting the liquidity Coverage Ratio (LCR) and cash reserves can be included as banks' high quality liquid assets for calculating LCR. This follows results from Quantitative Impact Studies (QIS) exercises by banks,  which revealed some banks would have shortfalls of around R140 billion in meeting the 100\% LCR  by 1 Jan 2019 due do to reliance eon short-term funding limited availability of HQLA
 
 \begin{itemize}
@@ -1337,8 +1329,6 @@ SARB issues \textbf{guidance Note G5/2012} announcing that it will provide  liqu
 
 2012/08/15*: \textcolor{blue}{Announcement, draft and passing of regulation}
 \begin{quote}
-    
-
 SARB transposes Basel III into law and publishes Counter-cyclical Capital Buffer (CCyB) rules, set to be implemented on 1 January 2016
 \end{quote}
 
@@ -1352,23 +1342,19 @@ SARB transposes Basel III into law and publishes Counter-cyclical Capital Buffer
 2013/08/20: \textcolor{blue}{Announcement, draft and passing of regulation}
 \begin{quote}
  SARB issues \textbf{Guidance Note 6/2013} announcing that banks' cash reserves may be included as part of their level 1 HQLA. Only equities listed on JSE's main exchange and included on Top 40 Index shall be considered as level2 HQLA (\textit{Potentially limit banks' ability to raise capital}).
-
 \end{quote}
 
 
 2014/01/31: \textcolor{ForestGreen}{Implementation}
 \begin{quote}
-
 SARB mimimum Capital Requirements increase to:\\
 Total CET1, 5,5\%, Total Tier1, 7\%, Total regulatory capital, 8\%, Total regulatory capital for D-SIB, 10\%
-
 \end{quote}
 
 
 
 2014/12/31: \textcolor{blue}{Announcement, draft and passing of regulation}
 \begin{quote}
-
 SARB issues \textbf{guidance note 8/2014} announcing  the provision of a committed liquidity facility  (CLF). This is to assist banks to meet the LCR.
 Banks, however need to have collateral to access the CLF, consisting of:
 \begin{itemize}
@@ -1376,13 +1362,10 @@ Banks, however need to have collateral to access the CLF, consisting of:
 \item Other loans and advances such as VAF, excluding unsecured loans
 \item Domestically listed securities
 \end{itemize}
-
-
 \end{quote}
 
 2015/01/31*: \textcolor{ForestGreen}{Implementation}
 \begin{quote}
-
 LCR ratio is introduced/implemented at 60\% compliance
 \end{quote}
 
@@ -1391,7 +1374,6 @@ LCR ratio is introduced/implemented at 60\% compliance
 
 2015/12/31*: \textcolor{blue}{Announcement, draft and passing of regulation}
 \begin{quote}
-
 SARB issues \textbf{circular 8/2015} announcing timelines and targets in respect of  the implementation of the countercyclical capital buffer (CCyB). SARB requirements shall apply to bank-wide total RWA:
 \begin{itemize}
     \item 0.625\% on 1 Jan 2016
@@ -1414,10 +1396,6 @@ CCyB is implemented and set at 0.625\%
 2016/04/13*: \textcolor{blue}{Announcement, draft and passing of regulation}
 \begin{quote}
 SARB issues \textbf{directive 1/2016} to inform all banks of matters related to the exposure limits imposed in the classification of deposits and credit exposures to small and medium enterprises  (SMEs), to be implemented on 1 July 2016. For instance, total exposure of a bank to an SME borrower, which shall be determined or calculated on a consolidated basis, at no time exceeds R12,5 million (\textit{Greater limits on value of a loan that can be extended to an SME})
-
-
-
-
 \end{quote}
 
 2016/07/01*: \textcolor{ForestGreen}{Implementation}
@@ -1435,12 +1413,7 @@ LCR ratio is introduced/implemented at 80\% compliance, while CCyB increases to 
 
 \begin{quote}
 2017/12/13*: \textcolor{blue}{Announcement, draft and passing of regulation}
-
-
 SARB issues \textbf{directive 8/2017} informing banks to comply with the Net Stable Funding Ratio (NSFR) framework and on matters related to calibration of NSFR, including  template to monitor NSFR compliance. Agrees to start implementation on 1 January 2018. Objective is to reduce funding risk over a longer time horizon by requiring banks to fund their activities with sufficiently stable sources of funding in order to mitigate the risk of future funding stress. \textit{Banks will be required to match their funding with their outflows, which may lead to a greater demand for longer term funding. Longer term funding will result in an increased cost of funding for banks (possibly passed on to borrowers and lower profitability and returns for banks}
-
-
-
 \end{quote}
 
 
@@ -1448,15 +1421,11 @@ SARB issues \textbf{directive 8/2017} informing banks to comply with the Net Sta
 2018/01/31*: \textcolor{ForestGreen}{Implementation}
 \begin{quote}
 NSFR Implemented following  Directive 8/2017, CCyB increases to 1,875\% and LCR is implemented at 90\% compliance.
-
-
 \end{quote}
 
 
 2019/01/31*: \textcolor{ForestGreen}{Implementation}
 \begin{quote}
-
-
 CCyB increases to 2,5\% (maximum) and LCR is implemented at 100\% compliance.
 \end{quote}
 
@@ -1556,7 +1525,7 @@ macropru_narratives_one_month_gg
 
 ```{r}
 #| label: fig-comp_narrative_indexes_one_month
-#| fig-cap: "One month lending growth and financial narrative index comparison. Note: The black line represents the Financial regulation index, and the red line represents the Financial inclusion index."
+#| fig-cap: "One month lending growth and financial narrative index comparison. Note: The black line represents the Financial regulation index."
 #| fig-height: 8
 #| fig-width: 8
 #| cache: FALSE
@@ -1569,7 +1538,7 @@ finance_narratives_one_month_gg
 
 ```{r}
 #| label: fig-comp_narrative_indexes_three_month
-#| fig-cap: "Three month lending growth and financial narrative indexes comparison. Note: The black line represents the Financial regulation index, and the red line represents the Financial inclusion index."
+#| fig-cap: "Three month lending growth and financial narrative indexes comparison. Note: The black line represents the Financial regulation index."
 #| fig-height: 8
 #| fig-width: 8
 #| cache: FALSE
