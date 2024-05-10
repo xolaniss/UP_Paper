@@ -96,13 +96,13 @@ source(here("Functions","borderlines.R" ))
 
 # Introduction
 
-Macroprudential policies are pursued in order to achieve stability in the finance sector. These policies could consist of higher bank capital requirements that ultimately lower lending in order to meet said requirements. The South African government has also sought to achieve greater levels of financial inclusion, largely through finance sector regulatory reforms. One of the primary ways of enhancing inclusion is through the extension of affordable credit to those who may have poor access or may have been excluded in the ordinary course. The existence of these two types of policies potentially suggest that their application may be at odds. Our paper therefore first analyses whether the realised impacts of regulatory developments related to macroprudential policy and financial inclusion meet their intended goals. Secondly, we consider whether the two regulatory approaches are potentially contradictory.
+The greater extension of affordable credit is one key component to financial inclusion.^[Financial inclusion is a multi-faceted concept that relates to access by individuals and businesses to affordable transaction, payments, savings, credit and insurance products [@WBGweb]. This paper focuses on the aspect of inclusion related to the greater usage of affordable credit]. Owing to South Africa's Apartheid history, levels of financial inclusion were significant low at the dawn of democracy [@hawkins2004]. Increasing financial inclusion levels has thus been a government imperative post-1994, and has been pursued through finance sector regulatory reforms. However, research indicates that greater financial inclusion, achieved through credit extension, may lower financial stability [@garcia2016]. Conversely, macroprudential policies are necessarily pursued in order to achieve stability in the finance sector and consists of policies that could increase bank capital requirements that ultimately lower lending in order to meet said requirements. Therefore inclusion and macroprudential policies have different objectives that could offset one another. 
 
-We achieve this through a panel data approach to estimate the impact of the different regulatory developments on bank rates and three month changes in bank lending volumes. To measure regulatory developments, we develop narrative indices that comprehensively measure all developments relevant to our study. This approach is consistent with various studies that consider the effect of macroprudential reforms on the stock of lending. However, this paper extends this type of analysis by also considering the impact of finance regulations geared towards financial inclusion.
+In this paper we first estimate the realised impacts of separate regulatory developments related to macroprudential policy and financial inclusion to determine if these initiatives meet their intended goals. Secondly, we consider whether the two regulatory approaches are potentially contradictory. We achieve this through a panel data approach to estimate the impact of the different regulatory developments on bank rates and three month changes in bank lending volumes. 
 
-We compile a dataset comprising of public and confidential bank data related to the four largest banks in South Africa. This allows us to analyse how the largest banks in South Africa respond to the two potentially opposing regulations. To the best of our knowledge, this paper is the first in South Africa to consider the impact of bank regulation on bank pricing.
+To measure regulatory developments, we develop narrative indices that comprehensively measure all developments relevant to our study. This approach is consistent with various studies that consider the effect of macroprudential reforms on the stock of lending. However, this paper extends this type of analysis by also considering the impact of finance regulations geared towards financial inclusion. We also compile a dataset comprising public and confidential bank data related to the four largest banks in South Africa. This allows us to analyse how the largest banks in South Africa respond to the two potentially opposing regulations. To the best of our knowledge, this paper is the first in South Africa to consider the impact of bank regulation on bank pricing.
 
-Our results indicate that macroprudential policy results in the banks in our sample rebalancing their loan portfolios. This refers to when banks reduce their relatively riskier loan portfolio (e.g reduction in unsecured lending) and rebalance their portfolios towards more prudent ones (secured loan portfolio) \citep{deli2017real}. This is due to the fact that macroprudential reforms require banks to attach greater risk weights to certain loan portfolios such as unsecured credit. We also find that banks increase lending rates for unsecured lending across both corporate and households in response to finance regulation aimed at inclusion. Rates for mortgates decrease in both segments as well. We also note a decrease in the growth of lending volumes in the unsecured segment for corporates. The finance regulation we consider appears to have the effect of introducing greater risk by increasing information asymmetry in credit markets. The end result of this is restricted credit supply. Efforts aimed at inclusion appear to have an impact that is contrary to the regulations' stated aims.
+Our results indicate that macroprudential policy is working as intended to achieve financial sector stability. We find that macroprudential regulation results in increases in interest rates in unsecured lending and decreases in secured lending and mortgage rates. Macroprudential regulations are also associated with positive growth in lending volumes in unsecured and secured credit while mortgage lending growth rates decrease. We estimate that inclusion focused initiatives result in increased bank lending rates for unsecured credit to households and decreased growth in the unsecured lending volumes to households. We also observe increases in the growth of secured lending to corporates and a decrease in secured lending rates paid by those corporates. As opposed to these two regulatory approaches offsetting one another, we find that the estimated impacts of financial inclusion initiatives largely overlap with those estimated for macroprudential policy. This is likely because inclusion focused regulation may be at odds with its own stated objectives.
 
 The paper is structured as follows. First, we provide a comprehensive review of literature that indicate how banks have responded to macroprudential and finance regulation intended for inclusion. Second, we describe the construction of our narrative indices. Third, we describe our data and methodology. Fourth, we discuss our results and thereafter conclude.
 
@@ -124,21 +124,19 @@ Interestingly, work on the potential effect of macroprudential reforms in emergi
 
 ## Financial inclusion regulatory developments 
 
-Financial inclusion is a multi-faceted concept that relates to access by individuals and businesses to affordable transaction, payments, savings, credit and insurance products [@WBGweb]. Owing to South Africa's Apartheid history, levels of financial inclusion were significant low at the dawn of democracy [@hawkins2004]. Increasing financial inclusion levels were thus a government imperative post-1994. It is postulated that higher levels of financial inclusion are able to reduce poverty as individuals and households are better enabled to manage risk [@ardington2004;@matsebula2020]. Research by @mahalika2023 find a positive association between financial exclusion and poverty in South Africa. On a macro-level, there are studies, albeit limited, linking financial inclusion with greater economic growth, employment and lower inequality [@demirgucc2017]. 
+Financial inclusion has been identified as key to development. Greater access to credit, savings account and transactional services have enabled individuals to store money safely, make and receive payments and invest for the future [@demirgucc2021]. Empirical studies have also shown that greater levels of financial inclusion are associated with lower levels of poverty. @mahalika2023 estimate such a relationship for South Africa through the regression of poverty levels on a meaure of derived measure of financial exclusion. On a macro-level, there are studies, albeit limited, linking financial inclusion with greater economic growth, employment and lower inequality [@demirgucc2017]. The importance of financial inclusion is also highlighted by its recognition as a strategy that could be used to achieve the United Nation's sustaiable development goals [@ozili2021].^[More specifically, @yap2023 conduct a cross-country analysis examining the relationship between 7 sustainable development goals (SDGs) and financial inclusion. They find statistical evidence indicating that greater financial inclusion is associated with SDGs 2 (ending hunger), 5 (reducing gender inequality) and 8 (promoting economic growth).] 
 
-Considering the potential gains from financial inclusion, the post-Apartheid South African government and financial market participants initiated and partook in a number of initiatives pursuant to financial inclusion.  These initiatives first focused heavily on enabling greater usage of transactional products and thereafter credit extension. For transactional product use, the most significant developments were the Financial Services Charter, the granting of bank accounts for grant recipients and market entry by Capitec. The development of the National Credit Act, as well as its regulations count as significant steps taken towards increasing the aspect of financial inclusion related to credit.
+The creation of, or the changes in, financial regulation has been used as a tool to further financial inclusion in various jurisdictions to different levels of success. In a World Bank policy working paper, @chen2019 indicates that around 2 of 3 national regulatory and supervisory entities in the world further financial inclusion by, inter alia, easing entry by  increasing consumer protection and financial literacy, as well as supporting the creation of non-traditional financial service providers. @chen2019 express further that a supportive regulatory environment enables the growth of service providers and the provision of products that meet the needs of various customers thus furthering financial inclusion. There is a wide range of  regulatory changes that governments have pursued to further inclusion. Our study is focused on greater access and usage to affordable credit products. Therefore, relevant finance sector regulatory efforts pursued in this vein by authorities worldwide include the creation of inclusive financial institutes, credit databases, newly designed financial products, promotion of technology as a method to deliver financial products, lending regulations, and the provision of subsidised funding [@yoshino2016]. Consumer protection measures are also touted necessary to support financial inclusion [@yoshino2016]. A number of these developments overlap with the inclusion related developments, initiated by South African authorities, that we consider in our study. A review of empirical analyses of these types of regulatory developments and their impact on credit extension, are discussed further below.
 
-In 2002, financial institutions developed a Financial Services Charter, where they committed to a range of efforts intended to provide financial services to lower income South Africans. Banks pledged to create a transactional account specifically aimed at lower income groups (Mzansi  transactional account), as well as ensuring that 80% of LSMs 1-5 were within 20kms of a service point to perform retail-banking activities [@bankfrontier2009]. The bank account initiative resulted in the opening of 6 million new Mzansi accounts being opened. Around a third of those who opened these accounts were reported to have never had a bank account before. Even though around 3.5 million of these additional accounts were reportedly active in 2008, the Mzansi account initiative was largely seen as impactful in increasing financial inclusion [@bankfrontier2009]. Another effort towards introducing a greater set of South African to financial products was the 2003/2004 effort by the Post Office to provide grant recipients with Postbank bank accounts [@postoffice2022].
+Regulations that result in the creation of credit databases that include relevant credit related information on individuals and firms reduce the level of asymmetry that exist between lenders and borrowers. Banking markets are characterised by informational asymmetries where a lender may not know the credit worthiness of an potential borrower. In such instances, banks may choose to credit ration where some customers may receive loans and others not due to demand for loans exceeding supply [@stiglitz1981]. This imbalance in information may also have an impact on market entry in credit markets, as well. @dell1999 provide a theoretical model that predicts that when a potential entrant bank is unable to differentiate good from bad borrowers, entry is likely to be deterred. @dell2001 show in a two period model that this barrier to entry can be lessened when banks are able to gain proprietary information about borrowers over time. However, gaining this information provides banks with market power over clients where old creditworthy clients are charged higher rates.^[@dell2001 indicates that this result is a function of their two period model. They indicate that over extended periods creditworthy customers may seek to switch credit providers thus attracting lower interest rates. However, we note that a lower proclivity to switching may affect this prediction.] A study by @martinez2014 estimates the impact of credit information sharing systems on bank lending to firms. The credit information schemes they consider include credit bureaus and public credit registries that capture information on borrowers, thus decreasing the informational asymmetry that characterise credit markets. @martinez2014 find that following the introduction of a credit bureau, firms had increased access to finance, lower interest rate, longer maturity terms and increased working capital. 
 
-The @CCSA2008 reports that access to transactional accounts can be useful gateway to accessing different types of credit. However, experience from the Mzansi account initiative does not suggest this. According to @bankfrontier2009, there was little evidence suggesting the opening of other financial services from the banks from which they opened the Mzansi account. This suggested that efforts increasing inclusion in respect of transactional services did not necessarily translate to greater credit usage.
+Consumer protection mechanisms are also pursued by various national authorities to further financial inclusion. These are usefully summarised by @yoshino2016 as the creation of rgulatory agencies that regulate credit extension. They explain further that consumer protection initiatives implemented by these agencies include the provision of guidelines to be followed when conducting affordability assessments and providing consumers with information on legal recourse following fraud. @yoshino2016 indicates that consumer protection could further financial inclusion has they increase consumer trust in financial services, thus increasing supporting usage. A study by @chen2019 estimated that inclusion focused regulatory measures had a causal impact on financial inclusion. Their index of regulatory measures comprised a number of regulations, as well as consumer protection initiatives that provided for interest rate disclosures to customers. 
 
-A significant step towards increasing the availability, affordability and usage of credit for inclusion was the regulatory development of the National Credit Act of 2005 (NCA). Prior to this Act, credit markets had a number of shortcomings. @kelly2007 indicates that these markets were characterised by ineffective consumer protection , a lack of access to credit, high cost of credit, high levels of over-indebtedness, as well as reckless and exploitative behaviour by credit providers. The @dti2003 indicated, in a 2003 review of credit laws, that the development on a new regulatory framework (to be called the *National Credit Act*) would address these concerns, but would also support national policy objectives of small business development and black economic empowerment following greater access to affordable credit and consumer protection [@dti2003].
+In South Africa, the National Credit Act ("NCA" hereafter) of 2006 resulted in a host of changes in credit market regulation that included provisions increasing disclosures on the costs of credit, to protect credit customers from reckless lending, the regulation of interest rates and the creation of national credit institutions, such as the National Credit Regulator [@groen2006]. @chipeta2012 study the impact that the announcement and actual implementation of the NCA on the growth of credit extension in South Africa. Using regression analysis, these authors find that the NCA was associated with greater loan growth in the credit card, overdrafts and other conventional loans, as well as total credit to the private sector. They make these finding for the both the announcement and the implementation of the Act. @dewet2015 assess the impact of the NCA on levels of over-indebtedness using regression analysis. They do not find evidence of the NCA having any impact on the levels of over-indebtedness in South Africa. @makhanya2016 provide a qualitative analysis of Capitec's entry into the banking industry. According to their analysis, the NCA provided certainty in unsecured lending that enabled Capitec to provide larger loan amounts over extended periods of time. This development is significant as Capitec growth in the banking industry is underpinned by its growth in the low-income market [@makhanya2016].
 
-The NCA's objectives are to achieve a *"fair, transparent, competitive, sustainable, responsible, efficient, effective and accessible credit market and industry, and to protect consumers*^[See the Preamble of the NCA]. Notable changes brought forth by the NCA included provisions increasing disclosures on the costs of credit, to protect credit customers from reckless lending, the regulation of interest rates and the creation of national credit institutions, such as the National Credit Regulator. @groen2006 provide a useful analysis of the intentions of the various provisions in the NCA. Provisions relating to information disclosures were set to lower the cost of credit and improve access to credit by consumers. Provisions relating to reckless lending were aimed to lower risk in the low-income market so as to facilitate entry in this segment and potentially increase the size of loans and lower the cost of loans in this segment. The creation of a credit regulator was said to be key to the facilitation of greater credit information exchanges between credit bureaus so as to reduce asymmetric information in credit markets. Critically, accompanying the NCA were regulations issued by the Minister of Trade and Industry.^[See Section 171 of the NCA.] @groen2006 indicate that these regulations are complimentary to the Act and also relate to matters not dealt with specifically addressed in the Act, such as how credit providers provide credit to customers. 
+Other initiatives such as interest rate caps applied to bank lending volumes have also been by implemented by regulatory authorities to support financial inclusion. @yoshino2016 indicates that these interest rate caps are applied in Bangladesh, India, Indonesia, and Thailand. Presumably interest rate caps support inclusion by artificially lowering the cost of lending for customers who would have been charged interest rates above the specified caps. However, this type of regulation can have an adverse effect on inclusion through the restriction of credit supply [@yoshino2016]. This is likely to reverse proposed gains in inclusion as a restriction in supply is likely to affect lending rates for all customers. @barua2016 indicates that enabling banks to price risk freely is likely to support financial inclusion in the long term.
 
-The Act was a significant development in South African credit market regulation and its impact on credit extension has been assessed in various studies. @chipeta2012 study the impact that the announcement and actual implementation of the NCA on the growth of credit extension in South Africa. Using regression analysis, these authors find that the NCA was associated with greater loan growth in the credit card, overdrafts and other conventional loans, as well as total credit to the private sector. They make these finding for the both the announcement and the implementation of the Act. @dewet2015 assess the impact of the NCA on levels of over-indebtedness using regression analysis. They do not find evidence of the NCA having any impact on the levels of over-indebtedness in South Africa. @makhanya2016 provide a qualitative analysis of Capitec's entry into the banking industry. According to their analysis, the NCA provided certainty in unsecured lending that enabled Capitec to provide larger loan amounta over extended periods of time. This development is significant as Capitec growth in the banking industry is underpinned by its growth in the low-income market [@makhanya2016]. 
-
-Following the development of the NCA and its associated regulations, there have been significant changes in the national credit regulations that directly affected credit providers between 2006 to present. However, there is scant research on the impact that these regulatory changes may have had on bank lending.
+Following the development of the NCA, there have been a number of changes in the regulations accompanying the NCA. Whilst there is, limited, research on the impact of the NCA on bank lending, none of the subsequent changes in NCA changes have been subject to empirical study. South Africa's national inclusion framework also includes fundamental changes in financial sector regulations with a clear intent of increasing inclusion. Furthermore, the country's financial ministry has developed draft national policy framework specific to increasing financial inclusion for individuals and firms. No empirical research has assessed the impact of this suite of financial inclusion focused regulatory developments on  inclusion outcomes in South Africa.
 
 ## Methods of identification
 
@@ -203,8 +201,6 @@ $$
 Rate_{b,k} = \sum_{i=1}^{CS_j}w^{j}_{b,i}P_{b,i}
 $$
 
-[[Pin down controls and update write-up]]
-
 \newpage
 
 ```{r}
@@ -256,10 +252,111 @@ With regard the impact of macroprudential regulation and bank lending rates, we 
 
 With regard the impact of macroprudential regulation and bank lending growth, we find that the draft indicator is associated with a 2\% increase in secured lending and an under 1\% decline in mortgage lending. The signs of the coefficients are consistent and significant for both unsecured lending to corporates and households as well as mortgage lending to corporates and households. However, lending to households has a stronger reaction relative to lending to corporates. On the contrary, we find that following regulatory implementation, total unsecured lending falls by approximately 2\%, while the effect on total secured lending is insignificant. The results are consistent for unsecured lending to corporates and households (although the coefficient on unsecured household lending is insignificant). 
 
-For both lending rates and volumes, we find that banks respond stronger and significantly following macruprudential regulatory implementation, relative to responses to the draft indicator. The results hold when we include controls, as shown in Table A.5 in Appendix A.10. 
+For both lending rates and volumes, we find that banks respond stronger and significantly following macruprudential regulatory implementation, relative to responses to the draft indicator. The results hold when we include controls, as shown in Tables A4 and A5. 
 
-Table 4 provides the results of how lending rates have responded to the finance regulations that have sought to enhance inclusion. Unsecured lending rates for households increase by 1.2% and increase by 0.8% for corporates. We also find statistically significant decreases in mortgage rates of 0.3% for households and 0.4% for corporates. [[results are not robust. requires different specification and re-estimation]].
+Table 4 provides the results of how lending rates have responded to the finance regulations that have sought to enhance inclusion. For both corporates and households we estimate that inclusion related regulations were associated with respective decreases in secured lending rates of 0.3% and 0.2%. With the inclusion of controls, we record decreases in corporate lending rates of 0.1% and lose the statistical significance in the decreases in household lending rates in the secured segment (Table A6). Statistically significant increases in corporate and household lending rates respectively increase by 1% and 1.5% in the face inclusion focused regulation. With controls, the 0.9% increase in the unsecured lending rates to households is the only statistically significant result across customer types. 
 
+\bsideways
+```{r}
+#| label: tbl-macropru_draft_rates
+#| tbl-cap: "Macroprudential regulation and lending rates"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 1
+
+rows <- modelsummary_basic(
+    macropru_results$rates_models$implementation,
+    coef_omit = 2:16,
+    gof_omit = "AIC|BIC|Std|Log",
+    output = "dataframe"
+  ) [, c(2, 4:12)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) 
+  
+rows_tbl <-  tibble(
+  "term" = "Implementation model",  
+  "(1)" = " ", 
+  "(2)" = " ", 
+  "(3)" = " ", 
+  "(4)" = " ", 
+  "(5)" = " ", 
+  "(6)" = " ", 
+  "(7)" = " ", 
+  "(8)" = " ", 
+  "(9)" = " ") %>% 
+  add_row(rows)
+
+dependant_rate <- c(
+  " ",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage"
+)
+
+
+
+modelsummary_word(
+    macropru_results$rates_models$draft,
+    coef_omit = 2:16,
+    gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+    add_rows = rows_tbl
+  ) %>% 
+  width(j = 1, width = 1.2) %>% 
+   add_body_row(values =
+                 c("Draft model"),
+               colwidths = 10) %>%
+  merge_at(i = 3, j = 1:10) %>%
+  add_header_row(
+    values = c("", "Total", "Corporates", "Households"),
+    colwidths = c(1, 3, 3, 3)) %>% 
+  align(align = "center", part = "header", i = 1) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 3) %>% 
+  hline(i = 4, j = 1:10, part = "body") %>% 
+   mk_par(
+    i = 2,
+    part = "header",
+    value = as_paragraph(dependant_rate)
+  ) %>% 
+  mk_par(
+    j = 1,
+    i = c(2, 4),
+    part = "body",
+    value = as_paragraph(predictor_macro)
+  ) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) %>% 
+  autofit(add_w = -10)
+
+```
+\esideways
 
 \bsideways
 ```{r}
@@ -371,21 +468,25 @@ modelsummary_word(
 \esideways
 
 
+\newpage
+
+
 \bsideways
 ```{r}
-#| label: tbl-macropru_draft_rates
-#| tbl-cap: "Macroprudential regulation and lending rates"
+#| label: tbl-finance_rates
+#| tbl-cap: "Financial regulation and lending rates results"
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: 1
 
-rows <- modelsummary_basic(
-    macropru_results$rates_models$implementation,
-    coef_omit = 2:16,
-    gof_omit = "AIC|BIC|Std|Log",
-    output = "dataframe"
-  ) [, c(2, 4:12)] %>% 
-  add_row(
+rows <- 
+# modelsummary_basic(
+#     additional_competition_results$financial_inclusion_rates_models,
+#     coef_omit = 3:17,
+#     gof_omit = "AIC|BIC|Std|Log",
+#     output = "dataframe"
+#   ) [, c(2, 4:12)] %>% 
+  tibble(
    term = "Bank Fixed Effects",  
   `(1)` = "Yes", 
   `(2)` = "Yes", 
@@ -410,19 +511,6 @@ rows <- modelsummary_basic(
   `(9)` = "Yes"
   ) 
   
-rows_tbl <-  tibble(
-  "term" = "Implementation model",  
-  "(1)" = " ", 
-  "(2)" = " ", 
-  "(3)" = " ", 
-  "(4)" = " ", 
-  "(5)" = " ", 
-  "(6)" = " ", 
-  "(7)" = " ", 
-  "(8)" = " ", 
-  "(9)" = " ") %>% 
-  add_row(rows)
-
 dependant_rate <- c(
   " ",
   "Unsecured",
@@ -436,26 +524,24 @@ dependant_rate <- c(
   "Mortgage"
 )
 
-
-
 modelsummary_word(
-    macropru_results$rates_models$draft,
+    additional_competition_results$finance_rates_models,
     coef_omit = 2:16,
-    gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
-    add_rows = rows_tbl
+    gof_omit = "AIC|BIC|Std|Log",
+    add_rows = rows
   ) %>% 
   width(j = 1, width = 1.2) %>% 
    add_body_row(values =
-                 c("Draft model"),
+                 c("Finance regulation model"),
                colwidths = 10) %>%
-  merge_at(i = 3, j = 1:10) %>%
+  # merge_at(i = 4, j = 1:10) %>%
   add_header_row(
     values = c("", "Total", "Corporates", "Households"),
     colwidths = c(1, 3, 3, 3)) %>% 
   align(align = "center", part = "header", i = 1) %>%
   align(align = "center", part = "body", i = 1) %>%
-  align(align = "center", part = "body", i = 3) %>% 
-  hline(i = 4, j = 1:10, part = "body") %>% 
+  align(align = "center", part = "body", i = 4) %>% 
+  hline(i = 2, j = 1:10, part = "body") %>% 
    mk_par(
     i = 2,
     part = "header",
@@ -463,19 +549,15 @@ modelsummary_word(
   ) %>% 
   mk_par(
     j = 1,
-    i = c(2, 4),
+    i = c(2),
     part = "body",
-    value = as_paragraph(predictor_macro)
+    value = as_paragraph(predictor_finance)
   ) %>% 
   hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) %>% 
   autofit(add_w = -10)
 
 ```
 \esideways
-
-
-\newpage
-
 
 \bsideways
 ```{r}
@@ -568,98 +650,8 @@ modelsummary_word(
 
 ```
 \esideways
-
-
-\bsideways
-```{r}
-#| label: tbl-finance_rates
-#| tbl-cap: "Financial regulation and lending rates results"
-#| cache: FALSE
-#| include: TRUE
-#| ft.arraystretch: 1
-
-rows <- 
-# modelsummary_basic(
-#     additional_competition_results$financial_inclusion_rates_models,
-#     coef_omit = 3:17,
-#     gof_omit = "AIC|BIC|Std|Log",
-#     output = "dataframe"
-#   ) [, c(2, 4:12)] %>% 
-  tibble(
-   term = "Bank Fixed Effects",  
-  `(1)` = "Yes", 
-  `(2)` = "Yes", 
-  `(3)` = "Yes", 
-  `(4)` = "Yes", 
-  `(5)` = "Yes", 
-  `(6)` = "Yes", 
-  `(7)` = "Yes", 
-  `(8)` = "Yes", 
-  `(9)` = "Yes"
-  ) %>% 
-  add_row(
-   term = "Monthly Fixed Effects",  
-  `(1)` = "Yes", 
-  `(2)` = "Yes", 
-  `(3)` = "Yes", 
-  `(4)` = "Yes", 
-  `(5)` = "Yes", 
-  `(6)` = "Yes", 
-  `(7)` = "Yes", 
-  `(8)` = "Yes", 
-  `(9)` = "Yes"
-  ) 
-  
-dependant_rate <- c(
-  " ",
-  "Unsecured",
-  "Secured",
-  "Mortgage",
-  "Unsecured",
-  "Secured",
-  "Mortgage",
-  "Unsecured",
-  "Secured",
-  "Mortgage"
-)
-
-modelsummary_word(
-    additional_competition_results$finance_rates_models,
-    coef_omit = 2:16,
-    gof_omit = "AIC|BIC|Std|Log",
-    add_rows = rows
-  ) %>% 
-  width(j = 1, width = 1.2) %>% 
-   add_body_row(values =
-                 c("Finance regulation model"),
-               colwidths = 10) %>%
-  # merge_at(i = 4, j = 1:10) %>%
-  add_header_row(
-    values = c("", "Total", "Corporates", "Households"),
-    colwidths = c(1, 3, 3, 3)) %>% 
-  align(align = "center", part = "header", i = 1) %>%
-  align(align = "center", part = "body", i = 1) %>%
-  align(align = "center", part = "body", i = 4) %>% 
-  hline(i = 2, j = 1:10, part = "body") %>% 
-   mk_par(
-    i = 2,
-    part = "header",
-    value = as_paragraph(dependant_rate)
-  ) %>% 
-  mk_par(
-    j = 1,
-    i = c(2),
-    part = "body",
-    value = as_paragraph(predictor_finance)
-  ) %>% 
-  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) %>% 
-  autofit(add_w = -10)
-
-```
-\esideways
  
-Table 5 provides responses in the three month growth of bank lending volumes in response to finance regulations. We only find that lending to corporates respond to regulatory developments. Results suggest that there was a 1.7% decrease in growth rates of unsecured lending to corporates following finance regulatory changes. Conversely, banks had a statistically significant increase of 0.7% in the growth rate of secured lending to corporates. We do not find any evidence of changes in bank lending to households, as well as in mortgage lending to corporates.
- 
+In Table 5 we provide the results of how lending volumes have responded to inclusion focused finance regulations. Results indicate that finance regulations are associated with 1.2% increase in lending volume growth to corporates in the secured segment. With the inclusion of controls (Table A7), this result lowers to a 0.8% and there is a statistically significant decrease in lending volume growth to households in the unsecured segment of 0.5%. 
  
 ## Discussion
 
@@ -670,13 +662,13 @@ The analysis in the paper adds to the existing work on consequences of macroprud
 Two possibilities exist for growth in credit supply following stringent  regulatory reforms (positive coefficients on lending volumes).
 One is the notion of  anticipation effects where  banks have information on the proposed regulation and dates which they will be implemented. As such, they can adjust credit supply upwards following pre-announcement and  thereby take advantage of less stringent requirements, before tighter requirements are introduced.
 
-Another possibility is the occurrence of portfolio re-balancing. The notion is that banks will reduce their relatively riskier loan  such as   reduction in unsecured lending and rebalance their portfolios towards more prudent ones such as secured lending \citep{deli2017real}. This is due to fact that macropruential reforms enforce banks to attach greater risk weights to certain loan portfolios such as unsecured credit. For instance, banks in Denmark retrenched more on their lending portfolio with higher risk weights, in response to higher capital requirements \citep{imbierowicz2018time}. Similarly, \cite{cappelletti2019impact} find that banks classified as Other Systematically-Important (O-SII), who face added capital requirements, reduce their credit supply to households and financial sectors and shifted their lending to less risky counterparts within the non-financial corporations sector. The four banks in our sample are also classified as Systematically-Important (SI) banks, facing added capital requirements. 
+Another possibility is the occurrence of portfolio re-balancing. The notion is that banks will reduce their relatively riskier loans, through a reduction in unsecured lending and rebalance their portfolios towards more prudent ones such as secured lending \citep{deli2017real}. This is due to fact that macropruential reforms enforce banks to attach greater risk weights to certain loan portfolios such as unsecured credit. For instance, banks in Denmark retrenched more on their lending portfolio with higher risk weights, in response to higher capital requirements \citep{imbierowicz2018time}. Similarly, \cite{cappelletti2019impact} find that banks classified as Other Systematically-Important (O-SII), who face added capital requirements, reduce their credit supply to households and financial sectors and shifted their lending to less risky counterparts within the non-financial corporations sector. The four banks in our sample are also classified as Systematically-Important (SI) banks, facing added capital requirements. 
 
-Results from Table 2 point to similar evidence when we consider the draft indicator, where we find an increase in secured lending relative to unsecured lending (rightward shift in the secured loan supply curve). Consequently, the rates  associated with unsecured lending fall.  These effects are stronger for household unsecured lending relative to corporate secured lending. Furthermore, we also find evidence of an increase in household unsecured lending during the pre-announcement stages, while this is not the case for coroprates. This possibly points to banks taking advantage of less stringent requirements on household unsecured lending, with both an increase in the supply loans and interest rates on these loans before implementation of stringent requirements. \cite{bridges2014impact} on the other hand, finds that an increase in capital requirements reduces on average, loan growth for commercial real estate (mortgages),  other corporate and household secured lending, while the response of unsecured lending is  relatively weak. 
-
-The portfolio re-balancing argument is stronger when we consider implementation effects, particularly on lending rates. We observe  a decline in secured lending and and increase in unsecured lending rates as greater risk weights are attached to unsecured credit. This is also highlighted by the fact that while corporate unsecured lending volume increase following implementation, there is no effect on household lending. As such,   Household (unsecured) lending appear to have greater risk weights as the effect on the respective lending rate is more than the effect on corporate unsecured lending rate\footnote{This makes sense as the average and maximum lending rate on household unsecured lending far exceed that on corporate unsecured lending, as shown in Table 1}.
+The portfolio re-balancing argument is stronger when we consider implementation effects, particularly on lending rates. We observe  a decline in secured lending and an increase in unsecured lending rates as greater risk weights are attached to unsecured credit. This is also highlighted by the fact that while corporate unsecured lending volume increase following implementation, there is no effect on household lending. As such, household (unsecured) lending appear to have greater risk weights as the effect on the respective lending rate is more than the effect on corporate unsecured lending rate\footnote{This makes sense as the average and maximum lending rate on household unsecured lending far exceed that on corporate unsecured lending, as shown in Table 1}.
 
 Results around regulatory implementation, especially for unsecured lending, show that, despite tighter macroprudential reforms, we still observe an increase in unsecured lending, driven by corporate unsecured lending. This suggest that despite the implementation of stringent regulatory measures, banks still lend to higher quality clients within the unsecured lending space (seemingly corporates) and still charge relatively higher rates on these loans. Interestingly and consistent with the portfolio re-balancing argument, this is not the case for any lending towards households, even though the implementation effect on lending rates is more pronounced on household unsecured lending relative corporate unsecured lending rate.
+
+Results from Table 2 point to similar evidence when we consider the draft indicator, where we find an increase in secured lending relative to unsecured lending (rightward shift in the secured loan supply curve). Consequently, the rates  associated with unsecured lending fall.  These effects are stronger for household unsecured lending relative to corporate secured lending. Furthermore, we also find evidence of an increase in household unsecured lending during the pre-announcement stages, while this is not the case for coroprates. This possibly points to banks taking advantage of less stringent requirements on household unsecured lending, with both an increase in the supply loans and interest rates on these loans before implementation of stringent requirements. \cite{bridges2014impact} on the other hand, finds that an increase in capital requirements reduces on average, loan growth for commercial real estate (mortgages),  other corporate and household secured lending, while the response of unsecured lending is  relatively weak. 
 
 Our results show that mortgage lending declines, in all specifications. At the same time, interest rates on mortgages also decline in all specifications. A few possibilities exist.  Firstly, banks tightened deposit requirements on mortgages following regulatory reforms. This in essence reduces the risk associated with mortgage lending, hence the decline in mortgages rates in all specifications as borrowers who can meet the new deposit requirements are likely to meet their mortgage obligations. The downside however to tighter deposit requirements on mortgages is that access to mortgage credit is tightened, hence the decline in mortgage lending volumes for all specifications in Table 2. Essentially, mortgage borrowers who can afford to pay higher deposits on mortgages following increased deposit requirements are the only ones likely to access mortgage lending, while those who are unable to meet higher deposit requirements are relatively unlikely to access mortgage borrowing.
 
@@ -684,25 +676,34 @@ Second is that mortgage lending declines following stringent macroprudential ref
 
 A report by the Actuarial Society of South Africa highlights that banks have reduced their relative exposures to mortgages and have in turn, increased their exposures to loan classes that are for consumption purposes. It also highlights that the introduction of the Net Stable Funding Ratio (NSFR) which form part of Basel III, potentially implies higher funding costs on retail mortgages relative to unsecured retail loans. In turn, these costs can be shifted to consumers through higher mortgages lending rates (which does not show up in our results) and/or rationing of mortgage lending for a given level of lending rate.
 
-The results also point to the unique nature of the banking system in South Africa and consequently, the response of banks to macroprudential regulation. The heterogeneous response of secured, unsecured and mortgage lending (both outstanding amounts and interest rates) also provide insights on and the mechanisms with which they are affected, following  stringent capital requirements.
+Results from Table 2 and 3 show that implementation effects are stronger relative to announcement effects as captured by the $Draft$ indicator. This is specific to unsecured lending rates and volumes. The stronger implementation effects potentially reflect the endogenous reaction of banks to pre-announced regulatory actions, thereby influencing (overestimating) the effects of regulatory implementation. For instance, \cite{fernandez2023transmission} and \cite{fang2022bank} control for possible anticipation effects by distinguishing between macroprudential policies with and without implementation lags as they can have different effects on macroeconomic variables. As such \cite{fernandez2023transmission} use only announcement dates to identify the effects of macroprudential policies.  Secondly, they identify macroprudential policies  that have no implementation lags, which are captured by the announcement date and in the spirit of \cite{mertens2012empirical},  they also identify macroprudential policies with implementation  lags,  which are defined as policies with significant delay between the announcement and enforcement or implementation date of at least 90 days. Those with implementation lags could potentially influence the response of banks as it allows them significant time to endogenously react to the prudential regulations ahead of implementation. 
+
+Therefore,  a further challenge to explore in our paper and with the construction of our macroprudential narrative indices, is an attempt at disentangling and distinguishing polices with and without  implementation lags. Secondly, a challenge is posed to also construct leads and lags for our macroprudential narrative series to identify any lag effects and identify if banks adjust their lending before actual implementation dates, as with \cite{fang2022bank}. 
+
+Despite the challenges, the construction of our narrative macroprudential indices and the use of data on bank lending rates, contributes significantly to the growing empirical work analysing the effects of macroprudential policy in South Africa and emerging markets at large.
 
 ### Finance regulatory changes
 
-The results contained in Tables 4 and 5 show the changes in bank responses following inclusion focused finance regulations. We find that these regulatory developments are associated with increased bank lending rates to corporates and households in unsecured lending, and decreased mortgage lending to both these customer groups. Growth in bank lending volumes decrease in unsecured lending to corporates.
+After accounting for possible confounders, the results pertaining to inclusion focused finance sector reforms indicate that these regulatory developments are associated with increases in unsecured lending rates for households, as well as decreased secured lending rates for corporates. With respect to lending volume growth, inclusion focused finance sector developments are associated with decreased growth in unsecured lending to households and increased growth in secured lending to corporates.
 
-A number of the regulatory developments were motivated by government intentions to improve access and lower the costs of financing for individuals and entities with poorer access. These developments included removal of adverse information kept at credit bureaus, reducing the periods that adverse information is kept by those credit bureaus and providing guidance facilitating debt restructing in cases of risky and/or reckless lending. However our results suggest opposite of the intended effects.
+A number of the regulatory developments were motivated by government intentions to improve access and lower the costs of financing for individuals and entities with poorer access. These developments included removal of adverse information kept at credit bureaus, reducing the periods that adverse information is kept by those credit bureaus and providing guidance facilitating debt restructing in cases of risky and/or reckless lending. According to the @ncrnd some of these developments were to enable greater consumer access to affordable credit, as well as employment opportunities. The @sagov2013 express further that negative credit information hinders access of individuals who have paid their debts from accessing affordable credit. The @sagov2013 thereafter took a decision to remove adverse credit information relating to individuals who have paid their debts to achieve this. However, our results suggest that opposite of the intended effects. Our results indicate that, on average, South African households paid higher interest rates on their unsecured credit following these regulatory developments. This was also followed by a decrease in the growth of unsecured lending volumes to households. This negatively impacts on financial inclusion as greater access to and usage of affordable credit is impeded.
 
-Part of our results could be driven by the increase in informational asymmetry that the regulations introduce. Banks are financial intermediaries that collect deposits and issue out loans. To extend loans, banks face credit risk which follows from the possibility that a loan customer may not pay back the loan [@bikker142017,@freixas1997]. To lessen this credit risk, banks rely on information about individuals and firms that can be sourced from credit bureaus or other institutions [@freixas1997]. The regulatory developments we consider in this paper have the effect of limiting the amount of information available to banks or the periods that information could be kept. This could have given rise to the increased lending rates we observe in unsecured credit provided to households and firms.
+This results is likely driven by the increase in the informational asymmetry that the regulations introduce. Banks are financial intermediaries that collect deposits and issue out loans. To extend loans, banks face credit risk which follows from the possibility that a loan customer may not pay back the loan [@bikker142017,@freixas1997]. To lessen this credit risk, banks rely on information about individuals and firms that can be sourced from credit bureaus or other institutions [@freixas1997]. The regulatory developments we consider in this paper have the effect of limiting the amount of information available to banks or the periods that information could be kept. This could have given rise to the increased lending rates and decreased lending volume growth we observe in unsecured credit provided to households.
 
-The observed decreases in the growth of unsecured lending volumes to corporates also follow from the increased information asymmetry following regulations. Our results suggest increases in secured lending to corporates. Our secured lending category refers to all loans provided by banks with an underlying asset offered by the customer as collateral. With collateral referring to an asset that a bank would be able to seize should a borrower face bankruptcy, thus guaranteeing the repayment of the debt [@freixas1997]. The shift from unsecured to secured lending to corporates likely reflects bank's moving towards safer credit types in the face of greater credit risk.
+Another potential explanation for the decreases in the reduced lending volume growth and higher interest rates in unsecured lending to households is the adjustment in the maximum interest rates that are specified in the NCA regulations. In 2015, the Minister of Trade and Industry proposed changes to the maximum interest rates and initiation fees that credit providers could charge consumers [@regulations2015b]. Final changes came into effect that same year [@regulations2015c]. For 5 of the 7 credit types, the net effect of these adjustments were that maximum interest rates on credit facilities would be lower by 2.9 percentage points and 7.9 percentage points for unsecured credit (based on the prevailing repo rate). The maximum rates set for other credit types increased marginally by 0.1 percentage points or had no change at all. Initiation and service fees were increased above the limits set in the 2006 regulations. @yoshino2016 indicates that this type of rate regulation can restrict credit supply. Indications are that flexible interest rate setting could further financial inclusion as opposed to consumer protection regulation that seeks to constrain rate determination [@barua2016].
+
+Our secured lending category refers to all loans provided by banks with an underlying asset offered by the customer as collateral. With collateral referring to an asset that a bank would be able to seize should a borrower face bankruptcy. This guarantees the repayment of the debt [@freixas1997]. Following the regulatory developments, we note that unsecured lending volume growth to households decrease, while secured lending volume growth to corporates increase. This development likely reflects bank shift towards safer credit categories. Since the regulations we consider primarily affect secured and unsecured lending to households, it appears that banks do not shift from unsecured to secured lending within household lending. Instead, they appear to be directing credit supply towards another credit customer type - corporates.
 
 # Conclusion
 
-This study examines the impact of regulation on the bank lending rates and volumes of the South Africa's largest banks. The regulations we consider are macroprudential regulation that intend to achieve stability in the finance sector, as well as finance regulations that are intended to achieve greater financial inclusion. These two regulations are potentially in conflict as one may limit credit supply while the other intends to increase it. We capture these regulatory developments through narrative indices that comprehensively measure all regulatory developments relevant to our study.
+This study examines the impact of regulation on the bank lending rates and volumes of the South Africa's largest banks. The regulations we consider are macroprudential regulation that intend to achieve stability in the finance sector, as well as finance regulations that are intended to achieve greater financial inclusion. These two regulations are potentially in conflict as one may be premised on limiting credit supply to achieve stability while the other may increase risk through greater credit extension. We capture these regulatory developments through narrative indices that comprehensively measure all regulatory developments relevant to our study.
 
-The effects of these regulations on bank pricing and lending are estimated through the estimation of panel data regressions estimated separately for the different types of regulations we consider. We find that macroprudential regulation results in increases in interest rates on unsecured lending while those on secured lending and mortgage decrease. Further to this, our results indicate that that macroprudential regulations are associated with positive growth in lending volumes are estimated for unsecured and secured credit while mortage lending growth rates decrease. Our estimates of inclusion focused regulation indicate that these developments are associated with increased bank lending rates for unsecured credit and lower mortgage rates. We observe decreases in the growth of unsecured lending for corporates and an increase for secured lending for that customer segment following inclusion focused developments. 
+The effects of these regulations on bank pricing and lending are estimated through panel data regressions estimated separately for the different types of regulations we consider. We find that macroprudential regulation results in increases in interest rates on unsecured lending while those on secured lending and mortgages decrease. Further to this, our results indicate that macroprudential regulations are associated with positive growth in lending volumes in unsecured and secured credit while mortgage lending growth rates decrease. Our estimates of inclusion focused initiatives indicate that these developments are associated with increased bank lending rates for unsecured credit to households and decreased growth in the unsecured lending volumes to households. We also observe increases in the growth of secured lending to corporates and a decrease in secured lending rates paid by those corporates. 
 
-Overall, our results indicate that macroprudential policy is working as intended to achieve financial sector stability. However, inclusion focused regulation may be at odds with its stated objectives of increasing the extension of affordable credit. The impact of these two notionally contradictory policies are consistent with respect to bank responses captured through price changes.
+The impact of these two notionally contradictory policies are consistent with respect to secured lending volume growth and rates to corporates, as well as the unsecured lending rates paid by households. The opposite effect is observed with respect to unsecured lending volumes to households - inclusion efforts lowers usage whereas macroprudential efforts increase usage.
+
+Overall, our results indicate that macroprudential policy is working as intended to achieve financial sector stability. However, inclusion focused regulation may be at odds with its own stated objectives of increasing the extension of affordable credit.  
+  
 
 \newpage 
 # References 
@@ -1411,7 +1412,7 @@ CCyB increases to 2,5\% (maximum) and LCR is implemented at 100\% compliance.
 
 **Changes in the National Credit Act of 2005 Regulations**
 
-The National Credit Act of 2005 is legislation that was enacted in order to better regulate the markets for customer credit. According to this Act its purpose is to develop, inter alia, credit markets that are accessible by all South Africans, correct the imbalance in negotiating power between consumers and credit providers, regulate the collection and sharing of consumer credit information and prevent over-indebtedness. These, and other, efforts are to achieve a *"fair, transparent, competitive, sustainable, responsible, efficient, effective and accessible credit market and industry, and to protect consumers*^ [Section 3 of the NCA.]. The Act specifically provided the Minister of, the erstwhile, Trade and Industry with powers to provide regulations pertaining to the implementation of the Act.^[Section 171 of the NCA.] These regulations were made available in May 2006.
+The National Credit Act of 2005 is legislation that was enacted in order to better regulate the markets for customer credit. According to this Act its purpose is to develop, inter alia, credit markets that are accessible by all South Africans, correct the imbalance in negotiating power between consumers and credit providers, regulate the collection and sharing of consumer credit information and prevent over-indebtedness. These, and other, efforts are to achieve a *"fair, transparent, competitive, sustainable, responsible, efficient, effective and accessible credit market and industry, and to protect consumers*^[Section 3 of the NCA.]. The Act specifically provided the Minister of, the erstwhile, Trade and Industry with powers to provide regulations pertaining to the implementation of the Act.^[Section 171 of the NCA.] These regulations were made available in May 2006.
 
 The initial regulations predate the period assessed by this paper, but the proposed and later realised changes to these Regulations occurred between 2012 and 2015. It is these developments that are captured within $FinReg$.
 
@@ -1423,9 +1424,9 @@ On the 10th of May 2012 the Minister of Trade and Industry published debt counse
 
 *2013 and 2014 draft and final credit regulations on the removal of adverse consumer credit information and information relating to paid up judgements*
 
-In 2013 the Minister of Trade and Industry issued a notice about a proposal to remove adverse credit information from credit bureaus. This followed Cabinet endorsement of a *Removal of Adverse Credit Information Project*. The Minister proposed that all adverse findings were to be removed regardless of non-payment. Thereafter on an ongoing basis adverse information held by credit bureaus were on settled debt or paid up judgements were to be removed. Communication from the SA government indicated that this move was to ensure that those who could access credit, and were prevented from doing so, due to adverse credit information could do so [@gcis2013].
+In 2013 the Minister of Trade and Industry issued a notice about a proposal to remove adverse credit information from credit bureaus. This followed Cabinet endorsement of a *Removal of Adverse Credit Information Project*. The Minister proposed that all adverse findings were to be removed regardless of non-payment. Thereafter on an ongoing basis adverse information held by credit bureaus were on settled debt or paid up judgements were to be removed. Communication from the SA government indicated that this move was to ensure that those who could access credit, and were prevented from doing so, due to adverse credit information could do so [@sagov2013].
 
-On the 26th of February 2014, the Minister published final regulations instructing credit bureaus that adverse credit information was to be removed on all paid up judgements [@regulations2014a]. The final regulations were less ambitious than the proposal. Nevertheless, the @ncrnd indicates that the regulations were to enable consumer access to affordable credit, as well as employment opportunities @ncrnd
+On the 26th of February 2014, the Minister published final regulations instructing credit bureaus that adverse credit information was to be removed on all paid up judgements [@regulations2014a]. The final regulations were less ambitious than the proposal. Nevertheless, the @ncrnd indicates that the regulations were to enable consumer access to affordable credit, as well as employment opportunities.
 
 *2014 and 2015 changes to the National Credit Regulations*
 
@@ -1435,7 +1436,7 @@ By the 13th of March 2015, the Minister provided a final set of proposed changes
 
 *2015 draft and final credit regulations on limitations on fees and interest rates*
 
-Section 42(1) of the 2006 credit regulations provided the maximum interest rates to be set on different types of credit[@regulations2006]. These included mortgages, credit facilities, unsecured credit, developmental credit, short term credit, other and incidental credit agreements. Incidental and short term credit rates were respectively capped at 2% and 5% per month. The limits for other rates were calculated at the repo rate scaled up by 2.2 and increased by fixed interest rates ranging between 5 to 20 percentage points depending on the credit type. In addition, the regulations also provided the maximum Rand values that would be set as initiation and service fees. The initiation fees  varied by credit type.
+Section 42(1) of the 2006 credit regulations provided the maximum interest rates to be set on different types of credit [@regulations2006]. These included mortgages, credit facilities, unsecured credit, developmental credit, short term credit, other and incidental credit agreements. Incidental and short term credit rates were respectively capped at 2% and 5% per month. The limits for other rates were calculated at the repo rate scaled up by 2.2 and increased by fixed interest rates ranging between 5 to 20 percentage points depending on the credit type. In addition, the regulations also provided the maximum Rand values that would be set as initiation and service fees. The initiation fees  varied by credit type.
 
 In 2015, the Minister of Trade and Industry proposed changes to these interest rates and initiation fees [@regulations2015b]. Final changes came into effects that same year [@regulations2015c]. For 5 of the 7 credit types, the Minister provided a lower scalar by higher interest rate premium. The net effect of this adjustment was that maximum interest rates on credit facilities would be lower by 2.9 percentage points and 7.9 percentage points for unsecured credit (based on the prevailing repo rate). The maximum rates set for other credit types increased marginally by 0.1 percentage points of had no change at all. Initiation and service fees were increased above the limits set in the 2006 regulations. 
 
@@ -1528,7 +1529,93 @@ finance_narratives_three_months_gg
 
 
 \bsideways
+
 ## Results with controls
+
+```{r}
+#| label: tbl-macropru_draft_rates_control
+#| tbl-cap: "Macroprudential regulation and lending rates with controls results"
+#| cache: FALSE
+#| include: TRUE
+#| ft.arraystretch: 1
+
+rows <- modelsummary_basic(
+    macropru_control_results$rates_models$implementation,
+    coef_omit = 4:18,
+    gof_omit = "AIC|BIC|Std|Log",
+    output = "dataframe"
+  ) [, c(2, 4:12)] %>% 
+  add_row(
+   term = "Bank Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) %>% 
+  add_row(
+   term = "Monthly Fixed Effects",  
+  `(1)` = "Yes", 
+  `(2)` = "Yes", 
+  `(3)` = "Yes", 
+  `(4)` = "Yes", 
+  `(5)` = "Yes", 
+  `(6)` = "Yes", 
+  `(7)` = "Yes", 
+  `(8)` = "Yes", 
+  `(9)` = "Yes"
+  ) 
+  
+rows_tbl <-  tibble(
+  "term" = "Implementation model",  
+  "(1)" = " ", 
+  "(2)" = " ", 
+  "(3)" = " ", 
+  "(4)" = " ", 
+  "(5)" = " ", 
+  "(6)" = " ", 
+  "(7)" = " ", 
+  "(8)" = " ", 
+  "(9)" = " ") %>% 
+  add_row(rows)
+
+
+modelsummary_word(
+    macropru_control_results$rates_models$draft,
+    coef_omit = 4:18,
+    gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
+    add_rows = rows_tbl
+  ) %>% 
+  width(j = 1, width = 1.4) %>% 
+   add_body_row(values =
+                 c("Draft model"),
+               colwidths = 10) %>%
+  merge_at(i = 5, j = 1:10) %>%
+  add_header_row(
+    values = c("", "Total", "Corporations", "Households"),
+    colwidths = c(1, 3, 3, 3)) %>%
+  align(align = "center", part = "header", i = 1) %>%
+  align(align = "center", part = "body", i = 1) %>%
+  align(align = "center", part = "body", i = 5) %>%
+  hline(i = 8, j = 1:10, part = "body") %>%
+  mk_par(i = 2,
+         part = "header",
+         value = as_paragraph(dependant_rate)) %>%
+  mk_par(
+    j = 1,
+    i = c(2, 3, 4, 6, 7, 8),
+    part = "body",
+    value = as_paragraph(predictor_control)
+  ) %>% 
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
+
+```
+\esideways
+
 
 ```{r}
 #| label: tbl-macropru_draft_lending_control
@@ -1633,22 +1720,22 @@ modelsummary_word(
 ```
 \esideways
 
-
 \bsideways
 ```{r}
-#| label: tbl-macropru_draft_rates_control
-#| tbl-cap: "Macroprudential regulation and lending rates with controls results"
+#| label: tbl-finance_control_rates
+#| tbl-cap: "Finance regulation and lending rates with controls results"
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: 1
 
-rows <- modelsummary_basic(
-    macropru_control_results$rates_models$implementation,
-    coef_omit = 4:18,
-    gof_omit = "AIC|BIC|Std|Log",
-    output = "dataframe"
-  ) [, c(2, 4:12)] %>% 
-  add_row(
+rows <- 
+# modelsummary_basic(
+#     additional_competition_controls_results$financial_inclusion_rates_models,
+#     coef_omit = 5:19,
+#     gof_omit = "AIC|BIC|Std|Log",
+#     output = "dataframe"
+#   ) [, c(2, 4:12)] %>% 
+  tibble(
    term = "Bank Fixed Effects",  
   `(1)` = "Yes", 
   `(2)` = "Yes", 
@@ -1673,52 +1760,52 @@ rows <- modelsummary_basic(
   `(9)` = "Yes"
   ) 
   
-rows_tbl <-  tibble(
-  "term" = "Implementation model",  
-  "(1)" = " ", 
-  "(2)" = " ", 
-  "(3)" = " ", 
-  "(4)" = " ", 
-  "(5)" = " ", 
-  "(6)" = " ", 
-  "(7)" = " ", 
-  "(8)" = " ", 
-  "(9)" = " ") %>% 
-  add_row(rows)
-
+dependant_rate <- c(
+  " ",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage",
+  "Unsecured",
+  "Secured",
+  "Mortgage"
+)
 
 modelsummary_word(
-    macropru_control_results$rates_models$draft,
+    additional_competition_controls_results$finance_rates_models,
     coef_omit = 4:18,
-    gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
-    add_rows = rows_tbl
+    gof_omit = "AIC|BIC|Std|Log",
+    add_rows = rows
   ) %>% 
-  width(j = 1, width = 1.4) %>% 
+  width(j = 1, width = 1.2) %>% 
    add_body_row(values =
-                 c("Draft model"),
+                 c("Finance regulation model"),
                colwidths = 10) %>%
-  merge_at(i = 5, j = 1:10) %>%
+  # merge_at(i = 8, j = 1:10) %>%
   add_header_row(
-    values = c("", "Total", "Corporations", "Households"),
-    colwidths = c(1, 3, 3, 3)) %>%
+    values = c("", "Total", "Corporates", "Households"),
+    colwidths = c(1, 3, 3, 3)) %>% 
   align(align = "center", part = "header", i = 1) %>%
   align(align = "center", part = "body", i = 1) %>%
-  align(align = "center", part = "body", i = 5) %>%
-  hline(i = 8, j = 1:10, part = "body") %>%
-  mk_par(i = 2,
-         part = "header",
-         value = as_paragraph(dependant_rate)) %>%
+  hline(i = 4, j = 1:10, part = "body") %>% 
+   mk_par(
+    i = 2,
+    part = "header",
+    value = as_paragraph(dependant_rate)
+  ) %>% 
   mk_par(
     j = 1,
-    i = c(2, 3, 4, 6, 7, 8),
+    i = c(2, 3, 4),
     part = "body",
-    value = as_paragraph(predictor_control)
+    value = as_paragraph(predictor_finance_controls)
   ) %>% 
-  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) %>% 
+  autofit(add_w = -10)
 
 ```
 \esideways
-
 
 \bsideways
 ```{r}
@@ -1820,90 +1907,4 @@ modelsummary_word(
 \esideways
 
 
-\bsideways
-```{r}
-#| label: tbl-finance_control_rates
-#| tbl-cap: "Finance regulation and lending rates with controls results"
-#| cache: FALSE
-#| include: TRUE
-#| ft.arraystretch: 1
-
-rows <- 
-# modelsummary_basic(
-#     additional_competition_controls_results$financial_inclusion_rates_models,
-#     coef_omit = 5:19,
-#     gof_omit = "AIC|BIC|Std|Log",
-#     output = "dataframe"
-#   ) [, c(2, 4:12)] %>% 
-  tibble(
-   term = "Bank Fixed Effects",  
-  `(1)` = "Yes", 
-  `(2)` = "Yes", 
-  `(3)` = "Yes", 
-  `(4)` = "Yes", 
-  `(5)` = "Yes", 
-  `(6)` = "Yes", 
-  `(7)` = "Yes", 
-  `(8)` = "Yes", 
-  `(9)` = "Yes"
-  ) %>% 
-  add_row(
-   term = "Monthly Fixed Effects",  
-  `(1)` = "Yes", 
-  `(2)` = "Yes", 
-  `(3)` = "Yes", 
-  `(4)` = "Yes", 
-  `(5)` = "Yes", 
-  `(6)` = "Yes", 
-  `(7)` = "Yes", 
-  `(8)` = "Yes", 
-  `(9)` = "Yes"
-  ) 
-  
-dependant_rate <- c(
-  " ",
-  "Unsecured",
-  "Secured",
-  "Mortgage",
-  "Unsecured",
-  "Secured",
-  "Mortgage",
-  "Unsecured",
-  "Secured",
-  "Mortgage"
-)
-
-modelsummary_word(
-    additional_competition_controls_results$finance_rates_models,
-    coef_omit = 4:18,
-    gof_omit = "AIC|BIC|Std|Log",
-    add_rows = rows
-  ) %>% 
-  width(j = 1, width = 1.2) %>% 
-   add_body_row(values =
-                 c("Finance regulation model"),
-               colwidths = 10) %>%
-  # merge_at(i = 8, j = 1:10) %>%
-  add_header_row(
-    values = c("", "Total", "Corporates", "Households"),
-    colwidths = c(1, 3, 3, 3)) %>% 
-  align(align = "center", part = "header", i = 1) %>%
-  align(align = "center", part = "body", i = 1) %>%
-  hline(i = 4, j = 1:10, part = "body") %>% 
-   mk_par(
-    i = 2,
-    part = "header",
-    value = as_paragraph(dependant_rate)
-  ) %>% 
-  mk_par(
-    j = 1,
-    i = c(2, 3, 4),
-    part = "body",
-    value = as_paragraph(predictor_finance_controls)
-  ) %>% 
-  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) %>% 
-  autofit(add_w = -10)
-
-```
-\esideways
 
