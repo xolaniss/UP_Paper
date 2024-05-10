@@ -171,7 +171,7 @@ The finance regulations that we consider in this paper are regulations that rela
 
 Below we provide an overview of the type of regulatory developments we capture within $FinReg$. A detailed review of each of these regulations is provided in Appendix A.8.
 
-The first type of development we consider are those related to the national credit regulations. These are regulations issued by the @regulations2006 and relate to the application of the NCA of 2005. Over time the Department of Trade and Industry has provided government notices inviting public comments on potential amendments to these regulations and following consultation, final regulations were published in the Government Gazette. The Ministry has put forth notices and final regulations related to (i) Debt Counselling Regulations in 2012, (ii) removal of adverse consumer credit information and information relating to paid up judgements in 2013 and 2014, (iii) various changes in credit regulation in 2014 and 2015, and (iv) limitations on fees and interest rates in 2015. Underlying these notices and regulations is the intention to further financial inclusion. For instance @Roestoff2009 indicates that the 2012 regulations were introduced to assist over-indebted consumers that could result in the restructuring of their debt. This directly relates to the affordability of credit products. 2013 and 2014 regulations relate to government efforts made towards removing adverse credit information from credit bureaus to better increase consumer access of credit products.
+The first type of development we consider are those related to the national credit regulations. These are regulations issued by the @regulations2006 and relate to the application of the NCA of 2005. Over time the Department of Trade and Industry has provided government notices inviting public comments on potential amendments to these regulations and following consultation, final regulations were published in the Government Gazette. The Ministry has put forth notices and final regulations related to (i) Debt Counselling Regulations in 2012, (ii) removal of adverse consumer credit information and information relating to paid up judgements in 2013 and 2014, (iii) various changes in credit regulation in 2014 and 2015, and (iv) limitations on fees and interest rates in 2015. Underlying these notices and regulations is the intention to further financial inclusion. For instance @roestoff2009 indicates that the 2012 regulations were introduced to assist over-indebted consumers that could result in the restructuring of their debt. This directly relates to the affordability of credit products. 2013 and 2014 regulations relate to government efforts made towards removing adverse credit information from credit bureaus to better increase consumer access of credit products.
 
 The second type of development relates to the restructuring finance regulation in South Africa. The @fsr2017 announced that the President had assented to the Financial Sector Regulation Act of 2017. This regulation set up two authorities. One being the Prudential Authority, which sits within the South African Reserve Bank. The other is the Financial Sector Conduct Authority (FSCA). Both of these institutions have varying mandates. But consistent across both was a task to promote financial inclusion [@fsr2017]. Another development is the drafting of a Conduct of Financial Institutions Bill. This bill proposes consolidating a number of the financial sector laws of the country in order to better regulate the conduct of institutions that provide financial services and products. According to the bill, the FSCA will be provided with the ability to provide standards for the conduct of firms in the provision of financial products and services. The referred to conduct relates to, inter alia, firms’ charging structures, pricing methodologies, financial product features and the identification of appropriate and inappropriate target markets. According to the @cofi2018b, this enhanced regulation will further financial inclusion as the better regulation of firm conduct would provide consumers with greater security required for greater usage of financial sector products.
 
@@ -195,7 +195,8 @@ We aggregate all bank assets that are relevant to the customer segments referred
 
 We pair our bank lending volumes data with corresponding bank lending rates data. This data is sourced from what is referred to as BA930 data. Similar to bank reporting of asset and liability data, banks are required to report their lending rates data to the SARB. This data is provided in a form prescribed by a "BA930 form" available from the Banks Act and is not publicly available. The BA930 data contains average rates that are weighted by the outstanding amounts due to the bank at the time of reporting for various customer segments. We describe further the customer segments for which rates data is reported in Appendix A.3. 
 
-We use the BA930 data to estimate weighted average rates that are consistent with the customer segments we use in our analysis. The formula below shows how we estimate weighted average rates for our 9 customer segments. $CS_j$ refers to the total number of banking assets pulled from the BA900 data to form customer segment $j$ , where ($j\in[1,9]$). $w^{j}_{b,i}$ is the weight for each bank's asset $i$ in customer segment $j$. It calculated as the value of that bank's asset value divided by the total value of the bank's assets in that customer segment $j$.
+We use the BA930 data to estimate weighted average rates that are consistent with the customer segments we use in our analysis. The formula below shows how we estimate weighted average rates for our 9 customer segments. $CS_j$ refers to the total number of banking assets pulled from the BA900 data to form customer segment $j$ , where $(j\in[1,9])$. $w^{j}_{b,i}$ is the weight for each bank's asset $i$ in customer segment $j$. It calculated as the value of that bank's asset value divided by the total value of the bank's assets in that customer segment $j$.
+
 
 $$
 Rate_{b,k} = \sum_{i=1}^{CS_j}w^{j}_{b,i}P_{b,i}
@@ -232,13 +233,13 @@ We use a panel data approach to estimate the impact of the different regulatory 
 
 Our approach differs from existing literature in the following respects. First, our analysis considers the impact of regulatory developments on both lending volumes and bank pricing. Second, we measure bank responses in disaggregated customer segments, as opposed to assess changes in aggregate lending. This approach allows us to measure whether bank responses differ in different customers segments. Third, our analysis considers separate estimations for each of the narrative indices. This allows us to estimate how differently banks respond in the face of different regulation. Our approach provides us with the ability to infer whether these two regulatory approaches are consistent with their own objectives, but also with each other.
 
-\begin{equation}
+$$
 Rate_{b,t}^{c} = \alpha_1Index_t^i + \tau_b^c + \lambda_t^c + \alpha'\Omega^c + \epsilon_{b,t}^c
-\end{equation}
+$$
 
-\begin{equation}
+$$
 Lending_{b,t}^{c} = \beta_1Index_t^i + \tau_b^c + \lambda_t^c + \beta'\Omega^c + \epsilon_{b,t}^c
-\end{equation}
+$$
 
 Where $b$ $\in [FNB, Absa, Nedbank, Standard Bank]$; $t$ is the time period; $c$ is the credit category; and $i$ $\in$ $[Draft_t, Implementation_t, FinReg_t]$. Therefore $Lending_{b,t}^c$ are the bank level three month growth of lending, and $Rate_{b,t}^c$ are the bank level lending rates. $\Omega^c$ is a matrix of controls which includes a covid dummy, bank level variables, and other macroeconomic variables. $\tau_b^c$ captures the bank fixed effect, $\lambda_t^c$ are the time fixed effects, and $\epsilon_{b,t}^c$ are the error terms.
 
@@ -263,6 +264,9 @@ Table 4 provides the results of how lending rates have responded to the finance 
 #| cache: FALSE
 #| include: TRUE
 #| ft.arraystretch: 1
+
+macropru_results <- read_rds(here("Outputs", "models", "artifacts_macropru_models.rds"))
+macropru_three_month_results <- read_rds(here("Outputs", "models", "artifacts_three_month_macropru_models.rds"))
 
 rows <- modelsummary_basic(
     macropru_results$rates_models$implementation,
@@ -321,6 +325,7 @@ dependant_rate <- c(
   "Mortgage"
 )
 
+predictor_macro <- c("Draft index", "Implementation index")
 
 
 modelsummary_word(
@@ -358,6 +363,7 @@ modelsummary_word(
 ```
 \esideways
 
+
 \bsideways
 ```{r}
 #| label: tbl-macropru_draft_lending
@@ -366,9 +372,9 @@ modelsummary_word(
 #| include: TRUE
 #| ft.arraystretch: 1
 
-macropru_results <- read_rds(here("Outputs", "models", "artifacts_macropru_models.rds"))
 
-macropru_three_month_results <- read_rds(here("Outputs", "models", "artifacts_three_month_macropru_models.rds"))
+
+
 
 rows <- modelsummary_basic(
     macropru_three_month_results$three_lending_models$three_month_implementation,
@@ -479,6 +485,8 @@ modelsummary_word(
 #| include: TRUE
 #| ft.arraystretch: 1
 
+
+additional_competition_results <- read_rds(here("Outputs", "models", "artifacts_additional_competition_models.rds"))
 rows <- 
 # modelsummary_basic(
 #     additional_competition_results$financial_inclusion_rates_models,
@@ -524,6 +532,8 @@ dependant_rate <- c(
   "Mortgage"
 )
 
+predictor_finance <- c("Finance regulation index")
+
 modelsummary_word(
     additional_competition_results$finance_rates_models,
     coef_omit = 2:16,
@@ -567,7 +577,7 @@ modelsummary_word(
 #| include: TRUE
 #| ft.arraystretch: 1
 
-additional_competition_results <- read_rds(here("Outputs", "models", "artifacts_additional_competition_models.rds"))
+
 
 rows <-
 # modelsummary_basic(
@@ -723,7 +733,7 @@ Overall, our results indicate that macroprudential policy is working as intended
 \newpage
 
 
-# Appendix 
+# Appendix
 
 ## Data sources
 
@@ -746,10 +756,10 @@ tibble(
     "Narrative index of financial regulations in South Africa",
     "Banking sector balance sheet data at a bank level",
     "Banking sector lending rates at a bank level",
-    "Banking sector performance data at a bank level and 
+    "Banking sector performance data at a bank level and
     general macroeconomic data."
   ),
-  
+
   "Availability" = c(
     "Public data",
     "Public data",
@@ -764,14 +774,14 @@ Bank specific data is private"
   "Own analysis",
   "South African Reserve Bank",
   "South African Reserve Bank",
-  "Prudential Authority, 
-  South African Reserve Bank, 
-  Statistics South Africa, 
+  "Prudential Authority,
+  South African Reserve Bank,
+  Statistics South Africa,
   Johanesburg Stock Exchange"
 )
 ) %>%
   flextable_word() %>%
-  flextable::align(align = "left", part = "all") %>% 
+  flextable::align(align = "left", part = "all") %>%
   autofit(add_w = -0.2)
 
 ```
@@ -789,7 +799,7 @@ model_variables <- c( "L_{b,t}",
                       "C - C_{min}",
                       "r_t",
                       "\\Omega_{b,t}"
-  
+
 )
 
 tibble(
@@ -801,28 +811,28 @@ tibble(
                  "GDP",
                  "Bank level perfomance metrics"
                  ),
-  "Data Description" = c("BA 900 data on bank level credit at a monthly frequency. 
-We have summarised to six lending categories: 
-Household secured credit, Household unsecured credit, Household residential mortgages, 
-Non financial sector secured credit, Non financial sector unsecured credit, 
+  "Data Description" = c("BA 900 data on bank level credit at a monthly frequency.
+We have summarised to six lending categories:
+Household secured credit, Household unsecured credit, Household residential mortgages,
+Non financial sector secured credit, Non financial sector unsecured credit,
 and Non financial sector mortgages as explain in Section 8.2.",
-"BA 930 data on bank level lending rates at a monthly frequency. 
-Lending rates are defined as the weighted average rate 
-by lending category. These were also summarised into the 
+"BA 930 data on bank level lending rates at a monthly frequency.
+Lending rates are defined as the weighted average rate
+by lending category. These were also summarised into the
 same six lending categories as shown in Section 8.2.",
-"Aggregate amount of qualifying capital and 
+"Aggregate amount of qualifying capital and
 reserve funds less minimum required capital and reserve funds.",
 "Basel III required level of capital as a percentage of risk-weighted assets",
 "South African Reserve Bank policy rate",
 "Nominal gross domestic product.",
-"The following are bank perfomance metrics are include in the data: 
+"The following are bank perfomance metrics are include in the data:
 total assets, gross loan advances, retained earnings,
-net interest income (12 months), level one high-quality liquid assets required to be held, 
-average daily amount of level one high-quality liquid assets held up to 
-fourteenth business day of the month following the month to which this return relates, 
-aggregate risk weighted exposure, return on equity, return on assets, 
+net interest income (12 months), level one high-quality liquid assets required to be held,
+average daily amount of level one high-quality liquid assets held up to
+fourteenth business day of the month following the month to which this return relates,
+aggregate risk weighted exposure, return on equity, return on assets,
 total capital adequacy ratio, and leverage ratio."
-                    
+
                     ),
   "Measure" = c("Rand","Percent", "Percent", "Percent", "Percent", "Rand", "Rand and percent"),
   "Cross-section" = c("Nedbank, First National Bank, Standard Bank, Absa",
@@ -833,7 +843,7 @@ total capital adequacy ratio, and leverage ratio."
                       "NA",
                       "Nedbank, First National Bank, Standard Bank, Absa"
                       ),
-  "Sample" = c("January 2008 to November 2022", 
+  "Sample" = c("January 2008 to November 2022",
                "January 2012 to June 2022",
                "January 2008 to September 2020",
                "January 2008 to September 2020",
@@ -849,12 +859,12 @@ total capital adequacy ratio, and leverage ratio."
   "Quartely",
   "Monthly"
   ),
-  
-) %>% 
+
+) %>%
   flextable_word(
     caption = "Data Description") %>%
-  align(j = 1, part = "all", align = "left") %>% 
-  fit_to_width(max_width = 10) 
+  align(j = 1, part = "all", align = "left") %>%
+  fit_to_width(max_width = 10)
 
 ```
 
@@ -869,7 +879,7 @@ total capital adequacy ratio, and leverage ratio."
 #| ft.arraystretch: .55
 
 tibble(
-  "BA 900 Categories" = 
+  "BA 900 Categories" =
     c(
       "Installment sales",
       "",
@@ -902,9 +912,9 @@ tibble(
       "",
       "",
       "Factoring debtors",
-      "Other loans and advances", 
+      "Other loans and advances",
       "",
-      "", 
+      "",
       "",
       "",
       ""
@@ -942,12 +952,12 @@ tibble(
     185,
     187,
     189,
-    190, 
-    191, 
+    190,
+    191,
     192,
     193,
     ""
-    
+
   ),
   "Sector" = c(
     "Financial corporate sector",
@@ -1027,10 +1037,10 @@ tibble(
     "-",
     ""
   ),
-) %>% 
-  flextable_word(caption = "Aggregation schema") %>% 
+) %>%
+  flextable_word(caption = "Aggregation schema") %>%
   align(align = "left", part = "all") %>%
-  colformat_num(digits = 0, j = 2) %>% 
+  colformat_num(digits = 0, j = 2) %>%
   autofit(add_w = -0.2)
 
 
@@ -1039,10 +1049,10 @@ tibble(
 
 The following aggregation scheme which results in nine categories was followed based on @tbl-scheme:
 
-a.	Non-financial corporate unsecured lending: Items 168 + 183 + 190 
-b.	Household unsecured lending: Items 169 + 185 + 192   
+a.	Non-financial corporate unsecured lending: Items 168 + 183 + 190
+b.	Household unsecured lending: Items 169 + 185 + 192
 c.	Total unsecured lending: Non-financial corporate unsecured lending + Household unsecured lending
-d.	Commercial mortgages to corporates and households: Items 152 + 153 + 156 + 163 + 164   
+d.	Commercial mortgages to corporates and households: Items 152 + 153 + 156 + 163 + 164
 e.  Residential mortgages to household: Item 157
 f.	Total mortgage lending: Commercial mortgages to corporates and households + Residential mortgages to household
 g.	Leasing and instalments to corporates: Items 142 + 147
@@ -1142,10 +1152,10 @@ tibble(
     "b and c",
     "b and c"
   )
-) %>% 
-  flextable_word() %>% 
+) %>%
+  flextable_word() %>%
   align(align = "left", part = "all") %>%
-  colformat_num(digits = 0, j = 3) %>% 
+  colformat_num(digits = 0, j = 3) %>%
   autofit(add_w = .35)
 
 ```
@@ -1161,9 +1171,6 @@ f.	Total mortgage lending: Weighted average of items 53 + 63
 g.	Leasing and instalments to corporates: Weighted average of items 49 + 51
 h.  Leasing and instalments to households: Weighted average of items 59 + 61
 i.  Total leasing and instalments: Weighted average of items 49 + 51 + 59 + 61
-
-
-
 
 \newpage
 ## Aggregated bank lending
@@ -1190,7 +1197,7 @@ bank_lending_gg
 #| fig-width: 6
 #| cache: FALSE
 
-bank_interest_rates <- 
+bank_interest_rates <-
   read_rds(here("Outputs","BA930","artifacts_BA930_futher_analysis.rds"))
 
 bank_interest_rates_gg <- bank_interest_rates$gg$aggregated_lending_rates_gg
@@ -1221,7 +1228,7 @@ controls_gg
 ### Macroprudential Indicators
 
 This section provides a detailed account of the narrative macroprudential indicators. The asterisk (*) indicates that the specific regulation is tracked from the date of announcement to the date of implementation.
-  
+
 2008/01/01:  \textcolor{ForestGreen}{Implementation}
 \begin{quote}
             BASEL II is  Implemented until Dec 2011
@@ -1236,7 +1243,7 @@ This section provides a detailed account of the narrative macroprudential indica
 2009/07/31*: \textcolor{blue}{Announcement, draft and passing of regulation}
              \begin{quote}BCBS announces "measures to strengthen the 1996 rules governing trading book capital and to enhance the three pillars of the Basel II framework (Basel 2.5)". This in essence, aims  to introduce higher capital requirements to capture the credit risk of complex trading activities, promote the build-up of capital buffers that can be drawn down in periods of stress and strengthen the quality of bank capital\citep{basel09}
                 \end{quote}
- 
+
 
 
 2010/10/08*: \textcolor{blue}{Announcement, draft and passing of regulation}
@@ -1247,12 +1254,12 @@ This section provides a detailed account of the narrative macroprudential indica
 
  2011/06/30*:   \textcolor{blue}{Announcement, draft and passing of regulation}
 
-\begin{quote}BCBS issues and publishes Basel III: A Global Regulatory Framework for More Resilient Banks and Banking Systems. 
+\begin{quote}BCBS issues and publishes Basel III: A Global Regulatory Framework for More Resilient Banks and Banking Systems.
 \end{quote}
 
 
 2011/07/31: \textcolor{blue}{Announcement, draft and passing of regulation}
-\begin{quote} 
+\begin{quote}
 Cabinet adopts proposal to shift to Twin Peaks Model of Financial Regulation in South Africa, following he GFC, with the aim of improving  institutional structure to support financial regulation. This is a signal to stricter oversight on the overall financial system
 \end{quote}
 
@@ -1277,7 +1284,7 @@ Cabinet adopts proposal to shift to Twin Peaks Model of Financial Regulation in 
 2012/02/16*:  \textcolor{blue}{Announcement, draft and passing of regulation}
 
 \begin{quote}
-    
+
 SARB issues \textbf{guidance note 2/2012} announcing on new definition of total regulatory capital for Basel III such as:
 \begin{itemize}
     \item Phasing out arrangements for non-common equity Tier 1 capital instruments that no longer qualify as regulatory capital under Basel III
@@ -1365,7 +1372,7 @@ SARB issues \textbf{circular 8/2015} announcing timelines and targets in respect
 
 2016/01/31*: \textcolor{ForestGreen}{Implementation}
 \begin{quote}
-CCyB is implemented and set at 0.625\% 
+CCyB is implemented and set at 0.625\%
 \end{quote}
 
 
@@ -1414,13 +1421,13 @@ CCyB increases to 2,5\% (maximum) and LCR is implemented at 100\% compliance.
 
 The National Credit Act of 2005 is legislation that was enacted in order to better regulate the markets for customer credit. According to this Act its purpose is to develop, inter alia, credit markets that are accessible by all South Africans, correct the imbalance in negotiating power between consumers and credit providers, regulate the collection and sharing of consumer credit information and prevent over-indebtedness. These, and other, efforts are to achieve a *"fair, transparent, competitive, sustainable, responsible, efficient, effective and accessible credit market and industry, and to protect consumers*^[Section 3 of the NCA.]. The Act specifically provided the Minister of, the erstwhile, Trade and Industry with powers to provide regulations pertaining to the implementation of the Act.^[Section 171 of the NCA.] These regulations were made available in May 2006.
 
-The initial regulations predate the period assessed by this paper, but the proposed and later realised changes to these Regulations occurred between 2012 and 2015. It is these developments that are captured within $FinReg$.
+The initial regulations pre-date the period assessed by this paper, but the proposed and later realised changes to these Regulations occurred between 2012 and 2015. It is these developments that are captured within $FinReg$.
 
 *2012 Debt Counselling Regulations*
 
 On the 10th of May 2012 the Minister of Trade and Industry published debt counselling regulations. These codified the process to be followed by debt counselors and consumers when seeking various order from the Magistrate's Court. These orders relate to the re-structuring of debt following a debt counselor's findings of consumer over-indebtedness, consumer difficulty to meet debt obligations and direct applications by consumers to the court following an adverse finding by debt counsellors. The regulations also provided that credit providers were expected to implement orders from the Court within 10 working days following their receipt of the court orders from the debt counselors and/or consumers [@regulations2012].^[The initial draft regulations were published on the 15th of May 2009 and did not prescribe the period within which court orders, made following debt counselling processes, were to be implemented by credit providers].
 
-@Roestoff2009 indicates that provisions of the National Credit Act in regard to debt relief are to assist over-indebted consumers, prioritising their interests more than those of credit providers. To achieve these outcomes, debt review negotiations require that credit providers have greater responsibility toward the possible negative outcomes of credit provision.
+@roestoff2009 indicates that provisions of the National Credit Act in regard to debt relief are to assist over-indebted consumers, prioritising their interests more than those of credit providers. To achieve these outcomes, debt review negotiations require that credit providers have greater responsibility toward the possible negative outcomes of credit provision.
 
 *2013 and 2014 draft and final credit regulations on the removal of adverse consumer credit information and information relating to paid up judgements*
 
@@ -1432,29 +1439,29 @@ On the 26th of February 2014, the Minister published final regulations instructi
 
 On the 1st of August 2014, the Minister of Trade and Industry published draft national credit regulations that proposed a host of changes to the existing 2006 regulations, as amended [@regulations2014b]. Many of these were proposed insertions into the regulations that did not exist before. The proposals included a criteria to be adopted by credit providers to conduct affordability assessments to further limit instances of reckless lending. Credit providers were provided with additional limits on when adverse consumer credit information was to be shared with credit bureaus; for instance, information that consumers did not meet their financial obligations would not be shared unless a consumer would have missed their minimum obligations for three consecutive months. Related to credit bureau information were changes to the maximum periods that credit information were to be kept by credit bureaus. For many of the types of information  kept, the proposed regulations proposed reduced retention periods. For instance, information relating to enquiries on a consumers record was to be reduced from 2 years to 2 months;  information on liquidations had been kept for an unlimited period and the proposal was to reduce this to 5 years; information on complaints initiated by customers was kept from 18 months and proposed to be reduced to 6 months. Other changes included explicit references to the registration and operation of payment distribution agents, as well as the provision of clarity on when credit information could be obtained for employment purposes.
 
-By the 13th of March 2015, the Minister provided a final set of proposed changes and insertions into the regulations that would come into effect [@regulations2015a]. Many of the 2014 proposals were accepted, some with changes. Some of these included the explicit criteria for affordability assessments, changes to the retention periods for credit bureau information, and the additional limits on when adverse consumer credit information was to be shared with credit bureaus. 
+By the 13th of March 2015, the Minister provided a final set of proposed changes and insertions into the regulations that would come into effect [@regulations2015a]. Many of the 2014 proposals were accepted, some with changes. Some of these included the explicit criteria for affordability assessments, changes to the retention periods for credit bureau information, and the additional limits on when adverse consumer credit information was to be shared with credit bureaus.
 
 *2015 draft and final credit regulations on limitations on fees and interest rates*
 
 Section 42(1) of the 2006 credit regulations provided the maximum interest rates to be set on different types of credit [@regulations2006]. These included mortgages, credit facilities, unsecured credit, developmental credit, short term credit, other and incidental credit agreements. Incidental and short term credit rates were respectively capped at 2% and 5% per month. The limits for other rates were calculated at the repo rate scaled up by 2.2 and increased by fixed interest rates ranging between 5 to 20 percentage points depending on the credit type. In addition, the regulations also provided the maximum Rand values that would be set as initiation and service fees. The initiation fees  varied by credit type.
 
-In 2015, the Minister of Trade and Industry proposed changes to these interest rates and initiation fees [@regulations2015b]. Final changes came into effects that same year [@regulations2015c]. For 5 of the 7 credit types, the Minister provided a lower scalar by higher interest rate premium. The net effect of this adjustment was that maximum interest rates on credit facilities would be lower by 2.9 percentage points and 7.9 percentage points for unsecured credit (based on the prevailing repo rate). The maximum rates set for other credit types increased marginally by 0.1 percentage points of had no change at all. Initiation and service fees were increased above the limits set in the 2006 regulations. 
+In 2015, the Minister of Trade and Industry proposed changes to these interest rates and initiation fees [@regulations2015b]. Final changes came into effects that same year [@regulations2015c]. For 5 of the 7 credit types, the Minister provided a lower scalar by higher interest rate premium. The net effect of this adjustment was that maximum interest rates on credit facilities would be lower by 2.9 percentage points and 7.9 percentage points for unsecured credit (based on the prevailing repo rate). The maximum rates set for other credit types increased marginally by 0.1 percentage points of had no change at all. Initiation and service fees were increased above the limits set in the 2006 regulations.
 
 **Restructuring of the financial sector regulation**
 
 *Financial Sector Regulation Act*
 
-The Financial Sector Regulation Act of 2017 represented a structural shift in the regulation of financial institutions in South Africa, as it set up a framework for financial regulation and supervision. 
+The Financial Sector Regulation Act of 2017 represented a structural shift in the regulation of financial institutions in South Africa, as it set up a framework for financial regulation and supervision.
 
-The Act importantly sets up two authorities with important regulatory powers.  One is the Prudential Authority, which sits within the South African Reserve Bank. This object of this authority is  to ensure the soundness of financial institutions and infrastructure and financial stability, as well as protecting consumers against risks from financial institutions. The other authority created by the act is the Financial Sector Conduct Authority (FSCA).^[The FSCA replaced the Financial Services Board. See: https://www.fsca.co.za/TPNL/4/fsb4/proactive.html] The object of the FSCA was to protect financial consumers by promoting fair treatment and  financial education, as well as to maintaining financial stability and market efficiency. 
+The Act importantly sets up two authorities with important regulatory powers.  One is the Prudential Authority, which sits within the South African Reserve Bank. This object of this authority is  to ensure the soundness of financial institutions and infrastructure and financial stability, as well as protecting consumers against risks from financial institutions. The other authority created by the act is the Financial Sector Conduct Authority (FSCA).^[The FSCA replaced the Financial Services Board. See: https://www.fsca.co.za/TPNL/4/fsb4/proactive.html] The object of the FSCA was to protect financial consumers by promoting fair treatment and  financial education, as well as to maintaining financial stability and market efficiency.
 
-Both the PA and the FSCA were tasked with promoting financial inclusion. Which the Act defined as a state where all persons have access to *"timely and fair access to appropriate, fair and affordable financial products and services"* [@fsr2017]. 
+Both the PA and the FSCA were tasked with promoting financial inclusion. Which the Act defined as a state where all persons have access to *"timely and fair access to appropriate, fair and affordable financial products and services"* [@fsr2017].
 
 *Draft and Update of the Conduct of Financial Institutions Bill*
 
 In 2018 the National Treasury presented a draft Conduct of Financial Institutions (COFI) Bill. This bill proposes consolidating a number of the financial sector laws of the country. At present, the nature of financial sector regulation is focused on particular sectors. For instance, insurance companies are regulated by the Insurance Act, investment schemes by the Collective Investment Schemes Control Act and financial service providers by the  Financial Advisory and Intermediary Services Act. The proposed bill seeks to provide the provide the Financial Services Conduct Authority with the ability to regulate the conduct of institution that provide the similar services and products [@cofi2018a].
 
-With regard to credit provision, the COFI bill proposes providing the FSCA with the ability to provide standards for the conduct of firms in the provision of financial products and services. The referred to conduct relates to, inter alia, firms' charging structures, pricing methodologies, financial product features and the identification of appropriate and inappropriate target markets [@cofi2018a, @cofi2020]. The @cofi2018b explains that this proposed legislation is premised on supporting greater financial inclusion as the better regulation of firm conduct would provide consumers with greater security required for their usage of financial sector products. A draft COFI bill was presented in 2018 and an updated draft in 2020 [@cofi2020]. 
+With regard to credit provision, the COFI bill proposes providing the FSCA with the ability to provide standards for the conduct of firms in the provision of financial products and services. The referred to conduct relates to, inter alia, firms' charging structures, pricing methodologies, financial product features and the identification of appropriate and inappropriate target markets [@cofi2018a, @cofi2020]. The @cofi2018b explains that this proposed legislation is premised on supporting greater financial inclusion as the better regulation of firm conduct would provide consumers with greater security required for their usage of financial sector products. A draft COFI bill was presented in 2018 and an updated draft in 2020 [@cofi2020].
 
 **National financial inclusion policy**
 
@@ -1526,11 +1533,9 @@ finance_narratives_three_months_gg
 
 \newpage
 
-
-
 \bsideways
-
 ## Results with controls
+
 
 ```{r}
 #| label: tbl-macropru_draft_rates_control
@@ -1539,49 +1544,61 @@ finance_narratives_three_months_gg
 #| include: TRUE
 #| ft.arraystretch: 1
 
+macropru_control_results <- read_rds(here("Outputs", "models", "artifacts_macropru_controls_models.rds"))
+
 rows <- modelsummary_basic(
     macropru_control_results$rates_models$implementation,
     coef_omit = 4:18,
     gof_omit = "AIC|BIC|Std|Log",
     output = "dataframe"
-  ) [, c(2, 4:12)] %>% 
+  ) [, c(2, 4:12)] %>%
   add_row(
-   term = "Bank Fixed Effects",  
-  `(1)` = "Yes", 
-  `(2)` = "Yes", 
-  `(3)` = "Yes", 
-  `(4)` = "Yes", 
-  `(5)` = "Yes", 
-  `(6)` = "Yes", 
-  `(7)` = "Yes", 
-  `(8)` = "Yes", 
+   term = "Bank Fixed Effects",
+  `(1)` = "Yes",
+  `(2)` = "Yes",
+  `(3)` = "Yes",
+  `(4)` = "Yes",
+  `(5)` = "Yes",
+  `(6)` = "Yes",
+  `(7)` = "Yes",
+  `(8)` = "Yes",
   `(9)` = "Yes"
-  ) %>% 
+  ) %>%
   add_row(
-   term = "Monthly Fixed Effects",  
-  `(1)` = "Yes", 
-  `(2)` = "Yes", 
-  `(3)` = "Yes", 
-  `(4)` = "Yes", 
-  `(5)` = "Yes", 
-  `(6)` = "Yes", 
-  `(7)` = "Yes", 
-  `(8)` = "Yes", 
+   term = "Monthly Fixed Effects",
+  `(1)` = "Yes",
+  `(2)` = "Yes",
+  `(3)` = "Yes",
+  `(4)` = "Yes",
+  `(5)` = "Yes",
+  `(6)` = "Yes",
+  `(7)` = "Yes",
+  `(8)` = "Yes",
   `(9)` = "Yes"
-  ) 
-  
+  )
+
 rows_tbl <-  tibble(
-  "term" = "Implementation model",  
-  "(1)" = " ", 
-  "(2)" = " ", 
-  "(3)" = " ", 
-  "(4)" = " ", 
-  "(5)" = " ", 
-  "(6)" = " ", 
-  "(7)" = " ", 
-  "(8)" = " ", 
-  "(9)" = " ") %>% 
+  "term" = "Implementation model",
+  "(1)" = " ",
+  "(2)" = " ",
+  "(3)" = " ",
+  "(4)" = " ",
+  "(5)" = " ",
+  "(6)" = " ",
+  "(7)" = " ",
+  "(8)" = " ",
+  "(9)" = " ") %>%
   add_row(rows)
+
+predictor_control <-
+  c(
+    "Draft index",
+    "Return on assets",
+    "Total capital adequacy ratio",
+    "Implementation index",
+    "Return on assets",
+    "Total capital adequacy ratio"
+  )
 
 
 modelsummary_word(
@@ -1589,8 +1606,8 @@ modelsummary_word(
     coef_omit = 4:18,
     gof_omit = "AIC|BIC|Std|Log|Num.Obs.",
     add_rows = rows_tbl
-  ) %>% 
-  width(j = 1, width = 1.4) %>% 
+  ) %>%
+  width(j = 1, width = 1.4) %>%
    add_body_row(values =
                  c("Draft model"),
                colwidths = 10) %>%
@@ -1610,13 +1627,13 @@ modelsummary_word(
     i = c(2, 3, 4, 6, 7, 8),
     part = "body",
     value = as_paragraph(predictor_control)
-  ) %>% 
+  ) %>%
   hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
 
 ```
 \esideways
 
-
+\bsideways
 ```{r}
 #| label: tbl-macropru_draft_lending_control
 #| tbl-cap: "Macroprudential regulations and lending volumes (3-months) with controls results"
@@ -1624,50 +1641,48 @@ modelsummary_word(
 #| include: TRUE
 #| ft.arraystretch: 1
 
-macropru_control_results <- read_rds(here("Outputs", "models", "artifacts_macropru_controls_models.rds"))
-
 rows <- modelsummary_basic(
     macropru_control_results$lending_models$implementation,
     coef_omit = 4:18,
     gof_omit = "AIC|BIC|Std|Log",
     output = "dataframe"
-  ) [, c(2, 4:12)] %>% 
+  ) [, c(2, 4:12)] %>%
   add_row(
-   term = "Bank Fixed Effects",  
-  `(1)` = "Yes", 
-  `(2)` = "Yes", 
-  `(3)` = "Yes", 
-  `(4)` = "Yes", 
-  `(5)` = "Yes", 
-  `(6)` = "Yes", 
-  `(7)` = "Yes", 
-  `(8)` = "Yes", 
+   term = "Bank Fixed Effects",
+  `(1)` = "Yes",
+  `(2)` = "Yes",
+  `(3)` = "Yes",
+  `(4)` = "Yes",
+  `(5)` = "Yes",
+  `(6)` = "Yes",
+  `(7)` = "Yes",
+  `(8)` = "Yes",
   `(9)` = "Yes"
-  ) %>% 
+  ) %>%
   add_row(
-   term = "Monthly Fixed Effects",  
-  `(1)` = "Yes", 
-  `(2)` = "Yes", 
-  `(3)` = "Yes", 
-  `(4)` = "Yes", 
-  `(5)` = "Yes", 
-  `(6)` = "Yes", 
-  `(7)` = "Yes", 
-  `(8)` = "Yes", 
+   term = "Monthly Fixed Effects",
+  `(1)` = "Yes",
+  `(2)` = "Yes",
+  `(3)` = "Yes",
+  `(4)` = "Yes",
+  `(5)` = "Yes",
+  `(6)` = "Yes",
+  `(7)` = "Yes",
+  `(8)` = "Yes",
   `(9)` = "Yes"
-  ) 
-  
+  )
+
 rows_tbl <-  tibble(
-  "term" = "Implementation model",  
-  "(1)" = " ", 
-  "(2)" = " ", 
-  "(3)" = " ", 
-  "(4)" = " ", 
-  "(5)" = " ", 
-  "(6)" = " ", 
-  "(7)" = " ", 
-  "(8)" = " ", 
-  "(9)" = " ") %>% 
+  "term" = "Implementation model",
+  "(1)" = " ",
+  "(2)" = " ",
+  "(3)" = " ",
+  "(4)" = " ",
+  "(5)" = " ",
+  "(6)" = " ",
+  "(7)" = " ",
+  "(8)" = " ",
+  "(9)" = " ") %>%
   add_row(rows)
 
 predictor_control <-
@@ -1680,14 +1695,6 @@ predictor_control <-
     "Total capital adequacy ratio"
   )
 
-predictor_control <- c(
-  "Draft index",
-  "Return on assets",
-  "Total capital adequacy ratio",
-  "Implementation index",
-  "Return on assets",
-  "Total capital adequacy ratio"
-)
 
 modelsummary_word(
   macropru_control_results$lending_models$draft,
@@ -1715,8 +1722,8 @@ modelsummary_word(
     i = c(2, 3, 4, 6, 7, 8),
     part = "body",
     value = as_paragraph(predictor_control)
-  ) %>% 
-  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) 
+  ) %>%
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white"))
 ```
 \esideways
 
@@ -1728,38 +1735,41 @@ modelsummary_word(
 #| include: TRUE
 #| ft.arraystretch: 1
 
-rows <- 
+
+additional_competition_controls_results <- read_rds(here("Outputs", "models", "artifacts_additional_competition_control_models.rds"))
+
+rows <-
 # modelsummary_basic(
 #     additional_competition_controls_results$financial_inclusion_rates_models,
 #     coef_omit = 5:19,
 #     gof_omit = "AIC|BIC|Std|Log",
 #     output = "dataframe"
-#   ) [, c(2, 4:12)] %>% 
+#   ) [, c(2, 4:12)] %>%
   tibble(
-   term = "Bank Fixed Effects",  
-  `(1)` = "Yes", 
-  `(2)` = "Yes", 
-  `(3)` = "Yes", 
-  `(4)` = "Yes", 
-  `(5)` = "Yes", 
-  `(6)` = "Yes", 
-  `(7)` = "Yes", 
-  `(8)` = "Yes", 
+   term = "Bank Fixed Effects",
+  `(1)` = "Yes",
+  `(2)` = "Yes",
+  `(3)` = "Yes",
+  `(4)` = "Yes",
+  `(5)` = "Yes",
+  `(6)` = "Yes",
+  `(7)` = "Yes",
+  `(8)` = "Yes",
   `(9)` = "Yes"
-  ) %>% 
+  ) %>%
   add_row(
-   term = "Monthly Fixed Effects",  
-  `(1)` = "Yes", 
-  `(2)` = "Yes", 
-  `(3)` = "Yes", 
-  `(4)` = "Yes", 
-  `(5)` = "Yes", 
-  `(6)` = "Yes", 
-  `(7)` = "Yes", 
-  `(8)` = "Yes", 
+   term = "Monthly Fixed Effects",
+  `(1)` = "Yes",
+  `(2)` = "Yes",
+  `(3)` = "Yes",
+  `(4)` = "Yes",
+  `(5)` = "Yes",
+  `(6)` = "Yes",
+  `(7)` = "Yes",
+  `(8)` = "Yes",
   `(9)` = "Yes"
-  ) 
-  
+  )
+
 dependant_rate <- c(
   " ",
   "Unsecured",
@@ -1773,35 +1783,45 @@ dependant_rate <- c(
   "Mortgage"
 )
 
+predictor_finance_controls <-
+  c("Finance regulation index",
+    # "Covid-dummy",
+    "Repo rate",
+    # "Consumer confidence",
+    "Return on assets"
+    # "SAVIT40 index",
+    )
+
+
 modelsummary_word(
     additional_competition_controls_results$finance_rates_models,
     coef_omit = 4:18,
     gof_omit = "AIC|BIC|Std|Log",
     add_rows = rows
-  ) %>% 
-  width(j = 1, width = 1.2) %>% 
+  ) %>%
+  width(j = 1, width = 1.2) %>%
    add_body_row(values =
                  c("Finance regulation model"),
                colwidths = 10) %>%
   # merge_at(i = 8, j = 1:10) %>%
   add_header_row(
     values = c("", "Total", "Corporates", "Households"),
-    colwidths = c(1, 3, 3, 3)) %>% 
+    colwidths = c(1, 3, 3, 3)) %>%
   align(align = "center", part = "header", i = 1) %>%
   align(align = "center", part = "body", i = 1) %>%
-  hline(i = 4, j = 1:10, part = "body") %>% 
+  hline(i = 4, j = 1:10, part = "body") %>%
    mk_par(
     i = 2,
     part = "header",
     value = as_paragraph(dependant_rate)
-  ) %>% 
+  ) %>%
   mk_par(
     j = 1,
     i = c(2, 3, 4),
     part = "body",
     value = as_paragraph(predictor_finance_controls)
-  ) %>% 
-  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) %>% 
+  ) %>%
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) %>%
   autofit(add_w = -10)
 
 ```
@@ -1815,40 +1835,40 @@ modelsummary_word(
 #| include: TRUE
 #| ft.arraystretch: 1
 
-additional_competition_controls_results <- read_rds(here("Outputs", "models", "artifacts_additional_competition_control_models.rds"))
 
-rows <- 
+
+rows <-
   # modelsummary_basic(
   #   additional_competition_controls_results$financial_inclusion_lending_models,
   #   coef_omit = 5:19,
   #   gof_omit = "AIC|BIC|Std|Log",
   #   output = "dataframe"
-  # ) [, c(2, 4:12)] %>% 
+  # ) [, c(2, 4:12)] %>%
   tibble(
-   term = "Bank Fixed Effects",  
-  `(1)` = "Yes", 
-  `(2)` = "Yes", 
-  `(3)` = "Yes", 
-  `(4)` = "Yes", 
-  `(5)` = "Yes", 
-  `(6)` = "Yes", 
-  `(7)` = "Yes", 
-  `(8)` = "Yes", 
+   term = "Bank Fixed Effects",
+  `(1)` = "Yes",
+  `(2)` = "Yes",
+  `(3)` = "Yes",
+  `(4)` = "Yes",
+  `(5)` = "Yes",
+  `(6)` = "Yes",
+  `(7)` = "Yes",
+  `(8)` = "Yes",
   `(9)` = "Yes"
-  ) %>% 
+  ) %>%
   add_row(
-   term = "Monthly Fixed Effects",  
-  `(1)` = "Yes", 
-  `(2)` = "Yes", 
-  `(3)` = "Yes", 
-  `(4)` = "Yes", 
-  `(5)` = "Yes", 
-  `(6)` = "Yes", 
-  `(7)` = "Yes", 
-  `(8)` = "Yes", 
+   term = "Monthly Fixed Effects",
+  `(1)` = "Yes",
+  `(2)` = "Yes",
+  `(3)` = "Yes",
+  `(4)` = "Yes",
+  `(5)` = "Yes",
+  `(6)` = "Yes",
+  `(7)` = "Yes",
+  `(8)` = "Yes",
   `(9)` = "Yes"
-  ) 
-  
+  )
+
 dependant_rate <- c(
   " ",
   "Unsecured",
@@ -1877,30 +1897,30 @@ modelsummary_word(
     coef_omit = 4:18,
     gof_omit = "AIC|BIC|Std|Log.",
     add_rows = rows
-  ) %>% 
-  width(j = 1, width = 1.2) %>% 
+  ) %>%
+  width(j = 1, width = 1.2) %>%
    add_body_row(values =
                  c("Finance regulation model"),
                colwidths = 10) %>%
   # merge_at(i = 8, j = 1:10) %>%
   add_header_row(
     values = c("", "Total", "Corporates", "Households"),
-    colwidths = c(1, 3, 3, 3)) %>% 
+    colwidths = c(1, 3, 3, 3)) %>%
   align(align = "center", part = "header", i = 1) %>%
   align(align = "center", part = "body", i = 1) %>%
-  hline(i = 4, j = 1:10, part = "body") %>% 
+  hline(i = 4, j = 1:10, part = "body") %>%
    mk_par(
     i = 2,
     part = "header",
     value = as_paragraph(dependant_rate)
-  ) %>% 
+  ) %>%
   mk_par(
     j = 1,
     i = c(2, 3, 4),
     part = "body",
     value = as_paragraph(predictor_finance_controls)
-  ) %>% 
-  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) %>% 
+  ) %>%
+  hline(i = 1, j = 1:1, part = "header", border = fp_border(color = "white")) %>%
   autofit(add_w = -10)
 
 ```
