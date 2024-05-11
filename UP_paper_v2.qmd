@@ -212,15 +212,19 @@ $$
 #| ft.arraystretch: 0.5
 
 descriptives <- read_rds(here("Outputs", "combined_data", "artifacts_descriptives.rds"))
-descriptives_tbl <- descriptives$descriptives_tbl
+descriptives_tbl <- 
+  descriptives$descriptives_tbl %>% 
+  filter(Series != "SAVIT40 index",
+         Series != "Consumer confidence index")
+
 
 descriptives_tbl %>%
   as_grouped_data(groups = c("Group")) %>% 
   as_flextable(hide_grouplabel = TRUE) %>% 
   colformat_double(digits = 2, i = 2:10, j = 2:6) %>%
   colformat_double(digits = 2, i = 11:20, j = 2:6) %>%
-  colformat_double(digits = 2 , i = 22:26, j = 2:6) %>%
-  colformat_double(digits = 2, i = 27:29, j = 2:6) %>%
+  colformat_double(digits = 2 , i = 22:26, j = 2:6) %>% 
+  colformat_double(digits = 2, i = 27, j = 2:6) %>% 
   width(j = 1, width = 1.5) %>%
   align(align = "center", i = c(1, 11, 21, 24, 26), part = "body") %>%
   autofit(add_w = -0.1)
