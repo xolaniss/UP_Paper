@@ -93,9 +93,10 @@ lending_capitec_nan_tbl <-
 lending_tbl <- 
   # We decided to replace capitec NaNs with 0s. Because of the division of the shares. This is essential for the exit and entry story. To delete capitec in the overall analysis because of "missing" or zero values.
   lending_capitec_nan_tbl %>% 
-  mutate(across(everything(), ~replace(.x, is.nan(.x), 0))) %>% 
-  drop_na() # because of date difference between lending data and lending rates data
- 
+  mutate(across(everything(), ~replace(.x, is.nan(.x), 0))) 
+  # drop_na() # because of date difference between lending data and lending rates data
+
+  
 ## Checks -------------------------------------------------------------
 lending_tbl %>% group_by(Banks) %>% skim() 
 dummies_tbl %>% group_by(Banks) %>% skim() 
@@ -181,8 +182,7 @@ additional_controls_tbl <-
   group_by(Banks) %>% 
   fill(`Consumer confidence index`, .direction = "up") %>% 
   ungroup() %>% 
-  left_join(impairments_tbl, by = c("Date", "Banks")) %>% 
-  drop_na()
+  left_join(impairments_tbl, by = c("Date", "Banks")) 
 
 additional_controls_tbl %>% skim()
 
@@ -203,6 +203,8 @@ combined_tbl <-
   left_join(controls_tbl, by = c("Date", "Banks")) %>%    # combined lending and dummies and controls
   left_join(additional_controls_tbl, by = c("Date", "Banks")) # combined lending and dummies and controls and additional controls
 
+combined_tbl %>% glimpse()
+
 # EDA ---------------------------------------------------------------
 combined_tbl %>% group_by(Banks) %>% skim()
 plot_str(combined_tbl) # structure of data
@@ -212,7 +214,7 @@ plot_bar(combined_tbl) # freq of discrete
 plot_histogram(combined_tbl) # distribution of continuous
 plot_boxplot(combined_tbl, by = "Banks") # distribution of continuous
 plot_qq(combined_tbl) # qq of continuous
-#
+
 
 # Feature engineering --------------------------------------------------------
 ## logs

@@ -125,15 +125,15 @@ descriptives_competition_tbl <-
   ) %>% 
   dplyr::select(
     Date,
-    `Finance regulation index`,
-    `Financial inclusion index`
+    `Finance regulation index`
+    # `Financial inclusion index`
   ) %>% 
   pivot_longer(
     cols = -Date,
     names_to = "Series",
     values_to = "Value"
   ) %>% 
-  descriptives(group_var = "Competition regulation narrative indices")
+  descriptives(group_var = "Financial regulation narrative index")
 
 descriptives_controls_tbl <- 
   combined_filtered_tbl %>%

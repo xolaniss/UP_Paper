@@ -50,7 +50,7 @@ combined_tbl <-
   mutate(covid_dummy = if_else(Date >= "2020-03-01", 1, 0)) %>%  # Covid dummy
   dplyr::filter(Banks != "Total Banks") %>%
   clean_names() %>% 
-  filter(date >= "2009-01-01") # Initial adjustment
+  filter(date >= "2009-01-01" & date < "2020-03-01") # Covid adjustment
 combined_tbl %>% glimpse()
 
 
@@ -74,7 +74,7 @@ response_finance_rates_vec <- c(
 predictor_finance_rates_vec <- c(
   "-1",
   "finance_regulation_dummy",
-  "covid_dummy",
+  # "covid_dummy",
   "factor(banks)",
   "factor(month)"
 )
@@ -104,7 +104,7 @@ response_finance_lending_vec <- c(
 predictor_finance_lending_vec <- c(
   "-1",
   "finance_regulation_dummy",
-  "covid_dummy",
+  # "covid_dummy",
   "factor(banks)",
   "factor(month)"
 )

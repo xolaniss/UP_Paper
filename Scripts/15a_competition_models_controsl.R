@@ -43,18 +43,20 @@ source(here("Functions", "model_workflow.R"))
 source(here("Functions", "excel_import_sheet.R"))
 
 # Import -------------------------------------------------------------
-combined <- read_rds(here("Outputs", "combined_data", "artifacts_modelling_data.rds"))
+combined <- read_rds(here("Outputs", "combined_data", "artifacts_combined_spreads.rds"))
 combined_tbl <- 
-  combined$combined_features_tbl %>% 
+  combined$combined_spread_tbl %>% 
   mutate(month = lubridate::month(Date)) %>%
   mutate(covid_dummy = if_else(Date >= "2020-03-01", 1, 0)) %>%  # Covid dummy
   dplyr::filter(Banks != "Total Banks") %>%
   clean_names() %>% 
-  filter(date >= "2009-01-01") # Initial adjustment
-combined_tbl %>% glimpse()
+  filter(date >= "2009-01-01" & date < "2020-03-01") # Covid adjustment
+combined_tbl %>% skim()
 
-
-
+combined_tbl$consumer_confidence_index
+combined_tbl$savit40
+combined_tbl$return_on_assets
+combined_tbl$repo
 # Finance regulation ------------------------------------------------------
 
 ## Rates models ------------------------------------------------------------
@@ -74,14 +76,15 @@ response_finance_rates_vec <- c(
 predictor_finance_rates_vec <- c(
   "-1",
   "finance_regulation_dummy",
-  "covid_dummy",
+  # "covid_dummy",
+  # "non_financial_corporate_unsecured_lending_spread",
   "repo",
-  "consumer_confidence_index",
+  # "consumer_confidence_index",
   "return_on_assets",
-  "savit40",
+  # "savit40",
   "factor(banks)",
   "factor(month)"
-)
+)    
 
 finance_rates_models <- model_workflow(
   data = combined_tbl,
@@ -108,11 +111,11 @@ response_finance_lending_vec <- c(
 predictor_finance_lending_vec <- c(
   "-1",
   "finance_regulation_dummy",
-  "covid_dummy",
+  # "covid_dummy",
   "repo",
-  "consumer_confidence_index",
+  # "consumer_confidence_index",
   "return_on_assets",
-  "savit40",
+  # "savit40",
   "factor(banks)",
   "factor(month)"
 )

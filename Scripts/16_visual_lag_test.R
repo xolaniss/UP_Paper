@@ -79,6 +79,44 @@ test_plot <- function(data,
     scale_color_manual(values = pnw_palette("Sunset2", 9))
 }
 
+test_plot_2 <- function(data,
+                     index_1 = `draft index`,
+                     lag_string = "three",
+                     plot_title = "add title",
+                     axis_title = "add axis title"
+) {
+  data %>% 
+    dplyr::select(date,
+                  starts_with(lag_string)) %>% 
+    pivot_longer(cols = -date, names_to = "series", values_to = "value") %>% 
+    mutate(series = str_to_sentence(series)) %>%
+    mutate(series = str_replace_all(series, "_", " ")) %>%
+    ggplot(aes(x = date, y = value, color = series, alpha = 0.4)) +
+    geom_line() +
+    geom_line(data = data, 
+              aes(x = date, y = {{index_1}}), 
+              color = "black", alpha = 1) +
+    theme_bw() +
+    theme(
+      legend.position = "none",
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank()
+    ) +
+    theme(
+      text = element_text(size = 8),
+      strip.background = element_rect(colour = "white", fill = "white"),
+      axis.text.x = element_text(angle = 90),
+      axis.title = element_text(size = 7),
+      plot.tag = element_text(size = 8)
+    ) +
+    labs(
+      x = " ",
+      y = axis_title) +
+    facet_wrap(~series, scales = "free_y", ncol = 2) +
+    scale_color_manual(values = pnw_palette("Sunset2", 9))
+}
+
+
 # Import -------------------------------------------------------------
 combined <- read_rds(here("Outputs", "combined_data", "artifacts_modelling_data.rds"))
 combined_tbl <- 
@@ -135,15 +173,13 @@ competition_test_tbl <-
          `Financial inclusion index` = financial_inclusion_dummy,
   )
 
-one_month_test_finance_gg <- test_plot(competition_test_tbl,
+one_month_test_finance_gg <- test_plot_2(competition_test_tbl,
                    index_1 = `Finance regulation index`,
-                   index_2 = `Financial inclusion index`,
                    lag_string = "change_in",
                    axis_title = "One month growth (%) / Index")
 
-three_month_test_finance_gg <- test_plot(competition_test_tbl,
+three_month_test_finance_gg <- test_plot_2(competition_test_tbl,
                    index_1 = `Finance regulation index`,
-                   index_2 = `Financial inclusion index`,
                    lag_string = "three",
                    axis_title = "Three month growth (%) / Index")
 
