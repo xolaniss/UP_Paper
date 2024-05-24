@@ -814,7 +814,7 @@ in customer segment \(j\) for bank \(b\). It is calculated as the value
 of that bank's asset value divided by the total value of the bank's
 assets in that customer segment \(j\).
 
-\begin{equation}\phantomsection\label{eq-rate}{
+\begin{equation}\phantomsection\label{eq-weight}{
 Rate_{b,j} = \sum_{i=1}^{CS_j}w^{j}_{b,i}P_{b,i}
 }\end{equation}
 
@@ -1041,13 +1041,13 @@ log difference in lending at \(t\) and \(t-3\).\footnote{We perform a
 \cite{mirzaei2022effectiveness}, who also consider the effect of
 macroprudential reforms on the stock of lending.
 
-\begin{equation}
+\begin{equation}\phantomsection\label{eq-rate}{
 Rate_{b,t}^{c} = \alpha_1Index_t^i + \tau_b^c + \lambda_t^c + \alpha'\Omega^c + \epsilon_{b,t}^c
-\end{equation}
+}\end{equation}
 
-\begin{equation}
+\begin{equation}\phantomsection\label{eq-lending}{
 Lending_{b,t}^{c} = \beta_1Index_t^i + \tau_b^c + \lambda_t^c + \beta'\Omega^c + \epsilon_{b,t}^c
-\end{equation}
+}\end{equation}
 
 Where \(b\) \(\in [FNB, Absa, Nedbank, Standard Bank]\); \(t\) is the
 time period; \(c\) is the credit category; and \(i\) \(\in\)
@@ -1063,10 +1063,11 @@ error terms.
 
 \subsection{Responses to regulation}\label{responses-to-regulation}
 
-Tables 2 and 4 report the results from the estimation of equation (1)
-with standard errors clustered at bank level. Tables 3 and 5 relate to
-equation (2), where the dependent variable is the log difference in
-lending volumes between \(t\) and \(t-3\), also clustered at bank
+Tables 2 and 4 report the results from the estimation of
+Equation~\ref{eq-rate} with standard errors clustered at bank level.
+Tables 3 and 5 relate to Equation~\ref{eq-lending}, where the dependent
+variable is the log difference in lending volumes between \(t\) and
+\(t-3\), also clustered at bank
 level.\footnote{Results of one month loan volume changes are available upon request.}
 
 With regard to the impact of macroprudential regulation and bank lending
@@ -3205,7 +3206,7 @@ rates with controls results}
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Finance\ regulation\ index}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.595**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.068}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.059}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.458}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.106*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.138}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.927***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.038}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.042}}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Finance\ regulation\ index}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.595**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.068}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.059}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.458}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.106**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.138}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.927***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.038}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.042}}}} \\
 
 \ascline{1pt}{FFFFFF}{1-10}
 

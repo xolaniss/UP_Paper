@@ -197,7 +197,7 @@ We use the BA930 data to estimate weighted average rates that are consistent wit
 
 $$
 Rate_{b,j} = \sum_{i=1}^{CS_j}w^{j}_{b,i}P_{b,i}
-$$ {#eq-rate}
+$$ {#eq-weight}
 
 \newpage
 
@@ -233,13 +233,13 @@ descriptives_tbl %>%
 We use a panel data approach to estimate the impact of the different regulatory developments on bank rates and three month changes in bank lending volumes. The three month change in lending is calculated as the log difference in lending at $t$ and $t-3$.^[We perform a visual test of the correlations between the response variables and our narrative indices. These are provided in @fig-macro_narrative_indexes_three_month and @fig-comp_narrative_indexes_three_month in Appendices A.7 and A.9. We find a stronger co-movement between the narrative indicators and three month change in lending. This is because the three month growth rates are less volatile than than the one month changes.] This approach is consistent with \cite{aiyar2016does}, \cite{deli2017real}, \cite{fang2022bank} and \cite{mirzaei2022effectiveness}, who also consider the effect of macroprudential reforms on the stock of lending.
 
 
-\begin{equation}
+$$
 Rate_{b,t}^{c} = \alpha_1Index_t^i + \tau_b^c + \lambda_t^c + \alpha'\Omega^c + \epsilon_{b,t}^c
-\end{equation}
+$$ {#eq-rate}
 
-\begin{equation}
+$$
 Lending_{b,t}^{c} = \beta_1Index_t^i + \tau_b^c + \lambda_t^c + \beta'\Omega^c + \epsilon_{b,t}^c
-\end{equation}
+$$ {#eq-lending}
 
 Where $b$ $\in [FNB, Absa, Nedbank, Standard Bank]$; $t$ is the time period; $c$ is the credit category; and $i$ $\in$ $[Draft_t, Implementation_t, FinReg_t]$. Therefore $Lending_{b,t}^c$ is the bank level three month growth in lending, and $Rate_{b,t}^c$ is the bank level lending rate. $\Omega^c$ is a matrix of controls, which includes a covid dummy, bank level variables, and other macroeconomic variables. $\tau_b^c$ captures the bank fixed effect, $\lambda_t^c$ are the monthly time fixed effects, and $\epsilon_{b,t}^c$ are the error terms.
 
@@ -247,7 +247,7 @@ Where $b$ $\in [FNB, Absa, Nedbank, Standard Bank]$; $t$ is the time period; $c$
 
 ## Responses to regulation
 
-Tables 2 and 4  report the results from the estimation of equation (1) with standard errors clustered at bank level. Tables 3 and 5 relate to equation (2), where the dependent variable is the log difference in lending volumes between $t$ and $t-3$, also clustered at bank level.\footnote{Results of one month loan volume changes are available upon request.}  
+Tables 2 and 4  report the results from the estimation of @eq-rate with standard errors clustered at bank level. Tables 3 and 5 relate to @eq-lending, where the dependent variable is the log difference in lending volumes between $t$ and $t-3$, also clustered at bank level.\footnote{Results of one month loan volume changes are available upon request.}  
 
 With regard to the impact of macroprudential regulation and bank lending rates, we find that interest rates on unsecured lending rise while those on secured lending and mortgages fall by under 1\%. The results are consistent and significant, when we consider the effect on households and corporates. Household unsecured and mortgage rates have  a stronger reaction, relative to corporate rates. Total unsecured lending rates increase by approximately 2.5\%, while lending rates on secured loans and mortgages fall half a percentage point. Lending rate increases on household unsecured  loans exceed those in corporate unsecured lending rates (over 3\% relative to 2\%  increase in corporate unsecured lending rates). On the other hand, secured and mortgage lending rates for corporates decline more, relative to secured and mortgage lending rates on households. 
 
