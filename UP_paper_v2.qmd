@@ -197,7 +197,7 @@ We use the BA930 data to estimate weighted average rates that are consistent wit
 
 $$
 Rate_{b,j} = \sum_{i=1}^{CS_j}w^{j}_{b,i}P_{b,i}
-$$
+$$ {#eq-rate}
 
 \newpage
 
