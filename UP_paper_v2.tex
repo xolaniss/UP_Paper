@@ -227,13 +227,16 @@ credit extension, may lower financial stability \citep{garcia2016}.
 Conversely, macroprudential policies are necessarily pursued in order to
 achieve stability in the finance sector and consists of policies that
 could increase bank capital requirements that ultimately lower lending
-in order to meet said requirements. Therefore inclusion and
+in order to meet said requirements.
+\textcolor{red}{However, this can vary depending on the banking system. For example, a healthier banking system can sustain higher lending capacity or regulatory pressure can prompt more risk taking}
+\citep[see][]{merrino2024macroprudential}. Therefore inclusion and
 macroprudential policies have different objectives that could offset one
 another.
 
 In this paper we first estimate the realised impacts of separate
 regulatory developments related to macroprudential policy and financial
-inclusion to determine if these initiatives meet their intended goals.
+inclusion to determine if these initiatives meet their intended
+goals\footnote{\textcolor{red}{We make the distinction between macroprudential and financial inclusion regulation for the purposes of the analysis. However, the focus of the paper is broader in nature and is primarily about bank regulation. The specific regulations that are included in the narrative indices can be found in Appendix A.6}}.
 Second, we consider whether the two regulatory approaches are
 potentially contradictory. We achieve this through a panel data approach
 to estimate the impact of different regulatory developments on bank
@@ -583,12 +586,11 @@ Agreements and Accords. The indicators represent credit supply shocks,
 following \cite{noss2016estimating} and \cite{deli2017real}, among
 others. The construction is based on historical documents containing
 actions and events that lead to the implementation of macroprudential
-regulations. Our analysis covers 2008 to 2019 due to data limitations.
-We consult circulars issued by the SARB to commercial banks in South
-Africa, annual reports of commercial banks and SARB and risk and capital
-management reports of commercial banks. We consider reports from only
-the big 4 commercial banks in South Africa, as they account for over 90
-percent of banking industry
+regulations. We consult circulars issued by the SARB to commercial banks
+in South Africa, annual reports of commercial banks and SARB and risk
+and capital management reports of commercial banks. We consider reports
+from only the big 4 commercial banks in South Africa, as they account
+for over 90 percent of banking industry
 assets.\footnote{The big 4 banks are Standard Bank, ABSA, Nedbank and First Rand.}
 We also consider documents published and issued by the Basel Committee
 on Bank Supervision (BCBS), containing communication between BCBS and
@@ -1027,19 +1029,25 @@ Rate_{b,j} = \sum_{i=1}^{CS_j}w^{j}_{b,i}P_{b,i}
 
 We use a panel data approach to estimate the impact of the different
 regulatory developments on bank rates and three month changes in bank
-lending volumes. The three month change in lending is calculated as the
-log difference in lending at \(t\) and \(t-3\).\footnote{We perform a
-  visual test of the correlations between the response variables and our
-  narrative indices. These are provided in
+lending volumes. Our analysis covers
+\textcolor{red}{January 2009 to February 2020. We estimate using robust standard errors clustered at the bank level}
+\citep[see][]{zeileis2004}.
+\textcolor{red}{This ensures estimates that are robust to heteroskedasticity and serial correlation. In addition, the clustering ensures that the model understands that the banks are from the same population}
+\citep[see][]{fang2022bank}.
+
+The three month change in lending is calculated as the log difference in
+lending at \(t\) and \(t-3\).\footnote{We perform a visual test of the
+  correlations between the response variables and our narrative indices.
+  These are provided in
   Figure~\ref{fig-macro_narrative_indexes_three_month} and
   Figure~\ref{fig-comp_narrative_indexes_three_month} in Appendices A.7
-  and A.9. We find a stronger co-movement between the narrative
+  and A.8. We find a stronger co-movement between the narrative
   indicators and three month change in lending. This is because the
   three month growth rates are less volatile than than the one month
-  changes.} This approach is consistent with \cite{aiyar2016does},
-\cite{deli2017real}, \cite{fang2022bank} and
-\cite{mirzaei2022effectiveness}, who also consider the effect of
-macroprudential reforms on the stock of lending.
+  changes.}
+\textcolor{red}{The log differences are then multiplied by a 100.} This
+approach is consistent with \cite{aiyar2016does}, \cite{deli2017real},
+\cite{fang2022bank} and \cite{mirzaei2022effectiveness}.
 
 \begin{equation}\phantomsection\label{eq-rate}{
 Rate_{b,t}^{c} = \alpha_1Index_t^i + \tau_b^c + \lambda_t^c + \alpha'\Omega^c + \epsilon_{b,t}^c
@@ -1053,11 +1061,10 @@ Where \(b\) \(\in [FNB, Absa, Nedbank, Standard Bank]\); \(t\) is the
 time period; \(c\) is the credit category; and \(i\) \(\in\)
 \([Draft_t, Implementation_t, FinReg_t]\). Therefore \(Lending_{b,t}^c\)
 is the bank level three month growth in lending, and \(Rate_{b,t}^c\) is
-the bank level lending rate. \(\Omega^c\) is a matrix of controls, which
-includes a covid dummy, bank level variables, and other macroeconomic
-variables. \(\tau_b^c\) captures the bank fixed effect, \(\lambda_t^c\)
-are the monthly time fixed effects, and \(\epsilon_{b,t}^c\) are the
-error terms.
+the bank level lending rate. \(\Omega^c\) is a matrix of controls, bank
+level variables, and other macroeconomic variables. \(\tau_b^c\)
+captures the bank fixed effect, \(\lambda_t^c\) are the monthly time
+fixed effects, and \(\epsilon_{b,t}^c\) are the error terms.
 
 \section{Results}\label{results}
 
@@ -3318,13 +3325,13 @@ lending volumes (3-months) with controls results}
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Repo\ rate}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.739***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-1.390***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.200*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.569***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.946***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.454*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-1.135***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-1.706***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.167}}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Repo\ rate}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.739***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-1.390***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.200*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.569***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.946***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.454*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-1.135***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-1.706***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.167*}}}} \\
 
 \ascline{1pt}{FFFFFF}{1-10}
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Return\ on\ assets}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.948***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-4.672}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.719}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.453**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.989}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-1.648}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.857}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-8.432}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.233}}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Return\ on\ assets}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.948**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-4.672}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.719}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.453**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.989}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-1.648}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.857}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-8.432}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.233}}}} \\
 
 \ascline{1pt}{000000}{1-10}
 
